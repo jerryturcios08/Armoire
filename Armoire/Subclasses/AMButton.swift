@@ -40,7 +40,7 @@ class AMButton: UIButton {
         titleLabel?.font = UIFontMetrics.default.scaledFont(for: customFont)
         titleLabel?.adjustsFontForContentSizeCategory = true
 
-        backgroundColor = .label
+        backgroundColor = UIColor(named: "AccentColor")
         setTitleColor(.systemBackground, for: .normal)
         layer.cornerRadius = 10
     }
@@ -59,16 +59,13 @@ struct AMButtonPreviews: PreviewProvider {
     static var previews: some View {
         Group {
             ContainerView()
-                .previewLayout(.sizeThatFits)
-                .frame(minWidth: 0, maxWidth: .infinity, maxHeight: 60)
-                .padding()
             ContainerView()
                 .preferredColorScheme(.dark)
                 .environment(\.sizeCategory, .accessibilityLarge)
-                .previewLayout(.sizeThatFits)
-                .frame(minWidth: 0, maxWidth: .infinity, maxHeight: 60)
-                .padding()
         }
+        .previewLayout(.sizeThatFits)
+        .frame(minWidth: 0, maxWidth: .infinity, maxHeight: 50)
+        .padding()
     }
 
     private struct ContainerView: UIViewRepresentable {

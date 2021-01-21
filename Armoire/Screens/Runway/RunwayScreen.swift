@@ -38,7 +38,7 @@ class RunwayScreen: UIViewController {
         view.addSubview(primaryLabel)
 
         primaryLabel.snp.makeConstraints { make in
-            make.top.equalTo(view).offset(20)
+            make.top.equalTo(view).offset(60)
             make.centerX.equalTo(view)
         }
     }
@@ -60,7 +60,7 @@ class RunwayScreen: UIViewController {
             make.centerY.equalTo(view)
             make.left.equalTo(view).offset(20)
             make.right.equalTo(view).offset(-20)
-            make.height.equalTo(60)
+            make.height.equalTo(50)
         }
     }
 
@@ -71,7 +71,7 @@ class RunwayScreen: UIViewController {
         primaryButton.snp.makeConstraints { make in
             make.left.equalTo(view).offset(20)
             make.right.bottom.equalTo(view).offset(-20)
-            make.height.equalTo(60)
+            make.height.equalTo(50)
         }
     }
 

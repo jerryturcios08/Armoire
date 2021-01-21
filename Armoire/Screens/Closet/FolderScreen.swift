@@ -10,7 +10,7 @@ import SwiftUI
 import UIKit
 
 class FolderScreen: UIViewController {
-    let tableView = UITableView()
+    let tableView = UITableView(frame: .zero, style: .grouped)
 
     let folder = "Dresses"
 
@@ -47,10 +47,15 @@ class FolderScreen: UIViewController {
         view.addSubview(tableView)
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.backgroundColor = .systemBackground
         tableView.register(ClothingCell.self, forCellReuseIdentifier: ClothingCell.reuseId)
         tableView.rowHeight = 121
         tableView.separatorStyle = .none
-        tableView.snp.makeConstraints { $0.size.equalTo(view) }
+
+        tableView.snp.makeConstraints { make in
+            make.top.bottom.equalTo(view)
+            make.left.right.equalTo(view.safeAreaLayoutGuide)
+        }
     }
 
     @objc func addButtonTapped(_ sender: UIBarButtonItem) {
@@ -73,6 +78,18 @@ extension FolderScreen: UITableViewDataSource, UITableViewDelegate {
         navigationController?.pushViewController(clothingScreen, animated: true)
     }
 
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 0
+    }
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return nil
+    }
+
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 60
+    }
+
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let containerView = UIView()
         let itemCountLabel = AMBodyLabel(text: "\(4) items", fontSize: 18)
@@ -80,8 +97,7 @@ extension FolderScreen: UITableViewDataSource, UITableViewDelegate {
         containerView.addSubview(itemCountLabel)
 
         itemCountLabel.snp.makeConstraints { make in
-            make.top.equalTo(containerView).offset(18)
-            make.centerX.equalTo(containerView)
+            make.centerX.centerY.equalTo(containerView)
         }
 
         return containerView

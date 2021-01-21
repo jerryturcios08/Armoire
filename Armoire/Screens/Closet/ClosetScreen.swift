@@ -14,12 +14,7 @@ class ClosetScreen: UIViewController {
     let footerContainerView = UIView()
     let folderCountLabel = AMBodyLabel(text: "0 folders", fontSize: 18)
 
-    var folders = [String]() {
-        didSet {
-            let count = folders.count
-            folderCountLabel.text = count == 1 ? "1 folder" : "\(count) folders"
-        }
-    }
+    var dataSource = FolderDataSource()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,28 +29,21 @@ class ClosetScreen: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
 
         let addButtonImage = UIImage(systemName: "plus")
-        let addButton = UIBarButtonItem(image: addButtonImage, style: .plain, target: self, action: #selector(addButtonTapped))
+        let addButton = UIBarButtonItem(image: addButtonImage, style: .plain, target: self, action: #selector(plusButtonTapped))
         navigationItem.rightBarButtonItem = addButton
 
-        folders = ["Dresses", "Shoes", "Skirts", "Bottoms"]
+        dataSource.folders = ["Dresses", "Shoes", "Skirts", "Bottoms"]
     }
 
     func configureSearchController() {
-        let searchController = UISearchController()
-
-        let customFont = UIFont(name: Fonts.quicksandMedium, size: 18)!
-        let textAttributes: [NSAttributedString.Key: Any] = [.font: customFont]
-        let attributedString = NSAttributedString(string: "Search Closet", attributes: textAttributes)
-        searchController.searchBar.searchTextField.attributedPlaceholder = attributedString
-
-        searchController.obscuresBackgroundDuringPresentation = false
+        let searchController = AMSearchController()
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
     }
 
     func configureTableView() {
         view.addSubview(tableView)
-        tableView.dataSource = self
+        tableView.dataSource = dataSource
         tableView.delegate = self
         tableView.backgroundColor = .systemBackground
         tableView.register(FolderCell.self, forCellReuseIdentifier: FolderCell.reuseId)
@@ -79,23 +67,21 @@ class ClosetScreen: UIViewController {
         return footerContainerView
     }
 
-    @objc func addButtonTapped(_ sender: UIBarButtonItem) {
-        // Show create item screen
+    func updateFolderCountLabel() {
+        // TODO: Make method reflect data source changes
+        let count = dataSource.folders.count
+        folderCountLabel.text = count == 1 ? "1 folder" : "\(count) folders"
+    }
+
+    @objc func plusButtonTapped(_ sender: UIBarButtonItem) {
+        let destinationScreen = AMNavigationController(rootViewController: CreateFolderScreen())
+        present(destinationScreen, animated: true)
     }
 }
 
-extension ClosetScreen: UITableViewDataSource, UITableViewDelegate {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return folders.count
-    }
+// MARK: - Table view delegate
 
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: FolderCell.reuseId, for: indexPath) as! FolderCell
-        let folder = folders[indexPath.row]
-        cell.set(folder: folder)
-        return cell
-    }
-
+extension ClosetScreen: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let folderScreen = FolderScreen()
         navigationController?.pushViewController(folderScreen, animated: true)
@@ -116,14 +102,9 @@ extension ClosetScreen: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return createFooterView()
     }
-
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            folders.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .automatic)
-        }
-    }
 }
+
+// MARK: - Previews
 
 #if DEBUG
 struct ClosetScreenPreviews: PreviewProvider {

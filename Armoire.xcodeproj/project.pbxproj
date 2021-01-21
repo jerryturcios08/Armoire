@@ -27,6 +27,7 @@
 		C63B0B7525B8DCE20065F813 /* ClothingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63B0B7425B8DCE20065F813 /* ClothingCell.swift */; };
 		C63B0B7D25B8DCEA0065F813 /* FolderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63B0B7C25B8DCEA0065F813 /* FolderCell.swift */; };
 		C63B0B8225B8F08E0065F813 /* ClothingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63B0B8125B8F08E0065F813 /* ClothingScreen.swift */; };
+		C63B0B8C25B931980065F813 /* FolderDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63B0B8B25B931980065F813 /* FolderDataSource.swift */; };
 		C658E7C925B7896E000F8F50 /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C658E7C825B7896E000F8F50 /* UIHelper.swift */; };
 		C658E7CE25B78D31000F8F50 /* AMNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C658E7CD25B78D31000F8F50 /* AMNavigationController.swift */; };
 		C658E7D925B78FE8000F8F50 /* previews.swift in Sources */ = {isa = PBXBuildFile; fileRef = C658E7D825B78FE8000F8F50 /* previews.swift */; };
@@ -34,6 +35,8 @@
 		C673CFFE25B7ABE800D3E765 /* ProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C673CFFD25B7ABE800D3E765 /* ProfileScreen.swift */; };
 		C673D00625B7AC3C00D3E765 /* RunwayScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C673D00525B7AC3C00D3E765 /* RunwayScreen.swift */; };
 		C673D00B25B7AC6300D3E765 /* WishlistScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C673D00A25B7AC6300D3E765 /* WishlistScreen.swift */; };
+		C674599D25B9354B003C87D1 /* AMSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C674599C25B9354B003C87D1 /* AMSearchController.swift */; };
+		C67459A225B93D0C003C87D1 /* CreateFolderScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67459A125B93D0C003C87D1 /* CreateFolderScreen.swift */; };
 		C6A9C1D425B7CE8600C22F29 /* AMButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A9C1D325B7CE8600C22F29 /* AMButton.swift */; };
 		C6C0A06625B786FF000CA9F7 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = C6C0A06525B786FF000CA9F7 /* SnapKit */; };
 		C6EE84BB25B8BE8000986BF4 /* AMPrimaryLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6EE84BA25B8BE8000986BF4 /* AMPrimaryLabel.swift */; };
@@ -83,6 +86,7 @@
 		C63B0B7425B8DCE20065F813 /* ClothingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClothingCell.swift; sourceTree = "<group>"; };
 		C63B0B7C25B8DCEA0065F813 /* FolderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderCell.swift; sourceTree = "<group>"; };
 		C63B0B8125B8F08E0065F813 /* ClothingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClothingScreen.swift; sourceTree = "<group>"; };
+		C63B0B8B25B931980065F813 /* FolderDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderDataSource.swift; sourceTree = "<group>"; };
 		C658E7C825B7896E000F8F50 /* UIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
 		C658E7CD25B78D31000F8F50 /* AMNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AMNavigationController.swift; sourceTree = "<group>"; };
 		C658E7D825B78FE8000F8F50 /* previews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = previews.swift; sourceTree = "<group>"; };
@@ -90,6 +94,8 @@
 		C673CFFD25B7ABE800D3E765 /* ProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreen.swift; sourceTree = "<group>"; };
 		C673D00525B7AC3C00D3E765 /* RunwayScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunwayScreen.swift; sourceTree = "<group>"; };
 		C673D00A25B7AC6300D3E765 /* WishlistScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishlistScreen.swift; sourceTree = "<group>"; };
+		C674599C25B9354B003C87D1 /* AMSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AMSearchController.swift; sourceTree = "<group>"; };
+		C67459A125B93D0C003C87D1 /* CreateFolderScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateFolderScreen.swift; sourceTree = "<group>"; };
 		C6A9C1D325B7CE8600C22F29 /* AMButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AMButton.swift; sourceTree = "<group>"; };
 		C6EE84BA25B8BE8000986BF4 /* AMPrimaryLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AMPrimaryLabel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -242,14 +248,24 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		C63B0B8A25B9317D0065F813 /* Collections */ = {
+			isa = PBXGroup;
+			children = (
+				C63B0B8B25B931980065F813 /* FolderDataSource.swift */,
+			);
+			path = Collections;
+			sourceTree = "<group>";
+		};
 		C658E7BC25B7890B000F8F50 /* Subclasses */ = {
 			isa = PBXGroup;
 			children = (
 				C63B0B7325B8DCD70065F813 /* Cells */,
+				C63B0B8A25B9317D0065F813 /* Collections */,
 				C63B0B5C25B8C1FD0065F813 /* Labels */,
 				C658E7E525B79023000F8F50 /* Navigation */,
 				C6A9C1D325B7CE8600C22F29 /* AMButton.swift */,
 				C63B0B6325B8C2180065F813 /* AMTextField.swift */,
+				C674599C25B9354B003C87D1 /* AMSearchController.swift */,
 			);
 			path = Subclasses;
 			sourceTree = "<group>";
@@ -268,6 +284,7 @@
 			children = (
 				C601983D25B78383004B4203 /* ClosetScreen.swift */,
 				C63B0B8125B8F08E0065F813 /* ClothingScreen.swift */,
+				C67459A125B93D0C003C87D1 /* CreateFolderScreen.swift */,
 				C63B0B6E25B8DACD0065F813 /* FolderScreen.swift */,
 			);
 			path = Closet;
@@ -437,7 +454,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C67459A225B93D0C003C87D1 /* CreateFolderScreen.swift in Sources */,
 				C601983E25B78383004B4203 /* ClosetScreen.swift in Sources */,
+				C674599D25B9354B003C87D1 /* AMSearchController.swift in Sources */,
 				C673D00625B7AC3C00D3E765 /* RunwayScreen.swift in Sources */,
 				C601983A25B78383004B4203 /* AppDelegate.swift in Sources */,
 				C63B0B6425B8C2180065F813 /* AMTextField.swift in Sources */,
@@ -447,6 +466,7 @@
 				C6A9C1D425B7CE8600C22F29 /* AMButton.swift in Sources */,
 				C601984425B78383004B4203 /* Armoire.xcdatamodeld in Sources */,
 				C658E7E125B7901F000F8F50 /* AMTabBarController.swift in Sources */,
+				C63B0B8C25B931980065F813 /* FolderDataSource.swift in Sources */,
 				C63B0B6F25B8DACD0065F813 /* FolderScreen.swift in Sources */,
 				C658E7C925B7896E000F8F50 /* UIHelper.swift in Sources */,
 				C62E0C4025B8BC110078065A /* AMBodyLabel.swift in Sources */,

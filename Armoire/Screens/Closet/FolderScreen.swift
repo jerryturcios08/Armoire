@@ -32,15 +32,9 @@ class FolderScreen: UIViewController {
     }
 
     func configureSearchController() {
-        let searchController = UISearchController()
-
-        let customFont = UIFont(name: Fonts.quicksandMedium, size: 18)!
-        let textAttributes: [NSAttributedString.Key: Any] = [.font: customFont]
-        let attributedString = NSAttributedString(string: "Search Closet", attributes: textAttributes)
-        searchController.searchBar.searchTextField.attributedPlaceholder = attributedString
-
-        searchController.obscuresBackgroundDuringPresentation = false
+        let searchController = AMSearchController()
         navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
     }
 
     func configureTableView() {

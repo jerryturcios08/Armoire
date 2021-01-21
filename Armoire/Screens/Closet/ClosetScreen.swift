@@ -11,6 +11,15 @@ import UIKit
 
 class ClosetScreen: UIViewController {
     let tableView = UITableView(frame: .zero, style: .grouped)
+    let footerContainerView = UIView()
+    let folderCountLabel = AMBodyLabel(text: "0 folders", fontSize: 18)
+
+    var folders = [String]() {
+        didSet {
+            let count = folders.count
+            folderCountLabel.text = count == 1 ? "1 folder" : "\(count) folders"
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +36,8 @@ class ClosetScreen: UIViewController {
         let addButtonImage = UIImage(systemName: "plus")
         let addButton = UIBarButtonItem(image: addButtonImage, style: .plain, target: self, action: #selector(addButtonTapped))
         navigationItem.rightBarButtonItem = addButton
+
+        folders = ["Dresses", "Shoes", "Skirts", "Bottoms"]
     }
 
     func configureSearchController() {
@@ -57,6 +68,17 @@ class ClosetScreen: UIViewController {
         }
     }
 
+    func createFooterView() -> UIView {
+        footerContainerView.addSubview(folderCountLabel)
+        folderCountLabel.textColor = .systemGray
+
+        folderCountLabel.snp.makeConstraints { make in
+            make.centerX.centerY.equalTo(footerContainerView)
+        }
+
+        return footerContainerView
+    }
+
     @objc func addButtonTapped(_ sender: UIBarButtonItem) {
         // Show create item screen
     }
@@ -64,11 +86,13 @@ class ClosetScreen: UIViewController {
 
 extension ClosetScreen: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return folders.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: FolderCell.reuseId, for: indexPath) as! FolderCell
+        let folder = folders[indexPath.row]
+        cell.set(folder: folder)
         return cell
     }
 
@@ -90,16 +114,14 @@ extension ClosetScreen: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let containerView = UIView()
-        let itemCountLabel = AMBodyLabel(text: "\(4) folders", fontSize: 18)
-        itemCountLabel.textColor = .systemGray
-        containerView.addSubview(itemCountLabel)
+        return createFooterView()
+    }
 
-        itemCountLabel.snp.makeConstraints { make in
-            make.centerX.centerY.equalTo(containerView)
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            folders.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
         }
-
-        return containerView
     }
 }
 

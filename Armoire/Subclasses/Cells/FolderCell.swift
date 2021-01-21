@@ -27,7 +27,7 @@ class FolderCell: UITableViewCell {
     }
 
     func set(folder: String) {
-        
+        folderTitleLabel.text = folder
     }
 
     private func configureCell() {

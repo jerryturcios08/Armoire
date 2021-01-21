@@ -32,11 +32,19 @@ class ClosetScreen: UIViewController {
         let addButton = UIBarButtonItem(image: addButtonImage, style: .plain, target: self, action: #selector(plusButtonTapped))
         navigationItem.rightBarButtonItem = addButton
 
+        dataSource.delegate = self
         dataSource.folders = ["Dresses", "Shoes", "Skirts", "Bottoms"]
     }
 
     func configureSearchController() {
-        let searchController = AMSearchController()
+        let searchController = UISearchController()
+        let customFont = UIFont(name: Fonts.quicksandMedium, size: 17)!
+        let textAttributes: [NSAttributedString.Key: Any] = [.font: customFont]
+        let attributedString = NSAttributedString(string: "Search", attributes: textAttributes)
+
+        searchController.searchBar.searchTextField.attributedPlaceholder = attributedString
+        searchController.obscuresBackgroundDuringPresentation = false
+
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
     }
@@ -67,15 +75,31 @@ class ClosetScreen: UIViewController {
         return footerContainerView
     }
 
-    func updateFolderCountLabel() {
-        // TODO: Make method reflect data source changes
-        let count = dataSource.folders.count
+    @objc func plusButtonTapped(_ sender: UIBarButtonItem) {
+        let createFolderScreen = CreateFolderScreen()
+        let destinationScreen = AMNavigationController(rootViewController: createFolderScreen)
+        createFolderScreen.delegate = self
+        destinationScreen.modalPresentationStyle = .fullScreen
+        present(destinationScreen, animated: true)
+    }
+}
+
+// MARK: - Data source delegate
+
+extension ClosetScreen: FolderDataSourceDelegate {
+    func didUpdateDataSource(_ folders: [String]) {
+        let count = folders.count
         folderCountLabel.text = count == 1 ? "1 folder" : "\(count) folders"
     }
+}
 
-    @objc func plusButtonTapped(_ sender: UIBarButtonItem) {
-        let destinationScreen = AMNavigationController(rootViewController: CreateFolderScreen())
-        present(destinationScreen, animated: true)
+// MARK: - Create folder delegate
+
+extension ClosetScreen: CreateFolderScreenDelegate {
+    func didCreateNewFolder(_ folder: Folder) {
+        print(folder.title)
+        dataSource.folders.append(folder.title)
+        tableView.reloadData()
     }
 }
 

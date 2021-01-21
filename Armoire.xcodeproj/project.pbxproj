@@ -21,6 +21,7 @@
 		C601987C25B78421004B4203 /* Quicksand-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C601987725B78421004B4203 /* Quicksand-SemiBold.ttf */; };
 		C601987D25B78421004B4203 /* Quicksand-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C601987825B78421004B4203 /* Quicksand-Regular.ttf */; };
 		C601988325B7843B004B4203 /* constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C601988225B7843B004B4203 /* constants.swift */; };
+		C60E9F8125BA358C00D97991 /* Folder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60E9F8025BA358C00D97991 /* Folder.swift */; };
 		C62E0C4025B8BC110078065A /* AMBodyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62E0C3F25B8BC110078065A /* AMBodyLabel.swift */; };
 		C63B0B6425B8C2180065F813 /* AMTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63B0B6325B8C2180065F813 /* AMTextField.swift */; };
 		C63B0B6F25B8DACD0065F813 /* FolderScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63B0B6E25B8DACD0065F813 /* FolderScreen.swift */; };
@@ -35,7 +36,6 @@
 		C673CFFE25B7ABE800D3E765 /* ProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C673CFFD25B7ABE800D3E765 /* ProfileScreen.swift */; };
 		C673D00625B7AC3C00D3E765 /* RunwayScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C673D00525B7AC3C00D3E765 /* RunwayScreen.swift */; };
 		C673D00B25B7AC6300D3E765 /* WishlistScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C673D00A25B7AC6300D3E765 /* WishlistScreen.swift */; };
-		C674599D25B9354B003C87D1 /* AMSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C674599C25B9354B003C87D1 /* AMSearchController.swift */; };
 		C67459A225B93D0C003C87D1 /* CreateFolderScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67459A125B93D0C003C87D1 /* CreateFolderScreen.swift */; };
 		C6A9C1D425B7CE8600C22F29 /* AMButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A9C1D325B7CE8600C22F29 /* AMButton.swift */; };
 		C6C0A06625B786FF000CA9F7 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = C6C0A06525B786FF000CA9F7 /* SnapKit */; };
@@ -80,6 +80,7 @@
 		C601987725B78421004B4203 /* Quicksand-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-SemiBold.ttf"; sourceTree = "<group>"; };
 		C601987825B78421004B4203 /* Quicksand-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-Regular.ttf"; sourceTree = "<group>"; };
 		C601988225B7843B004B4203 /* constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = constants.swift; sourceTree = "<group>"; };
+		C60E9F8025BA358C00D97991 /* Folder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Folder.swift; sourceTree = "<group>"; };
 		C62E0C3F25B8BC110078065A /* AMBodyLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AMBodyLabel.swift; sourceTree = "<group>"; };
 		C63B0B6325B8C2180065F813 /* AMTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AMTextField.swift; sourceTree = "<group>"; };
 		C63B0B6E25B8DACD0065F813 /* FolderScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderScreen.swift; sourceTree = "<group>"; };
@@ -94,7 +95,6 @@
 		C673CFFD25B7ABE800D3E765 /* ProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreen.swift; sourceTree = "<group>"; };
 		C673D00525B7AC3C00D3E765 /* RunwayScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunwayScreen.swift; sourceTree = "<group>"; };
 		C673D00A25B7AC6300D3E765 /* WishlistScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishlistScreen.swift; sourceTree = "<group>"; };
-		C674599C25B9354B003C87D1 /* AMSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AMSearchController.swift; sourceTree = "<group>"; };
 		C67459A125B93D0C003C87D1 /* CreateFolderScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateFolderScreen.swift; sourceTree = "<group>"; };
 		C6A9C1D325B7CE8600C22F29 /* AMButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AMButton.swift; sourceTree = "<group>"; };
 		C6EE84BA25B8BE8000986BF4 /* AMPrimaryLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AMPrimaryLabel.swift; sourceTree = "<group>"; };
@@ -151,6 +151,7 @@
 			children = (
 				C601987325B78411004B4203 /* Assets */,
 				C601988825B78492004B4203 /* Data */,
+				C60E9F7F25BA357300D97991 /* Models */,
 				C601988725B78483004B4203 /* Screens */,
 				C658E7BC25B7890B000F8F50 /* Subclasses */,
 				C601988925B784A5004B4203 /* Supporting Files */,
@@ -230,6 +231,14 @@
 			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		C60E9F7F25BA357300D97991 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C60E9F8025BA358C00D97991 /* Folder.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		C63B0B5C25B8C1FD0065F813 /* Labels */ = {
 			isa = PBXGroup;
 			children = (
@@ -265,7 +274,6 @@
 				C658E7E525B79023000F8F50 /* Navigation */,
 				C6A9C1D325B7CE8600C22F29 /* AMButton.swift */,
 				C63B0B6325B8C2180065F813 /* AMTextField.swift */,
-				C674599C25B9354B003C87D1 /* AMSearchController.swift */,
 			);
 			path = Subclasses;
 			sourceTree = "<group>";
@@ -456,7 +464,6 @@
 			files = (
 				C67459A225B93D0C003C87D1 /* CreateFolderScreen.swift in Sources */,
 				C601983E25B78383004B4203 /* ClosetScreen.swift in Sources */,
-				C674599D25B9354B003C87D1 /* AMSearchController.swift in Sources */,
 				C673D00625B7AC3C00D3E765 /* RunwayScreen.swift in Sources */,
 				C601983A25B78383004B4203 /* AppDelegate.swift in Sources */,
 				C63B0B6425B8C2180065F813 /* AMTextField.swift in Sources */,
@@ -465,6 +472,7 @@
 				C601988325B7843B004B4203 /* constants.swift in Sources */,
 				C6A9C1D425B7CE8600C22F29 /* AMButton.swift in Sources */,
 				C601984425B78383004B4203 /* Armoire.xcdatamodeld in Sources */,
+				C60E9F8125BA358C00D97991 /* Folder.swift in Sources */,
 				C658E7E125B7901F000F8F50 /* AMTabBarController.swift in Sources */,
 				C63B0B8C25B931980065F813 /* FolderDataSource.swift in Sources */,
 				C63B0B6F25B8DACD0065F813 /* FolderScreen.swift in Sources */,

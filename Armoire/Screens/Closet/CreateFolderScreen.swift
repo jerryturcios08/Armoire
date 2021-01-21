@@ -60,7 +60,7 @@ class CreateFolderScreen: UIViewController {
 
     func configureFavoriteSwitch() {
         view.addSubview(favoriteSwitch)
-        favoriteSwitch.onTintColor = UIColor(named: "AccentColor")
+        favoriteSwitch.onTintColor = UIColor.accentColor
 
         favoriteSwitch.snp.makeConstraints { make in
             make.right.equalTo(folderTitleTextField)

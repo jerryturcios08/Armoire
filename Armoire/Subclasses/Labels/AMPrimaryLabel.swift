@@ -27,7 +27,7 @@ class AMPrimaryLabel: UILabel {
 
     private func configureLabel() {
         translatesAutoresizingMaskIntoConstraints = false
-        textColor = UIColor(named: "AccentColor")
+        textColor = UIColor.accentColor
         adjustsFontForContentSizeCategory = true
         adjustsFontSizeToFitWidth = true
         minimumScaleFactor = 0.9

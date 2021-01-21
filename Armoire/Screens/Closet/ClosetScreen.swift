@@ -28,7 +28,7 @@ class ClosetScreen: UIViewController {
         view.backgroundColor = .systemBackground
         navigationController?.navigationBar.prefersLargeTitles = true
 
-        let addButtonImage = UIImage(systemName: "plus")
+        let addButtonImage = UIImage(systemName: SFSymbol.plus)
         let addButton = UIBarButtonItem(image: addButtonImage, style: .plain, target: self, action: #selector(plusButtonTapped))
         navigationItem.rightBarButtonItem = addButton
 

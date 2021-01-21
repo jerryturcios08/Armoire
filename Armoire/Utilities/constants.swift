@@ -14,3 +14,11 @@ enum Fonts {
     static let quicksandSemiBold = "Quicksand-SemiBold"
     static let quicksandLight = "Quicksand-Light"
 }
+
+enum SFSymbol {
+    static let folder = "folder"
+    static let houseFill = "house.fill"
+    static let personFill = "person.fill"
+    static let plus = "plus"
+    static let starFill = "star.fill"
+}

@@ -22,6 +22,7 @@
 		C601987D25B78421004B4203 /* Quicksand-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C601987825B78421004B4203 /* Quicksand-Regular.ttf */; };
 		C601988325B7843B004B4203 /* constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C601988225B7843B004B4203 /* constants.swift */; };
 		C60E9F8125BA358C00D97991 /* Folder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60E9F8025BA358C00D97991 /* Folder.swift */; };
+		C60E9F8A25BA37FA00D97991 /* UIColor+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60E9F8925BA37FA00D97991 /* UIColor+Ext.swift */; };
 		C62E0C4025B8BC110078065A /* AMBodyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62E0C3F25B8BC110078065A /* AMBodyLabel.swift */; };
 		C63B0B6425B8C2180065F813 /* AMTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63B0B6325B8C2180065F813 /* AMTextField.swift */; };
 		C63B0B6F25B8DACD0065F813 /* FolderScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63B0B6E25B8DACD0065F813 /* FolderScreen.swift */; };
@@ -81,6 +82,7 @@
 		C601987825B78421004B4203 /* Quicksand-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-Regular.ttf"; sourceTree = "<group>"; };
 		C601988225B7843B004B4203 /* constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = constants.swift; sourceTree = "<group>"; };
 		C60E9F8025BA358C00D97991 /* Folder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Folder.swift; sourceTree = "<group>"; };
+		C60E9F8925BA37FA00D97991 /* UIColor+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Ext.swift"; sourceTree = "<group>"; };
 		C62E0C3F25B8BC110078065A /* AMBodyLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AMBodyLabel.swift; sourceTree = "<group>"; };
 		C63B0B6325B8C2180065F813 /* AMTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AMTextField.swift; sourceTree = "<group>"; };
 		C63B0B6E25B8DACD0065F813 /* FolderScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderScreen.swift; sourceTree = "<group>"; };
@@ -194,6 +196,7 @@
 		C601988125B78429004B4203 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				C60E9F8825BA37F100D97991 /* Extensions */,
 				C601988225B7843B004B4203 /* constants.swift */,
 				C658E7D825B78FE8000F8F50 /* previews.swift */,
 				C658E7C825B7896E000F8F50 /* UIHelper.swift */,
@@ -237,6 +240,14 @@
 				C60E9F8025BA358C00D97991 /* Folder.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		C60E9F8825BA37F100D97991 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				C60E9F8925BA37FA00D97991 /* UIColor+Ext.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		C63B0B5C25B8C1FD0065F813 /* Labels */ = {
@@ -483,6 +494,7 @@
 				C63B0B8225B8F08E0065F813 /* ClothingScreen.swift in Sources */,
 				C658E7D925B78FE8000F8F50 /* previews.swift in Sources */,
 				C673D00B25B7AC6300D3E765 /* WishlistScreen.swift in Sources */,
+				C60E9F8A25BA37FA00D97991 /* UIColor+Ext.swift in Sources */,
 				C673CFFE25B7ABE800D3E765 /* ProfileScreen.swift in Sources */,
 				C63B0B7D25B8DCEA0065F813 /* FolderCell.swift in Sources */,
 			);

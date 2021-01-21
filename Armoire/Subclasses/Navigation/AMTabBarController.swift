@@ -27,7 +27,7 @@ class AMTabBarController: UITabBarController {
 
     private func createClosetNavigation() -> AMNavigationController {
         let closetScreen = ClosetScreen()
-        let tabBarItem = UITabBarItem(title: "Closet", image: UIImage(systemName: "house.fill"), tag: 0)
+        let tabBarItem = UITabBarItem(title: "Closet", image: UIImage(systemName: SFSymbol.houseFill), tag: 0)
         closetScreen.tabBarItem = tabBarItem
         configureTextAttributes(for: closetScreen.tabBarItem)
 
@@ -36,7 +36,7 @@ class AMTabBarController: UITabBarController {
 
     private func createProfileNavigation() -> AMNavigationController {
         let profileScreen = ProfileScreen()
-        let tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.fill"), tag: 1)
+        let tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: SFSymbol.personFill), tag: 1)
         profileScreen.tabBarItem = tabBarItem
         configureTextAttributes(for: profileScreen.tabBarItem)
 

@@ -62,7 +62,7 @@ class ClothingCell: UITableViewCell {
 
     private func configureFavoriteButton() {
         addSubview(favoriteButton)
-        favoriteButton.setImage(UIImage(systemName: "star.fill"), for: .normal)
+        favoriteButton.setImage(UIImage(systemName: SFSymbol.starFill), for: .normal)
         favoriteButton.tintColor = .systemYellow
 
         favoriteButton.snp.makeConstraints { make in

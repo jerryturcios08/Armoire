@@ -40,7 +40,7 @@ class AMButton: UIButton {
         titleLabel?.font = UIFontMetrics.default.scaledFont(for: customFont)
         titleLabel?.adjustsFontForContentSizeCategory = true
 
-        backgroundColor = UIColor(named: "AccentColor")
+        backgroundColor = UIColor.accentColor
         setTitleColor(.systemBackground, for: .normal)
         layer.cornerRadius = 10
     }

@@ -11,7 +11,7 @@ import UIKit
 class FolderCell: UITableViewCell {
     static let reuseId = "FolderCell"
 
-    let folderImageView = UIImageView(image: UIImage(systemName: "folder"))
+    let folderImageView = UIImageView(image: UIImage(systemName: SFSymbol.folder))
     let favoriteButton = UIButton()
     let folderTitleLabel = AMPrimaryLabel(text: "Dresses", fontSize: 20)
     let folderDescriptionLabel = AMBodyLabel(text: "My favorite dress out of everything in my collection. The fabric feels nice.", fontSize: 11)
@@ -53,7 +53,7 @@ class FolderCell: UITableViewCell {
 
     private func configureFavoriteButton() {
         addSubview(favoriteButton)
-        favoriteButton.setImage(UIImage(systemName: "star.fill"), for: .normal)
+        favoriteButton.setImage(UIImage(systemName: SFSymbol.starFill), for: .normal)
         favoriteButton.tintColor = .systemYellow
 
         favoriteButton.snp.makeConstraints { make in

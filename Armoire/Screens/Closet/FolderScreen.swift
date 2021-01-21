@@ -26,7 +26,7 @@ class FolderScreen: UIViewController {
         view.backgroundColor = .systemBackground
         navigationItem.largeTitleDisplayMode = .never
 
-        let addButtonImage = UIImage(systemName: "plus")
+        let addButtonImage = UIImage(systemName: SFSymbol.plus)
         let addButton = UIBarButtonItem(image: addButtonImage, style: .plain, target: self, action: #selector(addButtonTapped))
         navigationItem.rightBarButtonItem = addButton
     }

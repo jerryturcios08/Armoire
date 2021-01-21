@@ -71,6 +71,20 @@ extension ClosetScreen: UITableViewDataSource, UITableViewDelegate {
         let folderScreen = FolderScreen()
         navigationController?.pushViewController(folderScreen, animated: true)
     }
+
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let containerView = UIView()
+        let itemCountLabel = AMBodyLabel(text: "\(4) folders", fontSize: 18)
+        itemCountLabel.textColor = .systemGray
+        containerView.addSubview(itemCountLabel)
+
+        itemCountLabel.snp.makeConstraints { make in
+            make.top.equalTo(containerView).offset(18)
+            make.centerX.equalTo(containerView)
+        }
+
+        return containerView
+    }
 }
 
 #if DEBUG

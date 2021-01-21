@@ -72,6 +72,20 @@ extension FolderScreen: UITableViewDataSource, UITableViewDelegate {
         let clothingScreen = ClothingScreen()
         navigationController?.pushViewController(clothingScreen, animated: true)
     }
+
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let containerView = UIView()
+        let itemCountLabel = AMBodyLabel(text: "\(4) items", fontSize: 18)
+        itemCountLabel.textColor = .systemGray
+        containerView.addSubview(itemCountLabel)
+
+        itemCountLabel.snp.makeConstraints { make in
+            make.top.equalTo(containerView).offset(18)
+            make.centerX.equalTo(containerView)
+        }
+
+        return containerView
+    }
 }
 
 #if DEBUG

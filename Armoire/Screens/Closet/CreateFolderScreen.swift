@@ -14,9 +14,9 @@ protocol CreateFolderScreenDelegate: class {
 
 class CreateFolderScreen: UIViewController {
     let folderTitleTextField = AMTextField(text: "Title")
-    let folderDescriptionTextView = UITextView()
+    let folderDescriptionTextView = AMTextView(placeholder: "Enter description")
     let favoriteLabel = AMBodyLabel(text: "Mark as favorite?", fontSize: 20)
-    let favoriteSwitch = UISwitch()
+    let favoriteSwitch = AMSwitch(accentColor: UIColor.accentColor)
 
     var folderTitle = ""
     var folderDescription = ""
@@ -60,7 +60,7 @@ class CreateFolderScreen: UIViewController {
 
     func configureFavoriteSwitch() {
         view.addSubview(favoriteSwitch)
-        favoriteSwitch.onTintColor = UIColor.accentColor
+        favoriteSwitch.setOnAction(handleFavoriteSwitchToggle)
 
         favoriteSwitch.snp.makeConstraints { make in
             make.right.equalTo(folderTitleTextField)
@@ -80,9 +80,7 @@ class CreateFolderScreen: UIViewController {
 
     func configureFolderDescriptionTextView() {
         view.addSubview(folderDescriptionTextView)
-        folderDescriptionTextView.font = UIFont(name: Fonts.quicksandRegular, size: 20)
-        folderDescriptionTextView.backgroundColor = .systemGray6
-        folderDescriptionTextView.layer.cornerRadius = 10
+        folderDescriptionTextView.delegate = self
 
         folderDescriptionTextView.snp.makeConstraints { make in
             make.top.equalTo(folderTitleTextField.snp.bottom).offset(20)
@@ -98,6 +96,10 @@ class CreateFolderScreen: UIViewController {
         folderTitle = text
     }
 
+    func handleFavoriteSwitchToggle(_ sender: UISwitch) {
+        markedAsFavorite = sender.isOn
+    }
+
     @objc func doneButtonTapped() {
         let folder = Folder(title: folderTitle, description: folderDescription, favorite: markedAsFavorite)
         delegate?.didCreateNewFolder(folder)
@@ -106,6 +108,18 @@ class CreateFolderScreen: UIViewController {
 
     @objc func dismissScreen() {
         dismiss(animated: true)
+    }
+}
+
+// MARK: - Text view delegate
+
+extension CreateFolderScreen: UITextViewDelegate {
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        folderDescriptionTextView.hidePlaceholder()
+    }
+
+    func textViewDidEndEditing(_ textView: UITextView) {
+        folderDescriptionTextView.showPlaceholder()
     }
 }
 

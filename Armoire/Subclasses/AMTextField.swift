@@ -30,8 +30,7 @@ class AMTextField: UITextField {
         addTarget(self, action: #selector(handleEdit), for: .editingChanged)
 
         layer.cornerRadius = 10
-//        layer.borderWidth = 1
-//        layer.borderColor = UIColor.systemGray5.cgColor
+        tintColor = UIColor.accentColor
 
         let customFont = UIFont(name: Fonts.quicksandMedium, size: 18)!
         font = UIFontMetrics.default.scaledFont(for: customFont)

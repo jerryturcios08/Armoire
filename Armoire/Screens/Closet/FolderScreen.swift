@@ -60,7 +60,9 @@ class FolderScreen: UIViewController {
     }
 
     @objc func addButtonTapped(_ sender: UIBarButtonItem) {
-        // Show create item screen
+        let destinationScreen = AMNavigationController(rootViewController: AddClothingScreen())
+        destinationScreen.modalPresentationStyle = .fullScreen
+        present(destinationScreen, animated: true)
     }
 }
 

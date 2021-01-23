@@ -18,6 +18,17 @@ class ClothingScreen: UIViewController {
     let sizeLabel = AMBodyLabel(text: "Size", fontSize: 22)
     let materialLabel = AMBodyLabel(text: "Material", fontSize: 22)
 
+    private var clothing: String
+
+    init(clothing: String) {
+        self.clothing = clothing
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         configureScreen()
@@ -29,7 +40,7 @@ class ClothingScreen: UIViewController {
     }
 
     func configureScreen() {
-        title = "Pink Dress"
+        title = clothing
         view.backgroundColor = .systemBackground
 
         let starImage = UIImage(systemName: SFSymbol.starFill)
@@ -64,6 +75,7 @@ class ClothingScreen: UIViewController {
 
     func configureClothingNameLabel() {
         view.addSubview(clothingNameLabel)
+        clothingNameLabel.text = clothing
 
         clothingNameLabel.snp.makeConstraints { make in
             make.centerY.equalTo(clothingColorButton)
@@ -118,7 +130,7 @@ extension ClothingScreen: UIColorPickerViewControllerDelegate {
 struct ClothingScreenPreviews: PreviewProvider {
     static var previews: some View {
         UIViewControllerPreview {
-            AMNavigationController(rootViewController: ClothingScreen())
+            AMNavigationController(rootViewController: ClothingScreen(clothing: "Pink Dress"))
         }
     }
 }

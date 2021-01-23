@@ -42,6 +42,7 @@
 		C6A9C1D425B7CE8600C22F29 /* AMButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A9C1D325B7CE8600C22F29 /* AMButton.swift */; };
 		C6AA152D25BCBD0E0095ADA0 /* AMTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6AA152C25BCBD0E0095ADA0 /* AMTextView.swift */; };
 		C6AA153225BCBDF00095ADA0 /* AMSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6AA153125BCBDF00095ADA0 /* AMSwitch.swift */; };
+		C6AA153725BCC58D0095ADA0 /* ClothesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6AA153625BCC58D0095ADA0 /* ClothesDataSource.swift */; };
 		C6C0A06625B786FF000CA9F7 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = C6C0A06525B786FF000CA9F7 /* SnapKit */; };
 		C6EE84BB25B8BE8000986BF4 /* AMPrimaryLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6EE84BA25B8BE8000986BF4 /* AMPrimaryLabel.swift */; };
 /* End PBXBuildFile section */
@@ -105,6 +106,7 @@
 		C6A9C1D325B7CE8600C22F29 /* AMButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AMButton.swift; sourceTree = "<group>"; };
 		C6AA152C25BCBD0E0095ADA0 /* AMTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AMTextView.swift; sourceTree = "<group>"; };
 		C6AA153125BCBDF00095ADA0 /* AMSwitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AMSwitch.swift; sourceTree = "<group>"; };
+		C6AA153625BCC58D0095ADA0 /* ClothesDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClothesDataSource.swift; sourceTree = "<group>"; };
 		C6EE84BA25B8BE8000986BF4 /* AMPrimaryLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AMPrimaryLabel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -277,6 +279,7 @@
 		C63B0B8A25B9317D0065F813 /* Collections */ = {
 			isa = PBXGroup;
 			children = (
+				C6AA153625BCC58D0095ADA0 /* ClothesDataSource.swift */,
 				C63B0B8B25B931980065F813 /* FolderDataSource.swift */,
 			);
 			path = Collections;
@@ -488,6 +491,7 @@
 				C60E9F8F25BA42EC00D97991 /* AddClothingScreen.swift in Sources */,
 				C601983A25B78383004B4203 /* AppDelegate.swift in Sources */,
 				C63B0B6425B8C2180065F813 /* AMTextField.swift in Sources */,
+				C6AA153725BCC58D0095ADA0 /* ClothesDataSource.swift in Sources */,
 				C658E7CE25B78D31000F8F50 /* AMNavigationController.swift in Sources */,
 				C601983C25B78383004B4203 /* SceneDelegate.swift in Sources */,
 				C601988325B7843B004B4203 /* constants.swift in Sources */,

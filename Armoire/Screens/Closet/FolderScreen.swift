@@ -11,8 +11,20 @@ import UIKit
 
 class FolderScreen: UIViewController {
     let tableView = UITableView(frame: .zero, style: .grouped)
+    let footerContainerView = UIView()
+    let itemCountLabel = AMBodyLabel(text: "0 items", fontSize: 18)
 
-    let folder = "Dresses"
+    private var folder: String
+    var dataSource = ClothesDataSource()
+
+    init(folder: String) {
+        self.folder = folder
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +41,9 @@ class FolderScreen: UIViewController {
         let addButtonImage = UIImage(systemName: SFSymbol.plus)
         let addButton = UIBarButtonItem(image: addButtonImage, style: .plain, target: self, action: #selector(addButtonTapped))
         navigationItem.rightBarButtonItem = addButton
+
+        dataSource.delegate = self
+        dataSource.clothes = ["Pink Dress 1", "Pink Dress 2", "Pink Dress 3", "Pink Dress 4"]
     }
 
     func configureSearchController() {
@@ -46,7 +61,7 @@ class FolderScreen: UIViewController {
 
     func configureTableView() {
         view.addSubview(tableView)
-        tableView.dataSource = self
+        tableView.dataSource = dataSource
         tableView.delegate = self
         tableView.backgroundColor = .systemBackground
         tableView.register(ClothingCell.self, forCellReuseIdentifier: ClothingCell.reuseId)
@@ -59,6 +74,17 @@ class FolderScreen: UIViewController {
         }
     }
 
+    func createFooterView() -> UIView {
+        itemCountLabel.textColor = .systemGray
+        footerContainerView.addSubview(itemCountLabel)
+
+        itemCountLabel.snp.makeConstraints { make in
+            make.centerX.centerY.equalTo(footerContainerView)
+        }
+
+        return footerContainerView
+    }
+
     @objc func addButtonTapped(_ sender: UIBarButtonItem) {
         let destinationScreen = AMNavigationController(rootViewController: AddClothingScreen())
         destinationScreen.modalPresentationStyle = .fullScreen
@@ -66,18 +92,21 @@ class FolderScreen: UIViewController {
     }
 }
 
-extension FolderScreen: UITableViewDataSource, UITableViewDelegate {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
-    }
+// MARK: - Data source delegate
 
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: ClothingCell.reuseId, for: indexPath) as! ClothingCell
-        return cell
+extension FolderScreen: ClothesDataSourceDelegate {
+    func didUpdateDataSource(_ clothing: [String]) {
+        let count = clothing.count
+        itemCountLabel.text = count == 1 ? "1 item" : "\(count) items"
     }
+}
 
+// MARK: - Table view delegate
+
+extension FolderScreen: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let clothingScreen = ClothingScreen()
+        let clothing = dataSource.clothes[indexPath.row]
+        let clothingScreen = ClothingScreen(clothing: clothing)
         navigationController?.pushViewController(clothingScreen, animated: true)
     }
 
@@ -94,24 +123,17 @@ extension FolderScreen: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let containerView = UIView()
-        let itemCountLabel = AMBodyLabel(text: "\(4) items", fontSize: 18)
-        itemCountLabel.textColor = .systemGray
-        containerView.addSubview(itemCountLabel)
-
-        itemCountLabel.snp.makeConstraints { make in
-            make.centerX.centerY.equalTo(containerView)
-        }
-
-        return containerView
+        return createFooterView()
     }
 }
+
+// MARK: - Previews
 
 #if DEBUG
 struct FolderScreenPreviews: PreviewProvider {
     static var previews: some View {
         UIViewControllerPreview {
-            AMNavigationController(rootViewController: FolderScreen())
+            AMNavigationController(rootViewController: FolderScreen(folder: "Dresses"))
         }
     }
 }

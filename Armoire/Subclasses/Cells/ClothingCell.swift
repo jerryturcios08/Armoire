@@ -31,7 +31,7 @@ class ClothingCell: UITableViewCell {
     }
 
     func set(clothing: String) {
-
+        clothingTitleLabel.text = clothing
     }
 
     private func configureCell() {

@@ -107,7 +107,8 @@ extension ClosetScreen: CreateFolderScreenDelegate {
 
 extension ClosetScreen: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let folderScreen = FolderScreen()
+        let folder = dataSource.folders[indexPath.row]
+        let folderScreen = FolderScreen(folder: folder)
         navigationController?.pushViewController(folderScreen, animated: true)
     }
 

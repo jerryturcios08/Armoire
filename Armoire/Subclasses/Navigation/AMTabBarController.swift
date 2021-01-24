@@ -33,11 +33,11 @@ class AMTabBarController: UITabBarController {
     }
 
     private func createRunwayNavigation() -> AMNavigationController {
-        let runwayScreen = RunwayScreen()
-        runwayScreen.tabBarItem = UITabBarItem(title: "Runway", image: UIImage(systemName: SFSymbol.binoculars), selectedImage: UIImage(systemName: SFSymbol.binocularsFill))
-        configureTextAttributes(for: runwayScreen.tabBarItem)
+        let runwayListScreen = RunwayListScreen()
+        runwayListScreen.tabBarItem = UITabBarItem(title: "Runway", image: UIImage(systemName: SFSymbol.binoculars), selectedImage: UIImage(systemName: SFSymbol.binocularsFill))
+        configureTextAttributes(for: runwayListScreen.tabBarItem)
 
-        return AMNavigationController(rootViewController: runwayScreen)
+        return AMNavigationController(rootViewController: runwayListScreen)
     }
 
     private func createProfileNavigation() -> AMNavigationController {

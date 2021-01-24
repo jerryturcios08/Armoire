@@ -37,13 +37,14 @@
 		C66D718925BE0BEE008BC818 /* UIStackView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66D718825BE0BEE008BC818 /* UIStackView+Ext.swift */; };
 		C670A0F825BD31CA000A1405 /* AMBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C670A0F725BD31CA000A1405 /* AMBarButtonItem.swift */; };
 		C673CFFE25B7ABE800D3E765 /* ProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C673CFFD25B7ABE800D3E765 /* ProfileScreen.swift */; };
-		C673D00625B7AC3C00D3E765 /* RunwayScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C673D00525B7AC3C00D3E765 /* RunwayScreen.swift */; };
+		C673D00625B7AC3C00D3E765 /* RunwayListScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C673D00525B7AC3C00D3E765 /* RunwayListScreen.swift */; };
 		C67459A225B93D0C003C87D1 /* CreateFolderScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67459A125B93D0C003C87D1 /* CreateFolderScreen.swift */; };
 		C6A9C1D425B7CE8600C22F29 /* AMButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A9C1D325B7CE8600C22F29 /* AMButton.swift */; };
 		C6AA152D25BCBD0E0095ADA0 /* AMTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6AA152C25BCBD0E0095ADA0 /* AMTextView.swift */; };
 		C6AA153225BCBDF00095ADA0 /* AMSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6AA153125BCBDF00095ADA0 /* AMSwitch.swift */; };
 		C6AA153725BCC58D0095ADA0 /* ClothesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6AA153625BCC58D0095ADA0 /* ClothesDataSource.swift */; };
 		C6C0A06625B786FF000CA9F7 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = C6C0A06525B786FF000CA9F7 /* SnapKit */; };
+		C6C6D4F125BE15F300E4C0B8 /* UITableView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C6D4F025BE15F300E4C0B8 /* UITableView+Ext.swift */; };
 		C6EE84BB25B8BE8000986BF4 /* AMPrimaryLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6EE84BA25B8BE8000986BF4 /* AMPrimaryLabel.swift */; };
 /* End PBXBuildFile section */
 
@@ -101,12 +102,13 @@
 		C66D718825BE0BEE008BC818 /* UIStackView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Ext.swift"; sourceTree = "<group>"; };
 		C670A0F725BD31CA000A1405 /* AMBarButtonItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AMBarButtonItem.swift; sourceTree = "<group>"; };
 		C673CFFD25B7ABE800D3E765 /* ProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreen.swift; sourceTree = "<group>"; };
-		C673D00525B7AC3C00D3E765 /* RunwayScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunwayScreen.swift; sourceTree = "<group>"; };
+		C673D00525B7AC3C00D3E765 /* RunwayListScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunwayListScreen.swift; sourceTree = "<group>"; };
 		C67459A125B93D0C003C87D1 /* CreateFolderScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateFolderScreen.swift; sourceTree = "<group>"; };
 		C6A9C1D325B7CE8600C22F29 /* AMButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AMButton.swift; sourceTree = "<group>"; };
 		C6AA152C25BCBD0E0095ADA0 /* AMTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AMTextView.swift; sourceTree = "<group>"; };
 		C6AA153125BCBDF00095ADA0 /* AMSwitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AMSwitch.swift; sourceTree = "<group>"; };
 		C6AA153625BCC58D0095ADA0 /* ClothesDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClothesDataSource.swift; sourceTree = "<group>"; };
+		C6C6D4F025BE15F300E4C0B8 /* UITableView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Ext.swift"; sourceTree = "<group>"; };
 		C6EE84BA25B8BE8000986BF4 /* AMPrimaryLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AMPrimaryLabel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -159,12 +161,12 @@
 		C601983825B78383004B4203 /* Armoire */ = {
 			isa = PBXGroup;
 			children = (
+				C601988925B784A5004B4203 /* Application */,
 				C601987325B78411004B4203 /* Assets */,
 				C601988825B78492004B4203 /* Data */,
 				C60E9F7F25BA357300D97991 /* Models */,
 				C601988725B78483004B4203 /* Screens */,
 				C658E7BC25B7890B000F8F50 /* Subclasses */,
-				C601988925B784A5004B4203 /* Supporting Files */,
 				C601988125B78429004B4203 /* Utilities */,
 				C601984A25B78386004B4203 /* Info.plist */,
 			);
@@ -227,13 +229,13 @@
 			path = Data;
 			sourceTree = "<group>";
 		};
-		C601988925B784A5004B4203 /* Supporting Files */ = {
+		C601988925B784A5004B4203 /* Application */ = {
 			isa = PBXGroup;
 			children = (
 				C601983925B78383004B4203 /* AppDelegate.swift */,
 				C601983B25B78383004B4203 /* SceneDelegate.swift */,
 			);
-			path = "Supporting Files";
+			path = Application;
 			sourceTree = "<group>";
 		};
 		C60E9F7F25BA357300D97991 /* Models */ = {
@@ -249,6 +251,7 @@
 			children = (
 				C60E9F8925BA37FA00D97991 /* UIColor+Ext.swift */,
 				C66D718825BE0BEE008BC818 /* UIStackView+Ext.swift */,
+				C6C6D4F025BE15F300E4C0B8 /* UITableView+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -340,7 +343,7 @@
 		C673CFFC25B7ABD700D3E765 /* Runway */ = {
 			isa = PBXGroup;
 			children = (
-				C673D00525B7AC3C00D3E765 /* RunwayScreen.swift */,
+				C673D00525B7AC3C00D3E765 /* RunwayListScreen.swift */,
 			);
 			path = Runway;
 			sourceTree = "<group>";
@@ -487,7 +490,7 @@
 				C67459A225B93D0C003C87D1 /* CreateFolderScreen.swift in Sources */,
 				C601983E25B78383004B4203 /* ClosetScreen.swift in Sources */,
 				C670A0F825BD31CA000A1405 /* AMBarButtonItem.swift in Sources */,
-				C673D00625B7AC3C00D3E765 /* RunwayScreen.swift in Sources */,
+				C673D00625B7AC3C00D3E765 /* RunwayListScreen.swift in Sources */,
 				C60E9F8F25BA42EC00D97991 /* AddClothingScreen.swift in Sources */,
 				C601983A25B78383004B4203 /* AppDelegate.swift in Sources */,
 				C63B0B6425B8C2180065F813 /* AMTextField.swift in Sources */,
@@ -511,6 +514,7 @@
 				C6AA153225BCBDF00095ADA0 /* AMSwitch.swift in Sources */,
 				C658E7D925B78FE8000F8F50 /* previews.swift in Sources */,
 				C60E9F8A25BA37FA00D97991 /* UIColor+Ext.swift in Sources */,
+				C6C6D4F125BE15F300E4C0B8 /* UITableView+Ext.swift in Sources */,
 				C673CFFE25B7ABE800D3E765 /* ProfileScreen.swift in Sources */,
 				C63B0B7D25B8DCEA0065F813 /* FolderCell.swift in Sources */,
 			);

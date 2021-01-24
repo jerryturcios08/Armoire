@@ -12,7 +12,6 @@
 		C601983E25B78383004B4203 /* ClosetScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C601983D25B78383004B4203 /* ClosetScreen.swift */; };
 		C601984425B78383004B4203 /* Armoire.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C601984225B78383004B4203 /* Armoire.xcdatamodeld */; };
 		C601984625B78386004B4203 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C601984525B78386004B4203 /* Assets.xcassets */; };
-		C601984925B78386004B4203 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C601984725B78386004B4203 /* LaunchScreen.storyboard */; };
 		C601985425B78387004B4203 /* ArmoireTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C601985325B78387004B4203 /* ArmoireTests.swift */; };
 		C601985F25B78387004B4203 /* ArmoireUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C601985E25B78387004B4203 /* ArmoireUITests.swift */; };
 		C601987925B78421004B4203 /* Quicksand-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C601987425B78421004B4203 /* Quicksand-Bold.ttf */; };
@@ -72,7 +71,6 @@
 		C601983D25B78383004B4203 /* ClosetScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosetScreen.swift; sourceTree = "<group>"; };
 		C601984325B78383004B4203 /* Armoire.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Armoire.xcdatamodel; sourceTree = "<group>"; };
 		C601984525B78386004B4203 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		C601984825B78386004B4203 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C601984A25B78386004B4203 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C601984F25B78387004B4203 /* ArmoireTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ArmoireTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C601985325B78387004B4203 /* ArmoireTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArmoireTests.swift; sourceTree = "<group>"; };
@@ -194,11 +192,8 @@
 		C601987325B78411004B4203 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				C601987425B78421004B4203 /* Quicksand-Bold.ttf */,
-				C601987525B78421004B4203 /* Quicksand-Light.ttf */,
-				C601987625B78421004B4203 /* Quicksand-Medium.ttf */,
-				C601987825B78421004B4203 /* Quicksand-Regular.ttf */,
-				C601987725B78421004B4203 /* Quicksand-SemiBold.ttf */,
+				C601984525B78386004B4203 /* Assets.xcassets */,
+				C66D717425BDED68008BC818 /* Fonts */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -238,8 +233,6 @@
 			children = (
 				C601983925B78383004B4203 /* AppDelegate.swift */,
 				C601983B25B78383004B4203 /* SceneDelegate.swift */,
-				C601984525B78386004B4203 /* Assets.xcassets */,
-				C601984725B78386004B4203 /* LaunchScreen.storyboard */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -310,6 +303,18 @@
 				C658E7E025B7901F000F8F50 /* AMTabBarController.swift */,
 			);
 			path = Navigation;
+			sourceTree = "<group>";
+		};
+		C66D717425BDED68008BC818 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				C601987425B78421004B4203 /* Quicksand-Bold.ttf */,
+				C601987525B78421004B4203 /* Quicksand-Light.ttf */,
+				C601987625B78421004B4203 /* Quicksand-Medium.ttf */,
+				C601987825B78421004B4203 /* Quicksand-Regular.ttf */,
+				C601987725B78421004B4203 /* Quicksand-SemiBold.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		C673CFF825B7ABA100D3E765 /* Closet */ = {
@@ -457,7 +462,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C601984925B78386004B4203 /* LaunchScreen.storyboard in Resources */,
 				C601987925B78421004B4203 /* Quicksand-Bold.ttf in Resources */,
 				C601987D25B78421004B4203 /* Quicksand-Regular.ttf in Resources */,
 				C601984625B78386004B4203 /* Assets.xcassets in Resources */,
@@ -550,17 +554,6 @@
 			targetProxy = C601985B25B78387004B4203 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		C601984725B78386004B4203 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C601984825B78386004B4203 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		C601986125B78387004B4203 /* Debug */ = {

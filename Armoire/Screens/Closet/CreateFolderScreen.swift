@@ -61,8 +61,8 @@ class CreateFolderScreen: UIViewController {
 
         folderTitleTextField.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(12)
-            make.left.equalTo(view).offset(12)
-            make.right.equalTo(view).offset(-12)
+            make.left.equalTo(view.safeAreaLayoutGuide).offset(16)
+            make.right.equalTo(view.safeAreaLayoutGuide).offset(-16)
             make.height.equalTo(50)
         }
     }
@@ -92,7 +92,7 @@ class CreateFolderScreen: UIViewController {
         view.addSubview(favoriteLabel)
 
         favoriteLabel.snp.makeConstraints { make in
-            make.top.equalTo(folderDescriptionTextView.snp.bottom).offset(20)
+            make.centerY.equalTo(favoriteSwitch)
             make.left.equalTo(folderDescriptionTextView)
             make.right.equalTo(favoriteSwitch).offset(-8)
         }

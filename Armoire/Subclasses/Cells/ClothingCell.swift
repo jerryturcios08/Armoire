@@ -53,7 +53,7 @@ class ClothingCell: UITableViewCell {
         clothingImageView.clipsToBounds = true
 
         clothingImageView.snp.makeConstraints { make in
-            make.left.equalTo(self).offset(14)
+            make.left.equalTo(self).offset(16)
             make.top.equalTo(self).offset(9)
             make.bottom.equalTo(separatorLine).offset(-12)
             make.width.equalTo(100)
@@ -67,7 +67,7 @@ class ClothingCell: UITableViewCell {
 
         favoriteButton.snp.makeConstraints { make in
             make.top.equalTo(clothingImageView)
-            make.right.equalTo(self).offset(-14)
+            make.right.equalTo(self).offset(-16)
             make.width.equalTo(22)
         }
     }

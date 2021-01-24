@@ -10,16 +10,21 @@ import UIKit
 
 class AMSwitch: UISwitch {
     private var onAction: ((AMSwitch) -> Void)?
+    private var accentColor: UIColor?
 
     init(accentColor: UIColor?) {
         super.init(frame: .zero)
-        guard let color = accentColor else { return }
-        onTintColor = color
-        addTarget(self, action: #selector(handleToggle), for: .primaryActionTriggered)
+        self.accentColor = accentColor
+        configureSwitch()
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    private func configureSwitch() {
+        addTarget(self, action: #selector(handleToggle), for: .primaryActionTriggered)
+        onTintColor = accentColor
     }
 
     func setOnAction(_ onAction: @escaping (AMSwitch) -> Void) {

@@ -21,10 +21,10 @@ class AddClothingScreen: UIViewController {
         title = "Add Clothing"
         view.backgroundColor = .systemBackground
 
-        let cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(dismissScreen))
+        let cancelButton = AMBarButtonItem(title: "Cancel", font: Fonts.quicksandMedium, onAction: cancelButtonTapped)
         navigationItem.leftBarButtonItem = cancelButton
 
-        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonTapped))
+        let doneButton = AMBarButtonItem(title: "Done", font: Fonts.quicksandBold, onAction: doneButtonTapped)
         navigationItem.rightBarButtonItem = doneButton
     }
 
@@ -40,11 +40,11 @@ class AddClothingScreen: UIViewController {
         }
     }
 
-    @objc func doneButtonTapped() {
-        dismissScreen()
+    func cancelButtonTapped(_ sender: UIBarButtonItem) {
+        dismiss(animated: true)
     }
 
-    @objc func dismissScreen() {
+    func doneButtonTapped(_ sender: UIBarButtonItem) {
         dismiss(animated: true)
     }
 }

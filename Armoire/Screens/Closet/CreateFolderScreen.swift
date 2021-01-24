@@ -39,10 +39,10 @@ class CreateFolderScreen: UIViewController {
         title = "Create Folder"
         view.backgroundColor = .systemBackground
 
-        let cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(dismissScreen))
+        let cancelButton = AMBarButtonItem(title: "Cancel", font: Fonts.quicksandSemiBold, onAction: cancelButtonTapped)
         navigationItem.leftBarButtonItem = cancelButton
 
-        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonTapped))
+        let doneButton = AMBarButtonItem(title: "Done", font: Fonts.quicksandBold, onAction: doneButtonTapped)
         navigationItem.rightBarButtonItem = doneButton
     }
 
@@ -100,13 +100,13 @@ class CreateFolderScreen: UIViewController {
         markedAsFavorite = sender.isOn
     }
 
-    @objc func doneButtonTapped() {
-        let folder = Folder(title: folderTitle, description: folderDescription, favorite: markedAsFavorite)
-        delegate?.didCreateNewFolder(folder)
-        dismissScreen()
+    func cancelButtonTapped(_ sender: UIBarButtonItem) {
+        dismiss(animated: true)
     }
 
-    @objc func dismissScreen() {
+    func doneButtonTapped(_ sender: UIBarButtonItem) {
+        let folder = Folder(title: folderTitle, description: folderDescription, favorite: markedAsFavorite)
+        delegate?.didCreateNewFolder(folder)
         dismiss(animated: true)
     }
 }

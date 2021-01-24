@@ -27,10 +27,11 @@ class CreateFolderScreen: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureScreen()
+        configureGestures()
         configureFolderTitleTextField()
+        configureFolderDescriptionTextView()
         configureFavoriteSwitch()
         configureFavoriteLabel()
-        configureFolderDescriptionTextView()
     }
 
     // MARK: - Configurations
@@ -46,9 +47,17 @@ class CreateFolderScreen: UIViewController {
         navigationItem.rightBarButtonItem = doneButton
     }
 
+    func configureGestures() {
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tapGestureRecognizer)
+    }
+
     func configureFolderTitleTextField() {
         view.addSubview(folderTitleTextField)
         folderTitleTextField.setOnEdit(handleFolderTitleTextFieldEdit)
+        folderTitleTextField.delegate = self
+        folderTitleTextField.returnKeyType = .next
+        folderTitleTextField.tag = 0
 
         folderTitleTextField.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(12)
@@ -58,13 +67,24 @@ class CreateFolderScreen: UIViewController {
         }
     }
 
+    func configureFolderDescriptionTextView() {
+        view.addSubview(folderDescriptionTextView)
+        folderDescriptionTextView.delegate = self
+        folderDescriptionTextView.isScrollEnabled = false
+
+        folderDescriptionTextView.snp.makeConstraints { make in
+            make.top.equalTo(folderTitleTextField.snp.bottom).offset(20)
+            make.left.right.equalTo(folderTitleTextField)
+        }
+    }
+
     func configureFavoriteSwitch() {
         view.addSubview(favoriteSwitch)
         favoriteSwitch.setOnAction(handleFavoriteSwitchToggle)
 
         favoriteSwitch.snp.makeConstraints { make in
-            make.right.equalTo(folderTitleTextField)
-            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-20)
+            make.top.equalTo(folderDescriptionTextView.snp.bottom).offset(20)
+            make.right.equalTo(folderDescriptionTextView)
         }
     }
 
@@ -72,20 +92,9 @@ class CreateFolderScreen: UIViewController {
         view.addSubview(favoriteLabel)
 
         favoriteLabel.snp.makeConstraints { make in
-            make.left.equalTo(folderTitleTextField)
+            make.top.equalTo(folderDescriptionTextView.snp.bottom).offset(20)
+            make.left.equalTo(folderDescriptionTextView)
             make.right.equalTo(favoriteSwitch).offset(-8)
-            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-20)
-        }
-    }
-
-    func configureFolderDescriptionTextView() {
-        view.addSubview(folderDescriptionTextView)
-        folderDescriptionTextView.delegate = self
-
-        folderDescriptionTextView.snp.makeConstraints { make in
-            make.top.equalTo(folderTitleTextField.snp.bottom).offset(20)
-            make.left.right.equalTo(folderTitleTextField)
-            make.bottom.equalTo(favoriteSwitch.snp.top).offset(-20)
         }
     }
 
@@ -108,6 +117,26 @@ class CreateFolderScreen: UIViewController {
         let folder = Folder(title: folderTitle, description: folderDescription, favorite: markedAsFavorite)
         delegate?.didCreateNewFolder(folder)
         dismiss(animated: true)
+    }
+
+    @objc func dismissKeyboard(_ sender: UITapGestureRecognizer) {
+        folderTitleTextField.resignFirstResponder()
+        folderDescriptionTextView.resignFirstResponder()
+    }
+}
+
+// MARK: - Text field delegate
+
+extension CreateFolderScreen: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        switch textField.tag {
+        case 0:
+            folderDescriptionTextView.becomeFirstResponder()
+        default:
+            return true
+        }
+
+        return true
     }
 }
 

@@ -23,10 +23,12 @@ class AMBarButtonItem: UIBarButtonItem {
     }
 
     private func configureWithText(font: String) {
+        action = #selector(handleAction)
         let textAttributes: [NSAttributedString.Key: Any] = [
             .font: UIFont(name: font, size: 17)!
         ]
         self.setTitleTextAttributes(textAttributes, for: .normal)
+        self.setTitleTextAttributes(textAttributes, for: .highlighted)
     }
 
     func setOnAction(_ onAction: @escaping (AMBarButtonItem) -> Void) {

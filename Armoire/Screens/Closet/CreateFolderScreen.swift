@@ -39,7 +39,7 @@ class CreateFolderScreen: UIViewController {
         title = "Create Folder"
         view.backgroundColor = .systemBackground
 
-        let cancelButton = AMBarButtonItem(title: "Cancel", font: Fonts.quicksandSemiBold, onAction: cancelButtonTapped)
+        let cancelButton = AMBarButtonItem(title: "Cancel", font: Fonts.quicksandMedium, onAction: cancelButtonTapped)
         navigationItem.leftBarButtonItem = cancelButton
 
         let doneButton = AMBarButtonItem(title: "Done", font: Fonts.quicksandBold, onAction: doneButtonTapped)

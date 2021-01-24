@@ -19,7 +19,6 @@ class AMTabBarController: UITabBarController {
 
         viewControllers = [
             createClosetNavigation(),
-            createWishlistNavigation(),
             createRunwayNavigation(),
             createProfileNavigation()
         ]
@@ -27,38 +26,26 @@ class AMTabBarController: UITabBarController {
 
     private func createClosetNavigation() -> AMNavigationController {
         let closetScreen = ClosetScreen()
-        let tabBarItem = UITabBarItem(title: "Closet", image: UIImage(systemName: SFSymbol.houseFill), tag: 0)
-        closetScreen.tabBarItem = tabBarItem
+        closetScreen.tabBarItem = UITabBarItem(title: "Closet", image: UIImage(systemName: SFSymbol.folder), selectedImage: UIImage(systemName: SFSymbol.folderFill))
         configureTextAttributes(for: closetScreen.tabBarItem)
 
         return AMNavigationController(rootViewController: closetScreen)
     }
 
-    private func createProfileNavigation() -> AMNavigationController {
-        let profileScreen = ProfileScreen()
-        let tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: SFSymbol.personFill), tag: 1)
-        profileScreen.tabBarItem = tabBarItem
-        configureTextAttributes(for: profileScreen.tabBarItem)
-
-        return AMNavigationController(rootViewController: profileScreen)
-    }
-
     private func createRunwayNavigation() -> AMNavigationController {
         let runwayScreen = RunwayScreen()
-        runwayScreen.title = "Runway"
-        runwayScreen.tabBarItem = UITabBarItem(tabBarSystemItem: .downloads, tag: 2)
+        runwayScreen.tabBarItem = UITabBarItem(title: "Runway", image: UIImage(systemName: SFSymbol.binoculars), selectedImage: UIImage(systemName: SFSymbol.binocularsFill))
         configureTextAttributes(for: runwayScreen.tabBarItem)
 
         return AMNavigationController(rootViewController: runwayScreen)
     }
 
-    private func createWishlistNavigation() -> AMNavigationController {
-        let wishlistScreen = WishlistScreen()
-        wishlistScreen.title = "Wishlist"
-        wishlistScreen.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 3)
-        configureTextAttributes(for: wishlistScreen.tabBarItem)
+    private func createProfileNavigation() -> AMNavigationController {
+        let profileScreen = ProfileScreen()
+        profileScreen.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: SFSymbol.person), selectedImage: UIImage(systemName: SFSymbol.personFill))
+        configureTextAttributes(for: profileScreen.tabBarItem)
 
-        return AMNavigationController(rootViewController: wishlistScreen)
+        return AMNavigationController(rootViewController: profileScreen)
     }
 
     private func configureTextAttributes(for item: UITabBarItem) {

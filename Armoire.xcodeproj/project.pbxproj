@@ -37,7 +37,6 @@
 		C670A0F825BD31CA000A1405 /* AMBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C670A0F725BD31CA000A1405 /* AMBarButtonItem.swift */; };
 		C673CFFE25B7ABE800D3E765 /* ProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C673CFFD25B7ABE800D3E765 /* ProfileScreen.swift */; };
 		C673D00625B7AC3C00D3E765 /* RunwayScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C673D00525B7AC3C00D3E765 /* RunwayScreen.swift */; };
-		C673D00B25B7AC6300D3E765 /* WishlistScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C673D00A25B7AC6300D3E765 /* WishlistScreen.swift */; };
 		C67459A225B93D0C003C87D1 /* CreateFolderScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67459A125B93D0C003C87D1 /* CreateFolderScreen.swift */; };
 		C6A9C1D425B7CE8600C22F29 /* AMButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A9C1D325B7CE8600C22F29 /* AMButton.swift */; };
 		C6AA152D25BCBD0E0095ADA0 /* AMTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6AA152C25BCBD0E0095ADA0 /* AMTextView.swift */; };
@@ -101,7 +100,6 @@
 		C670A0F725BD31CA000A1405 /* AMBarButtonItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AMBarButtonItem.swift; sourceTree = "<group>"; };
 		C673CFFD25B7ABE800D3E765 /* ProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreen.swift; sourceTree = "<group>"; };
 		C673D00525B7AC3C00D3E765 /* RunwayScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunwayScreen.swift; sourceTree = "<group>"; };
-		C673D00A25B7AC6300D3E765 /* WishlistScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishlistScreen.swift; sourceTree = "<group>"; };
 		C67459A125B93D0C003C87D1 /* CreateFolderScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateFolderScreen.swift; sourceTree = "<group>"; };
 		C6A9C1D325B7CE8600C22F29 /* AMButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AMButton.swift; sourceTree = "<group>"; };
 		C6AA152C25BCBD0E0095ADA0 /* AMTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AMTextView.swift; sourceTree = "<group>"; };
@@ -215,7 +213,6 @@
 				C673CFF825B7ABA100D3E765 /* Closet */,
 				C673CFFB25B7ABCF00D3E765 /* Profile */,
 				C673CFFC25B7ABD700D3E765 /* Runway */,
-				C673CFFA25B7ABB500D3E765 /* Wishlist */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -327,14 +324,6 @@
 				C63B0B6E25B8DACD0065F813 /* FolderScreen.swift */,
 			);
 			path = Closet;
-			sourceTree = "<group>";
-		};
-		C673CFFA25B7ABB500D3E765 /* Wishlist */ = {
-			isa = PBXGroup;
-			children = (
-				C673D00A25B7AC6300D3E765 /* WishlistScreen.swift */,
-			);
-			path = Wishlist;
 			sourceTree = "<group>";
 		};
 		C673CFFB25B7ABCF00D3E765 /* Profile */ = {
@@ -517,7 +506,6 @@
 				C63B0B8225B8F08E0065F813 /* ClothingScreen.swift in Sources */,
 				C6AA153225BCBDF00095ADA0 /* AMSwitch.swift in Sources */,
 				C658E7D925B78FE8000F8F50 /* previews.swift in Sources */,
-				C673D00B25B7AC6300D3E765 /* WishlistScreen.swift in Sources */,
 				C60E9F8A25BA37FA00D97991 /* UIColor+Ext.swift in Sources */,
 				C673CFFE25B7ABE800D3E765 /* ProfileScreen.swift in Sources */,
 				C63B0B7D25B8DCEA0065F813 /* FolderCell.swift in Sources */,

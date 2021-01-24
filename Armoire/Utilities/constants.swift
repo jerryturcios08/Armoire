@@ -16,8 +16,11 @@ enum Fonts {
 }
 
 enum SFSymbol {
+    static let binoculars = "binoculars"
+    static let binocularsFill = "binoculars.fill"
     static let folder = "folder"
-    static let houseFill = "house.fill"
+    static let folderFill = "folder.fill"
+    static let person = "person"
     static let personFill = "person.fill"
     static let plus = "plus"
     static let starFill = "star.fill"

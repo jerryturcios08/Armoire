@@ -276,20 +276,20 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
-		C63B0B8A25B9317D0065F813 /* Collections */ = {
+		C63B0B8A25B9317D0065F813 /* Data Sources */ = {
 			isa = PBXGroup;
 			children = (
 				C6AA153625BCC58D0095ADA0 /* ClothesDataSource.swift */,
 				C63B0B8B25B931980065F813 /* FolderDataSource.swift */,
 			);
-			path = Collections;
+			path = "Data Sources";
 			sourceTree = "<group>";
 		};
 		C658E7BC25B7890B000F8F50 /* Subclasses */ = {
 			isa = PBXGroup;
 			children = (
 				C63B0B7325B8DCD70065F813 /* Cells */,
-				C63B0B8A25B9317D0065F813 /* Collections */,
+				C63B0B8A25B9317D0065F813 /* Data Sources */,
 				C63B0B5C25B8C1FD0065F813 /* Labels */,
 				C658E7E525B79023000F8F50 /* Navigation */,
 				C6A9C1D325B7CE8600C22F29 /* AMButton.swift */,

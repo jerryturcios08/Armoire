@@ -2,7 +2,7 @@
 //  AMTextView.swift
 //  Armoire
 //
-//  Created by Jerry Turcios on 1/23/21.
+//  Created by Geraldine Turcios on 1/23/21.
 //
 
 import SwiftUI

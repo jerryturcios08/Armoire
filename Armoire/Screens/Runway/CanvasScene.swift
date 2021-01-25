@@ -12,12 +12,25 @@ protocol CanvasSceneDelegate: class {
 }
 
 class CanvasScene: SKScene {
+    let cameraNode = SKCameraNode()
+
     weak var canvasDelegate: CanvasSceneDelegate?
     var selectedItemBorderNode = SKShapeNode()
 
+    // Camera properties
+    var previousCameraPoint = CGPoint.zero
+    var previousCameraScale = CGFloat()
+    var currentCameraScale = CGFloat(6)
+
+    override func sceneDidLoad() {
+        super.sceneDidLoad()
+        configureCamera()
+        createInitialNode()
+    }
+
     override func didMove(to view: SKView) {
         super.didMove(to: view)
-        createInitialNode()
+        configureGestures(view: view)
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -48,7 +61,25 @@ class CanvasScene: SKScene {
         }
     }
 
+    func configureCamera() {
+        camera = cameraNode
+        cameraNode.position = CGPoint(x: frame.midX, y: frame.midY)
+        cameraNode.setScale(currentCameraScale)
+        addChild(cameraNode)
+    }
+
+    func configureGestures(view: SKView) {
+        let panGesture = UIPanGestureRecognizer()
+        panGesture.addTarget(self, action: #selector(panGestureAction))
+        view.addGestureRecognizer(panGesture)
+
+        let pinchGesture = UIPinchGestureRecognizer()
+        pinchGesture.addTarget(self, action: #selector(pinchGestureAction))
+        view.addGestureRecognizer(pinchGesture)
+    }
+
     func createInitialNode() {
+        // TODO: May soon be deleted since this is for early testing
         let dressNode = SKSpriteNode(imageNamed: "PinkDress")
         dressNode.name = "PinkDress"
         dressNode.position = CGPoint(x: frame.midX, y: frame.midY)
@@ -61,7 +92,7 @@ class CanvasScene: SKScene {
 
         // Border node configurations
         borderNode.name = "SelectedItemBorder"
-        borderNode.strokeColor = UIColor.accentColor!
+        borderNode.strokeColor = UIColor.accentColor ?? .systemPurple
         borderNode.lineWidth = 20
         borderNode.position = CGPoint(x: node.frame.minX, y: node.frame.minY)
         borderNode.zPosition = 100
@@ -79,5 +110,40 @@ class CanvasScene: SKScene {
 
     func deleteNode(node: SKNode) {
         removeChildren(in: [node, selectedItemBorderNode])
+    }
+
+    @objc func pinchGestureAction(_ sender: UIPinchGestureRecognizer) {
+        guard let camera = camera else { return }
+
+        if sender.state == .began {
+            previousCameraScale = camera.xScale
+        }
+
+        let scale = previousCameraScale * 1 / sender.scale
+
+        if scale > 1, scale < 20 {
+            currentCameraScale = scale
+            camera.setScale(scale)
+        }
+    }
+
+    @objc func panGestureAction(_ sender: UIPanGestureRecognizer) {
+        // The camera has a weak reference, so test it
+        guard let camera = camera else { return }
+
+        // If the movement just began, save the first camera position
+        if sender.state == .began {
+            previousCameraPoint = camera.position
+        }
+
+        // Perform the translation
+        let translation = sender.translation(in: view)
+
+        let newPosition = CGPoint(
+            x: previousCameraPoint.x + translation.x * -1 * currentCameraScale,
+            y: previousCameraPoint.y + translation.y * currentCameraScale
+        )
+
+        camera.position = newPosition
     }
 }

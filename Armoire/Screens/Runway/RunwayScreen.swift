@@ -85,7 +85,8 @@ class RunwayScreen: UIViewController {
         scene.canvasDelegate = self
         scene.size = view.frame.size
         scene.anchorPoint = CGPoint(x: 0, y: 0)
-        scene.size = CGSize(width: 10000, height: 10000)
+        // TODO: Need to determine how scene size will be handled
+        scene.size = CGSize(width: 1000, height: 1000)
         scene.scaleMode = .aspectFill
 
         if traitCollection.userInterfaceStyle == .light {
@@ -97,7 +98,14 @@ class RunwayScreen: UIViewController {
         guard let skView = view as? SKView else { return }
         skView.ignoresSiblingOrder = true
         skView.presentScene(scene)
+
+        #if DEBUG
+        skView.showsFPS = true
         skView.showsNodeCount = true
+        #else
+        skView.showsFPS = false
+        skView.showsNodeCount = false
+        #endif
     }
 
     @objc func closeButtonTapped(_ sender: UIBarButtonItem) {

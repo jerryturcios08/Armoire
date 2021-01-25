@@ -45,6 +45,8 @@
 		C6AA153725BCC58D0095ADA0 /* ClothesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6AA153625BCC58D0095ADA0 /* ClothesDataSource.swift */; };
 		C6C0A06625B786FF000CA9F7 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = C6C0A06525B786FF000CA9F7 /* SnapKit */; };
 		C6C6D4F125BE15F300E4C0B8 /* UITableView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C6D4F025BE15F300E4C0B8 /* UITableView+Ext.swift */; };
+		C6EAA14825BE1FB900C727B3 /* RunwayScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6EAA14725BE1FB900C727B3 /* RunwayScreen.swift */; };
+		C6EAA14D25BE214300C727B3 /* CanvasScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6EAA14C25BE214300C727B3 /* CanvasScene.swift */; };
 		C6EE84BB25B8BE8000986BF4 /* AMPrimaryLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6EE84BA25B8BE8000986BF4 /* AMPrimaryLabel.swift */; };
 /* End PBXBuildFile section */
 
@@ -109,6 +111,8 @@
 		C6AA153125BCBDF00095ADA0 /* AMSwitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AMSwitch.swift; sourceTree = "<group>"; };
 		C6AA153625BCC58D0095ADA0 /* ClothesDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClothesDataSource.swift; sourceTree = "<group>"; };
 		C6C6D4F025BE15F300E4C0B8 /* UITableView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Ext.swift"; sourceTree = "<group>"; };
+		C6EAA14725BE1FB900C727B3 /* RunwayScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunwayScreen.swift; sourceTree = "<group>"; };
+		C6EAA14C25BE214300C727B3 /* CanvasScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasScene.swift; sourceTree = "<group>"; };
 		C6EE84BA25B8BE8000986BF4 /* AMPrimaryLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AMPrimaryLabel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -343,7 +347,9 @@
 		C673CFFC25B7ABD700D3E765 /* Runway */ = {
 			isa = PBXGroup;
 			children = (
+				C6EAA14C25BE214300C727B3 /* CanvasScene.swift */,
 				C673D00525B7AC3C00D3E765 /* RunwayListScreen.swift */,
+				C6EAA14725BE1FB900C727B3 /* RunwayScreen.swift */,
 			);
 			path = Runway;
 			sourceTree = "<group>";
@@ -509,9 +515,11 @@
 				C658E7C925B7896E000F8F50 /* UIHelper.swift in Sources */,
 				C62E0C4025B8BC110078065A /* AMBodyLabel.swift in Sources */,
 				C63B0B7525B8DCE20065F813 /* ClothingCell.swift in Sources */,
+				C6EAA14D25BE214300C727B3 /* CanvasScene.swift in Sources */,
 				C6EE84BB25B8BE8000986BF4 /* AMPrimaryLabel.swift in Sources */,
 				C63B0B8225B8F08E0065F813 /* ClothingScreen.swift in Sources */,
 				C6AA153225BCBDF00095ADA0 /* AMSwitch.swift in Sources */,
+				C6EAA14825BE1FB900C727B3 /* RunwayScreen.swift in Sources */,
 				C658E7D925B78FE8000F8F50 /* previews.swift in Sources */,
 				C60E9F8A25BA37FA00D97991 /* UIColor+Ext.swift in Sources */,
 				C6C6D4F125BE15F300E4C0B8 /* UITableView+Ext.swift in Sources */,

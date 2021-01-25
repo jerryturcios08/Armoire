@@ -27,6 +27,11 @@ class RunwayListScreen: UIViewController {
         configureTableView()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        deselectSelectedTableViewRow()
+    }
+
     func configureScreen() {
         title = "Runway"
         view.backgroundColor = .systemBackground
@@ -35,8 +40,6 @@ class RunwayListScreen: UIViewController {
         let addButtonImage = UIImage(systemName: SFSymbol.plus)
         let addButton = UIBarButtonItem(image: addButtonImage, style: .plain, target: self, action: #selector(addButtonTapped))
         navigationItem.rightBarButtonItem = addButton
-
-        runways = ["Runway 1", "Runway 2", "Runway 3"]
     }
 
     func configureSearchController() {
@@ -74,6 +77,11 @@ class RunwayListScreen: UIViewController {
         }
 
         return footerContainerView
+    }
+
+    func deselectSelectedTableViewRow() {
+        guard let index = tableView.indexPathForSelectedRow else { return }
+        tableView.deselectRow(at: index, animated: true)
     }
 
     @objc func addButtonTapped(_ sender: UIBarButtonItem) {
@@ -137,6 +145,14 @@ extension RunwayListScreen: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return createFooterView()
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let runway = runways[indexPath.row]
+        let runwayScreen = AMNavigationController(rootViewController: RunwayScreen(runway: runway))
+        runwayScreen.modalPresentationStyle = .fullScreen
+        runwayScreen.modalTransitionStyle = .crossDissolve
+        present(runwayScreen, animated: true)
     }
 }
 

@@ -10,16 +10,20 @@ import SwiftUI
 import UIKit
 
 class RunwayScreen: UIViewController {
+    // MARK: - Properties
+
     let scene = CanvasScene()
 
-    let undoButton = UIBarButtonItem(image: UIImage(systemName: "arrowshape.turn.up.left"), style: .plain, target: self, action: nil)
-    let redoButton = UIBarButtonItem(image: UIImage(systemName: "arrowshape.turn.up.right"), style: .plain, target: self, action: nil)
-    let moveUpButton = UIBarButtonItem(image: UIImage(systemName: "arrow.up"), style: .plain, target: self, action: nil)
-    let moveDownButton = UIBarButtonItem(image: UIImage(systemName: "arrow.down"), style: .plain, target: self, action: nil)
-    let deleteButton = UIBarButtonItem(image: UIImage(systemName: "trash"), style: .plain, target: self, action: #selector(deleteButtonTapped))
+    let undoButton = AMBarButtonItem(image: UIImage(systemName: "arrowshape.turn.up.left"))
+    let redoButton = AMBarButtonItem(image: UIImage(systemName: "arrowshape.turn.up.right"))
+    let moveUpButton = AMBarButtonItem(image: UIImage(systemName: "arrow.up"))
+    let moveDownButton = AMBarButtonItem(image: UIImage(systemName: "arrow.down"))
+    let deleteButton = AMBarButtonItem(image: UIImage(systemName: "trash"))
 
     private var runway: String
     var selectedNode: SKNode?
+
+    // MARK: - Initializers
 
     init(runway: String) {
         self.runway = runway
@@ -29,6 +33,8 @@ class RunwayScreen: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    // MARK: - Overriden methods
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,6 +52,8 @@ class RunwayScreen: UIViewController {
             scene.changeToDarkMode()
         }
     }
+
+    // MARK: - Configurations
 
     func configureScreen() {
         title = runway
@@ -65,6 +73,12 @@ class RunwayScreen: UIViewController {
         navigationController?.toolbar.isTranslucent = false
 
         let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
+
+        undoButton.setOnAction(undoButtonTapped)
+        redoButton.setOnAction(redoButtonTapped)
+        moveUpButton.setOnAction(arrowUpButtonTapped)
+        moveDownButton.setOnAction(arrowDownButtonTapped)
+        deleteButton.setOnAction(deleteButtonTapped)
 
         undoButton.isEnabled = false
         redoButton.isEnabled = false
@@ -108,15 +122,37 @@ class RunwayScreen: UIViewController {
         #endif
     }
 
+    // MARK: - Action methods
+
     @objc func closeButtonTapped(_ sender: UIBarButtonItem) {
         dismiss(animated: true)
     }
 
     @objc func exportButtonTapped(_ sender: UIBarButtonItem) {
+        // TODO: Allow for sharing with another user to get feedback on a runway
+    }
+
+    @objc func undoButtonTapped(_ sender: UIBarButtonItem) {
+        // TODO: Implement undo functionality
+    }
+
+    @objc func redoButtonTapped(_ sender: UIBarButtonItem) {
+        // TODO: Implement redo functionality
+    }
+
+    @objc func arrowUpButtonTapped(_ sender: UIBarButtonItem) {
+        guard let node = selectedNode else { return }
+        scene.increaseNodeZPosition(for: node)
+    }
+
+    @objc func arrowDownButtonTapped(_ sender: UIBarButtonItem) {
+        guard let node = selectedNode else { return }
+        scene.decreaseNodeZPosition(for: node)
     }
 
     @objc func addItemButtonTapped(_ sender: UIBarButtonItem) {
-        print("Hello")
+        // TODO: Add screen for adding an item from the closet with a valid photo
+        scene.createNewNode(for: "BlackSkirt")
     }
 
     @objc func deleteButtonTapped(_ sender: UIBarButtonItem) {
@@ -124,6 +160,7 @@ class RunwayScreen: UIViewController {
         guard let node = selectedNode else { return }
 
         let alertController = UIAlertController(title: "Warning", message: "Are you sure you want to delete the selected item?", preferredStyle: .alert)
+        alertController.view.tintColor = UIColor.accentColor
 
         alertController.addAction(UIAlertAction(title: "Delete", style: .destructive) { [weak self] _ in
             guard let self = self else { return }
@@ -139,7 +176,16 @@ class RunwayScreen: UIViewController {
     }
 }
 
+// MARK: - Canvas scene delegate
+
 extension RunwayScreen: CanvasSceneDelegate {
+    func didTapBackground() {
+        selectedNode = nil
+        moveUpButton.isEnabled = false
+        moveDownButton.isEnabled = false
+        deleteButton.isEnabled = false
+    }
+
     func didTapItem(_ node: SKNode) {
         selectedNode = node
         moveUpButton.isEnabled = true
@@ -147,6 +193,8 @@ extension RunwayScreen: CanvasSceneDelegate {
         deleteButton.isEnabled = true
     }
 }
+
+// MARK: - Previews
 
 #if DEBUG
 struct RunwayScreenPreviews: PreviewProvider {

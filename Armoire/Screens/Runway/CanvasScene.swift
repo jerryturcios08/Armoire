@@ -8,19 +8,33 @@
 import SpriteKit
 
 protocol CanvasSceneDelegate: class {
+    func didTapBackground()
     func didTapItem(_ node: SKNode)
 }
 
+fileprivate enum CanvasObject: String {
+    case border = "Border"
+    case item = "Item"
+}
+
 class CanvasScene: SKScene {
+    // MARK: - Properties
+
     let cameraNode = SKCameraNode()
 
     weak var canvasDelegate: CanvasSceneDelegate?
+
+    // Item properties
+    var highestNodeZPosition = CGFloat(0)
     var selectedItemBorderNode = SKShapeNode()
+    var nodeIsSelected = false
 
     // Camera properties
     var previousCameraPoint = CGPoint.zero
     var previousCameraScale = CGFloat()
     var currentCameraScale = CGFloat(6)
+
+    // MARK: - Overriden methods
 
     override func sceneDidLoad() {
         super.sceneDidLoad()
@@ -46,20 +60,28 @@ class CanvasScene: SKScene {
             nodeFound = true
 
             // Creates a border for a selected border
-            if node.name == "SelectedItemBorder" {
+            if node.name == CanvasObject.border.rawValue {
                 return
             }
 
-            selectedItemBorderNode = createBorderNode(for: node)
-            addChild(selectedItemBorderNode)
-            canvasDelegate?.didTapItem(node)
+            // Adds a new border if a node has not been selected yet
+            if !nodeIsSelected {
+                selectedItemBorderNode = createBorderNode(for: node)
+                nodeIsSelected = true
+                addChild(selectedItemBorderNode)
+                canvasDelegate?.didTapItem(node)
+            }
         }
 
         // Removes the selected item border node if the user taps the background
         if !nodeFound {
             removeChildren(in: [selectedItemBorderNode])
+            nodeIsSelected = false
+            canvasDelegate?.didTapBackground()
         }
     }
+
+    // MARK: - Configurations
 
     func configureCamera() {
         camera = cameraNode
@@ -78,28 +100,6 @@ class CanvasScene: SKScene {
         view.addGestureRecognizer(pinchGesture)
     }
 
-    func createInitialNode() {
-        // TODO: May soon be deleted since this is for early testing
-        let dressNode = SKSpriteNode(imageNamed: "PinkDress")
-        dressNode.name = "PinkDress"
-        dressNode.position = CGPoint(x: frame.midX, y: frame.midY)
-        addChild(dressNode)
-    }
-
-    func createBorderNode(for node: SKNode) -> SKShapeNode {
-        let rect = CGRect(x: 0, y: 0, width: node.frame.width, height: node.frame.height)
-        let borderNode = SKShapeNode(rect: rect)
-
-        // Border node configurations
-        borderNode.name = "SelectedItemBorder"
-        borderNode.strokeColor = UIColor.accentColor ?? .systemPurple
-        borderNode.lineWidth = 20
-        borderNode.position = CGPoint(x: node.frame.minX, y: node.frame.minY)
-        borderNode.zPosition = 100
-
-        return borderNode
-    }
-
     func changeToDarkMode() {
         backgroundColor = .darkGray
     }
@@ -108,9 +108,71 @@ class CanvasScene: SKScene {
         backgroundColor = .systemGray5
     }
 
-    func deleteNode(node: SKNode) {
-        removeChildren(in: [node, selectedItemBorderNode])
+    // MARK: - Node methods
+
+    func createInitialNode() {
+        // TODO: May soon be deleted since this is for early testing
+        let dressNode = SKSpriteNode(imageNamed: "PinkDress")
+        dressNode.name = CanvasObject.item.rawValue
+        dressNode.position = CGPoint(x: frame.midX, y: frame.midY)
+        addChild(dressNode)
     }
+
+    func createNewNode(for imageName: String) {
+        let newNode = SKSpriteNode(imageNamed: imageName)
+        newNode.name = CanvasObject.item.rawValue
+        newNode.position = CGPoint(x: frame.midX, y: frame.midY)
+        newNode.zPosition = highestNodeZPosition + 1
+        highestNodeZPosition += 1
+        addChild(newNode)
+    }
+
+    func createBorderNode(for node: SKNode) -> SKShapeNode {
+        let rect = CGRect(x: 0, y: 0, width: node.frame.width, height: node.frame.height)
+        let borderNode = SKShapeNode(rect: rect)
+
+        // Border node configurations
+        borderNode.name = CanvasObject.border.rawValue
+        borderNode.strokeColor = UIColor.accentColor ?? .systemPurple
+        borderNode.lineWidth = 20
+        borderNode.position = CGPoint(x: node.frame.minX, y: node.frame.minY)
+        borderNode.zPosition = 100
+
+        return borderNode
+    }
+
+    // MARK: - Action methods
+
+    func increaseNodeZPosition(for node: SKNode) {
+        if node.zPosition == highestNodeZPosition {
+            highestNodeZPosition += 1
+            node.zPosition = highestNodeZPosition
+        } else {
+            node.zPosition += 1
+        }
+    }
+
+    func decreaseNodeZPosition(for node: SKNode) {
+        node.zPosition -= 1
+    }
+
+    func deleteNode(node: SKNode) {
+        let fadeOutAnimation = SKAction.fadeOut(withDuration: 0.25)
+
+        node.run(fadeOutAnimation) { [weak self] in
+            guard let self = self else { return }
+            self.removeChildren(in: [node])
+        }
+
+        selectedItemBorderNode.run(fadeOutAnimation) { [weak self] in
+            guard let self = self else { return }
+            self.removeChildren(in: [self.selectedItemBorderNode])
+        }
+
+        nodeIsSelected = false
+    }
+
+    // MARK: - Gesture methods
 
     @objc func pinchGestureAction(_ sender: UIPinchGestureRecognizer) {
         guard let camera = camera else { return }

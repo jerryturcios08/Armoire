@@ -15,15 +15,26 @@ class AMBarButtonItem: UIBarButtonItem {
         super.init()
         self.title = title
         self.onAction = onAction
-        configureWithText(font: font)
+        configureButton()
+        configureText(font: font)
+    }
+
+    init(image: UIImage?, onAction: ((AMBarButtonItem) -> Void)? = nil) {
+        super.init()
+        self.image = image
+        self.onAction = onAction
+        configureButton()
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    private func configureWithText(font: String) {
+    private func configureButton() {
         action = #selector(handleAction)
+    }
+
+    private func configureText(font: String) {
         let textAttributes: [NSAttributedString.Key: Any] = [
             .font: UIFont(name: font, size: 17)!
         ]

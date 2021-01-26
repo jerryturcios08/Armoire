@@ -233,12 +233,7 @@ class AddClothingScreen: UIViewController {
     }
 
     @objc func dismissKeyboard(_ sender: UITapGestureRecognizer) {
-        clothingNameTextField.resignFirstResponder()
-        clothingDescriptionTextView.resignFirstResponder()
-        clothingSizeTextField.resignFirstResponder()
-        clothingBrandTextField.resignFirstResponder()
-        clothingMaterialTextField.resignFirstResponder()
-        clothingUrlTextField.resignFirstResponder()
+        view.endEditing(true)
     }
 }
 
@@ -247,21 +242,13 @@ class AddClothingScreen: UIViewController {
 extension AddClothingScreen: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         switch textField.tag {
-        case 0:
-            clothingDescriptionTextView.becomeFirstResponder()
-        case 1:
-            clothingBrandTextField.becomeFirstResponder()
-        case 2:
-            clothingMaterialTextField.becomeFirstResponder()
-        case 3:
-            clothingUrlTextField.becomeFirstResponder()
-        case 4:
-            clothingUrlTextField.resignFirstResponder()
-        default:
-            return true
+        case 0: return clothingDescriptionTextView.becomeFirstResponder()
+        case 1: return clothingBrandTextField.becomeFirstResponder()
+        case 2: return clothingMaterialTextField.becomeFirstResponder()
+        case 3: return clothingUrlTextField.becomeFirstResponder()
+        case 4: return clothingUrlTextField.resignFirstResponder()
+        default: return true
         }
-
-        return true
     }
 }
 

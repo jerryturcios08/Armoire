@@ -64,18 +64,12 @@ class CanvasControlsView: UIView {
 
     func setAction(for control: CanvasControl, onAction: @escaping (AMCanvasButton) -> Void) {
         switch control {
-        case .zoomOut:
-            zoomOutButton.setOnAction(onAction)
-        case .zoomIn:
-            zoomInButton.setOnAction(onAction)
-        case .moveUp:
-            panUpButton.setOnAction(onAction)
-        case .moveLeft:
-            panLeftButton.setOnAction(onAction)
-        case .moveRight:
-            panRightButton.setOnAction(onAction)
-        case .moveDown:
-            panDownButton.setOnAction(onAction)
+        case .zoomOut: zoomOutButton.setOnAction(onAction)
+        case .zoomIn: zoomInButton.setOnAction(onAction)
+        case .moveUp: panUpButton.setOnAction(onAction)
+        case .moveLeft: panLeftButton.setOnAction(onAction)
+        case .moveRight: panRightButton.setOnAction(onAction)
+        case .moveDown: panDownButton.setOnAction(onAction)
         }
     }
 }

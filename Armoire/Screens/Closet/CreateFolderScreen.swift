@@ -129,8 +129,7 @@ class CreateFolderScreen: UIViewController {
     }
 
     @objc func dismissKeyboard(_ sender: UITapGestureRecognizer) {
-        folderTitleTextField.resignFirstResponder()
-        folderDescriptionTextView.resignFirstResponder()
+        view.endEditing(true)
     }
 }
 
@@ -139,13 +138,9 @@ class CreateFolderScreen: UIViewController {
 extension CreateFolderScreen: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         switch textField.tag {
-        case 0:
-            folderDescriptionTextView.becomeFirstResponder()
-        default:
-            return true
+        case 0: return folderDescriptionTextView.becomeFirstResponder()
+        default: return true
         }
-
-        return true
     }
 }
 

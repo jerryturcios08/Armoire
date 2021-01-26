@@ -44,8 +44,8 @@ class FolderCell: UITableViewCell {
         folderImageView.tintColor = .systemGray4
 
         folderImageView.snp.makeConstraints { make in
-            make.top.equalTo(self).offset(4)
-            make.left.equalTo(self).offset(14)
+            make.top.equalTo(self).offset(8)
+            make.left.equalTo(self).offset(16)
             make.width.equalTo(40)
             make.height.equalTo(32)
         }
@@ -58,7 +58,7 @@ class FolderCell: UITableViewCell {
 
         favoriteButton.snp.makeConstraints { make in
             make.top.equalTo(folderImageView)
-            make.right.equalTo(self).offset(-14)
+            make.right.equalTo(self).offset(-16)
             make.width.equalTo(22)
         }
     }
@@ -79,9 +79,9 @@ class FolderCell: UITableViewCell {
         folderDescriptionLabel.numberOfLines = 2
 
         folderDescriptionLabel.snp.makeConstraints { make in
+            make.top.equalTo(folderTitleLabel.snp.bottom)
             make.left.equalTo(folderTitleLabel)
             make.right.equalTo(favoriteButton)
-            make.top.equalTo(folderTitleLabel.snp.bottom).offset(4)
         }
     }
 
@@ -91,8 +91,8 @@ class FolderCell: UITableViewCell {
         folderQuantityLabel.textColor = .secondaryLabel
 
         folderQuantityLabel.snp.makeConstraints { make in
-            make.left.equalTo(folderDescriptionLabel)
             make.top.equalTo(folderDescriptionLabel.snp.bottom).offset(4)
+            make.left.equalTo(folderDescriptionLabel)
             make.right.equalTo(favoriteButton)
         }
     }
@@ -104,7 +104,7 @@ struct FolderCellPreviews: PreviewProvider {
         Group {
             UIViewPreview { FolderCell() }
         }
-        .frame(minWidth: 0, maxWidth: .infinity, maxHeight: 80)
+        .frame(minWidth: 0, maxWidth: .infinity, maxHeight: 90)
         .previewLayout(.sizeThatFits)
     }
 }

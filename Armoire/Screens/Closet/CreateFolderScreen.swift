@@ -115,9 +115,17 @@ class CreateFolderScreen: UIViewController {
     }
 
     func doneButtonTapped(_ sender: UIBarButtonItem) {
-        let folder = Folder(title: folderTitle, description: folderDescription, favorite: markedAsFavorite)
-        delegate?.didCreateNewFolder(folder)
-        dismiss(animated: true)
+        if folderTitle.isEmpty {
+            let alert = UIAlertController(title: "Error", message: "The title text field must not be empty.", preferredStyle: .alert)
+            alert.view.tintColor = UIColor.accentColor
+            alert.addAction(UIAlertAction(title: "Okay", style: .default))
+            present(alert, animated: true)
+        } else {
+            let description = folderDescription.isEmpty ? nil : folderDescription
+            let folder = Folder(title: folderTitle, description: description, favorite: markedAsFavorite)
+            delegate?.didCreateNewFolder(folder)
+            dismiss(animated: true)
+        }
     }
 
     @objc func dismissKeyboard(_ sender: UITapGestureRecognizer) {
@@ -144,6 +152,11 @@ extension CreateFolderScreen: UITextFieldDelegate {
 // MARK: - Text view delegate
 
 extension CreateFolderScreen: UITextViewDelegate {
+    func textViewDidChange(_ textView: UITextView) {
+        guard let text = textView.text else { return }
+        folderDescription = text
+    }
+
     func textViewDidBeginEditing(_ textView: UITextView) {
         folderDescriptionTextView.hidePlaceholder()
     }

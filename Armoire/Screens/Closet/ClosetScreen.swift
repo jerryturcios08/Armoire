@@ -33,7 +33,6 @@ class ClosetScreen: UIViewController {
         navigationItem.rightBarButtonItem = addButton
 
         dataSource.delegate = self
-        dataSource.folders = ["Dresses", "Shoes", "Skirts", "Bottoms"]
     }
 
     func configureSearchController() {
@@ -87,7 +86,7 @@ class ClosetScreen: UIViewController {
 // MARK: - Data source delegate
 
 extension ClosetScreen: FolderDataSourceDelegate {
-    func didUpdateDataSource(_ folders: [String]) {
+    func didUpdateDataSource(_ folders: [Folder]) {
         let count = folders.count
         folderCountLabel.text = count == 1 ? "1 folder" : "\(count) folders"
     }
@@ -97,8 +96,7 @@ extension ClosetScreen: FolderDataSourceDelegate {
 
 extension ClosetScreen: CreateFolderScreenDelegate {
     func didCreateNewFolder(_ folder: Folder) {
-        print(folder.title)
-        dataSource.folders.append(folder.title)
+        dataSource.folders.append(folder)
         tableView.reloadData()
     }
 }
@@ -108,7 +106,7 @@ extension ClosetScreen: CreateFolderScreenDelegate {
 extension ClosetScreen: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let folder = dataSource.folders[indexPath.row]
-        let folderScreen = FolderScreen(folder: folder)
+        let folderScreen = FolderScreen(folder: folder.title)
         navigationController?.pushViewController(folderScreen, animated: true)
     }
 
@@ -126,6 +124,26 @@ extension ClosetScreen: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return createFooterView()
+    }
+
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let folder = dataSource.folders[indexPath.row]
+        
+        let actionColor = folder.favorite ? UIColor.systemGray : UIColor.systemYellow
+        let actionTitle = folder.favorite ? "Unfavorite" : "Favorite"
+        let actionImage = folder.favorite ? UIImage(systemName: "star") : UIImage(systemName: "star.fill")
+
+        let action = UIContextualAction(style: .normal, title: actionTitle) { [weak self] action, view, completionHandler in
+            guard let self = self else { return }
+            // TODO: Add a way to update the selected folder as favorited
+            print(self.dataSource.folders)
+            completionHandler(true)
+        }
+
+        action.backgroundColor = actionColor
+        action.image = actionImage
+
+        return UISwipeActionsConfiguration(actions: [action])
     }
 }
 

@@ -8,11 +8,11 @@
 import UIKit
 
 protocol FolderDataSourceDelegate: class {
-    func didUpdateDataSource(_ folders: [String])
+    func didUpdateDataSource(_ folders: [Folder])
 }
 
 class FolderDataSource: NSObject, UITableViewDataSource {
-    var folders = [String]()
+    var folders = [Folder]()
     weak var delegate: FolderDataSourceDelegate?
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

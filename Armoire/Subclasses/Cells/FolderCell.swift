@@ -26,8 +26,11 @@ class FolderCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func set(folder: String) {
-        folderTitleLabel.text = folder
+    func set(folder: Folder) {
+        folderTitleLabel.text = folder.title
+        folderDescriptionLabel.text = folder.description ?? "No description."
+        favoriteButton.setImage(UIImage(systemName: SFSymbol.starFill), for: .normal)
+        favoriteButton.tintColor = folder.favorite ? UIColor.systemYellow : UIColor.systemGray
     }
 
     private func configureCell() {
@@ -91,9 +94,9 @@ class FolderCell: UITableViewCell {
         folderQuantityLabel.textColor = .secondaryLabel
 
         folderQuantityLabel.snp.makeConstraints { make in
-            make.top.equalTo(folderDescriptionLabel.snp.bottom).offset(4)
             make.left.equalTo(folderDescriptionLabel)
             make.right.equalTo(favoriteButton)
+            make.bottom.equalTo(self).offset(-8)
         }
     }
 }

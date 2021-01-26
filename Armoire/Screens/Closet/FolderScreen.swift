@@ -125,6 +125,17 @@ extension FolderScreen: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return createFooterView()
     }
+
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let action = UIContextualAction(style: .normal, title: "Favorite") { action, view, completionHandler in
+            completionHandler(true)
+        }
+
+        action.backgroundColor = .systemYellow
+        action.image = UIImage(systemName: SFSymbol.starFill)
+
+        return UISwipeActionsConfiguration(actions: [action])
+    }
 }
 
 // MARK: - Previews

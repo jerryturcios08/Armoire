@@ -166,7 +166,6 @@ class RunwayScreen: UIViewController {
     }
 
     @objc func deleteButtonTapped(_ sender: UIBarButtonItem) {
-        // TODO: Figure out why this method does not fire when the button is tapped
         guard let node = selectedNode else { return }
 
         let alertController = UIAlertController(title: "Warning", message: "Are you sure you want to delete the selected item?", preferredStyle: .alert)

@@ -76,8 +76,9 @@ class CanvasScene: SKScene {
             }
         }
 
-        // Removes the selected item border node if the user taps the background
+        // Removes the selected item properties if the user taps the background
         if !nodeFound {
+            selectedNode = nil
             removeChildren(in: [selectedItemBorderNode])
             nodeIsSelected = false
             canvasDelegate?.didTapBackground()
@@ -178,6 +179,7 @@ class CanvasScene: SKScene {
     // MARK: - Gesture methods
 
     @objc func pinchGestureAction(_ sender: UIPinchGestureRecognizer) {
+        // TODO: Add pinch gesture to selected item to change scale
         guard let camera = camera else { return }
 
         if sender.state == .began {

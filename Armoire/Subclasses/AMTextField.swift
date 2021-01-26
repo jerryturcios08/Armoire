@@ -11,9 +11,9 @@ import UIKit
 class AMTextField: UITextField {
     private var onEdit: ((AMTextField) -> Void)?
 
-    convenience init(text: String) {
+    convenience init(placeholder: String) {
         self.init(frame: .zero)
-        placeholder = text
+        self.placeholder = placeholder
     }
 
     override init(frame: CGRect) {
@@ -60,8 +60,8 @@ class AMTextField: UITextField {
 struct AMTextFieldPreviews: PreviewProvider {
     static var previews: some View {
         Group {
-            UIViewPreview { AMTextField(text: "Enter text") }
-            UIViewPreview { AMTextField(text: "Enter text") }
+            UIViewPreview { AMTextField(placeholder: "Enter text") }
+            UIViewPreview { AMTextField(placeholder: "Enter text") }
                 .preferredColorScheme(.dark)
                 .environment(\.sizeCategory, .accessibilityLarge)
         }

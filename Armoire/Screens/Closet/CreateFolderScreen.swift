@@ -13,7 +13,7 @@ protocol CreateFolderScreenDelegate: class {
 }
 
 class CreateFolderScreen: UIViewController {
-    let folderTitleTextField = AMTextField(text: "Title")
+    let folderTitleTextField = AMTextField(placeholder: "Title")
     let folderDescriptionTextView = AMTextView(placeholder: "Enter description")
     let favoriteLabel = AMBodyLabel(text: "Mark as favorite?", fontSize: 20)
     let favoriteSwitch = AMSwitch(accentColor: UIColor.accentColor)

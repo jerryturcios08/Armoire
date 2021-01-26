@@ -97,7 +97,7 @@ class RunwayScreen: UIViewController {
         view = SKView(frame: UIScreen.main.bounds)
 
         scene.canvasDelegate = self
-        scene.size = view.frame.size
+        scene.size = view.bounds.size
         scene.anchorPoint = CGPoint(x: 0, y: 0)
         // TODO: Need to determine how scene size will be handled
         scene.size = CGSize(width: 1000, height: 1000)
@@ -125,7 +125,17 @@ class RunwayScreen: UIViewController {
     // MARK: - Action methods
 
     @objc func closeButtonTapped(_ sender: UIBarButtonItem) {
-        dismiss(animated: true)
+        let alertController = UIAlertController(title: "Exit", message: "Are you sure you want to close this runway? All progress will be saved.", preferredStyle: .alert)
+        alertController.view.tintColor = UIColor.accentColor
+
+        alertController.addAction(UIAlertAction(title: "Exit", style: .default) { [weak self] _ in
+            guard let self = self else { return }
+            self.dismiss(animated: true)
+        })
+
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+
+        present(alertController, animated: true)
     }
 
     @objc func exportButtonTapped(_ sender: UIBarButtonItem) {

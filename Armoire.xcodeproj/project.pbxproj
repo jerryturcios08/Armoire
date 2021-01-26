@@ -45,6 +45,8 @@
 		C6AA153725BCC58D0095ADA0 /* ClothesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6AA153625BCC58D0095ADA0 /* ClothesDataSource.swift */; };
 		C6C0A06625B786FF000CA9F7 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = C6C0A06525B786FF000CA9F7 /* SnapKit */; };
 		C6C6D4F125BE15F300E4C0B8 /* UITableView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C6D4F025BE15F300E4C0B8 /* UITableView+Ext.swift */; };
+		C6DFC04325BF5269002BC018 /* CanvasControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6DFC04225BF5269002BC018 /* CanvasControlsView.swift */; };
+		C6DFC04825BF77E6002BC018 /* AMCanvasButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6DFC04725BF77E6002BC018 /* AMCanvasButton.swift */; };
 		C6EAA14825BE1FB900C727B3 /* RunwayScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6EAA14725BE1FB900C727B3 /* RunwayScreen.swift */; };
 		C6EAA14D25BE214300C727B3 /* CanvasScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6EAA14C25BE214300C727B3 /* CanvasScene.swift */; };
 		C6EE84BB25B8BE8000986BF4 /* AMPrimaryLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6EE84BA25B8BE8000986BF4 /* AMPrimaryLabel.swift */; };
@@ -111,6 +113,8 @@
 		C6AA153125BCBDF00095ADA0 /* AMSwitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AMSwitch.swift; sourceTree = "<group>"; };
 		C6AA153625BCC58D0095ADA0 /* ClothesDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClothesDataSource.swift; sourceTree = "<group>"; };
 		C6C6D4F025BE15F300E4C0B8 /* UITableView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Ext.swift"; sourceTree = "<group>"; };
+		C6DFC04225BF5269002BC018 /* CanvasControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasControlsView.swift; sourceTree = "<group>"; };
+		C6DFC04725BF77E6002BC018 /* AMCanvasButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AMCanvasButton.swift; sourceTree = "<group>"; };
 		C6EAA14725BE1FB900C727B3 /* RunwayScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunwayScreen.swift; sourceTree = "<group>"; };
 		C6EAA14C25BE214300C727B3 /* CanvasScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasScene.swift; sourceTree = "<group>"; };
 		C6EE84BA25B8BE8000986BF4 /* AMPrimaryLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AMPrimaryLabel.swift; sourceTree = "<group>"; };
@@ -290,6 +294,7 @@
 		C658E7BC25B7890B000F8F50 /* Subclasses */ = {
 			isa = PBXGroup;
 			children = (
+				C6DFC04C25BF78C4002BC018 /* Canvas */,
 				C63B0B7325B8DCD70065F813 /* Cells */,
 				C63B0B8A25B9317D0065F813 /* Data Sources */,
 				C63B0B5C25B8C1FD0065F813 /* Labels */,
@@ -352,6 +357,15 @@
 				C6EAA14725BE1FB900C727B3 /* RunwayScreen.swift */,
 			);
 			path = Runway;
+			sourceTree = "<group>";
+		};
+		C6DFC04C25BF78C4002BC018 /* Canvas */ = {
+			isa = PBXGroup;
+			children = (
+				C6DFC04725BF77E6002BC018 /* AMCanvasButton.swift */,
+				C6DFC04225BF5269002BC018 /* CanvasControlsView.swift */,
+			);
+			path = Canvas;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -512,10 +526,12 @@
 				C658E7E125B7901F000F8F50 /* AMTabBarController.swift in Sources */,
 				C63B0B8C25B931980065F813 /* FolderDataSource.swift in Sources */,
 				C63B0B6F25B8DACD0065F813 /* FolderScreen.swift in Sources */,
+				C6DFC04825BF77E6002BC018 /* AMCanvasButton.swift in Sources */,
 				C658E7C925B7896E000F8F50 /* UIHelper.swift in Sources */,
 				C62E0C4025B8BC110078065A /* AMBodyLabel.swift in Sources */,
 				C63B0B7525B8DCE20065F813 /* ClothingCell.swift in Sources */,
 				C6EAA14D25BE214300C727B3 /* CanvasScene.swift in Sources */,
+				C6DFC04325BF5269002BC018 /* CanvasControlsView.swift in Sources */,
 				C6EE84BB25B8BE8000986BF4 /* AMPrimaryLabel.swift in Sources */,
 				C63B0B8225B8F08E0065F813 /* ClothingScreen.swift in Sources */,
 				C6AA153225BCBDF00095ADA0 /* AMSwitch.swift in Sources */,

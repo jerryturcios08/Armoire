@@ -26,7 +26,6 @@ class AMBodyLabel: UILabel {
     }
 
     private func configureLabel() {
-        translatesAutoresizingMaskIntoConstraints = false
         textColor = .label
         adjustsFontForContentSizeCategory = true
         adjustsFontSizeToFitWidth = true

@@ -33,7 +33,6 @@ class AMButton: UIButton {
     }
 
     private func configureButton() {
-        translatesAutoresizingMaskIntoConstraints = false
         addTarget(self, action: #selector(handleTapped), for: .touchUpInside)
 
         let customFont = UIFont(name: Fonts.quicksandSemiBold, size: 20)!

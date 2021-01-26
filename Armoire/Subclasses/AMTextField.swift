@@ -26,7 +26,6 @@ class AMTextField: UITextField {
     }
 
     private func configureTextField() {
-        translatesAutoresizingMaskIntoConstraints = false
         addTarget(self, action: #selector(handleEdit), for: .editingChanged)
 
         layer.cornerRadius = 10

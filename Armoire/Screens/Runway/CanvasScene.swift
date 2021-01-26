@@ -25,7 +25,9 @@ class CanvasScene: SKScene {
     weak var canvasDelegate: CanvasSceneDelegate?
 
     // Item properties
+    var selectedNode: SKNode?
     var highestNodeZPosition = CGFloat(0)
+    var previousNodePoint = CGPoint.zero
     var selectedItemBorderNode = SKShapeNode()
     var nodeIsSelected = false
 
@@ -66,6 +68,7 @@ class CanvasScene: SKScene {
 
             // Adds a new border if a node has not been selected yet
             if !nodeIsSelected {
+                selectedNode = node
                 selectedItemBorderNode = createBorderNode(for: node)
                 nodeIsSelected = true
                 addChild(selectedItemBorderNode)
@@ -190,22 +193,45 @@ class CanvasScene: SKScene {
     }
 
     @objc func panGestureAction(_ sender: UIPanGestureRecognizer) {
-        // The camera has a weak reference, so test it
-        guard let camera = camera else { return }
+        if nodeIsSelected {
+            // Moves a selected item if that item was selected
+            guard let node = selectedNode else { return }
 
-        // If the movement just began, save the first camera position
-        if sender.state == .began {
-            previousCameraPoint = camera.position
+            var touchLocation = sender.location(in: view)
+            touchLocation = convertPoint(fromView: touchLocation)
+
+            if sender.state == .changed {
+                if previousNodePoint != CGPoint.zero {
+                    let xDifference = -(touchLocation.x - previousNodePoint.x)
+                    let yDifference = -(touchLocation.y - previousNodePoint.y)
+                    let newPosition = CGPoint(x: node.position.x - xDifference, y: node.position.y - yDifference)
+
+                    // Sets the position of the node and border based on the computations
+                    node.position = newPosition
+                    selectedItemBorderNode.position = CGPoint(x: node.frame.minX, y: node.frame.minY)
+                }
+
+                previousNodePoint = touchLocation
+            } else if sender.state == .ended {
+                previousNodePoint = CGPoint.zero
+            }
+        } else {
+            // Moves the camera if a node was not selected
+            guard let camera = camera else { return }
+
+            if sender.state == .began {
+                previousCameraPoint = camera.position
+            }
+
+            // Perform the translation
+            let translation = sender.translation(in: view)
+
+            let newPosition = CGPoint(
+                x: previousCameraPoint.x + translation.x * -1 * currentCameraScale,
+                y: previousCameraPoint.y + translation.y * currentCameraScale
+            )
+
+            camera.position = newPosition
         }
-
-        // Perform the translation
-        let translation = sender.translation(in: view)
-
-        let newPosition = CGPoint(
-            x: previousCameraPoint.x + translation.x * -1 * currentCameraScale,
-            y: previousCameraPoint.y + translation.y * currentCameraScale
-        )
-
-        camera.position = newPosition
     }
 }

@@ -89,6 +89,8 @@ class RunwayListScreen: UIViewController {
         alertController.view.tintColor = UIColor.accentColor
 
         alertController.addTextField { textField in
+            textField.autocapitalizationType = .sentences
+            textField.autocorrectionType = .yes
             textField.placeholder = "Runway name"
             textField.tintColor = UIColor.accentColor
         }

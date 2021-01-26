@@ -34,7 +34,7 @@ class AMTextView: UITextView {
     func hidePlaceholder() {
         if textColor == UIColor.systemGray2 {
             text = nil
-            textColor = .black
+            textColor = .label
         }
     }
 

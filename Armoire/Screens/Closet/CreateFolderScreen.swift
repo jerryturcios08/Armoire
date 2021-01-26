@@ -55,6 +55,7 @@ class CreateFolderScreen: UIViewController {
     func configureFolderTitleTextField() {
         view.addSubview(folderTitleTextField)
         folderTitleTextField.setOnEdit(handleFolderTitleTextFieldEdit)
+        folderTitleTextField.autocapitalizationType = .sentences
         folderTitleTextField.delegate = self
         folderTitleTextField.returnKeyType = .next
         folderTitleTextField.tag = 0

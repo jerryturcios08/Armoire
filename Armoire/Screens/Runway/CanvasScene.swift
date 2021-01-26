@@ -140,7 +140,7 @@ class CanvasScene: SKScene {
         borderNode.strokeColor = UIColor.accentColor ?? .systemPurple
         borderNode.lineWidth = 20
         borderNode.position = CGPoint(x: node.frame.minX, y: node.frame.minY)
-        borderNode.zPosition = 100
+        borderNode.zPosition = .greatestFiniteMagnitude
 
         return borderNode
     }

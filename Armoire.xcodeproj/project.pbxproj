@@ -36,6 +36,7 @@
 		C658E7E125B7901F000F8F50 /* AMTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C658E7E025B7901F000F8F50 /* AMTabBarController.swift */; };
 		C66D718925BE0BEE008BC818 /* UIStackView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66D718825BE0BEE008BC818 /* UIStackView+Ext.swift */; };
 		C670A0F825BD31CA000A1405 /* AMBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C670A0F725BD31CA000A1405 /* AMBarButtonItem.swift */; };
+		C671BE5F25C0D3C7002D1B62 /* AdditionalFieldsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C671BE5E25C0D3C6002D1B62 /* AdditionalFieldsView.swift */; };
 		C673CFFE25B7ABE800D3E765 /* ProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C673CFFD25B7ABE800D3E765 /* ProfileScreen.swift */; };
 		C673D00625B7AC3C00D3E765 /* RunwayListScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C673D00525B7AC3C00D3E765 /* RunwayListScreen.swift */; };
 		C67459A225B93D0C003C87D1 /* CreateFolderScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67459A125B93D0C003C87D1 /* CreateFolderScreen.swift */; };
@@ -105,6 +106,7 @@
 		C658E7E025B7901F000F8F50 /* AMTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AMTabBarController.swift; sourceTree = "<group>"; };
 		C66D718825BE0BEE008BC818 /* UIStackView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Ext.swift"; sourceTree = "<group>"; };
 		C670A0F725BD31CA000A1405 /* AMBarButtonItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AMBarButtonItem.swift; sourceTree = "<group>"; };
+		C671BE5E25C0D3C6002D1B62 /* AdditionalFieldsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalFieldsView.swift; sourceTree = "<group>"; };
 		C673CFFD25B7ABE800D3E765 /* ProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreen.swift; sourceTree = "<group>"; };
 		C673D00525B7AC3C00D3E765 /* RunwayListScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunwayListScreen.swift; sourceTree = "<group>"; };
 		C67459A125B93D0C003C87D1 /* CreateFolderScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateFolderScreen.swift; sourceTree = "<group>"; };
@@ -304,6 +306,7 @@
 				C6AA153125BCBDF00095ADA0 /* AMSwitch.swift */,
 				C63B0B6325B8C2180065F813 /* AMTextField.swift */,
 				C6AA152C25BCBD0E0095ADA0 /* AMTextView.swift */,
+				C671BE5E25C0D3C6002D1B62 /* AdditionalFieldsView.swift */,
 			);
 			path = Subclasses;
 			sourceTree = "<group>";
@@ -516,6 +519,7 @@
 				C63B0B6425B8C2180065F813 /* AMTextField.swift in Sources */,
 				C6AA153725BCC58D0095ADA0 /* ClothesDataSource.swift in Sources */,
 				C658E7CE25B78D31000F8F50 /* AMNavigationController.swift in Sources */,
+				C671BE5F25C0D3C7002D1B62 /* AdditionalFieldsView.swift in Sources */,
 				C601983C25B78383004B4203 /* SceneDelegate.swift in Sources */,
 				C66D718925BE0BEE008BC818 /* UIStackView+Ext.swift in Sources */,
 				C601988325B7843B004B4203 /* constants.swift in Sources */,

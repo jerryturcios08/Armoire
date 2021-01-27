@@ -11,25 +11,26 @@ import UIKit
 class AddClothingScreen: UIViewController {
     // MARK: - Properties
 
+    // Stack views
     let screenStackView = UIStackView()
     let contentStackView = UIStackView()
 
+    let addClothingImageButton = AMButton(title: "Add Image")
+    let clothingImageView = UIImageView()
     let clothingNameTextField = AMTextField(placeholder: "Name")
     let clothingDescriptionTextView = AMTextView(placeholder: "Enter description")
-    let clothingSizeTextField = AMTextField(placeholder: "Size")
     let clothingQuantityLabel = AMBodyLabel(text: "Quantity: 0", fontSize: 20)
     let clothingQuantityStepper = UIStepper()
     let clothingColorLabel = AMBodyLabel(text: "Color", fontSize: 20)
     let clothingColorButton = UIButton()
-    let clothingBrandTextField = AMTextField(placeholder: "Brand")
-    let clothingMaterialTextField = AMTextField(placeholder: "Material")
-    let clothingUrlTextField = AMTextField(placeholder: "URL")
     let favoriteLabel = AMBodyLabel(text: "Mark as favorite?", fontSize: 20)
     let favoriteSwitch = AMSwitch(accentColor: UIColor.accentColor)
 
+    // Views for additional fields
+    let additionalFieldsView = AdditionalFieldsView()
+
     var clothingName = ""
     var clothingDescription = ""
-    var clothingSize = ""
 
     var clothingQuantity = 0 {
         didSet {
@@ -43,9 +44,6 @@ class AddClothingScreen: UIViewController {
         }
     }
 
-    var clothingBrand = ""
-    var clothingMaterial = ""
-    var clothingUrl = ""
     var markedAsFavorite = false
 
     // MARK: - Configurations
@@ -55,15 +53,15 @@ class AddClothingScreen: UIViewController {
         configureScreen()
         configureGestures()
         configureStackViews()
+
+        configureClothingImageView()
         configureClothingNameTextField()
         configureClothingDescriptionTextView()
-        configureClothingSizeTextField()
         configureClothingQuantityViews()
         configureClothingColorViews()
-        configureClothingBrandTextField()
-        configureClothingMaterialTextField()
-        configureClothingUrlTextField()
         configureFavoriteViews()
+
+        contentStackView.addArrangedSubview(additionalFieldsView)
     }
 
     func configureScreen() {
@@ -89,16 +87,23 @@ class AddClothingScreen: UIViewController {
 
         // Content stack view contains all form inputs
         contentStackView.axis = .vertical
-        contentStackView.alignment = .fill
         contentStackView.distribution = .equalSpacing
         contentStackView.spacing = 20
 
-        screenStackView.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(12)
-            make.left.equalTo(view.safeAreaLayoutGuide).offset(16)
-            make.right.equalTo(view.safeAreaLayoutGuide).offset(-16)
-            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-20) // Need to tweak
-        }
+        let insets = UIEdgeInsets(top: 12, left: 16, bottom: 16, right: 20)
+        screenStackView.snp.makeConstraints { $0.edges.equalTo(view.safeAreaLayoutGuide).inset(insets) }
+    }
+
+    func configureClothingImageView() {
+        contentStackView.addArrangedSubview(clothingImageView)
+        clothingImageView.image = UIImage(named: "PinkDress")
+        clothingImageView.contentMode = .scaleAspectFit
+        clothingImageView.isHidden = true
+        clothingImageView.snp.makeConstraints { $0.height.lessThanOrEqualTo(280) }
+
+        contentStackView.addArrangedSubview(addClothingImageButton)
+        addClothingImageButton.setOnAction(addClothingImageButtonTapped)
+        addClothingImageButton.snp.makeConstraints { $0.height.equalTo(50) }
     }
 
     func configureClothingNameTextField() {
@@ -113,14 +118,6 @@ class AddClothingScreen: UIViewController {
         contentStackView.addArrangedSubview(clothingDescriptionTextView)
         clothingDescriptionTextView.delegate = self
         clothingDescriptionTextView.isScrollEnabled = false
-    }
-
-    func configureClothingSizeTextField() {
-        contentStackView.addArrangedSubview(clothingSizeTextField)
-        clothingSizeTextField.setOnEdit(handleClothingSizeTextFieldEdit)
-        setCommonTextFieldProperties(for: clothingSizeTextField)
-        clothingSizeTextField.tag = 1
-        clothingSizeTextField.snp.makeConstraints { $0.height.equalTo(50) }
     }
 
     func configureClothingQuantityViews() {
@@ -138,34 +135,7 @@ class AddClothingScreen: UIViewController {
 
         clothingColorButton.addTarget(self, action: #selector(colorButtonTapped), for: .touchUpInside)
         clothingColorButton.setImage(UIImage(systemName: "circle.fill"), for: .normal)
-        clothingColorButton.imageView?.layer.transform = CATransform3DMakeScale(2, 2, 2)
         clothingColorButton.tintColor = .systemPink
-    }
-
-    func configureClothingBrandTextField() {
-        contentStackView.addArrangedSubview(clothingBrandTextField)
-        clothingBrandTextField.setOnEdit(handleClothingSizeTextFieldEdit)
-        setCommonTextFieldProperties(for: clothingBrandTextField)
-        clothingBrandTextField.tag = 2
-        clothingBrandTextField.snp.makeConstraints { $0.height.equalTo(50) }
-    }
-
-    func configureClothingMaterialTextField() {
-        contentStackView.addArrangedSubview(clothingMaterialTextField)
-        clothingMaterialTextField.setOnEdit(handleClothingMaterialTextFieldEdit)
-        setCommonTextFieldProperties(for: clothingMaterialTextField)
-        clothingMaterialTextField.tag = 3
-        clothingMaterialTextField.snp.makeConstraints { $0.height.equalTo(50) }
-    }
-
-    func configureClothingUrlTextField() {
-        contentStackView.addArrangedSubview(clothingUrlTextField)
-        clothingUrlTextField.setOnEdit(handleClothingUrlTextFieldEdit)
-        clothingUrlTextField.delegate = self
-        clothingUrlTextField.keyboardType = .URL
-        clothingUrlTextField.returnKeyType = .done
-        clothingUrlTextField.tag = 4
-        clothingUrlTextField.snp.makeConstraints { $0.height.equalTo(50) }
     }
 
     func configureFavoriteViews() {
@@ -191,14 +161,34 @@ class AddClothingScreen: UIViewController {
         dismiss(animated: true)
     }
 
+    func addClothingImageButtonTapped(_ sender: UIButton) {
+        let picker = UIImagePickerController()
+        picker.navigationBar.tintColor = UIColor.accentColor
+        picker.delegate = self
+
+        let alert = UIAlertController(title: "Photo", message: "Please select a method to add an image.", preferredStyle: .actionSheet)
+        alert.view.tintColor = UIColor.accentColor
+
+        alert.addAction(UIAlertAction(title: "Camera", style: .default) { [weak self] _ in
+            guard let self = self else { return }
+            picker.sourceType = .camera
+            self.present(picker, animated: true)
+        })
+
+        alert.addAction(UIAlertAction(title: "Photo Library", style: .default) { [weak self] _ in
+            guard let self = self else { return }
+            picker.sourceType = .photoLibrary
+            self.present(picker, animated: true)
+        })
+
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+
+        present(alert, animated: true)
+    }
+
     func handleClothingNameTextFieldEdit(_ textField: UITextField) {
         guard let text = textField.text else { return }
         clothingName = text
-    }
-
-    func handleClothingSizeTextFieldEdit(_ textField: UITextField) {
-        guard let text = textField.text else { return }
-        clothingSize = text
     }
 
     @objc func handleStepperValueChanged(_ sender: UIStepper) {
@@ -213,21 +203,6 @@ class AddClothingScreen: UIViewController {
         present(colorPicker, animated: true)
     }
 
-    func handleClothingBrandTextFieldEdit(_ textField: UITextField) {
-        guard let text = textField.text else { return }
-        clothingBrand = text
-    }
-
-    func handleClothingMaterialTextFieldEdit(_ textField: UITextField) {
-        guard let text = textField.text else { return }
-        clothingMaterial = text
-    }
-
-    func handleClothingUrlTextFieldEdit(_ textField: UITextField) {
-        guard let text = textField.text else { return }
-        clothingUrl = text
-    }
-
     func handleFavoriteSwitchToggle(_ sender: UISwitch) {
         markedAsFavorite = sender.isOn
     }
@@ -237,16 +212,23 @@ class AddClothingScreen: UIViewController {
     }
 }
 
+// MARK: - Image picker delegate
+
+extension AddClothingScreen: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        guard let image = info[.originalImage] as? UIImage else { return }
+        clothingImageView.image = image
+        clothingImageView.isHidden = false
+        dismiss(animated: true)
+    }
+}
+
 // MARK: - Text field delegate
 
 extension AddClothingScreen: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         switch textField.tag {
         case 0: return clothingDescriptionTextView.becomeFirstResponder()
-        case 1: return clothingBrandTextField.becomeFirstResponder()
-        case 2: return clothingMaterialTextField.becomeFirstResponder()
-        case 3: return clothingUrlTextField.becomeFirstResponder()
-        case 4: return clothingUrlTextField.resignFirstResponder()
         default: return true
         }
     }

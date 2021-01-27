@@ -11,7 +11,6 @@ import UIKit
 class AddClothingScreen: UIViewController {
     // MARK: - Properties
 
-    // Stack views
     let scrollView = UIScrollView()
     let contentStackView = UIStackView()
 
@@ -22,7 +21,6 @@ class AddClothingScreen: UIViewController {
     let favoriteLabel = AMBodyLabel(text: "Mark as favorite?", fontSize: 20)
     let favoriteSwitch = AMSwitch(accentColor: UIColor.accentColor)
 
-    // Views for additional fields
     let additionalFieldsView = AdditionalFieldsView()
     let primaryFieldsViewController = PrimaryFieldsViewController()
 

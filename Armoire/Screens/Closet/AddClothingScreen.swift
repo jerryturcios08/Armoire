@@ -15,10 +15,6 @@ class AddClothingScreen: UIViewController {
     let screenStackView = UIStackView()
     let contentStackView = UIStackView()
 
-    let addClothingImageButton = AMButton(title: "Add Image")
-    let clothingImageView = UIImageView()
-    let clothingNameTextField = AMTextField(placeholder: "Name")
-    let clothingDescriptionTextView = AMTextView(placeholder: "Enter description")
     let clothingQuantityLabel = AMBodyLabel(text: "Quantity: 0", fontSize: 20)
     let clothingQuantityStepper = UIStepper()
     let clothingColorLabel = AMBodyLabel(text: "Color", fontSize: 20)
@@ -28,9 +24,7 @@ class AddClothingScreen: UIViewController {
 
     // Views for additional fields
     let additionalFieldsView = AdditionalFieldsView()
-
-    var clothingName = ""
-    var clothingDescription = ""
+    let primaryFieldsViewController = PrimaryFieldsViewController()
 
     var clothingQuantity = 0 {
         didSet {
@@ -54,9 +48,6 @@ class AddClothingScreen: UIViewController {
         configureGestures()
         configureStackViews()
 
-        configureClothingImageView()
-        configureClothingNameTextField()
-        configureClothingDescriptionTextView()
         configureClothingQuantityViews()
         configureClothingColorViews()
         configureFavoriteViews()
@@ -73,6 +64,9 @@ class AddClothingScreen: UIViewController {
 
         let doneButton = AMBarButtonItem(title: "Done", font: Fonts.quicksandBold, onAction: doneButtonTapped)
         navigationItem.rightBarButtonItem = doneButton
+
+        addChild(primaryFieldsViewController)
+        contentStackView.addArrangedSubview(primaryFieldsViewController.view)
     }
 
     func configureGestures() {
@@ -92,32 +86,6 @@ class AddClothingScreen: UIViewController {
 
         let insets = UIEdgeInsets(top: 12, left: 16, bottom: 16, right: 20)
         screenStackView.snp.makeConstraints { $0.edges.equalTo(view.safeAreaLayoutGuide).inset(insets) }
-    }
-
-    func configureClothingImageView() {
-        contentStackView.addArrangedSubview(clothingImageView)
-        clothingImageView.image = UIImage(named: "PinkDress")
-        clothingImageView.contentMode = .scaleAspectFit
-        clothingImageView.isHidden = true
-        clothingImageView.snp.makeConstraints { $0.height.lessThanOrEqualTo(280) }
-
-        contentStackView.addArrangedSubview(addClothingImageButton)
-        addClothingImageButton.setOnAction(addClothingImageButtonTapped)
-        addClothingImageButton.snp.makeConstraints { $0.height.equalTo(50) }
-    }
-
-    func configureClothingNameTextField() {
-        contentStackView.addArrangedSubview(clothingNameTextField)
-        clothingNameTextField.setOnEdit(handleClothingNameTextFieldEdit)
-        setCommonTextFieldProperties(for: clothingNameTextField)
-        clothingNameTextField.tag = 0
-        clothingNameTextField.snp.makeConstraints { $0.height.equalTo(50) }
-    }
-
-    func configureClothingDescriptionTextView() {
-        contentStackView.addArrangedSubview(clothingDescriptionTextView)
-        clothingDescriptionTextView.delegate = self
-        clothingDescriptionTextView.isScrollEnabled = false
     }
 
     func configureClothingQuantityViews() {
@@ -147,48 +115,12 @@ class AddClothingScreen: UIViewController {
 
     // MARK: - Defined methods
 
-    func setCommonTextFieldProperties(for textField: UITextField) {
-        textField.autocapitalizationType = .sentences
-        textField.delegate = self
-        textField.returnKeyType = .next
-    }
-
     func cancelButtonTapped(_ sender: UIBarButtonItem) {
         dismiss(animated: true)
     }
 
     func doneButtonTapped(_ sender: UIBarButtonItem) {
         dismiss(animated: true)
-    }
-
-    func addClothingImageButtonTapped(_ sender: UIButton) {
-        let picker = UIImagePickerController()
-        picker.navigationBar.tintColor = UIColor.accentColor
-        picker.delegate = self
-
-        let alert = UIAlertController(title: "Photo", message: "Please select a method to add an image.", preferredStyle: .actionSheet)
-        alert.view.tintColor = UIColor.accentColor
-
-        alert.addAction(UIAlertAction(title: "Camera", style: .default) { [weak self] _ in
-            guard let self = self else { return }
-            picker.sourceType = .camera
-            self.present(picker, animated: true)
-        })
-
-        alert.addAction(UIAlertAction(title: "Photo Library", style: .default) { [weak self] _ in
-            guard let self = self else { return }
-            picker.sourceType = .photoLibrary
-            self.present(picker, animated: true)
-        })
-
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-
-        present(alert, animated: true)
-    }
-
-    func handleClothingNameTextFieldEdit(_ textField: UITextField) {
-        guard let text = textField.text else { return }
-        clothingName = text
     }
 
     @objc func handleStepperValueChanged(_ sender: UIStepper) {
@@ -209,45 +141,6 @@ class AddClothingScreen: UIViewController {
 
     @objc func dismissKeyboard(_ sender: UITapGestureRecognizer) {
         view.endEditing(true)
-    }
-}
-
-// MARK: - Image picker delegate
-
-extension AddClothingScreen: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        guard let image = info[.originalImage] as? UIImage else { return }
-        clothingImageView.image = image
-        clothingImageView.isHidden = false
-        dismiss(animated: true)
-    }
-}
-
-// MARK: - Text field delegate
-
-extension AddClothingScreen: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        switch textField.tag {
-        case 0: return clothingDescriptionTextView.becomeFirstResponder()
-        default: return true
-        }
-    }
-}
-
-// MARK: - Text view delegate
-
-extension AddClothingScreen: UITextViewDelegate {
-    func textViewDidChange(_ textView: UITextView) {
-        guard let text = textView.text else { return }
-        clothingDescription = text
-    }
-
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        clothingDescriptionTextView.hidePlaceholder()
-    }
-
-    func textViewDidEndEditing(_ textView: UITextView) {
-        clothingDescriptionTextView.showPlaceholder()
     }
 }
 

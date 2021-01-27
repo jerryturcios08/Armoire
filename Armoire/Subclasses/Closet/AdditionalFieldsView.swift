@@ -5,7 +5,6 @@
 //  Created by Geraldine Turcios on 1/26/21.
 //
 
-import SwiftUI
 import UIKit
 
 class AdditionalFieldsView: UIView {

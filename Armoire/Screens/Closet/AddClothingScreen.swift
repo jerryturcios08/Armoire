@@ -12,7 +12,7 @@ class AddClothingScreen: UIViewController {
     // MARK: - Properties
 
     // Stack views
-    let screenStackView = UIStackView()
+    let scrollView = UIScrollView()
     let contentStackView = UIStackView()
 
     let clothingQuantityLabel = AMBodyLabel(text: "Quantity: 0", fontSize: 20)
@@ -46,7 +46,7 @@ class AddClothingScreen: UIViewController {
         super.viewDidLoad()
         configureScreen()
         configureGestures()
-        configureStackViews()
+        configureStackView()
 
         configureClothingQuantityViews()
         configureClothingColorViews()
@@ -74,18 +74,24 @@ class AddClothingScreen: UIViewController {
         view.addGestureRecognizer(tapGestureRecognizer)
     }
 
-    func configureStackViews() {
-        view.addSubview(screenStackView)
-        screenStackView.axis = .vertical
-        screenStackView.addArrangedSubviews(contentStackView, UIView())
+    func configureStackView() {
+        view.addSubview(scrollView)
 
-        // Content stack view contains all form inputs
+        scrollView.snp.makeConstraints { make in
+            make.top.bottom.equalTo(view)
+            make.left.right.equalTo(view.safeAreaLayoutGuide)
+        }
+
+        scrollView.addSubview(contentStackView)
         contentStackView.axis = .vertical
-        contentStackView.distribution = .equalSpacing
         contentStackView.spacing = 20
+        contentStackView.isLayoutMarginsRelativeArrangement = true
+        contentStackView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 12, leading: 16, bottom: 16, trailing: 20)
 
-        let insets = UIEdgeInsets(top: 12, left: 16, bottom: 16, right: 20)
-        screenStackView.snp.makeConstraints { $0.edges.equalTo(view.safeAreaLayoutGuide).inset(insets) }
+        contentStackView.snp.makeConstraints { make in
+            make.edges.equalTo(scrollView).inset(UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
+            make.width.equalTo(scrollView)
+        }
     }
 
     func configureClothingQuantityViews() {
@@ -160,6 +166,7 @@ struct AddClothingScreenPreviews: PreviewProvider {
         UIViewControllerPreview {
             AMNavigationController(rootViewController: AddClothingScreen())
         }
+        .ignoresSafeArea(.all, edges: .all)
     }
 }
 #endif

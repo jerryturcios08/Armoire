@@ -40,7 +40,6 @@ class PrimaryFieldsViewController: UIViewController {
 
     func configureClothingImageView() {
         containerStackView.addArrangedSubview(clothingImageView)
-        clothingImageView.image = UIImage(named: "PinkDress")
         clothingImageView.contentMode = .scaleAspectFit
         clothingImageView.isHidden = true
         clothingImageView.snp.makeConstraints { $0.height.lessThanOrEqualTo(280) }

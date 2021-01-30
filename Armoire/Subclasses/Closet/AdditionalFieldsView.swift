@@ -13,8 +13,8 @@ class AdditionalFieldsView: UIView {
     let containerStackView = UIStackView()
     let additionalFieldsStackView = UIStackView()
     let additionalFieldsButton = AMButton(title: "Show Additional Fields")
+    let clothingDescriptionTextView = AMTextView(placeholder: "Enter description")
     let clothingSizeTextField = AMTextField(placeholder: "Size")
-    let clothingBrandTextField = AMTextField(placeholder: "Brand")
     let clothingMaterialTextField = AMTextField(placeholder: "Material")
     let clothingUrlTextField = AMTextField(placeholder: "URL")
 
@@ -25,8 +25,8 @@ class AdditionalFieldsView: UIView {
         }
     }
 
+    var clothingDescription = ""
     var clothingSize = ""
-    var clothingBrand = ""
     var clothingMaterial = ""
     var clothingUrl = ""
 
@@ -61,8 +61,8 @@ class AdditionalFieldsView: UIView {
         additionalFieldsStackView.alpha = 0
         additionalFieldsStackView.isHidden = true
 
+        configureClothingDescriptionTextView()
         configureClothingSizeTextField()
-        configureClothingBrandTextField()
         configureClothingMaterialTextField()
         configureClothingUrlTextField()
     }
@@ -73,6 +73,12 @@ class AdditionalFieldsView: UIView {
         additionalFieldsButton.snp.makeConstraints { $0.height.equalTo(50) }
     }
 
+    private func configureClothingDescriptionTextView() {
+        additionalFieldsStackView.addArrangedSubview(clothingDescriptionTextView)
+        clothingDescriptionTextView.delegate = self
+        clothingDescriptionTextView.isScrollEnabled = false
+    }
+
     private func configureClothingSizeTextField() {
         additionalFieldsStackView.addArrangedSubview(clothingSizeTextField)
         clothingSizeTextField.setOnEdit(handleClothingSizeTextFieldEdit)
@@ -81,19 +87,11 @@ class AdditionalFieldsView: UIView {
         clothingSizeTextField.snp.makeConstraints { $0.height.equalTo(50) }
     }
 
-    private func configureClothingBrandTextField() {
-        additionalFieldsStackView.addArrangedSubview(clothingBrandTextField)
-        clothingBrandTextField.setOnEdit(handleClothingSizeTextFieldEdit)
-        setCommonTextFieldProperties(for: clothingBrandTextField)
-        clothingBrandTextField.tag = 1
-        clothingBrandTextField.snp.makeConstraints { $0.height.equalTo(50) }
-    }
-
     private func configureClothingMaterialTextField() {
         additionalFieldsStackView.addArrangedSubview(clothingMaterialTextField)
         clothingMaterialTextField.setOnEdit(handleClothingMaterialTextFieldEdit)
         setCommonTextFieldProperties(for: clothingMaterialTextField)
-        clothingMaterialTextField.tag = 2
+        clothingMaterialTextField.tag = 1
         clothingMaterialTextField.snp.makeConstraints { $0.height.equalTo(50) }
     }
 
@@ -103,7 +101,7 @@ class AdditionalFieldsView: UIView {
         clothingUrlTextField.delegate = self
         clothingUrlTextField.keyboardType = .URL
         clothingUrlTextField.returnKeyType = .done
-        clothingUrlTextField.tag = 3
+        clothingUrlTextField.tag = 2
         clothingUrlTextField.snp.makeConstraints { $0.height.equalTo(50) }
     }
 
@@ -138,11 +136,6 @@ class AdditionalFieldsView: UIView {
         clothingSize = text
     }
 
-    private func handleClothingBrandTextFieldEdit(_ textField: UITextField) {
-        guard let text = textField.text else { return }
-        clothingBrand = text
-    }
-
     private func handleClothingMaterialTextFieldEdit(_ textField: UITextField) {
         guard let text = textField.text else { return }
         clothingMaterial = text
@@ -159,11 +152,27 @@ class AdditionalFieldsView: UIView {
 extension AdditionalFieldsView: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         switch textField.tag {
-        case 0: return clothingBrandTextField.becomeFirstResponder()
-        case 1: return clothingMaterialTextField.becomeFirstResponder()
-        case 2: return clothingUrlTextField.becomeFirstResponder()
-        case 3: return clothingUrlTextField.resignFirstResponder()
+        case 0: return clothingMaterialTextField.becomeFirstResponder()
+        case 1: return clothingUrlTextField.becomeFirstResponder()
+        case 2: return clothingUrlTextField.resignFirstResponder()
         default: return true
         }
+    }
+}
+
+// MARK: - Text view delegate
+
+extension AdditionalFieldsView: UITextViewDelegate {
+    func textViewDidChange(_ textView: UITextView) {
+        guard let text = textView.text else { return }
+        clothingDescription = text
+    }
+
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        clothingDescriptionTextView.hidePlaceholder()
+    }
+
+    func textViewDidEndEditing(_ textView: UITextView) {
+        clothingDescriptionTextView.showPlaceholder()
     }
 }

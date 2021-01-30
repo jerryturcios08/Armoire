@@ -64,7 +64,6 @@ class ClothingScreen: UIViewController {
         view.addSubview(clothingColorButton)
         clothingColorButton.addTarget(self, action: #selector(colorButtonTapped), for: .touchUpInside)
         clothingColorButton.setImage(UIImage(systemName: "circle.fill"), for: .normal)
-        clothingColorButton.imageView?.layer.transform = CATransform3DMakeScale(2, 2, 2)
         clothingColorButton.tintColor = .systemPink
 
         clothingColorButton.snp.makeConstraints { make in
@@ -130,17 +129,7 @@ extension ClothingScreen: UIColorPickerViewControllerDelegate {
 struct ClothingScreenPreviews: PreviewProvider {
     static var previews: some View {
         UIViewControllerPreview {
-            AMNavigationController(
-                rootViewController: ClothingScreen(
-                    clothing: Clothing(
-                        image: UIImage(named: "Pink Dress")!,
-                        name: "Pink Dress",
-                        quantity: 1,
-                        color: "#000000",
-                        isFavorite: true
-                    )
-                )
-            )
+            AMNavigationController(rootViewController: ClothingScreen(clothing: Clothing.example))
         }
     }
 }

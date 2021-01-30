@@ -14,10 +14,10 @@ class PrimaryFieldsViewController: UIViewController {
     let addClothingImageButton = AMButton(title: "Add Image")
     let clothingImageView = UIImageView()
     let clothingNameTextField = AMTextField(placeholder: "Name")
-    let clothingDescriptionTextView = AMTextView(placeholder: "Enter description")
+    let clothingBrandTextField = AMTextField(placeholder: "Brand")
 
     var clothingName = ""
-    var clothingDescription = ""
+    var clothingBrand = ""
 
     // MARK: - Configurations
 
@@ -35,7 +35,7 @@ class PrimaryFieldsViewController: UIViewController {
 
         configureClothingImageView()
         configureClothingNameTextField()
-        configureClothingDescriptionTextView()
+        configureClothingBrandTextField()
     }
 
     func configureClothingImageView() {
@@ -59,10 +59,14 @@ class PrimaryFieldsViewController: UIViewController {
         clothingNameTextField.snp.makeConstraints { $0.height.equalTo(50) }
     }
 
-    func configureClothingDescriptionTextView() {
-        containerStackView.addArrangedSubview(clothingDescriptionTextView)
-        clothingDescriptionTextView.delegate = self
-        clothingDescriptionTextView.isScrollEnabled = false
+    private func configureClothingBrandTextField() {
+        containerStackView.addArrangedSubview(clothingBrandTextField)
+        clothingBrandTextField.setOnEdit(handleClothingBrandTextFieldEdit)
+        clothingNameTextField.autocapitalizationType = .sentences
+        clothingNameTextField.delegate = self
+        clothingNameTextField.returnKeyType = .done
+        clothingBrandTextField.tag = 1
+        clothingBrandTextField.snp.makeConstraints { $0.height.equalTo(50) }
     }
 
     // MARK: - Defined Methods
@@ -96,6 +100,11 @@ class PrimaryFieldsViewController: UIViewController {
         guard let text = textField.text else { return }
         clothingName = text
     }
+
+    private func handleClothingBrandTextFieldEdit(_ textField: UITextField) {
+        guard let text = textField.text else { return }
+        clothingBrand = text
+    }
 }
 
 // MARK: - Image picker delegate
@@ -114,25 +123,8 @@ extension PrimaryFieldsViewController: UIImagePickerControllerDelegate, UINaviga
 extension PrimaryFieldsViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         switch textField.tag {
-        case 0: return clothingDescriptionTextView.becomeFirstResponder()
+        case 0: return clothingBrandTextField.becomeFirstResponder()
         default: return true
         }
-    }
-}
-
-// MARK: - Text view delegate
-
-extension PrimaryFieldsViewController: UITextViewDelegate {
-    func textViewDidChange(_ textView: UITextView) {
-        guard let text = textView.text else { return }
-        clothingDescription = text
-    }
-
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        clothingDescriptionTextView.hidePlaceholder()
-    }
-
-    func textViewDidEndEditing(_ textView: UITextView) {
-        clothingDescriptionTextView.showPlaceholder()
     }
 }

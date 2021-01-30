@@ -142,23 +142,26 @@ class AddClothingScreen: UIViewController {
             // Shows an error if a name was not entered
             alert.message = "A title is required when adding a clothing item. Please enter a title and try again."
             present(alert, animated: true)
+        } else if primaryFieldsViewController.clothingBrand.isEmpty {
+            // Shows an error if a brand was not entered
+            alert.message = "A brand is required when adding a clothing item. Please enter a brand and try again."
+            present(alert, animated: true)
         } else {
-            // Optionals
-            let description = primaryFieldsViewController.clothingDescription
+            // Additional fields
+            let description = additionalFieldsView.clothingDescription
             let size = additionalFieldsView.clothingSize
-            let brand = additionalFieldsView.clothingBrand
             let material = additionalFieldsView.clothingMaterial
             let url = additionalFieldsView.clothingUrl
 
             let newClothing = Clothing(
                 image: primaryFieldsViewController.clothingImageView.image!,
                 name: primaryFieldsViewController.clothingName,
-                description: description.isEmpty ? nil : description,
+                brand: primaryFieldsViewController.clothingBrand,
                 quantity: clothingQuantity,
                 color: clothingColor.toHexString(),
                 isFavorite: markedAsFavorite,
+                description: description.isEmpty ? nil : description,
                 size: size.isEmpty ? nil : size,
-                brand: brand.isEmpty ? nil : brand,
                 material: material.isEmpty ? nil : material,
                 url: url.isEmpty ? nil : url
             )

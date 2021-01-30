@@ -30,8 +30,20 @@ class ClothingCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func set(clothing: String) {
-        clothingTitleLabel.text = clothing
+    func set(clothing: Clothing) {
+        clothingImageView.image = clothing.image
+        clothingTitleLabel.text = clothing.name
+        clothingBrandLabel.text = clothing.brand
+        clothingDescriptionLabel.text = clothing.description ?? "No description."
+        clothingQuantityLabel.text = "Quantity: \(clothing.quantity)"
+
+        if let date = clothing.dateUpdated {
+            let dateString = date.convertToDayMonthYearFormat()
+            clothingDateLabel.text = "Last updated on \(dateString)"
+        } else {
+            let dateString = clothing.dateCreated.convertToDayMonthYearFormat()
+            clothingDateLabel.text = "Created on \(dateString)"
+        }
     }
 
     private func configureCell() {

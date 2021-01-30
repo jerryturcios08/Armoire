@@ -8,11 +8,11 @@
 import UIKit
 
 protocol ClothesDataSourceDelegate: class {
-    func didUpdateDataSource(_ clothing: [String])
+    func didUpdateDataSource(_ clothing: [Clothing])
 }
 
 class ClothesDataSource: NSObject, UITableViewDataSource {
-    var clothes = [String]()
+    var clothes = [Clothing]()
     weak var delegate: ClothesDataSourceDelegate?
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

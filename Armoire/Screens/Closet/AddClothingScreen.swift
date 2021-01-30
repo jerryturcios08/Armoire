@@ -8,6 +8,10 @@
 import SwiftUI
 import UIKit
 
+protocol AddClothingScreenDelegate: class {
+    func didAddNewClothing(_ clothing: Clothing)
+}
+
 class AddClothingScreen: UIViewController {
     // MARK: - Properties
 
@@ -37,6 +41,8 @@ class AddClothingScreen: UIViewController {
     }
 
     var markedAsFavorite = false
+
+    weak var delegate: AddClothingScreenDelegate?
 
     // MARK: - Configurations
 
@@ -124,7 +130,42 @@ class AddClothingScreen: UIViewController {
     }
 
     func doneButtonTapped(_ sender: UIBarButtonItem) {
-        dismiss(animated: true)
+        let alert = UIAlertController(title: "Error", message: nil, preferredStyle: .alert)
+        alert.view.tintColor = UIColor.accentColor
+        alert.addAction(UIAlertAction(title: "Okay", style: .default))
+
+        if primaryFieldsViewController.clothingImageView.image == nil {
+            // Shows an error if an image was not added
+            alert.message = "An image is required when adding a clothing item. Please add an image and try again."
+            present(alert, animated: true)
+        } else if primaryFieldsViewController.clothingName.isEmpty {
+            // Shows an error if a name was not entered
+            alert.message = "A title is required when adding a clothing item. Please enter a title and try again."
+            present(alert, animated: true)
+        } else {
+            // Optionals
+            let description = primaryFieldsViewController.clothingDescription
+            let size = additionalFieldsView.clothingSize
+            let brand = additionalFieldsView.clothingBrand
+            let material = additionalFieldsView.clothingMaterial
+            let url = additionalFieldsView.clothingUrl
+
+            let newClothing = Clothing(
+                image: primaryFieldsViewController.clothingImageView.image!,
+                name: primaryFieldsViewController.clothingName,
+                description: description.isEmpty ? nil : description,
+                quantity: clothingQuantity,
+                color: clothingColor.toHexString(),
+                isFavorite: markedAsFavorite,
+                size: size.isEmpty ? nil : size,
+                brand: brand.isEmpty ? nil : brand,
+                material: material.isEmpty ? nil : material,
+                url: url.isEmpty ? nil : url
+            )
+
+            delegate?.didAddNewClothing(newClothing)
+            dismiss(animated: true)
+        }
     }
 
     @objc func handleStepperValueChanged(_ sender: UIStepper) {

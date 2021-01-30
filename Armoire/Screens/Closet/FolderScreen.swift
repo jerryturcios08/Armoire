@@ -43,7 +43,6 @@ class FolderScreen: UIViewController {
         navigationItem.rightBarButtonItem = addButton
 
         dataSource.delegate = self
-        dataSource.clothes = ["Pink Dress 1", "Pink Dress 2", "Pink Dress 3", "Pink Dress 4"]
     }
 
     func configureSearchController() {
@@ -86,7 +85,9 @@ class FolderScreen: UIViewController {
     }
 
     @objc func addButtonTapped(_ sender: UIBarButtonItem) {
-        let destinationScreen = AMNavigationController(rootViewController: AddClothingScreen())
+        let addClothingScreen = AddClothingScreen()
+        let destinationScreen = AMNavigationController(rootViewController: addClothingScreen)
+        addClothingScreen.delegate = self
         destinationScreen.modalPresentationStyle = .fullScreen
         present(destinationScreen, animated: true)
     }
@@ -95,9 +96,18 @@ class FolderScreen: UIViewController {
 // MARK: - Data source delegate
 
 extension FolderScreen: ClothesDataSourceDelegate {
-    func didUpdateDataSource(_ clothing: [String]) {
+    func didUpdateDataSource(_ clothing: [Clothing]) {
         let count = clothing.count
         itemCountLabel.text = count == 1 ? "1 item" : "\(count) items"
+    }
+}
+
+// MARK: - Add clothing delegate
+
+extension FolderScreen: AddClothingScreenDelegate {
+    func didAddNewClothing(_ clothing: Clothing) {
+        dataSource.clothes.insert(clothing, at: 0)
+        tableView.reloadData()
     }
 }
 

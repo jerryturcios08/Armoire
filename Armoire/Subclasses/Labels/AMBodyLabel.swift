@@ -32,6 +32,11 @@ class AMBodyLabel: UILabel {
         minimumScaleFactor = 0.75
         lineBreakMode = .byWordWrapping
     }
+
+    func setFont(with font: UIFont?) {
+        guard let font = font else { return }
+        self.font = UIFontMetrics.default.scaledFont(for: font)
+    }
 }
 
 #if DEBUG

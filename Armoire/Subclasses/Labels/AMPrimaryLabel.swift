@@ -32,6 +32,11 @@ class AMPrimaryLabel: UILabel {
         minimumScaleFactor = 0.9
         lineBreakMode = .byTruncatingTail
     }
+
+    func setFont(with font: UIFont?) {
+        guard let font = font else { return }
+        self.font = UIFontMetrics.default.scaledFont(for: font)
+    }
 }
 
 #if DEBUG

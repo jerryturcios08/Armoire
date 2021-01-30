@@ -62,9 +62,9 @@ class PrimaryFieldsViewController: UIViewController {
     private func configureClothingBrandTextField() {
         containerStackView.addArrangedSubview(clothingBrandTextField)
         clothingBrandTextField.setOnEdit(handleClothingBrandTextFieldEdit)
-        clothingNameTextField.autocapitalizationType = .sentences
-        clothingNameTextField.delegate = self
-        clothingNameTextField.returnKeyType = .done
+        clothingBrandTextField.autocapitalizationType = .sentences
+        clothingBrandTextField.delegate = self
+        clothingBrandTextField.returnKeyType = .done
         clothingBrandTextField.tag = 1
         clothingBrandTextField.snp.makeConstraints { $0.height.equalTo(50) }
     }
@@ -101,7 +101,7 @@ class PrimaryFieldsViewController: UIViewController {
         clothingName = text
     }
 
-    private func handleClothingBrandTextFieldEdit(_ textField: UITextField) {
+    func handleClothingBrandTextFieldEdit(_ textField: UITextField) {
         guard let text = textField.text else { return }
         clothingBrand = text
     }
@@ -124,6 +124,7 @@ extension PrimaryFieldsViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         switch textField.tag {
         case 0: return clothingBrandTextField.becomeFirstResponder()
+        case 1: return clothingBrandTextField.resignFirstResponder()
         default: return true
         }
     }

@@ -5,9 +5,11 @@
 //  Created by Geraldine Turcios on 1/30/21.
 //
 
-import UIKit
+import FirebaseFirestore
+import FirebaseFirestoreSwift
 
 struct Clothing: Codable {
+    @DocumentID var id: String? = nil
     var name: String
     var brand: String
     var quantity: Int
@@ -19,6 +21,7 @@ struct Clothing: Codable {
     var url: String?
     var dateCreated = Date()
     var dateUpdated: Date? = nil
+    var folder: DocumentReference?
 
     static var example: Clothing {
         Clothing(

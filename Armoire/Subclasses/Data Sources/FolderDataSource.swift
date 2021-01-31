@@ -31,6 +31,12 @@ class FolderDataSource: NSObject, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
+            let folder = folders[indexPath.row]
+
+            FirebaseManager.shared.deleteFolder(folder) { error in
+                fatalError(error.rawValue)
+            }
+
             folders.remove(at: indexPath.row)
             delegate?.didUpdateDataSource(folders)
             tableView.deleteRows(at: [indexPath], with: .automatic)

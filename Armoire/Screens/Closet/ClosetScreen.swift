@@ -69,11 +69,11 @@ class ClosetScreen: UIViewController {
     }
 
     func fetchFolders() {
-        FirebaseManager.shared.fetchFolderItems { [weak self] result in
+        FirebaseManager.shared.fetchFolders(for: "QePfaCJjbHIOmAZgfgTF") { [weak self] result in
             guard let self = self else { return }
 
             switch result {
-            case .success(let folders): self.updateTableView(with: folders)
+            case .success(let folders): self.setTableViewDataSource(with: folders)
             case .failure(let error): print(error.rawValue)
             }
         }
@@ -92,9 +92,14 @@ class ClosetScreen: UIViewController {
         return footerContainerView
     }
 
-    func updateTableView(with folders: [Folder]) {
+    func setTableViewDataSource(with folders: [Folder]) {
         dataSource.folders = folders
         tableView.reloadDataWithAnimation()
+    }
+
+    func addTableViewData(with folder: Folder) {
+        dataSource.folders.append(folder)
+        tableView.reloadData()
     }
 
     @objc func plusButtonTapped(_ sender: UIBarButtonItem) {
@@ -119,8 +124,16 @@ extension ClosetScreen: FolderDataSourceDelegate {
 
 extension ClosetScreen: CreateFolderScreenDelegate {
     func didCreateNewFolder(_ folder: Folder) {
-        dataSource.folders.append(folder)
-        tableView.reloadData()
+        FirebaseManager.shared.addFolder(with: folder, for: "QePfaCJjbHIOmAZgfgTF") { [weak self] result in
+            guard let self = self else { return }
+
+            switch result {
+            case .success(let folder):
+                self.addTableViewData(with: folder)
+            case .failure(let error):
+                fatalError(error.localizedDescription)
+            }
+        }
     }
 }
 

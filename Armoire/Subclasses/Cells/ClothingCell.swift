@@ -31,7 +31,6 @@ class ClothingCell: UITableViewCell {
     }
 
     func set(clothing: Clothing) {
-        clothingImageView.image = clothing.image
         clothingTitleLabel.text = clothing.name
         clothingBrandLabel.text = clothing.brand
         clothingDescriptionLabel.text = clothing.description ?? "No description."

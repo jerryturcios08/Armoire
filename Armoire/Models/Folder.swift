@@ -7,8 +7,9 @@
 
 import Foundation
 
-struct Folder {
+struct Folder: Codable {
     var title: String
     var description: String?
     var favorite: Bool
+    var clothing = [Clothing]()
 }

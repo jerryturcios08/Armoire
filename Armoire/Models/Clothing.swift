@@ -7,8 +7,7 @@
 
 import UIKit
 
-struct Clothing {
-    var image: UIImage // Needs a different implementation
+struct Clothing: Codable {
     var name: String
     var brand: String
     var quantity: Int
@@ -23,7 +22,6 @@ struct Clothing {
 
     static var example: Clothing {
         Clothing(
-            image: UIImage(named: "PinkDress")!,
             name: "Pink Dress",
             brand: "MSK",
             quantity: 1,

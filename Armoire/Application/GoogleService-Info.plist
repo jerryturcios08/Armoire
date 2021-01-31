@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>802901021163-sudu0s7nun0cc1et4g7d3hf1jpth6s6p.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.802901021163-sudu0s7nun0cc1et4g7d3hf1jpth6s6p</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDv1I_7Co9ryvHKadt6jNmk2EC5bu2v6Kw</string>
+	<key>GCM_SENDER_ID</key>
+	<string>802901021163</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.jerryturcios.Armoire</string>
+	<key>PROJECT_ID</key>
+	<string>armoire-da5fc</string>
+	<key>STORAGE_BUCKET</key>
+	<string>armoire-da5fc.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:802901021163:ios:f5e0d5b7a7a63e1f0b49ae</string>
+</dict>
+</plist>

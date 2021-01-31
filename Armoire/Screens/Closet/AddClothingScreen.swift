@@ -154,7 +154,6 @@ class AddClothingScreen: UIViewController {
             let url = additionalFieldsView.clothingUrl
 
             let newClothing = Clothing(
-                image: primaryFieldsViewController.clothingImageView.image!,
                 name: primaryFieldsViewController.clothingName,
                 brand: primaryFieldsViewController.clothingBrand,
                 quantity: clothingQuantity,

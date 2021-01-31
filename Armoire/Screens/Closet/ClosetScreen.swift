@@ -21,6 +21,13 @@ class ClosetScreen: UIViewController {
         configureScreen()
         configureSearchController()
         configureTableView()
+
+        FirebaseManager.shared.fetchFolderItems { result in
+            switch result {
+            case .success(let folders): print(folders)
+            case .failure(let error): print(error.rawValue)
+            }
+        }
     }
 
     func configureScreen() {

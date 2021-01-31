@@ -3,17 +3,15 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		72CAAF4FCB0CE68A63A1C963 /* Pods_Armoire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 850AD35AB4ABB34A197A0BFC /* Pods_Armoire.framework */; };
 		C601983A25B78383004B4203 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C601983925B78383004B4203 /* AppDelegate.swift */; };
 		C601983C25B78383004B4203 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C601983B25B78383004B4203 /* SceneDelegate.swift */; };
 		C601983E25B78383004B4203 /* ClosetScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C601983D25B78383004B4203 /* ClosetScreen.swift */; };
-		C601984425B78383004B4203 /* Armoire.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C601984225B78383004B4203 /* Armoire.xcdatamodeld */; };
 		C601984625B78386004B4203 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C601984525B78386004B4203 /* Assets.xcassets */; };
-		C601985425B78387004B4203 /* ArmoireTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C601985325B78387004B4203 /* ArmoireTests.swift */; };
-		C601985F25B78387004B4203 /* ArmoireUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C601985E25B78387004B4203 /* ArmoireUITests.swift */; };
 		C601987925B78421004B4203 /* Quicksand-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C601987425B78421004B4203 /* Quicksand-Bold.ttf */; };
 		C601987A25B78421004B4203 /* Quicksand-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C601987525B78421004B4203 /* Quicksand-Light.ttf */; };
 		C601987B25B78421004B4203 /* Quicksand-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C601987625B78421004B4203 /* Quicksand-Medium.ttf */; };
@@ -32,6 +30,9 @@
 		C63B0B8C25B931980065F813 /* FolderDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63B0B8B25B931980065F813 /* FolderDataSource.swift */; };
 		C648380C25C5DC0800C8082B /* Clothing.swift in Sources */ = {isa = PBXBuildFile; fileRef = C648380B25C5DC0800C8082B /* Clothing.swift */; };
 		C648381425C5E30400C8082B /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C648381325C5E30400C8082B /* Date+Ext.swift */; };
+		C648381D25C607C600C8082B /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C648381C25C607C600C8082B /* FirebaseManager.swift */; };
+		C648382225C608BB00C8082B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C648382125C608BB00C8082B /* GoogleService-Info.plist */; };
+		C648386F25C619F000C8082B /* AMError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C648386E25C619F000C8082B /* AMError.swift */; };
 		C658E7C925B7896E000F8F50 /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C658E7C825B7896E000F8F50 /* UIHelper.swift */; };
 		C658E7CE25B78D31000F8F50 /* AMNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C658E7CD25B78D31000F8F50 /* AMNavigationController.swift */; };
 		C658E7D925B78FE8000F8F50 /* previews.swift in Sources */ = {isa = PBXBuildFile; fileRef = C658E7D825B78FE8000F8F50 /* previews.swift */; };
@@ -47,7 +48,6 @@
 		C6AA152D25BCBD0E0095ADA0 /* AMTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6AA152C25BCBD0E0095ADA0 /* AMTextView.swift */; };
 		C6AA153225BCBDF00095ADA0 /* AMSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6AA153125BCBDF00095ADA0 /* AMSwitch.swift */; };
 		C6AA153725BCC58D0095ADA0 /* ClothesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6AA153625BCC58D0095ADA0 /* ClothesDataSource.swift */; };
-		C6C0A06625B786FF000CA9F7 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = C6C0A06525B786FF000CA9F7 /* SnapKit */; };
 		C6C6D4F125BE15F300E4C0B8 /* UITableView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C6D4F025BE15F300E4C0B8 /* UITableView+Ext.swift */; };
 		C6DFC04325BF5269002BC018 /* CanvasControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6DFC04225BF5269002BC018 /* CanvasControlsView.swift */; };
 		C6DFC04825BF77E6002BC018 /* AMCanvasButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6DFC04725BF77E6002BC018 /* AMCanvasButton.swift */; };
@@ -56,37 +56,15 @@
 		C6EE84BB25B8BE8000986BF4 /* AMPrimaryLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6EE84BA25B8BE8000986BF4 /* AMPrimaryLabel.swift */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		C601985025B78387004B4203 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C601982E25B78383004B4203 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = C601983525B78383004B4203;
-			remoteInfo = Armoire;
-		};
-		C601985B25B78387004B4203 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C601982E25B78383004B4203 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = C601983525B78383004B4203;
-			remoteInfo = Armoire;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
+		345BABCA796DCB781B1DF126 /* Pods-Armoire.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Armoire.debug.xcconfig"; path = "Target Support Files/Pods-Armoire/Pods-Armoire.debug.xcconfig"; sourceTree = "<group>"; };
+		850AD35AB4ABB34A197A0BFC /* Pods_Armoire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Armoire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C601983625B78383004B4203 /* Armoire.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Armoire.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C601983925B78383004B4203 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C601983B25B78383004B4203 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		C601983D25B78383004B4203 /* ClosetScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosetScreen.swift; sourceTree = "<group>"; };
-		C601984325B78383004B4203 /* Armoire.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Armoire.xcdatamodel; sourceTree = "<group>"; };
 		C601984525B78386004B4203 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C601984A25B78386004B4203 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C601984F25B78387004B4203 /* ArmoireTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ArmoireTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		C601985325B78387004B4203 /* ArmoireTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArmoireTests.swift; sourceTree = "<group>"; };
-		C601985525B78387004B4203 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C601985A25B78387004B4203 /* ArmoireUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ArmoireUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		C601985E25B78387004B4203 /* ArmoireUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArmoireUITests.swift; sourceTree = "<group>"; };
-		C601986025B78387004B4203 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C601987425B78421004B4203 /* Quicksand-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-Bold.ttf"; sourceTree = "<group>"; };
 		C601987525B78421004B4203 /* Quicksand-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-Light.ttf"; sourceTree = "<group>"; };
 		C601987625B78421004B4203 /* Quicksand-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-Medium.ttf"; sourceTree = "<group>"; };
@@ -105,6 +83,9 @@
 		C63B0B8B25B931980065F813 /* FolderDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderDataSource.swift; sourceTree = "<group>"; };
 		C648380B25C5DC0800C8082B /* Clothing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clothing.swift; sourceTree = "<group>"; };
 		C648381325C5E30400C8082B /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
+		C648381C25C607C600C8082B /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
+		C648382125C608BB00C8082B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C648386E25C619F000C8082B /* AMError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AMError.swift; sourceTree = "<group>"; };
 		C658E7C825B7896E000F8F50 /* UIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
 		C658E7CD25B78D31000F8F50 /* AMNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AMNavigationController.swift; sourceTree = "<group>"; };
 		C658E7D825B78FE8000F8F50 /* previews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = previews.swift; sourceTree = "<group>"; };
@@ -126,6 +107,7 @@
 		C6EAA14725BE1FB900C727B3 /* RunwayScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunwayScreen.swift; sourceTree = "<group>"; };
 		C6EAA14C25BE214300C727B3 /* CanvasScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasScene.swift; sourceTree = "<group>"; };
 		C6EE84BA25B8BE8000986BF4 /* AMPrimaryLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AMPrimaryLabel.swift; sourceTree = "<group>"; };
+		F3B933E3C3206FEB502DAD33 /* Pods-Armoire.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Armoire.release.xcconfig"; path = "Target Support Files/Pods-Armoire/Pods-Armoire.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,34 +115,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C6C0A06625B786FF000CA9F7 /* SnapKit in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C601984C25B78387004B4203 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C601985725B78387004B4203 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				72CAAF4FCB0CE68A63A1C963 /* Pods_Armoire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		440A7847417C9C4490CE79ED /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				345BABCA796DCB781B1DF126 /* Pods-Armoire.debug.xcconfig */,
+				F3B933E3C3206FEB502DAD33 /* Pods-Armoire.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		C601982D25B78383004B4203 = {
 			isa = PBXGroup;
 			children = (
 				C601983825B78383004B4203 /* Armoire */,
-				C601985225B78387004B4203 /* ArmoireTests */,
-				C601985D25B78387004B4203 /* ArmoireUITests */,
 				C601983725B78383004B4203 /* Products */,
+				440A7847417C9C4490CE79ED /* Pods */,
+				C86EE372AD7C8F456C07EF99 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -168,8 +145,6 @@
 			isa = PBXGroup;
 			children = (
 				C601983625B78383004B4203 /* Armoire.app */,
-				C601984F25B78387004B4203 /* ArmoireTests.xctest */,
-				C601985A25B78387004B4203 /* ArmoireUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -179,7 +154,7 @@
 			children = (
 				C601988925B784A5004B4203 /* Application */,
 				C601987325B78411004B4203 /* Assets */,
-				C601988825B78492004B4203 /* Data */,
+				C648381B25C607AE00C8082B /* Managers */,
 				C60E9F7F25BA357300D97991 /* Models */,
 				C601988725B78483004B4203 /* Screens */,
 				C658E7BC25B7890B000F8F50 /* Subclasses */,
@@ -187,24 +162,6 @@
 				C601984A25B78386004B4203 /* Info.plist */,
 			);
 			path = Armoire;
-			sourceTree = "<group>";
-		};
-		C601985225B78387004B4203 /* ArmoireTests */ = {
-			isa = PBXGroup;
-			children = (
-				C601985325B78387004B4203 /* ArmoireTests.swift */,
-				C601985525B78387004B4203 /* Info.plist */,
-			);
-			path = ArmoireTests;
-			sourceTree = "<group>";
-		};
-		C601985D25B78387004B4203 /* ArmoireUITests */ = {
-			isa = PBXGroup;
-			children = (
-				C601985E25B78387004B4203 /* ArmoireUITests.swift */,
-				C601986025B78387004B4203 /* Info.plist */,
-			);
-			path = ArmoireUITests;
 			sourceTree = "<group>";
 		};
 		C601987325B78411004B4203 /* Assets */ = {
@@ -220,6 +177,7 @@
 			isa = PBXGroup;
 			children = (
 				C60E9F8825BA37F100D97991 /* Extensions */,
+				C648386E25C619F000C8082B /* AMError.swift */,
 				C601988225B7843B004B4203 /* constants.swift */,
 				C658E7D825B78FE8000F8F50 /* previews.swift */,
 				C658E7C825B7896E000F8F50 /* UIHelper.swift */,
@@ -237,17 +195,10 @@
 			path = Screens;
 			sourceTree = "<group>";
 		};
-		C601988825B78492004B4203 /* Data */ = {
-			isa = PBXGroup;
-			children = (
-				C601984225B78383004B4203 /* Armoire.xcdatamodeld */,
-			);
-			path = Data;
-			sourceTree = "<group>";
-		};
 		C601988925B784A5004B4203 /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				C648382125C608BB00C8082B /* GoogleService-Info.plist */,
 				C601983925B78383004B4203 /* AppDelegate.swift */,
 				C601983B25B78383004B4203 /* SceneDelegate.swift */,
 			);
@@ -299,6 +250,14 @@
 				C63B0B8B25B931980065F813 /* FolderDataSource.swift */,
 			);
 			path = "Data Sources";
+			sourceTree = "<group>";
+		};
+		C648381B25C607AE00C8082B /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				C648381C25C607C600C8082B /* FirebaseManager.swift */,
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 		C658E7BC25B7890B000F8F50 /* Subclasses */ = {
@@ -388,6 +347,14 @@
 			path = Canvas;
 			sourceTree = "<group>";
 		};
+		C86EE372AD7C8F456C07EF99 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				850AD35AB4ABB34A197A0BFC /* Pods_Armoire.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -395,57 +362,20 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C601986325B78387004B4203 /* Build configuration list for PBXNativeTarget "Armoire" */;
 			buildPhases = (
+				3673EB30C9768DB929E15F2A /* [CP] Check Pods Manifest.lock */,
 				C601983225B78383004B4203 /* Sources */,
 				C601983325B78383004B4203 /* Frameworks */,
 				C601983425B78383004B4203 /* Resources */,
+				D5CF5F91B418383C865E609A /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = Armoire;
-			packageProductDependencies = (
-				C6C0A06525B786FF000CA9F7 /* SnapKit */,
-			);
 			productName = Armoire;
 			productReference = C601983625B78383004B4203 /* Armoire.app */;
 			productType = "com.apple.product-type.application";
-		};
-		C601984E25B78387004B4203 /* ArmoireTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = C601986625B78387004B4203 /* Build configuration list for PBXNativeTarget "ArmoireTests" */;
-			buildPhases = (
-				C601984B25B78387004B4203 /* Sources */,
-				C601984C25B78387004B4203 /* Frameworks */,
-				C601984D25B78387004B4203 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				C601985125B78387004B4203 /* PBXTargetDependency */,
-			);
-			name = ArmoireTests;
-			productName = ArmoireTests;
-			productReference = C601984F25B78387004B4203 /* ArmoireTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		C601985925B78387004B4203 /* ArmoireUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = C601986925B78387004B4203 /* Build configuration list for PBXNativeTarget "ArmoireUITests" */;
-			buildPhases = (
-				C601985625B78387004B4203 /* Sources */,
-				C601985725B78387004B4203 /* Frameworks */,
-				C601985825B78387004B4203 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				C601985C25B78387004B4203 /* PBXTargetDependency */,
-			);
-			name = ArmoireUITests;
-			productName = ArmoireUITests;
-			productReference = C601985A25B78387004B4203 /* ArmoireUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
@@ -459,14 +389,6 @@
 					C601983525B78383004B4203 = {
 						CreatedOnToolsVersion = 12.3;
 					};
-					C601984E25B78387004B4203 = {
-						CreatedOnToolsVersion = 12.3;
-						TestTargetID = C601983525B78383004B4203;
-					};
-					C601985925B78387004B4203 = {
-						CreatedOnToolsVersion = 12.3;
-						TestTargetID = C601983525B78383004B4203;
-					};
 				};
 			};
 			buildConfigurationList = C601983125B78383004B4203 /* Build configuration list for PBXProject "Armoire" */;
@@ -478,16 +400,11 @@
 				Base,
 			);
 			mainGroup = C601982D25B78383004B4203;
-			packageReferences = (
-				C6C0A06425B786FF000CA9F7 /* XCRemoteSwiftPackageReference "SnapKit" */,
-			);
 			productRefGroup = C601983725B78383004B4203 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				C601983525B78383004B4203 /* Armoire */,
-				C601984E25B78387004B4203 /* ArmoireTests */,
-				C601985925B78387004B4203 /* ArmoireUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -503,30 +420,60 @@
 				C601987C25B78421004B4203 /* Quicksand-SemiBold.ttf in Resources */,
 				C601987A25B78421004B4203 /* Quicksand-Light.ttf in Resources */,
 				C601987B25B78421004B4203 /* Quicksand-Medium.ttf in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C601984D25B78387004B4203 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C601985825B78387004B4203 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				C648382225C608BB00C8082B /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3673EB30C9768DB929E15F2A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Armoire-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D5CF5F91B418383C865E609A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Armoire/Pods-Armoire-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Armoire/Pods-Armoire-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Armoire/Pods-Armoire-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		C601983225B78383004B4203 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C648381D25C607C600C8082B /* FirebaseManager.swift in Sources */,
 				C67459A225B93D0C003C87D1 /* CreateFolderScreen.swift in Sources */,
 				C601983E25B78383004B4203 /* ClosetScreen.swift in Sources */,
 				C670A0F825BD31CA000A1405 /* AMBarButtonItem.swift in Sources */,
@@ -543,13 +490,13 @@
 				C6716F2325C106DC00D0CFF2 /* PrimaryFieldsViewController.swift in Sources */,
 				C601988325B7843B004B4203 /* constants.swift in Sources */,
 				C6A9C1D425B7CE8600C22F29 /* AMButton.swift in Sources */,
-				C601984425B78383004B4203 /* Armoire.xcdatamodeld in Sources */,
 				C6AA152D25BCBD0E0095ADA0 /* AMTextView.swift in Sources */,
 				C60E9F8125BA358C00D97991 /* Folder.swift in Sources */,
 				C658E7E125B7901F000F8F50 /* AMTabBarController.swift in Sources */,
 				C63B0B8C25B931980065F813 /* FolderDataSource.swift in Sources */,
 				C63B0B6F25B8DACD0065F813 /* FolderScreen.swift in Sources */,
 				C6DFC04825BF77E6002BC018 /* AMCanvasButton.swift in Sources */,
+				C648386F25C619F000C8082B /* AMError.swift in Sources */,
 				C658E7C925B7896E000F8F50 /* UIHelper.swift in Sources */,
 				C62E0C4025B8BC110078065A /* AMBodyLabel.swift in Sources */,
 				C63B0B7525B8DCE20065F813 /* ClothingCell.swift in Sources */,
@@ -568,36 +515,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C601984B25B78387004B4203 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				C601985425B78387004B4203 /* ArmoireTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C601985625B78387004B4203 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				C601985F25B78387004B4203 /* ArmoireUITests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		C601985125B78387004B4203 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = C601983525B78383004B4203 /* Armoire */;
-			targetProxy = C601985025B78387004B4203 /* PBXContainerItemProxy */;
-		};
-		C601985C25B78387004B4203 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = C601983525B78383004B4203 /* Armoire */;
-			targetProxy = C601985B25B78387004B4203 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		C601986125B78387004B4203 /* Debug */ = {
@@ -718,6 +636,7 @@
 		};
 		C601986425B78387004B4203 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 345BABCA796DCB781B1DF126 /* Pods-Armoire.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -737,6 +656,7 @@
 		};
 		C601986525B78387004B4203 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F3B933E3C3206FEB502DAD33 /* Pods-Armoire.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -751,90 +671,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		C601986725B78387004B4203 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = DU8BZ7Q774;
-				INFOPLIST_FILE = ArmoireTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.jerryturcios.ArmoireTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Armoire.app/Armoire";
-			};
-			name = Debug;
-		};
-		C601986825B78387004B4203 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = DU8BZ7Q774;
-				INFOPLIST_FILE = ArmoireTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.jerryturcios.ArmoireTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Armoire.app/Armoire";
-			};
-			name = Release;
-		};
-		C601986A25B78387004B4203 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = DU8BZ7Q774;
-				INFOPLIST_FILE = ArmoireUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.jerryturcios.ArmoireUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Armoire;
-			};
-			name = Debug;
-		};
-		C601986B25B78387004B4203 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = DU8BZ7Q774;
-				INFOPLIST_FILE = ArmoireUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.jerryturcios.ArmoireUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Armoire;
 			};
 			name = Release;
 		};
@@ -859,57 +695,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C601986625B78387004B4203 /* Build configuration list for PBXNativeTarget "ArmoireTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				C601986725B78387004B4203 /* Debug */,
-				C601986825B78387004B4203 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		C601986925B78387004B4203 /* Build configuration list for PBXNativeTarget "ArmoireUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				C601986A25B78387004B4203 /* Debug */,
-				C601986B25B78387004B4203 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		C6C0A06425B786FF000CA9F7 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.0.1;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		C6C0A06525B786FF000CA9F7 /* SnapKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = C6C0A06425B786FF000CA9F7 /* XCRemoteSwiftPackageReference "SnapKit" */;
-			productName = SnapKit;
-		};
-/* End XCSwiftPackageProductDependency section */
-
-/* Begin XCVersionGroup section */
-		C601984225B78383004B4203 /* Armoire.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				C601984325B78383004B4203 /* Armoire.xcdatamodel */,
-			);
-			currentVersion = C601984325B78383004B4203 /* Armoire.xcdatamodel */;
-			path = Armoire.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = C601982E25B78383004B4203 /* Project object */;
 }

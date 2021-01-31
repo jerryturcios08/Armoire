@@ -6,16 +6,6 @@
 //
 
 import FirebaseFirestore
-import FirebaseFirestoreSwift
-
-struct User: Codable {
-    @DocumentID var id: String? = nil
-    var firstName: String
-    var lastName: String
-    var email: String
-    var username: String
-    var closet: [Folder]
-}
 
 class FirebaseManager {
     static let shared = FirebaseManager()
@@ -24,20 +14,22 @@ class FirebaseManager {
     private init() {}
 
     func fetchFolderItems(completed: @escaping (Result<[Folder], AMError>) -> Void) {
-        db.collection("users").addSnapshotListener { querySnapshot, error in
+        let userRef = db.collection("users").document("QePfaCJjbHIOmAZgfgTF")
+
+        userRef.getDocument { document, error in
             if let _ = error {
                 return completed(.failure(.invalidUser))
             }
 
-            guard let document = querySnapshot?.documents else {
+            guard let document = document, document.exists else {
                 return completed(.failure(.nonexistentDocument))
             }
 
-            let user = document.compactMap { queryDocumentSnapshot -> User? in
-                return try? queryDocumentSnapshot.data(as: User.self)
+            guard let user = try? document.data(as: User.self) else {
+                return completed(.failure(.nonexistentDocument))
             }
 
-            print(user)
+            return completed(.success(user.closet))
         }
     }
 }

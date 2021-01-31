@@ -10,24 +10,22 @@ import SwiftUI
 import UIKit
 
 class ClosetScreen: UIViewController {
+    // MARK: - Properties
+
     let tableView = UITableView(frame: .zero, style: .grouped)
     let footerContainerView = UIView()
     let folderCountLabel = AMBodyLabel(text: "0 folders", fontSize: 18)
 
     var dataSource = FolderDataSource()
 
+    // MARK: - Configurations
+
     override func viewDidLoad() {
         super.viewDidLoad()
         configureScreen()
         configureSearchController()
         configureTableView()
-
-        FirebaseManager.shared.fetchFolderItems { result in
-            switch result {
-            case .success(let folders): print(folders)
-            case .failure(let error): print(error.rawValue)
-            }
-        }
+        fetchFolders()
     }
 
     func configureScreen() {
@@ -70,6 +68,19 @@ class ClosetScreen: UIViewController {
         }
     }
 
+    func fetchFolders() {
+        FirebaseManager.shared.fetchFolderItems { [weak self] result in
+            guard let self = self else { return }
+
+            switch result {
+            case .success(let folders): self.updateTableView(with: folders)
+            case .failure(let error): print(error.rawValue)
+            }
+        }
+    }
+
+    // MARK: - Defined methods
+
     func createFooterView() -> UIView {
         footerContainerView.addSubview(folderCountLabel)
         folderCountLabel.textColor = .systemGray
@@ -79,6 +90,11 @@ class ClosetScreen: UIViewController {
         }
 
         return footerContainerView
+    }
+
+    func updateTableView(with folders: [Folder]) {
+        dataSource.folders = folders
+        tableView.reloadDataWithAnimation()
     }
 
     @objc func plusButtonTapped(_ sender: UIBarButtonItem) {
@@ -136,9 +152,9 @@ extension ClosetScreen: UITableViewDelegate {
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let folder = dataSource.folders[indexPath.row]
         
-        let actionColor = folder.favorite ? UIColor.systemGray : UIColor.systemYellow
-        let actionTitle = folder.favorite ? "Unfavorite" : "Favorite"
-        let actionImage = folder.favorite ? UIImage(systemName: "star") : UIImage(systemName: "star.fill")
+        let actionColor = folder.isFavorite ? UIColor.systemGray : UIColor.systemYellow
+        let actionTitle = folder.isFavorite ? "Unfavorite" : "Favorite"
+        let actionImage = folder.isFavorite ? UIImage(systemName: "star") : UIImage(systemName: "star.fill")
 
         let action = UIContextualAction(style: .normal, title: actionTitle) { [weak self] action, view, completionHandler in
             guard let self = self else { return }

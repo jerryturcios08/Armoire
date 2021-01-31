@@ -10,6 +10,6 @@ import Foundation
 struct Folder: Codable {
     var title: String
     var description: String?
-    var favorite: Bool
-    var clothing = [Clothing]()
+    var isFavorite: Bool
+    var clothes = [Clothing]()
 }

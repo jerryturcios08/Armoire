@@ -30,7 +30,7 @@ class FolderCell: UITableViewCell {
         folderTitleLabel.text = folder.title
         folderDescriptionLabel.text = folder.description ?? "No description."
         favoriteButton.setImage(UIImage(systemName: SFSymbol.starFill), for: .normal)
-        favoriteButton.tintColor = folder.favorite ? UIColor.systemYellow : UIColor.systemGray
+        favoriteButton.tintColor = folder.isFavorite ? UIColor.systemYellow : UIColor.systemGray
     }
 
     private func configureCell() {

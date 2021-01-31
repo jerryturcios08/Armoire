@@ -9,6 +9,7 @@ import UIKit
 
 protocol FolderDataSourceDelegate: class {
     func didUpdateDataSource(_ folders: [Folder])
+    func errorIsPresented(_ error: AMError)
 }
 
 class FolderDataSource: NSObject, UITableViewDataSource {
@@ -33,8 +34,10 @@ class FolderDataSource: NSObject, UITableViewDataSource {
         if editingStyle == .delete {
             let folder = folders[indexPath.row]
 
-            FirebaseManager.shared.deleteFolder(folder) { error in
-                fatalError(error.rawValue)
+            FirebaseManager.shared.deleteFolder(folder) { [weak self] error in
+                guard let self = self else { return }
+                self.delegate?.errorIsPresented(error)
+                return
             }
 
             folders.remove(at: indexPath.row)

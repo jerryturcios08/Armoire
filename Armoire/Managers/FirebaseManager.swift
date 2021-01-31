@@ -19,7 +19,7 @@ class FirebaseManager {
 
         var newFolder = Folder(
             title: folder.title,
-            description: folder.description,
+            description: folder.description ?? nil,
             isFavorite: folder.isFavorite,
             user: userRef
         )
@@ -51,6 +51,24 @@ class FirebaseManager {
             }
 
             completed(.success(folders))
+        }
+    }
+
+    func updateFolder(_ folder: Folder, completion: @escaping (Result<Folder, AMError>) -> Void) {
+        guard let id = folder.id else { return }
+        let folderRef = db.collection("folders").document(id)
+
+        if let description = folder.description {
+            folderRef.updateData([
+                "title": folder.title,
+                "description": description,
+                "isFavorite": folder.isFavorite
+            ])
+        } else {
+            folderRef.updateData([
+                "title": folder.title,
+                "isFavorite": folder.isFavorite
+            ])
         }
     }
 

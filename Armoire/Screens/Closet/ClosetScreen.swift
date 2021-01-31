@@ -74,7 +74,7 @@ class ClosetScreen: UIViewController {
 
             switch result {
             case .success(let folders): self.setTableViewDataSource(with: folders)
-            case .failure(let error): print(error.rawValue)
+            case .failure(let error): self.presentErrorAlert(message: error.rawValue)
             }
         }
     }
@@ -97,7 +97,7 @@ class ClosetScreen: UIViewController {
         tableView.reloadDataWithAnimation()
     }
 
-    func addTableViewData(with folder: Folder) {
+    func addTableViewData(using folder: Folder) {
         dataSource.folders.append(folder)
         tableView.reloadData()
     }
@@ -118,6 +118,10 @@ extension ClosetScreen: FolderDataSourceDelegate {
         let count = folders.count
         folderCountLabel.text = count == 1 ? "1 folder" : "\(count) folders"
     }
+
+    func errorIsPresented(_ error: AMError) {
+        presentErrorAlert(message: error.rawValue)
+    }
 }
 
 // MARK: - Create folder delegate
@@ -128,10 +132,8 @@ extension ClosetScreen: CreateFolderScreenDelegate {
             guard let self = self else { return }
 
             switch result {
-            case .success(let folder):
-                self.addTableViewData(with: folder)
-            case .failure(let error):
-                fatalError(error.localizedDescription)
+            case .success(let folder): self.addTableViewData(using: folder)
+            case .failure(let error): self.presentErrorAlert(message: error.rawValue)
             }
         }
     }
@@ -171,8 +173,18 @@ extension ClosetScreen: UITableViewDelegate {
 
         let action = UIContextualAction(style: .normal, title: actionTitle) { [weak self] action, view, completionHandler in
             guard let self = self else { return }
-            // TODO: Add a way to update the selected folder as favorited
-            print(self.dataSource.folders)
+
+            self.dataSource.folders[indexPath.row].isFavorite.toggle()
+            self.tableView.reloadRows(at: [indexPath], with: .automatic)
+            let updatedFolder = self.dataSource.folders[indexPath.row]
+
+            FirebaseManager.shared.updateFolder(updatedFolder) { result in
+                switch result {
+                case .success(_): break
+                case .failure(let error): self.presentErrorAlert(message: error.rawValue)
+                }
+            }
+
             completionHandler(true)
         }
 

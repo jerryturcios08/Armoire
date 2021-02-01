@@ -13,6 +13,31 @@ class FirebaseManager {
 
     private init() {}
 
+    // MARK: - Clothes collection
+
+    func fetchClothes(for folderId: String, completed: @escaping (Result<[Clothing], AMError>) -> Void) {
+        let folderRef = db.collection("folders").document(folderId)
+        let clothingQuery = db.collection("clothes").whereField("folder", isEqualTo: folderRef)
+
+        clothingQuery.getDocuments { querySnapshot, error in
+            if error != nil {
+                return completed(.failure(.invalidUser))
+            }
+
+            guard let documents = querySnapshot?.documents else {
+                fatalError("Something went wrong.")
+            }
+
+            let clothes = documents.compactMap { document in
+                return try? document.data(as: Clothing.self)
+            }
+
+            completed(.success(clothes))
+        }
+    }
+
+    // MARK: - Folders collection
+
     func addFolder(with folder: Folder, for userId: String, completed: @escaping (Result<Folder, AMError>) -> Void) {
         let userRef = db.collection("users").document(userId)
         let foldersRef = db.collection("folders")
@@ -38,7 +63,7 @@ class FirebaseManager {
         let folderQuery = db.collection("folders").whereField("user", isEqualTo: userRef)
 
         folderQuery.getDocuments { querySnapshot, error in
-            if let _ = error {
+            if error != nil {
                 return completed(.failure(.invalidUser))
             }
 
@@ -75,9 +100,30 @@ class FirebaseManager {
     func deleteFolder(_ folder: Folder, errorHandler: @escaping (AMError) ->Void) {
         guard let id = folder.id else { return }
 
+        fetchClothes(for: id) { [weak self] result in
+            guard let self = self else { return }
+
+            switch result {
+            case .success(let clothes): self.deleteClothesForFolder(clothes, errorHandler: errorHandler)
+            case .failure(let error): fatalError("Error! " + error.localizedDescription)
+            }
+        }
+
         db.collection("folders").document(id).delete { error in
-            if let _ = error {
+            if error != nil {
                 return errorHandler(.invalidUser)
+            }
+        }
+    }
+
+    private func deleteClothesForFolder(_ clothes: [Clothing], errorHandler: @escaping (AMError) -> Void) {
+        for clothing in clothes {
+            guard let id = clothing.id else { break}
+
+            self.db.collection("clothes").document(id).delete { error in
+                if error != nil {
+                    return errorHandler(.nonexistentDocument)
+                }
             }
         }
     }

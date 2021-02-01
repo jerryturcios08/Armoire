@@ -10,14 +10,18 @@ import SwiftUI
 import UIKit
 
 class FolderScreen: UIViewController {
+    // MARK: - Properties
+
     let tableView = UITableView(frame: .zero, style: .grouped)
     let footerContainerView = UIView()
     let itemCountLabel = AMBodyLabel(text: "0 items", fontSize: 18)
 
-    private var folder: String
+    private var folder: Folder
     var dataSource = ClothesDataSource()
 
-    init(folder: String) {
+    // MARK: - Initializers
+
+    init(folder: Folder) {
         self.folder = folder
         super.init(nibName: nil, bundle: nil)
     }
@@ -26,15 +30,28 @@ class FolderScreen: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
+    // MARK: - Configurations
+
     override func viewDidLoad() {
         super.viewDidLoad()
         configureScreen()
         configureSearchController()
         configureTableView()
+
+        guard let id = folder.id else { return }
+
+        FirebaseManager.shared.fetchClothes(for: id) { [weak self] result in
+            guard let self = self else { return }
+
+            switch result {
+            case .success(let clothes): self.setTableViewData(with: clothes)
+            case .failure(let error): self.presentErrorAlert(message: error.rawValue)
+            }
+        }
     }
 
     func configureScreen() {
-        title = folder
+        title = folder.title
         view.backgroundColor = .systemBackground
         navigationItem.largeTitleDisplayMode = .never
 
@@ -73,6 +90,8 @@ class FolderScreen: UIViewController {
         }
     }
 
+    // MARK: - Defined methods
+
     func createFooterView() -> UIView {
         itemCountLabel.textColor = .systemGray
         footerContainerView.addSubview(itemCountLabel)
@@ -82,6 +101,11 @@ class FolderScreen: UIViewController {
         }
 
         return footerContainerView
+    }
+
+    func setTableViewData(with clothes: [Clothing]) {
+        dataSource.clothes = clothes
+        tableView.reloadDataWithAnimation()
     }
 
     @objc func addButtonTapped(_ sender: UIBarButtonItem) {
@@ -154,7 +178,7 @@ extension FolderScreen: UITableViewDelegate {
 struct FolderScreenPreviews: PreviewProvider {
     static var previews: some View {
         UIViewControllerPreview {
-            AMNavigationController(rootViewController: FolderScreen(folder: "Dresses"))
+            AMNavigationController(rootViewController: FolderScreen(folder: Folder.example))
         }
     }
 }

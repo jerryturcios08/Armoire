@@ -74,7 +74,7 @@ class ClosetScreen: UIViewController {
             guard let self = self else { return }
 
             switch result {
-            case .success(let folders): self.setTableViewDataSource(with: folders)
+            case .success(let folders): self.setTableViewData(with: folders)
             case .failure(let error): self.presentErrorAlert(message: error.rawValue)
             }
         }
@@ -93,7 +93,11 @@ class ClosetScreen: UIViewController {
         return footerContainerView
     }
 
-    func setTableViewDataSource(with folders: [Folder]) {
+    func setTableViewData(with folders: [Folder]) {
+        if folders.isEmpty {
+            folderCountLabel.text = "0 folders"
+        }
+
         dataSource.folders = folders
         tableView.hideActivityIndicator()
         tableView.reloadDataWithAnimation()
@@ -146,7 +150,7 @@ extension ClosetScreen: CreateFolderScreenDelegate {
 extension ClosetScreen: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let folder = dataSource.folders[indexPath.row]
-        let folderScreen = FolderScreen(folder: folder.title)
+        let folderScreen = FolderScreen(folder: folder)
         navigationController?.pushViewController(folderScreen, animated: true)
     }
 

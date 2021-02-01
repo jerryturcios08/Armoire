@@ -14,4 +14,12 @@ struct Folder: Codable {
     var description: String?
     var isFavorite: Bool
     var user: DocumentReference?
+
+    static var example: Folder {
+        Folder(
+            title: "Dresses",
+            description: "Collection of formal wear.",
+            isFavorite: true
+        )
+    }
 }

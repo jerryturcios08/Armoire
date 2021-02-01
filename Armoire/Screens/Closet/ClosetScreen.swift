@@ -14,7 +14,7 @@ class ClosetScreen: UIViewController {
 
     let tableView = UITableView(frame: .zero, style: .grouped)
     let footerContainerView = UIView()
-    let folderCountLabel = AMBodyLabel(text: "0 folders", fontSize: 18)
+    let folderCountLabel = AMBodyLabel(text: "Loading folders...", fontSize: 18)
 
     var dataSource = FolderDataSource()
 
@@ -61,6 +61,7 @@ class ClosetScreen: UIViewController {
         tableView.register(FolderCell.self, forCellReuseIdentifier: FolderCell.reuseId)
         tableView.rowHeight = 90
         tableView.separatorStyle = .none
+        tableView.showActivityIndicator()
 
         tableView.snp.makeConstraints { make in
             make.top.bottom.equalTo(view)
@@ -94,6 +95,7 @@ class ClosetScreen: UIViewController {
 
     func setTableViewDataSource(with folders: [Folder]) {
         dataSource.folders = folders
+        tableView.hideActivityIndicator()
         tableView.reloadDataWithAnimation()
     }
 

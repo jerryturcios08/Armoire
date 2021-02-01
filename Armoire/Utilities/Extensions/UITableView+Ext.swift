@@ -15,4 +15,20 @@ extension UITableView {
             })
         }
     }
+
+    func showActivityIndicator() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            let activityView = UIActivityIndicatorView(style: .large)
+            self.backgroundView = activityView
+            activityView.startAnimating()
+        }
+    }
+
+    func hideActivityIndicator() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.backgroundView = nil
+        }
+    }
 }

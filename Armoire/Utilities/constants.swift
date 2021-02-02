@@ -5,7 +5,7 @@
 //  Created by Geraldine Turcios on 1/19/21.
 //
 
-import Foundation
+import UIKit
 
 enum Fonts {
     static let quicksandBold = "Quicksand-Bold"
@@ -13,6 +13,10 @@ enum Fonts {
     static let quicksandRegular = "Quicksand-Regular"
     static let quicksandSemiBold = "Quicksand-SemiBold"
     static let quicksandLight = "Quicksand-Light"
+}
+
+enum Images {
+    static let placeholder = UIImage(named: "Placeholder")
 }
 
 enum SFSymbol {

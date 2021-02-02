@@ -13,7 +13,7 @@ class ClothingCell: UITableViewCell {
 
     let separatorLine = UIView()
 
-    let clothingImageView = UIImageView()
+    let clothingImageView = AMImageView(frame: .zero)
     let favoriteButton = UIButton()
     let clothingTitleLabel = AMPrimaryLabel(text: "Pink Dress", fontSize: 20)
     let clothingBrandLabel = AMBodyLabel(text: "Miss Collection")
@@ -31,6 +31,10 @@ class ClothingCell: UITableViewCell {
     }
 
     func set(clothing: Clothing) {
+        if let imageUrl = clothing.imageUrl {
+            clothingImageView.setImage(fromURL: imageUrl.absoluteString)
+        }
+
         clothingTitleLabel.text = clothing.name
         clothingBrandLabel.text = clothing.brand
         clothingDescriptionLabel.text = clothing.description ?? "No description."
@@ -59,9 +63,6 @@ class ClothingCell: UITableViewCell {
 
     private func configureClothingImageView() {
         addSubview(clothingImageView)
-        clothingImageView.image = UIImage(named: "PinkDress")
-        clothingImageView.contentMode = .scaleAspectFill
-        clothingImageView.clipsToBounds = true
 
         clothingImageView.snp.makeConstraints { make in
             make.left.equalTo(self).offset(16)

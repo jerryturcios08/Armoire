@@ -50,6 +50,8 @@
 		C6AA152D25BCBD0E0095ADA0 /* AMTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6AA152C25BCBD0E0095ADA0 /* AMTextView.swift */; };
 		C6AA153225BCBDF00095ADA0 /* AMSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6AA153125BCBDF00095ADA0 /* AMSwitch.swift */; };
 		C6AA153725BCC58D0095ADA0 /* ClothesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6AA153625BCC58D0095ADA0 /* ClothesDataSource.swift */; };
+		C6AC1BA325CA0A780076777B /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6AC1BA225CA0A780076777B /* NetworkManager.swift */; };
+		C6AC1BA725CA0B190076777B /* AMImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6AC1BA625CA0B190076777B /* AMImageView.swift */; };
 		C6C6D4F125BE15F300E4C0B8 /* UITableView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C6D4F025BE15F300E4C0B8 /* UITableView+Ext.swift */; };
 		C6DFC04325BF5269002BC018 /* CanvasControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6DFC04225BF5269002BC018 /* CanvasControlsView.swift */; };
 		C6DFC04825BF77E6002BC018 /* AMCanvasButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6DFC04725BF77E6002BC018 /* AMCanvasButton.swift */; };
@@ -105,6 +107,8 @@
 		C6AA152C25BCBD0E0095ADA0 /* AMTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AMTextView.swift; sourceTree = "<group>"; };
 		C6AA153125BCBDF00095ADA0 /* AMSwitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AMSwitch.swift; sourceTree = "<group>"; };
 		C6AA153625BCC58D0095ADA0 /* ClothesDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClothesDataSource.swift; sourceTree = "<group>"; };
+		C6AC1BA225CA0A780076777B /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		C6AC1BA625CA0B190076777B /* AMImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AMImageView.swift; sourceTree = "<group>"; };
 		C6C6D4F025BE15F300E4C0B8 /* UITableView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Ext.swift"; sourceTree = "<group>"; };
 		C6DFC04225BF5269002BC018 /* CanvasControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasControlsView.swift; sourceTree = "<group>"; };
 		C6DFC04725BF77E6002BC018 /* AMCanvasButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AMCanvasButton.swift; sourceTree = "<group>"; };
@@ -262,6 +266,7 @@
 			isa = PBXGroup;
 			children = (
 				C648381C25C607C600C8082B /* FirebaseManager.swift */,
+				C6AC1BA225CA0A780076777B /* NetworkManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -277,6 +282,7 @@
 				C658E7E525B79023000F8F50 /* Navigation */,
 				C670A0F725BD31CA000A1405 /* AMBarButtonItem.swift */,
 				C6A9C1D325B7CE8600C22F29 /* AMButton.swift */,
+				C6AC1BA625CA0B190076777B /* AMImageView.swift */,
 				C6AA153125BCBDF00095ADA0 /* AMSwitch.swift */,
 				C63B0B6325B8C2180065F813 /* AMTextField.swift */,
 				C6AA152C25BCBD0E0095ADA0 /* AMTextView.swift */,
@@ -490,6 +496,7 @@
 				C6AA153725BCC58D0095ADA0 /* ClothesDataSource.swift in Sources */,
 				C658E7CE25B78D31000F8F50 /* AMNavigationController.swift in Sources */,
 				C648381425C5E30400C8082B /* Date+Ext.swift in Sources */,
+				C6AC1BA725CA0B190076777B /* AMImageView.swift in Sources */,
 				C68BCD7325C76C3C0002B376 /* UIViewController+Ext.swift in Sources */,
 				C671BE5F25C0D3C7002D1B62 /* AdditionalFieldsView.swift in Sources */,
 				C601983C25B78383004B4203 /* SceneDelegate.swift in Sources */,
@@ -503,6 +510,7 @@
 				C63B0B8C25B931980065F813 /* FolderDataSource.swift in Sources */,
 				C63B0B6F25B8DACD0065F813 /* FolderScreen.swift in Sources */,
 				C6DFC04825BF77E6002BC018 /* AMCanvasButton.swift in Sources */,
+				C6AC1BA325CA0A780076777B /* NetworkManager.swift in Sources */,
 				C648386F25C619F000C8082B /* AMError.swift in Sources */,
 				C658E7C925B7896E000F8F50 /* UIHelper.swift in Sources */,
 				C62E0C4025B8BC110078065A /* AMBodyLabel.swift in Sources */,

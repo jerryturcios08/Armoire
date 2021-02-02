@@ -6,14 +6,73 @@
 //
 
 import FirebaseFirestore
+import FirebaseStorage
+
+extension String {
+    var blobCase: String {
+        self.replacingOccurrences(of: " ", with: "-")
+    }
+}
 
 class FirebaseManager {
     static let shared = FirebaseManager()
+
     private let db = Firestore.firestore()
+    private let storage = Storage.storage()
 
     private init() {}
 
     // MARK: - Clothes collection
+
+    func addClothing(with clothing: Clothing, image: UIImage, folderId: String, completed: @escaping (Result<Clothing, AMError>) -> Void) {
+        let folderRef = db.collection("folders").document(folderId)
+        let clothesRef = db.collection("clothes")
+        let storageRef = storage.reference()
+
+        let clothingImageRef = storageRef.child("images/\(clothing.name.blobCase.lowercased()).jpg")
+
+        guard let data = image.jpegData(compressionQuality: 0.8) else {
+            return completed(.failure(.invalidImage))
+        }
+
+        let uploadTask = clothingImageRef.putData(data, metadata: nil) { metadata, error in
+            clothingImageRef.downloadURL { url, error in
+                if error != nil {
+                    return completed(.failure(.unableToComplete))
+                }
+
+                guard let downloadUrl = url else {
+                    return completed(.failure(.invalidUrl))
+                }
+
+                var newClothing = Clothing(
+                    imageUrl: downloadUrl,
+                    name: clothing.name,
+                    brand: clothing.brand,
+                    quantity: clothing.quantity,
+                    color: clothing.color,
+                    isFavorite: clothing.isFavorite,
+                    description: clothing.description ?? nil,
+                    size: clothing.size ?? nil,
+                    material: clothing.material ?? nil,
+                    url: clothing.url ?? nil,
+                    dateCreated: clothing.dateCreated,
+                    dateUpdated: clothing.dateUpdated,
+                    folder: folderRef
+                )
+
+                do {
+                    let document = try clothesRef.addDocument(from: newClothing)
+                    newClothing.id = document.documentID
+                    completed(.success(newClothing))
+                } catch {
+                    completed(.failure(.invalidData))
+                }
+            }
+        }
+
+        uploadTask.resume()
+    }
 
     func fetchClothes(for folderId: String, completed: @escaping (Result<[Clothing], AMError>) -> Void) {
         let folderRef = db.collection("folders").document(folderId)
@@ -38,7 +97,7 @@ class FirebaseManager {
 
     // MARK: - Folders collection
 
-    func addFolder(with folder: Folder, for userId: String, completed: @escaping (Result<Folder, AMError>) -> Void) {
+    func createFolder(with folder: Folder, for userId: String, completed: @escaping (Result<Folder, AMError>) -> Void) {
         let userRef = db.collection("users").document(userId)
         let foldersRef = db.collection("folders")
 
@@ -52,9 +111,9 @@ class FirebaseManager {
         do {
             let document = try foldersRef.addDocument(from: newFolder)
             newFolder.id = document.documentID
-            return completed(.success(newFolder))
+            completed(.success(newFolder))
         } catch {
-            return completed(.failure(.invalidUser))
+            completed(.failure(.invalidData))
         }
     }
 

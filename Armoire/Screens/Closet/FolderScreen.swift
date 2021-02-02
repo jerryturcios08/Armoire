@@ -14,7 +14,7 @@ class FolderScreen: UIViewController {
 
     let tableView = UITableView(frame: .zero, style: .grouped)
     let footerContainerView = UIView()
-    let itemCountLabel = AMBodyLabel(text: "0 items", fontSize: 18)
+    let itemCountLabel = AMBodyLabel(text: "Loading items...", fontSize: 18)
 
     private var folder: Folder
     var dataSource = ClothesDataSource()
@@ -83,6 +83,7 @@ class FolderScreen: UIViewController {
         tableView.register(ClothingCell.self, forCellReuseIdentifier: ClothingCell.reuseId)
         tableView.rowHeight = 121
         tableView.separatorStyle = .none
+        tableView.showActivityIndicator()
 
         tableView.snp.makeConstraints { make in
             make.top.bottom.equalTo(view)
@@ -104,8 +105,18 @@ class FolderScreen: UIViewController {
     }
 
     func setTableViewData(with clothes: [Clothing]) {
+        if clothes.isEmpty {
+            itemCountLabel.text = "0 items"
+        }
+
         dataSource.clothes = clothes
+        tableView.hideActivityIndicator()
         tableView.reloadDataWithAnimation()
+    }
+
+    func addTableViewData(using clothing: Clothing) {
+        dataSource.clothes.insert(clothing, at: 0)
+        tableView.reloadData()
     }
 
     @objc func addButtonTapped(_ sender: UIBarButtonItem) {
@@ -129,9 +140,17 @@ extension FolderScreen: ClothesDataSourceDelegate {
 // MARK: - Add clothing delegate
 
 extension FolderScreen: AddClothingScreenDelegate {
-    func didAddNewClothing(_ clothing: Clothing) {
-        dataSource.clothes.insert(clothing, at: 0)
-        tableView.reloadData()
+    func didAddNewClothing(_ clothing: Clothing, image: UIImage) {
+        guard let id = folder.id else { return }
+
+        FirebaseManager.shared.addClothing(with: clothing, image: image, folderId: id) { [weak self] result in
+            guard let self = self else { return }
+
+            switch result {
+            case .success(let clothing): self.addTableViewData(using: clothing)
+            case .failure(let error): self.presentErrorAlert(message: error.rawValue)
+            }
+        }
     }
 }
 

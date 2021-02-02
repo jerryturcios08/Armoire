@@ -10,6 +10,7 @@ import FirebaseFirestoreSwift
 
 struct Clothing: Codable {
     @DocumentID var id: String? = nil
+    var imageUrl: URL?
     var name: String
     var brand: String
     var quantity: Int

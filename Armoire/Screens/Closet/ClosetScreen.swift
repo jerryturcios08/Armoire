@@ -134,7 +134,7 @@ extension ClosetScreen: FolderDataSourceDelegate {
 
 extension ClosetScreen: CreateFolderScreenDelegate {
     func didCreateNewFolder(_ folder: Folder) {
-        FirebaseManager.shared.addFolder(with: folder, for: "QePfaCJjbHIOmAZgfgTF") { [weak self] result in
+        FirebaseManager.shared.createFolder(with: folder, for: "QePfaCJjbHIOmAZgfgTF") { [weak self] result in
             guard let self = self else { return }
 
             switch result {
@@ -171,33 +171,7 @@ extension ClosetScreen: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let folder = dataSource.folders[indexPath.row]
-        
-        let actionColor = folder.isFavorite ? UIColor.systemGray : UIColor.systemYellow
-        let actionTitle = folder.isFavorite ? "Unfavorite" : "Favorite"
-        let actionImage = folder.isFavorite ? UIImage(systemName: "star") : UIImage(systemName: "star.fill")
-
-        let action = UIContextualAction(style: .normal, title: actionTitle) { [weak self] action, view, completionHandler in
-            guard let self = self else { return }
-
-            self.dataSource.folders[indexPath.row].isFavorite.toggle()
-            self.tableView.reloadRows(at: [indexPath], with: .automatic)
-            let updatedFolder = self.dataSource.folders[indexPath.row]
-
-            FirebaseManager.shared.updateFolder(updatedFolder) { result in
-                switch result {
-                case .success(_): break
-                case .failure(let error): self.presentErrorAlert(message: error.rawValue)
-                }
-            }
-
-            completionHandler(true)
-        }
-
-        action.backgroundColor = actionColor
-        action.image = actionImage
-
-        return UISwipeActionsConfiguration(actions: [action])
+        return UIHelper.favoriteFolderAction(dataSource: dataSource, tableView: tableView, indexPath: indexPath)
     }
 }
 

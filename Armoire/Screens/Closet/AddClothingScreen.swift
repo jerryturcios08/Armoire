@@ -9,7 +9,7 @@ import SwiftUI
 import UIKit
 
 protocol AddClothingScreenDelegate: class {
-    func didAddNewClothing(_ clothing: Clothing)
+    func didAddNewClothing(_ clothing: Clothing, image: UIImage)
 }
 
 class AddClothingScreen: UIViewController {
@@ -147,7 +147,6 @@ class AddClothingScreen: UIViewController {
             alert.message = "A brand is required when adding a clothing item. Please enter a brand and try again."
             present(alert, animated: true)
         } else {
-            // Additional fields
             let description = additionalFieldsView.clothingDescription
             let size = additionalFieldsView.clothingSize
             let material = additionalFieldsView.clothingMaterial
@@ -165,7 +164,7 @@ class AddClothingScreen: UIViewController {
                 url: url.isEmpty ? nil : url
             )
 
-            delegate?.didAddNewClothing(newClothing)
+            delegate?.didAddNewClothing(newClothing, image: primaryFieldsViewController.clothingImageView.image!)
             dismiss(animated: true)
         }
     }

@@ -135,6 +135,10 @@ extension FolderScreen: ClothesDataSourceDelegate {
         let count = clothing.count
         itemCountLabel.text = count == 1 ? "1 item" : "\(count) items"
     }
+
+    func errorIsPresented(_ error: AMError) {
+        presentErrorAlert(message: error.rawValue)
+    }
 }
 
 // MARK: - Add clothing delegate

@@ -16,4 +16,8 @@ enum AMError: String, Error {
 
     case invalidImage = "An error occurred with the image. Please upload another image and try again."
     case invalidUrl = "An invalid URL was retrieved. Please try again."
+
+    case failedToDeleteFolder = "Unable to delete the folder. Please try again."
+    case failedToDeleteImage = "Unable to delete the image associated to the clothing item. Please try again."
+    case failedToDeleteClothing = "Unable to delete the clothing item. Please try again."
 }

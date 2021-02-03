@@ -9,6 +9,7 @@ import UIKit
 
 protocol ClothesDataSourceDelegate: class {
     func didUpdateDataSource(_ clothing: [Clothing])
+    func errorIsPresented(_ error: AMError)
 }
 
 class ClothesDataSource: NSObject, UITableViewDataSource {
@@ -31,6 +32,14 @@ class ClothesDataSource: NSObject, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
+            let clothing = clothes[indexPath.row]
+
+            FirebaseManager.shared.deleteClothing(clothing) { [weak self] error in
+                guard let self = self else { return }
+                self.delegate?.errorIsPresented(error)
+                return
+            }
+
             clothes.remove(at: indexPath.row)
             delegate?.didUpdateDataSource(clothes)
             tableView.deleteRows(at: [indexPath], with: .automatic)

@@ -80,7 +80,7 @@ class FirebaseManager {
 
         clothingQuery.getDocuments { querySnapshot, error in
             if error != nil {
-                return completed(.failure(.invalidUser))
+                return completed(.failure(.unableToComplete))
             }
 
             guard let documents = querySnapshot?.documents else {
@@ -92,6 +92,35 @@ class FirebaseManager {
             }
 
             completed(.success(clothes))
+        }
+    }
+
+    func deleteClothing(_ clothing: Clothing, errorHandler: @escaping (AMError) ->Void) {
+        guard let id = clothing.id else { return }
+
+        fetchClothes(for: id) { [weak self] result in
+            guard let self = self else { return }
+
+            switch result {
+            case .success(let clothes): self.deleteClothesForFolder(clothes, errorHandler: errorHandler)
+            case .failure(let error): fatalError("Error! " + error.localizedDescription)
+            }
+        }
+
+        let storageRef = storage.reference()
+        let clothingImageRef = storageRef.child("images/\(clothing.name.blobCase.lowercased()).jpg")
+
+        // Deletes the image from firebase storage associated to the clothing item
+        clothingImageRef.delete { error in
+            if error != nil {
+                return errorHandler(.failedToDeleteImage)
+            }
+        }
+
+        db.collection("clothes").document(id).delete { error in
+            if error != nil {
+                return errorHandler(.failedToDeleteClothing)
+            }
         }
     }
 
@@ -123,7 +152,7 @@ class FirebaseManager {
 
         folderQuery.getDocuments { querySnapshot, error in
             if error != nil {
-                return completed(.failure(.invalidUser))
+                return completed(.failure(.unableToComplete))
             }
 
             guard let documents = querySnapshot?.documents else {
@@ -170,7 +199,7 @@ class FirebaseManager {
 
         db.collection("folders").document(id).delete { error in
             if error != nil {
-                return errorHandler(.invalidUser)
+                return errorHandler(.failedToDeleteFolder)
             }
         }
     }

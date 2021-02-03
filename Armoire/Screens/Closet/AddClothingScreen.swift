@@ -165,7 +165,13 @@ class AddClothingScreen: UIViewController {
             )
 
             delegate?.didAddNewClothing(newClothing, image: primaryFieldsViewController.clothingImageView.image!)
-            dismiss(animated: true)
+            startLoadingOverlay()
+
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
+                guard let self = self else { return }
+                self.stopLoadingOverlay()
+                self.dismiss(animated: true)
+            }
         }
     }
 

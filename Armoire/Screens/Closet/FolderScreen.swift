@@ -37,17 +37,7 @@ class FolderScreen: UIViewController {
         configureScreen()
         configureSearchController()
         configureTableView()
-
-        guard let id = folder.id else { return }
-
-        FirebaseManager.shared.fetchClothes(for: id) { [weak self] result in
-            guard let self = self else { return }
-
-            switch result {
-            case .success(let clothes): self.setTableViewData(with: clothes)
-            case .failure(let error): self.presentErrorAlert(message: error.rawValue)
-            }
-        }
+        fetchClothes()
     }
 
     func configureScreen() {
@@ -88,6 +78,19 @@ class FolderScreen: UIViewController {
         tableView.snp.makeConstraints { make in
             make.top.bottom.equalTo(view)
             make.left.right.equalTo(view.safeAreaLayoutGuide)
+        }
+    }
+
+    func fetchClothes() {
+        guard let id = folder.id else { return }
+
+        FirebaseManager.shared.fetchClothes(for: id) { [weak self] result in
+            guard let self = self else { return }
+
+            switch result {
+            case .success(let clothes): self.setTableViewData(with: clothes)
+            case .failure(let error): self.presentErrorAlert(message: error.rawValue)
+            }
         }
     }
 
@@ -184,14 +187,7 @@ extension FolderScreen: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let action = UIContextualAction(style: .normal, title: "Favorite") { action, view, completionHandler in
-            completionHandler(true)
-        }
-
-        action.backgroundColor = .systemYellow
-        action.image = UIImage(systemName: SFSymbol.starFill)
-
-        return UISwipeActionsConfiguration(actions: [action])
+        return UIHelper.favoriteClothingAction(dataSource: dataSource, tableView: tableView, indexPath: indexPath)
     }
 }
 

@@ -95,6 +95,12 @@ class FirebaseManager {
         }
     }
 
+    func toggleFavoriteClothing(_ clothing: Clothing, completion: @escaping (Result<Clothing, AMError>) -> Void) {
+        guard let id = clothing.id else { return }
+        let clothingRef = db.collection("clothes").document(id)
+        clothingRef.updateData(["isFavorite": clothing.isFavorite])
+    }
+
     func deleteClothing(_ clothing: Clothing, errorHandler: @escaping (AMError) ->Void) {
         guard let id = clothing.id else { return }
 

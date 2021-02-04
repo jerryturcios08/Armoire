@@ -39,6 +39,8 @@ class ClothingCell: UITableViewCell {
         clothingBrandLabel.text = clothing.brand
         clothingDescriptionLabel.text = clothing.description ?? "No description."
         clothingQuantityLabel.text = "Quantity: \(clothing.quantity)"
+        favoriteButton.setImage(UIImage(systemName: SFSymbol.starFill), for: .normal)
+        favoriteButton.tintColor = clothing.isFavorite ? UIColor.systemYellow : UIColor.systemGray
 
         if let date = clothing.dateUpdated {
             let dateString = date.convertToDayMonthYearFormat()

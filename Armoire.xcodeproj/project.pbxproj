@@ -276,19 +276,17 @@
 		C658E7BC25B7890B000F8F50 /* Subclasses */ = {
 			isa = PBXGroup;
 			children = (
+				C67E11E225CCB5C100D0E77C /* Buttons */,
 				C6DFC04C25BF78C4002BC018 /* Canvas */,
 				C63B0B7325B8DCD70065F813 /* Cells */,
 				C6716F2125C106AE00D0CFF2 /* Closet */,
 				C63B0B8A25B9317D0065F813 /* Data Sources */,
 				C63B0B5C25B8C1FD0065F813 /* Labels */,
 				C658E7E525B79023000F8F50 /* Navigation */,
-				C670A0F725BD31CA000A1405 /* AMBarButtonItem.swift */,
-				C6A9C1D325B7CE8600C22F29 /* AMButton.swift */,
 				C6AC1BA625CA0B190076777B /* AMImageView.swift */,
 				C6AA153125BCBDF00095ADA0 /* AMSwitch.swift */,
 				C63B0B6325B8C2180065F813 /* AMTextField.swift */,
 				C6AA152C25BCBD0E0095ADA0 /* AMTextView.swift */,
-				C67E11C325CCABE400D0E77C /* AMLinkButton.swift */,
 			);
 			path = Subclasses;
 			sourceTree = "<group>";
@@ -351,6 +349,16 @@
 				C6EAA14725BE1FB900C727B3 /* RunwayScreen.swift */,
 			);
 			path = Runway;
+			sourceTree = "<group>";
+		};
+		C67E11E225CCB5C100D0E77C /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				C670A0F725BD31CA000A1405 /* AMBarButtonItem.swift */,
+				C6A9C1D325B7CE8600C22F29 /* AMButton.swift */,
+				C67E11C325CCABE400D0E77C /* AMLinkButton.swift */,
+			);
+			path = Buttons;
 			sourceTree = "<group>";
 		};
 		C6DFC04C25BF78C4002BC018 /* Canvas */ = {

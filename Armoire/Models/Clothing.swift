@@ -26,15 +26,16 @@ struct Clothing: Codable {
 
     static var example: Clothing {
         Clothing(
+            imageUrl: URL(string: "https://www.theprettydresscompany.com/images/the-pretty-dress-company-tilly-off-the-shoulder-bow-high-low-gown-p267-18042_image.jpg"),
             name: "Pink Dress",
-            brand: "MSK",
+            brand: "Miss Collection",
             quantity: 1,
-            color: "#000000",
+            color: "#FAD9DC",
             isFavorite: true,
             description: "My favorite pink dress.",
             size: "Small",
             material: "Cotton",
-            url: Date().convertToDayMonthYearFormat()
+            url: "https://www.theprettydresscompany.com/shop-c1/dresses-c2/the-pretty-dress-company-tilly-off-the-shoulder-bow-high-low-gown-p267"
         )
     }
 }

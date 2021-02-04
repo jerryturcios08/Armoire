@@ -9,11 +9,15 @@ import SwiftUI
 import UIKit
 
 class ClothingScreen: UIViewController {
-    let clothingColorButton = UIButton()
-    let clothingImageView = UIImageView(image: UIImage(named: "PinkDress"))
+    // MARK: - Properties
+
+    let stackView = UIStackView()
+
+    let clothingImageView = AMImageView(frame: .zero)
     let clothingNameLabel = AMPrimaryLabel(text: "Pink Dress", fontSize: 36)
+    let clothingColorImageView = UIImageView()
     let clothingBrandLabel = AMBodyLabel(text: "Miss Collection", fontSize: 24)
-    let clothingDescriptionLabel = AMBodyLabel(text: "My favorite dress out of everything in my collection. The frabrick feels nice. The color is also nice.")
+    let clothingDescriptionLabel = AMBodyLabel(text: "No description.")
     let clothingQuantityLabel = AMBodyLabel(text: "1 quantity", fontSize: 22)
     let sizeLabel = AMBodyLabel(text: "Size", fontSize: 22)
     let materialLabel = AMBodyLabel(text: "Material", fontSize: 22)
@@ -29,101 +33,146 @@ class ClothingScreen: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
+    // MARK: - Configurations
+
     override func viewDidLoad() {
         super.viewDidLoad()
         configureScreen()
+        configureStackView()
         configureClothingImageView()
-        configureClothingColorButton()
-        configureClothingNameLabel()
+        configureNameAndColorStackView()
         configureClothingBrandLabel()
-        configureClothingDescriptionLabel()
+        configureAboutSection()
+        configureInfoSection()
+        configureUrlSection()
+        stackView.addArrangedSubview(UIView())
     }
 
     func configureScreen() {
         title = clothing.name
         view.backgroundColor = .systemBackground
 
-        let starImage = UIImage(systemName: SFSymbol.starFill)
-        let favoriteButton = UIBarButtonItem(image: starImage, style: .plain, target: self, action: #selector(favoriteButtonTapped))
-        navigationItem.rightBarButtonItem = favoriteButton
+        let starImageView = UIImageView(image: UIImage(systemName: SFSymbol.starFill))
+        starImageView.tintColor = clothing.isFavorite ? .systemYellow : .systemGray
+        starImageView.frame = .init(x: 0, y: 0, width: 30, height: 28)
+        let markAsFavoriteItem = UIBarButtonItem(customView: starImageView)
+        navigationItem.rightBarButtonItem = markAsFavoriteItem
+    }
+
+    func configureStackView() {
+        view.addSubview(stackView)
+        stackView.axis = .vertical
+        stackView.spacing = 10
+        stackView.snp.makeConstraints { $0.size.equalTo(view) }
     }
 
     func configureClothingImageView() {
-        view.addSubview(clothingImageView)
+        stackView.addArrangedSubview(clothingImageView)
+        clothingImageView.setImage(fromURL: clothing.imageUrl!.absoluteString)
         clothingImageView.contentMode = .scaleAspectFill
         clothingImageView.clipsToBounds = true
-
-        clothingImageView.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide)
-            make.left.right.equalTo(view)
-            make.height.equalTo(300)
-        }
+        clothingImageView.snp.makeConstraints { $0.height.equalTo(260) }
     }
 
-    func configureClothingColorButton() {
-        view.addSubview(clothingColorButton)
-        clothingColorButton.addTarget(self, action: #selector(colorButtonTapped), for: .touchUpInside)
-        clothingColorButton.setImage(UIImage(systemName: "circle.fill"), for: .normal)
-        clothingColorButton.tintColor = .systemPink
-
-        clothingColorButton.snp.makeConstraints { make in
-            make.top.equalTo(clothingImageView.snp.bottom).offset(20)
-            make.right.equalTo(view).offset(-20)
-        }
-    }
-
-    func configureClothingNameLabel() {
-        view.addSubview(clothingNameLabel)
+    func configureNameAndColorStackView() {
+        let nameAndColorStackView = UIStackView(arrangedSubviews: [clothingNameLabel, clothingColorImageView])
+        stackView.addArrangedSubview(nameAndColorStackView)
+//        constrainCommonPadding(view: nameAndColorStackView)
         clothingNameLabel.text = clothing.name
 
-        clothingNameLabel.snp.makeConstraints { make in
-            make.centerY.equalTo(clothingColorButton)
-            make.left.equalTo(view).offset(12)
-            make.right.equalTo(clothingColorButton).offset(-8)
-        }
+        let circleImage = UIImage(systemName: "circle.fill")?.withRenderingMode(.alwaysOriginal)
+        clothingColorImageView.image = circleImage
+        clothingColorImageView.tintColor = UIColor(hex: clothing.color)
+        clothingColorImageView.snp.makeConstraints { $0.width.height.equalTo(36) }
     }
 
     func configureClothingBrandLabel() {
-        view.addSubview(clothingBrandLabel)
-
-        clothingBrandLabel.snp.makeConstraints { make in
-            make.top.equalTo(clothingNameLabel.snp.bottom)
-            make.left.equalTo(clothingNameLabel)
-            make.right.equalTo(clothingColorButton)
-        }
+        stackView.addArrangedSubview(clothingBrandLabel)
+        clothingBrandLabel.text = clothing.brand
+//        constrainCommonPadding(view: clothingBrandLabel)
     }
 
-    func configureClothingDescriptionLabel() {
-        view.addSubview(clothingDescriptionLabel)
-        clothingDescriptionLabel.font = UIFont(name: Fonts.quicksandRegular, size: 18)
+    func configureAboutSection() {
+        createSectionHeaderView(for: "About")
+        stackView.addArrangedSubview(clothingDescriptionLabel)
+        clothingDescriptionLabel.text = clothing.description ?? "No description."
+        clothingDescriptionLabel.setFont(with: UIFont(name: Fonts.quicksandRegular, size: 16))
         clothingDescriptionLabel.numberOfLines = 0
+//        constrainCommonPadding(view: clothingDescriptionLabel)
+    }
 
-        clothingDescriptionLabel.snp.makeConstraints { make in
-            make.top.equalTo(clothingBrandLabel.snp.bottom).offset(20)
-            make.left.equalTo(clothingBrandLabel)
-            make.right.equalTo(view).offset(-12)
+    func configureInfoSection() {
+        createSectionHeaderView(for: "Info")
+        createInfoRowStackView(title: "Quantity", value: String(clothing.quantity))
+
+        if let size = clothing.size {
+            createInfoRowStackView(title: "Size", value: size)
+        }
+
+        if let material = clothing.material {
+            createInfoRowStackView(title: "Material", value: material)
         }
     }
 
-    @objc func favoriteButtonTapped(_ sender: UIBarButtonItem) {
-        // Implement
+    func configureUrlSection() {
+        if let url = clothing.url {
+            createSectionHeaderView(for: "URL")
+            let urlButton = AMLinkButton(title: url, onAction: urlButtonTapped)
+            stackView.addArrangedSubview(urlButton)
+//            constrainCommonPadding(view: urlButton)
+        }
     }
 
-    @objc func colorButtonTapped(_ sender: UIButton) {
-        let colorPicker = UIColorPickerViewController()
-        colorPicker.delegate = self
-        colorPicker.selectedColor = clothingColorButton.tintColor
-        colorPicker.supportsAlpha = false
-        present(colorPicker, animated: true)
+    // MARK: - Defined methods
+
+    private func createSectionHeaderView(for title: String) {
+        let sectionHeaderStackView = UIStackView()
+        sectionHeaderStackView.axis = .vertical
+        sectionHeaderStackView.spacing = 4
+        stackView.addArrangedSubview(sectionHeaderStackView)
+
+        sectionHeaderStackView.addArrangedSubview(createSeparatorLine())
+
+        let sectionHeaderLabel = AMBodyLabel(text: title)
+        sectionHeaderStackView.addArrangedSubview(sectionHeaderLabel)
+        sectionHeaderLabel.textColor = .systemGray
+
+        sectionHeaderStackView.addArrangedSubview(createSeparatorLine())
+    }
+
+    private func createSeparatorLine() -> UIView {
+        let separatorLine = UIView()
+        separatorLine.backgroundColor = .systemGray4
+        separatorLine.snp.makeConstraints { $0.height.equalTo(1) }
+        return separatorLine
+    }
+
+    private func createInfoRowStackView(title: String, value: String) {
+        let titleLabel = AMBodyLabel(text: title, fontSize: 16)
+        let valueLabel = AMBodyLabel(text: value)
+        valueLabel.setFont(with: UIFont(name: Fonts.quicksandRegular, size: 16))
+
+        let infoRowStackView = UIStackView(arrangedSubviews: [titleLabel, UIView(), valueLabel])
+        stackView.addArrangedSubview(infoRowStackView)
+        infoRowStackView.spacing = 8
+//        constrainCommonPadding(view: infoRowStackView)
+    }
+
+    private func constrainCommonPadding(view: UIView) {
+        view.snp.makeConstraints { make in
+            make.left.equalTo(stackView).offset(12)
+            make.right.equalTo(stackView).offset(-12)
+        }
+    }
+
+    @objc private func urlButtonTapped(_ sender: UIButton) {
+        guard let urlString = clothing.url else { return }
+        guard let url = URL(string: urlString) else { return }
+        presentSafariViewController(with: url)
     }
 }
 
-extension ClothingScreen: UIColorPickerViewControllerDelegate {
-    func colorPickerViewControllerDidSelectColor(_ viewController: UIColorPickerViewController) {
-        let color = viewController.selectedColor
-        clothingColorButton.tintColor = color
-    }
-}
+// MARK: - Previews
 
 #if DEBUG
 struct ClothingScreenPreviews: PreviewProvider {

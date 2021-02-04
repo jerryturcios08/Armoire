@@ -141,7 +141,7 @@ class ClothingCell: UITableViewCell {
         }
     }
 
-    private func addSeparatorLine(){
+    private func addSeparatorLine() {
         addSubview(separatorLine)
         separatorLine.backgroundColor = .systemGray6
 

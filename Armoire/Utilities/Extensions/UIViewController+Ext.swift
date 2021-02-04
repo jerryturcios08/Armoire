@@ -5,6 +5,7 @@
 //  Created by Geraldine Turcios on 1/31/21.
 //
 
+import SafariServices
 import UIKit
 
 fileprivate struct ProgressDialog {
@@ -26,6 +27,12 @@ extension UIViewController {
         alert.view.tintColor = UIColor.accentColor
         alert.addAction(UIAlertAction(title: "Okay", style: .default))
         present(alert, animated: true)
+    }
+
+    func presentSafariViewController(with url: URL) {
+        let safariViewController = SFSafariViewController(url: url)
+        safariViewController.preferredControlTintColor = UIColor.accentColor
+        present(safariViewController, animated: true)
     }
 
     func startLoadingOverlay() {

@@ -1,15 +1,15 @@
 //
-//  AMButton.swift
+//  AMLinkButton.swift
 //  Armoire
 //
-//  Created by Geraldine Turcios on 1/19/21.
+//  Created by Geraldine Turcios on 2/4/21.
 //
 
 import SwiftUI
 import UIKit
 
-class AMButton: UIButton {
-    private var onAction: ((AMButton) -> Void)?
+class AMLinkButton: UIButton {
+    private var onAction: ((AMLinkButton) -> Void)?
 
     override var isHighlighted: Bool {
         didSet {
@@ -17,7 +17,7 @@ class AMButton: UIButton {
         }
     }
 
-    convenience init(title: String, onAction: ((AMButton) -> Void)? = nil) {
+    convenience init(title: String, onAction: ((AMLinkButton) -> Void)? = nil) {
         self.init(frame: .zero)
         self.onAction = onAction
         setTitle(title, for: .normal)
@@ -35,16 +35,14 @@ class AMButton: UIButton {
     private func configureButton() {
         addTarget(self, action: #selector(handleTapped), for: .touchUpInside)
 
-        let customFont = UIFont(name: Fonts.quicksandSemiBold, size: 20)!
+        let customFont = UIFont(name: Fonts.quicksandMedium, size: 16)!
         titleLabel?.font = UIFontMetrics.default.scaledFont(for: customFont)
+        titleLabel?.lineBreakMode = .byTruncatingTail
         titleLabel?.adjustsFontForContentSizeCategory = true
-
-        backgroundColor = UIColor.accentColor
-        setTitleColor(.systemBackground, for: .normal)
-        layer.cornerRadius = 10
+        setTitleColor(UIColor.systemTeal, for: .normal)
     }
 
-    func setOnAction(_ onAction: @escaping (AMButton) -> Void) {
+    func setOnAction(_ onAction: @escaping (AMLinkButton) -> Void) {
         self.onAction = onAction
     }
 
@@ -54,17 +52,17 @@ class AMButton: UIButton {
 }
 
 #if DEBUG
-struct AMButtonPreviews: PreviewProvider {
+struct AMLinkButtonPreviews: PreviewProvider {
     static var previews: some View {
         Group {
-            UIViewPreview { AMButton(title: "Click Me") }
-            UIViewPreview { AMButton(title: "Click Me") }
+            UIViewPreview { AMLinkButton(title: "https://www.google.com") }
+                .frame(width: 200, height: 30)
+            UIViewPreview { AMLinkButton(title: "https://www.google.com") }
                 .preferredColorScheme(.dark)
-                .environment(\.sizeCategory, .accessibilityLarge)
+                .environment(\.sizeCategory, .accessibilityMedium)
+                .frame(width: 310, height: 44)
         }
         .previewLayout(.sizeThatFits)
-        .frame(minWidth: 0, maxWidth: .infinity, maxHeight: 50)
-        .padding()
     }
 }
 #endif

@@ -24,7 +24,7 @@ class AMTextView: UITextView {
     private func configureTextView() {
         text = placeholder
         textColor = .systemGray2
-        font = UIFont(name: Fonts.quicksandRegular, size: 20)
+        font = UIFont(name: Fonts.quicksandMedium, size: 18)
         backgroundColor = .systemGray6
         tintColor = UIColor.accentColor
         layer.cornerRadius = 10

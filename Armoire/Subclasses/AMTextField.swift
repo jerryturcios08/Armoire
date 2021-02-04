@@ -31,8 +31,7 @@ class AMTextField: UITextField {
         layer.cornerRadius = 10
         tintColor = UIColor.accentColor
 
-        let customFont = UIFont(name: Fonts.quicksandMedium, size: 18)!
-        font = UIFontMetrics.default.scaledFont(for: customFont)
+        font = UIFont(name: Fonts.quicksandMedium, size: 18)
         adjustsFontSizeToFitWidth = true
         minimumFontSize = 12
 

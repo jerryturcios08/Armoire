@@ -190,14 +190,6 @@ class AddClothingScreen: UIViewController {
     }
 }
 
-// MARK: - Color picker delegate
-
-extension AddClothingScreen: UIColorPickerViewControllerDelegate {
-    func colorPickerViewControllerDidSelectColor(_ viewController: UIColorPickerViewController) {
-        clothingColor = viewController.selectedColor
-    }
-}
-
 // MARK: - Previews
 
 #if DEBUG

@@ -104,15 +104,6 @@ class FirebaseManager {
     func deleteClothing(_ clothing: Clothing, errorHandler: @escaping (AMError) ->Void) {
         guard let id = clothing.id else { return }
 
-        fetchClothes(for: id) { [weak self] result in
-            guard let self = self else { return }
-
-            switch result {
-            case .success(let clothes): self.deleteClothesForFolder(clothes, errorHandler: errorHandler)
-            case .failure(let error): fatalError("Error! " + error.localizedDescription)
-            }
-        }
-
         let storageRef = storage.reference()
         let clothingImageRef = storageRef.child("images/\(clothing.name.blobCase.lowercased()).jpg")
 
@@ -192,18 +183,19 @@ class FirebaseManager {
     }
 
     func deleteFolder(_ folder: Folder, errorHandler: @escaping (AMError) ->Void) {
-        guard let id = folder.id else { return }
+        guard let folderId = folder.id else { return }
 
-        fetchClothes(for: id) { [weak self] result in
+        // Deletes all clothes along with their images in storage for the given folder
+        fetchClothes(for: folderId) { [weak self] result in
             guard let self = self else { return }
 
             switch result {
             case .success(let clothes): self.deleteClothesForFolder(clothes, errorHandler: errorHandler)
-            case .failure(let error): fatalError("Error! " + error.localizedDescription)
+            case .failure(let error): errorHandler(error)
             }
         }
 
-        db.collection("folders").document(id).delete { error in
+        db.collection("folders").document(folderId).delete { error in
             if error != nil {
                 return errorHandler(.failedToDeleteFolder)
             }
@@ -212,11 +204,26 @@ class FirebaseManager {
 
     private func deleteClothesForFolder(_ clothes: [Clothing], errorHandler: @escaping (AMError) -> Void) {
         for clothing in clothes {
-            guard let id = clothing.id else { break}
+            guard let id = clothing.id else { break }
+            let clothingRef = db.collection("clothes").document(id)
 
-            self.db.collection("clothes").document(id).delete { error in
+            clothingRef.getDocument { document, error in
                 if error != nil {
+                    return errorHandler(.unableToComplete)
+                }
+
+                guard let document = document, document.exists else {
                     return errorHandler(.nonexistentDocument)
+                }
+
+                do {
+                    guard let clothing = try document.data(as: Clothing.self) else { return }
+
+                    self.deleteClothing(clothing) { error in
+                        errorHandler(.failedToDeleteClothing)
+                    }
+                } catch {
+                    return errorHandler(.invalidData)
                 }
             }
         }

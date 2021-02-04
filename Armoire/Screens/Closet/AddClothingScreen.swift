@@ -21,7 +21,7 @@ class AddClothingScreen: UIViewController {
     let clothingQuantityLabel = AMBodyLabel(text: "Quantity: 0", fontSize: 20)
     let clothingQuantityStepper = UIStepper()
     let clothingColorLabel = AMBodyLabel(text: "Color", fontSize: 20)
-    let clothingColorButton = UIButton()
+    let clothingColorWell = UIColorWell()
     let favoriteLabel = AMBodyLabel(text: "Mark as favorite?", fontSize: 20)
     let favoriteSwitch = AMSwitch(accentColor: UIColor.accentColor)
 
@@ -34,12 +34,7 @@ class AddClothingScreen: UIViewController {
         }
     }
 
-    var clothingColor = UIColor.systemPink {
-        didSet {
-            clothingColorButton.tintColor = clothingColor
-        }
-    }
-
+    var clothingColor: UIColor? = nil
     var markedAsFavorite = false
 
     weak var delegate: AddClothingScreenDelegate?
@@ -101,25 +96,19 @@ class AddClothingScreen: UIViewController {
     func configureClothingQuantityViews() {
         let quantityStackView = UIStackView(arrangedSubviews: [clothingQuantityLabel, clothingQuantityStepper])
         contentStackView.addArrangedSubview(quantityStackView)
-        quantityStackView.spacing = 8
         clothingQuantityStepper.addTarget(self, action: #selector(handleStepperValueChanged), for: .primaryActionTriggered)
     }
 
     func configureClothingColorViews() {
-        let colorStackView = UIStackView(arrangedSubviews: [clothingColorLabel, clothingColorButton])
+        let colorStackView = UIStackView(arrangedSubviews: [clothingColorLabel, clothingColorWell])
         contentStackView.addArrangedSubview(colorStackView)
-        colorStackView.distribution = .equalSpacing
-        colorStackView.spacing = 8
-
-        clothingColorButton.addTarget(self, action: #selector(colorButtonTapped), for: .touchUpInside)
-        clothingColorButton.setImage(UIImage(systemName: "circle.fill"), for: .normal)
-        clothingColorButton.tintColor = .systemPink
+        clothingColorWell.addTarget(self, action: #selector(handleColorValueChanged), for: .primaryActionTriggered)
+        clothingColorWell.supportsAlpha = false
     }
 
     func configureFavoriteViews() {
         let favoriteStackView = UIStackView(arrangedSubviews: [favoriteLabel, favoriteSwitch])
         contentStackView.addArrangedSubview(favoriteStackView)
-        favoriteStackView.spacing = 8
         favoriteSwitch.setOnAction(handleFavoriteSwitchToggle)
     }
 
@@ -134,11 +123,19 @@ class AddClothingScreen: UIViewController {
         alert.view.tintColor = UIColor.accentColor
         alert.addAction(UIAlertAction(title: "Okay", style: .default))
 
-        if primaryFieldsViewController.clothingImageView.image == nil {
-            // Shows an error if an image was not added
+        guard let image = primaryFieldsViewController.clothingImageView.image else {
             alert.message = "An image is required when adding a clothing item. Please add an image and try again."
             present(alert, animated: true)
-        } else if primaryFieldsViewController.clothingName.isEmpty {
+            return
+        }
+
+        guard let color = clothingColor else {
+            alert.message = "A color was not selected for this clothing item. Please choose one from the color well and try again."
+            present(alert, animated: true)
+            return
+        }
+
+        if primaryFieldsViewController.clothingName.isEmpty {
             // Shows an error if a name was not entered
             alert.message = "A title is required when adding a clothing item. Please enter a title and try again."
             present(alert, animated: true)
@@ -156,7 +153,7 @@ class AddClothingScreen: UIViewController {
                 name: primaryFieldsViewController.clothingName,
                 brand: primaryFieldsViewController.clothingBrand,
                 quantity: clothingQuantity,
-                color: clothingColor.toHexString(),
+                color: color.toHexString(),
                 isFavorite: markedAsFavorite,
                 description: description.isEmpty ? nil : description,
                 size: size.isEmpty ? nil : size,
@@ -164,7 +161,7 @@ class AddClothingScreen: UIViewController {
                 url: url.isEmpty ? nil : url
             )
 
-            delegate?.didAddNewClothing(newClothing, image: primaryFieldsViewController.clothingImageView.image!)
+            delegate?.didAddNewClothing(newClothing, image: image)
             startLoadingOverlay()
 
             DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
@@ -179,12 +176,9 @@ class AddClothingScreen: UIViewController {
         clothingQuantity = Int(sender.value)
     }
 
-    @objc func colorButtonTapped(_ sender: UIButton) {
-        let colorPicker = UIColorPickerViewController()
-        colorPicker.delegate = self
-        colorPicker.selectedColor = clothingColorButton.tintColor
-        colorPicker.supportsAlpha = false
-        present(colorPicker, animated: true)
+    @objc func handleColorValueChanged(_ sender: UIColorWell) {
+        guard let color = sender.selectedColor else { return }
+        clothingColor = color
     }
 
     func handleFavoriteSwitchToggle(_ sender: UISwitch) {

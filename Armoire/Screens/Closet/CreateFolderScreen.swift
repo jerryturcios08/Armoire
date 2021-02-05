@@ -169,6 +169,7 @@ struct CreateFolderScreenPreviews: PreviewProvider {
         UIViewControllerPreview {
             AMNavigationController(rootViewController: CreateFolderScreen())
         }
+        .ignoresSafeArea(.all, edges: .all)
     }
 }
 #endif

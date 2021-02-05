@@ -17,14 +17,18 @@ class ClothingScreen: UIViewController {
 
     let clothingImageView = AMImageView(frame: .zero)
     let clothingNameLabel = AMPrimaryLabel(text: "Pink Dress", fontSize: 36)
-    let clothingColorImageView = UIImageView()
+    let clothingColorWell = UIColorWell()
     let clothingBrandLabel = AMBodyLabel(text: "Miss Collection", fontSize: 24)
     let clothingDescriptionLabel = AMBodyLabel(text: "No description.")
     let clothingQuantityLabel = AMBodyLabel(text: "1 quantity", fontSize: 22)
     let sizeLabel = AMBodyLabel(text: "Size", fontSize: 22)
     let materialLabel = AMBodyLabel(text: "Material", fontSize: 22)
+    let dateCreatedLabel = AMBodyLabel(text: "Created on 1/1/2020", fontSize: 16)
+    let dateUpdatedLabel = AMBodyLabel(text: "Updated on 1/1/2020", fontSize: 16)
 
     private var clothing: Clothing
+
+    // MARK: - Initializers
 
     init(clothing: Clothing) {
         self.clothing = clothing
@@ -47,7 +51,7 @@ class ClothingScreen: UIViewController {
         configureAboutSection()
         configureInfoSection()
         configureUrlSection()
-        contentStackView.addArrangedSubview(UIView())
+        configureDateSection()
     }
 
     func configureScreen() {
@@ -72,14 +76,15 @@ class ClothingScreen: UIViewController {
         scrollView.addSubview(stackView)
         stackView.axis = .vertical
         stackView.spacing = 10
-        stackView.snp.makeConstraints { $0.size.equalTo(view) }
+        stackView.isLayoutMarginsRelativeArrangement = true
+        stackView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 16, trailing: 0)
 
         stackView.snp.makeConstraints { make in
             make.edges.equalTo(scrollView).inset(UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
             make.width.equalTo(scrollView)
         }
 
-        // Add the views for the screen stack view
+        // Add the views to the stack view that make up the screen
         stackView.addArrangedSubviews(clothingImageView, contentStackView)
         contentStackView.axis = .vertical
         contentStackView.spacing = 10
@@ -93,12 +98,10 @@ class ClothingScreen: UIViewController {
     }
 
     func configureNameAndColorStackView() {
-        contentStackView.addArrangedSubview(hStackWithPadding(clothingNameLabel, clothingColorImageView))
+        contentStackView.addArrangedSubview(hStackWithPadding(clothingNameLabel, clothingColorWell))
         clothingNameLabel.text = clothing.name
-        let circleImage = UIImage(systemName: "circle.fill")?.withRenderingMode(.alwaysOriginal)
-        clothingColorImageView.image = circleImage
-        clothingColorImageView.tintColor = UIColor(hex: clothing.color)
-        clothingColorImageView.snp.makeConstraints { $0.width.height.equalTo(36) }
+        clothingColorWell.selectedColor = UIColor(hex: clothing.color) ?? .systemRed
+        clothingColorWell.isEnabled = false
     }
 
     func configureClothingBrandLabel() {
@@ -111,7 +114,7 @@ class ClothingScreen: UIViewController {
         contentStackView.addArrangedSubview(hStackWithPadding(clothingDescriptionLabel))
         clothingDescriptionLabel.text = clothing.description ?? "No description."
         clothingDescriptionLabel.setFont(with: UIFont(name: Fonts.quicksandRegular, size: 16))
-        clothingDescriptionLabel.numberOfLines = 0
+        clothingDescriptionLabel.numberOfLines = 10
     }
 
     func configureInfoSection() {
@@ -132,6 +135,19 @@ class ClothingScreen: UIViewController {
             createSectionHeaderView(for: "URL")
             let urlButton = AMLinkButton(title: url, onAction: urlButtonTapped)
             contentStackView.addArrangedSubview(hStackWithPadding(urlButton))
+        }
+    }
+
+    func configureDateSection() {
+        dateCreatedLabel.text = "Created on \(clothing.dateCreated.convertToDayMonthYearFormat())"
+        dateCreatedLabel.textColor = .systemGray
+
+        if let dateUpdated = clothing.dateUpdated {
+            dateUpdatedLabel.text = "Updated on \(dateUpdated.convertToDayMonthYearFormat())"
+            dateUpdatedLabel.textColor = .systemGray
+            contentStackView.addArrangedSubview(hStackWithPadding(dateCreatedLabel, dateUpdatedLabel))
+        } else {
+            contentStackView.addArrangedSubview(hStackWithPadding(dateCreatedLabel))
         }
     }
 
@@ -198,6 +214,7 @@ struct ClothingScreenPreviews: PreviewProvider {
         UIViewControllerPreview {
             AMNavigationController(rootViewController: ClothingScreen(clothing: Clothing.example))
         }
+        .ignoresSafeArea(.all, edges: .all)
     }
 }
 #endif

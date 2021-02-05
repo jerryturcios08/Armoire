@@ -11,7 +11,9 @@ import UIKit
 class ClothingScreen: UIViewController {
     // MARK: - Properties
 
+    let scrollView = UIScrollView()
     let stackView = UIStackView()
+    let contentStackView = UIStackView()
 
     let clothingImageView = AMImageView(frame: .zero)
     let clothingNameLabel = AMPrimaryLabel(text: "Pink Dress", fontSize: 36)
@@ -38,14 +40,14 @@ class ClothingScreen: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureScreen()
-        configureStackView()
+        configureStackViews()
         configureClothingImageView()
         configureNameAndColorStackView()
         configureClothingBrandLabel()
         configureAboutSection()
         configureInfoSection()
         configureUrlSection()
-        stackView.addArrangedSubview(UIView())
+        contentStackView.addArrangedSubview(UIView())
     }
 
     func configureScreen() {
@@ -59,27 +61,40 @@ class ClothingScreen: UIViewController {
         navigationItem.rightBarButtonItem = markAsFavoriteItem
     }
 
-    func configureStackView() {
-        view.addSubview(stackView)
+    func configureStackViews() {
+        view.addSubview(scrollView)
+
+        scrollView.snp.makeConstraints { make in
+            make.top.bottom.equalTo(view)
+            make.left.right.equalTo(view.safeAreaLayoutGuide)
+        }
+
+        scrollView.addSubview(stackView)
         stackView.axis = .vertical
         stackView.spacing = 10
         stackView.snp.makeConstraints { $0.size.equalTo(view) }
+
+        stackView.snp.makeConstraints { make in
+            make.edges.equalTo(scrollView).inset(UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
+            make.width.equalTo(scrollView)
+        }
+
+        // Add the views for the screen stack view
+        stackView.addArrangedSubviews(clothingImageView, contentStackView)
+        contentStackView.axis = .vertical
+        contentStackView.spacing = 10
     }
 
     func configureClothingImageView() {
-        stackView.addArrangedSubview(clothingImageView)
         clothingImageView.setImage(fromURL: clothing.imageUrl!.absoluteString)
         clothingImageView.contentMode = .scaleAspectFill
         clothingImageView.clipsToBounds = true
-        clothingImageView.snp.makeConstraints { $0.height.equalTo(260) }
+        clothingImageView.snp.makeConstraints { $0.height.equalTo(280) }
     }
 
     func configureNameAndColorStackView() {
-        let nameAndColorStackView = UIStackView(arrangedSubviews: [clothingNameLabel, clothingColorImageView])
-        stackView.addArrangedSubview(nameAndColorStackView)
-//        constrainCommonPadding(view: nameAndColorStackView)
+        contentStackView.addArrangedSubview(hStackWithPadding(clothingNameLabel, clothingColorImageView))
         clothingNameLabel.text = clothing.name
-
         let circleImage = UIImage(systemName: "circle.fill")?.withRenderingMode(.alwaysOriginal)
         clothingColorImageView.image = circleImage
         clothingColorImageView.tintColor = UIColor(hex: clothing.color)
@@ -87,18 +102,16 @@ class ClothingScreen: UIViewController {
     }
 
     func configureClothingBrandLabel() {
-        stackView.addArrangedSubview(clothingBrandLabel)
+        contentStackView.addArrangedSubview(hStackWithPadding(clothingBrandLabel))
         clothingBrandLabel.text = clothing.brand
-//        constrainCommonPadding(view: clothingBrandLabel)
     }
 
     func configureAboutSection() {
         createSectionHeaderView(for: "About")
-        stackView.addArrangedSubview(clothingDescriptionLabel)
+        contentStackView.addArrangedSubview(hStackWithPadding(clothingDescriptionLabel))
         clothingDescriptionLabel.text = clothing.description ?? "No description."
         clothingDescriptionLabel.setFont(with: UIFont(name: Fonts.quicksandRegular, size: 16))
         clothingDescriptionLabel.numberOfLines = 0
-//        constrainCommonPadding(view: clothingDescriptionLabel)
     }
 
     func configureInfoSection() {
@@ -118,8 +131,7 @@ class ClothingScreen: UIViewController {
         if let url = clothing.url {
             createSectionHeaderView(for: "URL")
             let urlButton = AMLinkButton(title: url, onAction: urlButtonTapped)
-            stackView.addArrangedSubview(urlButton)
-//            constrainCommonPadding(view: urlButton)
+            contentStackView.addArrangedSubview(hStackWithPadding(urlButton))
         }
     }
 
@@ -129,12 +141,12 @@ class ClothingScreen: UIViewController {
         let sectionHeaderStackView = UIStackView()
         sectionHeaderStackView.axis = .vertical
         sectionHeaderStackView.spacing = 4
-        stackView.addArrangedSubview(sectionHeaderStackView)
+        contentStackView.addArrangedSubview(sectionHeaderStackView)
 
         sectionHeaderStackView.addArrangedSubview(createSeparatorLine())
 
         let sectionHeaderLabel = AMBodyLabel(text: title)
-        sectionHeaderStackView.addArrangedSubview(sectionHeaderLabel)
+        sectionHeaderStackView.addArrangedSubview(hStackWithPadding(sectionHeaderLabel))
         sectionHeaderLabel.textColor = .systemGray
 
         sectionHeaderStackView.addArrangedSubview(createSeparatorLine())
@@ -153,16 +165,22 @@ class ClothingScreen: UIViewController {
         valueLabel.setFont(with: UIFont(name: Fonts.quicksandRegular, size: 16))
 
         let infoRowStackView = UIStackView(arrangedSubviews: [titleLabel, UIView(), valueLabel])
-        stackView.addArrangedSubview(infoRowStackView)
+        contentStackView.addArrangedSubview(hStackWithPadding(infoRowStackView))
         infoRowStackView.spacing = 8
-//        constrainCommonPadding(view: infoRowStackView)
     }
 
-    private func constrainCommonPadding(view: UIView) {
-        view.snp.makeConstraints { make in
-            make.left.equalTo(stackView).offset(12)
-            make.right.equalTo(stackView).offset(-12)
-        }
+    private func hStackWithPadding(_ views: UIView...) -> UIStackView {
+        let hStack = UIStackView()
+        hStack.addArrangedSubview(getPaddingSpacerView())
+        views.forEach { hStack.addArrangedSubview($0) }
+        hStack.addArrangedSubview(getPaddingSpacerView())
+        return hStack
+    }
+
+    private func getPaddingSpacerView() -> UIView {
+        let paddingSpacer = UIView()
+        paddingSpacer.snp.makeConstraints { $0.width.equalTo(12) }
+        return paddingSpacer
     }
 
     @objc private func urlButtonTapped(_ sender: UIButton) {

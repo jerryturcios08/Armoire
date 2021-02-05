@@ -53,6 +53,7 @@
 		C6AA153725BCC58D0095ADA0 /* ClothesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6AA153625BCC58D0095ADA0 /* ClothesDataSource.swift */; };
 		C6AC1BA325CA0A780076777B /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6AC1BA225CA0A780076777B /* NetworkManager.swift */; };
 		C6AC1BA725CA0B190076777B /* AMImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6AC1BA625CA0B190076777B /* AMImageView.swift */; };
+		C6C13A9425CCD70E007CE2E1 /* ImageViewerScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C13A9325CCD70E007CE2E1 /* ImageViewerScreen.swift */; };
 		C6C6D4F125BE15F300E4C0B8 /* UITableView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C6D4F025BE15F300E4C0B8 /* UITableView+Ext.swift */; };
 		C6DFC04325BF5269002BC018 /* CanvasControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6DFC04225BF5269002BC018 /* CanvasControlsView.swift */; };
 		C6DFC04825BF77E6002BC018 /* AMCanvasButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6DFC04725BF77E6002BC018 /* AMCanvasButton.swift */; };
@@ -111,6 +112,7 @@
 		C6AA153625BCC58D0095ADA0 /* ClothesDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClothesDataSource.swift; sourceTree = "<group>"; };
 		C6AC1BA225CA0A780076777B /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		C6AC1BA625CA0B190076777B /* AMImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AMImageView.swift; sourceTree = "<group>"; };
+		C6C13A9325CCD70E007CE2E1 /* ImageViewerScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewerScreen.swift; sourceTree = "<group>"; };
 		C6C6D4F025BE15F300E4C0B8 /* UITableView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Ext.swift"; sourceTree = "<group>"; };
 		C6DFC04225BF5269002BC018 /* CanvasControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasControlsView.swift; sourceTree = "<group>"; };
 		C6DFC04725BF77E6002BC018 /* AMCanvasButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AMCanvasButton.swift; sourceTree = "<group>"; };
@@ -329,6 +331,7 @@
 				C63B0B8125B8F08E0065F813 /* ClothingScreen.swift */,
 				C67459A125B93D0C003C87D1 /* CreateFolderScreen.swift */,
 				C63B0B6E25B8DACD0065F813 /* FolderScreen.swift */,
+				C6C13A9325CCD70E007CE2E1 /* ImageViewerScreen.swift */,
 			);
 			path = Closet;
 			sourceTree = "<group>";
@@ -537,6 +540,7 @@
 				C60E9F8125BA358C00D97991 /* Folder.swift in Sources */,
 				C658E7E125B7901F000F8F50 /* AMTabBarController.swift in Sources */,
 				C63B0B8C25B931980065F813 /* FolderDataSource.swift in Sources */,
+				C6C13A9425CCD70E007CE2E1 /* ImageViewerScreen.swift in Sources */,
 				C63B0B6F25B8DACD0065F813 /* FolderScreen.swift in Sources */,
 				C6DFC04825BF77E6002BC018 /* AMCanvasButton.swift in Sources */,
 				C6AC1BA325CA0A780076777B /* NetworkManager.swift in Sources */,

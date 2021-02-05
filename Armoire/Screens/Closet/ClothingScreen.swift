@@ -92,6 +92,8 @@ class ClothingScreen: UIViewController {
 
     func configureClothingImageView() {
         clothingImageView.setImage(fromURL: clothing.imageUrl!.absoluteString)
+        clothingImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(clothingImageTapped)))
+        clothingImageView.isUserInteractionEnabled = true
         clothingImageView.contentMode = .scaleAspectFill
         clothingImageView.clipsToBounds = true
         clothingImageView.snp.makeConstraints { $0.height.equalTo(280) }
@@ -197,6 +199,13 @@ class ClothingScreen: UIViewController {
         let paddingSpacer = UIView()
         paddingSpacer.snp.makeConstraints { $0.width.equalTo(12) }
         return paddingSpacer
+    }
+
+    @objc private func clothingImageTapped(_ sender: UITapGestureRecognizer) {
+        let imageViewerScreen = ImageViewerScreen(imageName: clothing.name, image: clothingImageView.image)
+        imageViewerScreen.modalPresentationStyle = .overFullScreen
+        imageViewerScreen.modalTransitionStyle = .crossDissolve
+        present(imageViewerScreen, animated: true)
     }
 
     @objc private func urlButtonTapped(_ sender: UIButton) {

@@ -13,6 +13,9 @@ protocol CreateFolderScreenDelegate: class {
 }
 
 class CreateFolderScreen: UIViewController {
+    let scrollView = UIScrollView()
+    let contentStackView = UIStackView()
+
     let folderTitleTextField = AMTextField(placeholder: "Title")
     let folderDescriptionTextView = AMTextView(placeholder: "Enter description")
     let favoriteLabel = AMBodyLabel(text: "Mark as favorite?", fontSize: 20)
@@ -27,14 +30,20 @@ class CreateFolderScreen: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureScreen()
+        configureObservers()
         configureGestures()
+        configureStackView()
         configureFolderTitleTextField()
         configureFolderDescriptionTextView()
-        configureFavoriteSwitch()
-        configureFavoriteLabel()
+        configureFavoriteViews()
     }
 
     // MARK: - Configurations
+
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
 
     func configureScreen() {
         title = "Create Folder"
@@ -47,56 +56,58 @@ class CreateFolderScreen: UIViewController {
         navigationItem.rightBarButtonItem = doneButton
     }
 
+    func configureObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+
     func configureGestures() {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tapGestureRecognizer)
     }
 
+    func configureStackView() {
+        view.addSubview(scrollView)
+
+        scrollView.snp.makeConstraints { make in
+            make.top.bottom.equalTo(view)
+            make.left.right.equalTo(view.safeAreaLayoutGuide)
+        }
+
+        scrollView.addSubview(contentStackView)
+        contentStackView.axis = .vertical
+        contentStackView.spacing = 20
+        contentStackView.isLayoutMarginsRelativeArrangement = true
+        contentStackView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 12, leading: 16, bottom: 16, trailing: 20)
+
+        contentStackView.snp.makeConstraints { make in
+            make.edges.equalTo(scrollView).inset(UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
+            make.width.equalTo(scrollView)
+        }
+    }
+
     func configureFolderTitleTextField() {
-        view.addSubview(folderTitleTextField)
+        contentStackView.addArrangedSubview(folderTitleTextField)
         folderTitleTextField.setOnEdit(handleFolderTitleTextFieldEdit)
         folderTitleTextField.autocapitalizationType = .sentences
         folderTitleTextField.delegate = self
         folderTitleTextField.returnKeyType = .next
         folderTitleTextField.tag = 0
-
-        folderTitleTextField.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(12)
-            make.left.equalTo(view.safeAreaLayoutGuide).offset(16)
-            make.right.equalTo(view.safeAreaLayoutGuide).offset(-16)
-            make.height.equalTo(50)
+        folderTitleTextField.snp.makeConstraints { $0.height.equalTo(50)
         }
     }
 
     func configureFolderDescriptionTextView() {
-        view.addSubview(folderDescriptionTextView)
+        contentStackView.addArrangedSubview(folderDescriptionTextView)
         folderDescriptionTextView.delegate = self
         folderDescriptionTextView.isScrollEnabled = false
-
-        folderDescriptionTextView.snp.makeConstraints { make in
-            make.top.equalTo(folderTitleTextField.snp.bottom).offset(20)
-            make.left.right.equalTo(folderTitleTextField)
-        }
     }
 
-    func configureFavoriteSwitch() {
-        view.addSubview(favoriteSwitch)
+    func configureFavoriteViews() {
+        let favoriteStackView = UIStackView(arrangedSubviews: [favoriteLabel, favoriteSwitch])
+        contentStackView.addArrangedSubview(favoriteStackView)
+        favoriteStackView.spacing = 8
         favoriteSwitch.setOnAction(handleFavoriteSwitchToggle)
-
-        favoriteSwitch.snp.makeConstraints { make in
-            make.top.equalTo(folderDescriptionTextView.snp.bottom).offset(20)
-            make.right.equalTo(folderDescriptionTextView)
-        }
-    }
-
-    func configureFavoriteLabel() {
-        view.addSubview(favoriteLabel)
-
-        favoriteLabel.snp.makeConstraints { make in
-            make.centerY.equalTo(favoriteSwitch)
-            make.left.equalTo(folderDescriptionTextView)
-            make.right.equalTo(favoriteSwitch).offset(-8)
-        }
     }
 
     // MARK: - Defined methods
@@ -130,6 +141,23 @@ class CreateFolderScreen: UIViewController {
 
     @objc func dismissKeyboard(_ sender: UITapGestureRecognizer) {
         view.endEditing(true)
+    }
+
+    @objc func keyboardWillShow(notification:NSNotification) {
+        guard let userInfo = notification.userInfo else { return }
+        guard let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
+
+        var keyboardSize = keyboardFrame.cgRectValue
+        keyboardSize = view.convert(keyboardSize, from: nil)
+
+        var contentInset = scrollView.contentInset
+        contentInset.bottom = keyboardSize.size.height + 20
+        scrollView.contentInset = contentInset
+    }
+
+    @objc func keyboardWillHide(notification:NSNotification) {
+        let contentInset = UIEdgeInsets.zero
+        scrollView.contentInset = contentInset
     }
 }
 

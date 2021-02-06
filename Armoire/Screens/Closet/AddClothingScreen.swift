@@ -78,11 +78,6 @@ class AddClothingScreen: UIViewController {
         view.addGestureRecognizer(tapGestureRecognizer)
     }
 
-    func configurePrimaryFieldsViewController() {
-        addChild(primaryFieldsViewController)
-        contentStackView.addArrangedSubview(primaryFieldsViewController.view)
-    }
-
     func configureStackView() {
         view.addSubview(scrollView)
 
@@ -101,6 +96,11 @@ class AddClothingScreen: UIViewController {
             make.edges.equalTo(scrollView).inset(UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
             make.width.equalTo(scrollView)
         }
+    }
+
+    func configurePrimaryFieldsViewController() {
+        addChild(primaryFieldsViewController)
+        contentStackView.addArrangedSubview(primaryFieldsViewController.view)
     }
 
     func configureSecondaryFields() {

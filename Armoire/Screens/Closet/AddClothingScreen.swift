@@ -41,16 +41,19 @@ class AddClothingScreen: UIViewController {
 
     // MARK: - Configurations
 
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         configureScreen()
+        configureObservers()
         configureGestures()
         configureStackView()
-
-        configureClothingQuantityViews()
-        configureClothingColorViews()
-        configureFavoriteViews()
-
+        configurePrimaryFieldsViewController()
+        configureSecondaryFields()
         contentStackView.addArrangedSubview(additionalFieldsView)
     }
 
@@ -63,14 +66,21 @@ class AddClothingScreen: UIViewController {
 
         let doneButton = AMBarButtonItem(title: "Done", font: Fonts.quicksandBold, onAction: doneButtonTapped)
         navigationItem.rightBarButtonItem = doneButton
+    }
 
-        addChild(primaryFieldsViewController)
-        contentStackView.addArrangedSubview(primaryFieldsViewController.view)
+    func configureObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 
     func configureGestures() {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tapGestureRecognizer)
+    }
+
+    func configurePrimaryFieldsViewController() {
+        addChild(primaryFieldsViewController)
+        contentStackView.addArrangedSubview(primaryFieldsViewController.view)
     }
 
     func configureStackView() {
@@ -91,6 +101,12 @@ class AddClothingScreen: UIViewController {
             make.edges.equalTo(scrollView).inset(UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
             make.width.equalTo(scrollView)
         }
+    }
+
+    func configureSecondaryFields() {
+        configureClothingQuantityViews()
+        configureClothingColorViews()
+        configureFavoriteViews()
     }
 
     func configureClothingQuantityViews() {
@@ -187,6 +203,23 @@ class AddClothingScreen: UIViewController {
 
     @objc func dismissKeyboard(_ sender: UITapGestureRecognizer) {
         view.endEditing(true)
+    }
+
+    @objc func keyboardWillShow(notification:NSNotification) {
+        guard let userInfo = notification.userInfo else { return }
+        guard let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
+
+        var keyboardSize = keyboardFrame.cgRectValue
+        keyboardSize = view.convert(keyboardSize, from: nil)
+
+        var contentInset = scrollView.contentInset
+        contentInset.bottom = keyboardSize.size.height + 20
+        scrollView.contentInset = contentInset
+    }
+
+    @objc func keyboardWillHide(notification:NSNotification) {
+        let contentInset = UIEdgeInsets.zero
+        scrollView.contentInset = contentInset
     }
 }
 

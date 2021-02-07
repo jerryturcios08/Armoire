@@ -14,40 +14,67 @@ protocol FolderDataSourceDelegate: class {
 
 class FolderDataSource: NSObject, UITableViewDataSource {
     var folders = [Folder]()
+    var filteredFolders = [Folder]()
     weak var delegate: FolderDataSourceDelegate?
 
     var searchText = ""
 
-    var filteredFolders: [Folder] {
-        folders.filter { searchText.isEmpty ? true : $0.title.lowercased().contains(searchText.lowercased()) }
+    // MARK: "Getter" methods
+
+    func getItem(for indexPath: IndexPath) -> Folder {
+        searchText.isEmpty ? folders[indexPath.row] : filteredFolders[indexPath.row]
     }
 
+    func getItems() -> [Folder] {
+        searchText.isEmpty ? folders : filteredFolders
+    }
+
+    // MARK: Search methods
+
+    func filterObjectsWithSearchText() {
+        filteredFolders = folders.filter {
+            searchText.isEmpty ? true : $0.title.lowercased().contains(searchText.lowercased())
+        }
+    }
+
+    // MARK: - Table view methods
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        delegate?.didUpdateDataSource(searchText.isEmpty ? folders : filteredFolders)
-        return searchText.isEmpty ? folders.count : filteredFolders.count
+        delegate?.didUpdateDataSource(getItems())
+        return getItems().count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: FolderCell.reuseId, for: indexPath) as! FolderCell
-        let folder = searchText.isEmpty ? folders[indexPath.row] : filteredFolders[indexPath.row]
 
-        cell.set(folder: folder)
-        delegate?.didUpdateDataSource(searchText.isEmpty ? folders : filteredFolders)
+        cell.set(folder: getItem(for: indexPath))
+        delegate?.didUpdateDataSource(getItems())
 
         return cell
     }
 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let folder = searchText.isEmpty ? folders[indexPath.row] : filteredFolders[indexPath.row]
+            let selectedFolder = getItem(for: indexPath)
 
-            FirebaseManager.shared.deleteFolder(folder) { [weak self] error in
+            FirebaseManager.shared.deleteFolder(selectedFolder) { [weak self] error in
                 guard let self = self else { return }
                 self.delegate?.errorIsPresented(error)
                 return
             }
 
-            folders.remove(at: indexPath.row)
+            if searchText.isEmpty {
+                folders.remove(at: indexPath.row)
+            } else {
+                filteredFolders.remove(at: indexPath.row)
+
+                for (index, folder) in folders.enumerated() {
+                    if selectedFolder.id == folder.id {
+                        folders.remove(at: index)
+                    }
+                }
+            }
+
             delegate?.didUpdateDataSource(folders)
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }

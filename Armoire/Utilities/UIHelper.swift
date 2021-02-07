@@ -9,16 +9,21 @@ import UIKit
 
 enum UIHelper {
     static func favoriteClothingAction(dataSource: ClothesDataSource, tableView: UITableView, indexPath: IndexPath) -> UISwipeActionsConfiguration {
-        let clothing = dataSource.clothes[indexPath.row]
+        let clothing = dataSource.getItem(for: indexPath)
 
         let actionColor = clothing.isFavorite ? UIColor.systemGray : UIColor.systemYellow
         let actionTitle = clothing.isFavorite ? "Unfavorite" : "Favorite"
         let actionImage = clothing.isFavorite ? UIImage(systemName: "star") : UIImage(systemName: "star.fill")
 
         let action = UIContextualAction(style: .normal, title: actionTitle) { action, view, completionHandler in
-            dataSource.clothes[indexPath.row].isFavorite.toggle()
+            if dataSource.searchText.isEmpty {
+                dataSource.clothes[indexPath.row].isFavorite.toggle()
+            } else {
+                dataSource.filteredClothes[indexPath.row].isFavorite.toggle()
+            }
+
             tableView.reloadRows(at: [indexPath], with: .automatic)
-            let updatedClothing = dataSource.clothes[indexPath.row]
+            let updatedClothing = dataSource.getItem(for: indexPath)
 
             FirebaseManager.shared.toggleFavoriteClothing(updatedClothing) { result in
                 switch result {
@@ -37,16 +42,21 @@ enum UIHelper {
     }
 
     static func favoriteFolderAction(dataSource: FolderDataSource, tableView: UITableView, indexPath: IndexPath) -> UISwipeActionsConfiguration {
-        let folder = dataSource.folders[indexPath.row]
+        let folder = dataSource.getItem(for: indexPath)
 
         let actionColor = folder.isFavorite ? UIColor.systemGray : UIColor.systemYellow
         let actionTitle = folder.isFavorite ? "Unfavorite" : "Favorite"
         let actionImage = folder.isFavorite ? UIImage(systemName: "star") : UIImage(systemName: "star.fill")
 
         let action = UIContextualAction(style: .normal, title: actionTitle) { action, view, completionHandler in
-            dataSource.folders[indexPath.row].isFavorite.toggle()
+            if dataSource.searchText.isEmpty {
+                dataSource.folders[indexPath.row].isFavorite.toggle()
+            } else {
+                dataSource.filteredFolders[indexPath.row].isFavorite.toggle()
+            }
+
             tableView.reloadRows(at: [indexPath], with: .automatic)
-            let updatedFolder = dataSource.folders[indexPath.row]
+            let updatedFolder = dataSource.getItem(for: indexPath)
 
             FirebaseManager.shared.updateFolder(updatedFolder) { result in
                 switch result {

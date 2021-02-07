@@ -14,7 +14,7 @@ class ClothingCell: UITableViewCell {
     let separatorLine = UIView()
 
     let clothingImageView = AMImageView(frame: .zero)
-    let favoriteButton = UIButton()
+    let favoriteImageView = UIImageView(image: UIImage(systemName: SFSymbol.starFill)?.withRenderingMode(.alwaysOriginal))
     let clothingTitleLabel = AMPrimaryLabel(text: "Pink Dress", fontSize: 20)
     let clothingBrandLabel = AMBodyLabel(text: "Miss Collection")
     let clothingDescriptionLabel = AMBodyLabel(text: "My favorite dress out of everything in my collection. The fabric feels nice.")
@@ -39,8 +39,11 @@ class ClothingCell: UITableViewCell {
         clothingBrandLabel.text = clothing.brand
         clothingDescriptionLabel.text = clothing.description ?? "No description."
         clothingQuantityLabel.text = "Quantity: \(clothing.quantity)"
-        favoriteButton.setImage(UIImage(systemName: SFSymbol.starFill), for: .normal)
-        favoriteButton.tintColor = clothing.isFavorite ? UIColor.systemYellow : UIColor.systemGray
+
+        if let starImage = UIImage(systemName: SFSymbol.starFill) {
+            let starColor = clothing.isFavorite ? UIColor.systemYellow : UIColor.systemGray
+            favoriteImageView.image = starImage.withRenderingMode(.alwaysOriginal).withTintColor(starColor)
+        }
 
         if let date = clothing.dateUpdated {
             let dateString = date.convertToDayMonthYearFormat()
@@ -55,7 +58,7 @@ class ClothingCell: UITableViewCell {
         selectionStyle = .none
         addSeparatorLine()
         configureClothingImageView()
-        configureFavoriteButton()
+        configureFavoriteImageView()
         configureClothingTitleLabel()
         configureClothingBrandLabel()
         configureClothingDescriptionLabel()
@@ -74,12 +77,10 @@ class ClothingCell: UITableViewCell {
         }
     }
 
-    private func configureFavoriteButton() {
-        addSubview(favoriteButton)
-        favoriteButton.setImage(UIImage(systemName: SFSymbol.starFill), for: .normal)
-        favoriteButton.tintColor = .systemYellow
+    private func configureFavoriteImageView() {
+        addSubview(favoriteImageView)
 
-        favoriteButton.snp.makeConstraints { make in
+        favoriteImageView.snp.makeConstraints { make in
             make.top.equalTo(clothingImageView)
             make.right.equalTo(self).offset(-16)
             make.width.equalTo(22)
@@ -91,8 +92,8 @@ class ClothingCell: UITableViewCell {
 
         clothingTitleLabel.snp.makeConstraints { make in
             make.left.equalTo(clothingImageView.snp.right).offset(10)
-            make.right.equalTo(favoriteButton.snp.left)
-            make.centerY.equalTo(favoriteButton)
+            make.right.equalTo(favoriteImageView.snp.left)
+            make.centerY.equalTo(favoriteImageView)
         }
     }
 
@@ -103,7 +104,7 @@ class ClothingCell: UITableViewCell {
         clothingBrandLabel.snp.makeConstraints { make in
             make.top.equalTo(clothingTitleLabel.snp.bottom).offset(6)
             make.left.equalTo(clothingTitleLabel)
-            make.right.equalTo(favoriteButton.snp.right)
+            make.right.equalTo(favoriteImageView)
         }
     }
 
@@ -115,7 +116,7 @@ class ClothingCell: UITableViewCell {
         clothingDescriptionLabel.snp.makeConstraints { make in
             make.top.equalTo(clothingBrandLabel.snp.bottom).offset(6)
             make.left.equalTo(clothingBrandLabel)
-            make.right.equalTo(favoriteButton)
+            make.right.equalTo(favoriteImageView)
         }
     }
 
@@ -136,7 +137,7 @@ class ClothingCell: UITableViewCell {
         clothingDateLabel.textColor = .secondaryLabel
 
         clothingDateLabel.snp.makeConstraints { make in
-            make.right.equalTo(favoriteButton)
+            make.right.equalTo(favoriteImageView)
             make.bottom.equalTo(clothingImageView)
         }
     }

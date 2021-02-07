@@ -12,7 +12,7 @@ class FolderCell: UITableViewCell {
     static let reuseId = "FolderCell"
 
     let folderImageView = UIImageView(image: UIImage(systemName: SFSymbol.folder))
-    let favoriteButton = UIButton()
+    let favoriteImageView = UIImageView(image: UIImage(systemName: SFSymbol.starFill)?.withRenderingMode(.alwaysOriginal))
     let folderTitleLabel = AMPrimaryLabel(text: "Dresses", fontSize: 20)
     let folderDescriptionLabel = AMBodyLabel(text: "My favorite dress out of everything in my collection. The fabric feels nice.", fontSize: 11)
     let folderQuantityLabel = AMBodyLabel(text: "4 items")
@@ -29,14 +29,17 @@ class FolderCell: UITableViewCell {
     func set(folder: Folder) {
         folderTitleLabel.text = folder.title
         folderDescriptionLabel.text = folder.description ?? "No description."
-        favoriteButton.setImage(UIImage(systemName: SFSymbol.starFill), for: .normal)
-        favoriteButton.tintColor = folder.isFavorite ? UIColor.systemYellow : UIColor.systemGray
+
+        if let starImage = UIImage(systemName: SFSymbol.starFill) {
+            let starColor = folder.isFavorite ? UIColor.systemYellow : UIColor.systemGray
+            favoriteImageView.image = starImage.withRenderingMode(.alwaysOriginal).withTintColor(starColor)
+        }
     }
 
     private func configureCell() {
         selectionStyle = .none
         configureFolderImageView()
-        configureFavoriteButton()
+        configureFavoriteImageView()
         configureFolderTitleLabel()
         configureFolderDescriptionLabel()
         configureFolderQuantityLabel()
@@ -54,12 +57,10 @@ class FolderCell: UITableViewCell {
         }
     }
 
-    private func configureFavoriteButton() {
-        addSubview(favoriteButton)
-        favoriteButton.setImage(UIImage(systemName: SFSymbol.starFill), for: .normal)
-        favoriteButton.tintColor = .systemYellow
+    private func configureFavoriteImageView() {
+        addSubview(favoriteImageView)
 
-        favoriteButton.snp.makeConstraints { make in
+        favoriteImageView.snp.makeConstraints { make in
             make.top.equalTo(folderImageView)
             make.right.equalTo(self).offset(-16)
             make.width.equalTo(22)
@@ -72,8 +73,8 @@ class FolderCell: UITableViewCell {
         folderTitleLabel.snp.makeConstraints { make in
             make.top.equalTo(self)
             make.left.equalTo(folderImageView.snp.right).offset(10)
-            make.right.equalTo(favoriteButton)
-            make.centerY.equalTo(favoriteButton)
+            make.right.equalTo(favoriteImageView)
+            make.centerY.equalTo(favoriteImageView)
         }
     }
 
@@ -84,7 +85,7 @@ class FolderCell: UITableViewCell {
         folderDescriptionLabel.snp.makeConstraints { make in
             make.top.equalTo(folderTitleLabel.snp.bottom)
             make.left.equalTo(folderTitleLabel)
-            make.right.equalTo(favoriteButton)
+            make.right.equalTo(favoriteImageView)
         }
     }
 
@@ -95,7 +96,7 @@ class FolderCell: UITableViewCell {
 
         folderQuantityLabel.snp.makeConstraints { make in
             make.left.equalTo(folderDescriptionLabel)
-            make.right.equalTo(favoriteButton)
+            make.right.equalTo(favoriteImageView)
             make.bottom.equalTo(self).offset(-8)
         }
     }

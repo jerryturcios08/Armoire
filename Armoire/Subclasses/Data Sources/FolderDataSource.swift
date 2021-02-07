@@ -19,7 +19,7 @@ class FolderDataSource: NSObject, UITableViewDataSource {
 
     var searchText = ""
 
-    // MARK: "Getter" methods
+    // MARK: - "Getter" methods
 
     func getItem(for indexPath: IndexPath) -> Folder {
         searchText.isEmpty ? folders[indexPath.row] : filteredFolders[indexPath.row]
@@ -29,11 +29,21 @@ class FolderDataSource: NSObject, UITableViewDataSource {
         searchText.isEmpty ? folders : filteredFolders
     }
 
-    // MARK: Search methods
+    // MARK: - Utility methods
 
-    func filterObjectsWithSearchText() {
+    func filterFoldersWithSearchText() {
         filteredFolders = folders.filter {
             searchText.isEmpty ? true : $0.title.lowercased().contains(searchText.lowercased())
+        }
+    }
+
+    func sortFolders() {
+        folders = folders.sorted { firstItem, secondItem in
+            if firstItem.isFavorite == secondItem.isFavorite {
+                return firstItem.title < secondItem.title
+            }
+
+            return firstItem.isFavorite && !secondItem.isFavorite
         }
     }
 

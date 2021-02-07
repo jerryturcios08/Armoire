@@ -199,7 +199,7 @@ extension FolderScreen: UITableViewDelegate {
 extension FolderScreen: UISearchControllerDelegate {
     func didDismissSearchController(_ searchController: UISearchController) {
         dataSource.searchText = ""
-        dataSource.filterObjectsWithSearchText()
+        dataSource.filterClothesWithSearchText()
         tableView.reloadDataWithAnimation()
     }
 }
@@ -208,7 +208,7 @@ extension FolderScreen: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         guard let searchText = searchController.searchBar.text else { return }
         dataSource.searchText = searchText
-        dataSource.filterObjectsWithSearchText()
+        dataSource.filterClothesWithSearchText()
         tableView.reloadDataWithAnimation()
     }
 }

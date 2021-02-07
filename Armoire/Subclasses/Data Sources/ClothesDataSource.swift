@@ -19,7 +19,7 @@ class ClothesDataSource: NSObject, UITableViewDataSource {
 
     var searchText = ""
 
-    // MARK: "Getter" methods
+    // MARK: - "Getter" methods
 
     func getItem(for indexPath: IndexPath) -> Clothing {
         searchText.isEmpty ? clothes[indexPath.row] : filteredClothes[indexPath.row]
@@ -29,15 +29,25 @@ class ClothesDataSource: NSObject, UITableViewDataSource {
         searchText.isEmpty ? clothes : filteredClothes
     }
 
-    // MARK: - Search methods
+    // MARK: - Utility methods
 
-    func filterObjectsWithSearchText() {
+    func filterClothesWithSearchText() {
         filteredClothes = clothes.filter {
             searchText.isEmpty ? true :
                 $0.name.lowercased().contains(searchText.lowercased()) ||
                 $0.brand.lowercased().contains(searchText.lowercased()) ||
                 $0.size?.lowercased().contains(searchText.lowercased()) != nil ||
                 $0.material?.lowercased().contains(searchText.lowercased()) != nil
+        }
+    }
+
+    func sortClothes() {
+        clothes = clothes.sorted { firstItem, secondItem in
+            if firstItem.isFavorite == secondItem.isFavorite {
+                return firstItem.name < secondItem.name
+            }
+
+            return firstItem.isFavorite && !secondItem.isFavorite
         }
     }
 

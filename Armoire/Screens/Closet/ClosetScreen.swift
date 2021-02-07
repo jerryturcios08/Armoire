@@ -124,6 +124,7 @@ class ClosetScreen: UIViewController {
 
 extension ClosetScreen: FolderDataSourceDelegate {
     func didUpdateDataSource(_ folders: [Folder]) {
+        dataSource.sortFolders()
         let count = folders.count
         folderCountLabel.text = count == 1 ? "1 folder" : "\(count) folders"
     }
@@ -183,7 +184,7 @@ extension ClosetScreen: UITableViewDelegate {
 extension ClosetScreen: UISearchControllerDelegate {
     func didDismissSearchController(_ searchController: UISearchController) {
         dataSource.searchText = ""
-        dataSource.filterObjectsWithSearchText()
+        dataSource.filterFoldersWithSearchText()
         tableView.reloadDataWithAnimation()
     }
 }
@@ -192,7 +193,7 @@ extension ClosetScreen: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         guard let searchText = searchController.searchBar.text else { return }
         dataSource.searchText = searchText
-        dataSource.filterObjectsWithSearchText()
+        dataSource.filterFoldersWithSearchText()
         tableView.reloadDataWithAnimation()
     }
 }

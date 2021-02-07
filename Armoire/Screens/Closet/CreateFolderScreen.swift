@@ -132,7 +132,7 @@ class CreateFolderScreen: UIViewController {
             alert.addAction(UIAlertAction(title: "Okay", style: .default))
             present(alert, animated: true)
         } else {
-            let description = folderDescription.isEmpty ? nil : folderDescription
+            let description = folderDescription.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? nil : folderDescription
             let folder = Folder(title: folderTitle, description: description, isFavorite: markedAsFavorite)
             delegate?.didCreateNewFolder(folder)
             dismiss(animated: true)

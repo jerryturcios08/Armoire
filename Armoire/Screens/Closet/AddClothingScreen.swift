@@ -171,7 +171,7 @@ class AddClothingScreen: UIViewController {
                 quantity: clothingQuantity,
                 color: color.toHexString(),
                 isFavorite: markedAsFavorite,
-                description: description.isEmpty ? nil : description,
+                description: description.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? nil : description,
                 size: size.isEmpty ? nil : size,
                 material: material.isEmpty ? nil : material,
                 url: url.isEmpty ? nil : url

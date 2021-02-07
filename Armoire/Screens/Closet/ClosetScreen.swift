@@ -46,7 +46,10 @@ class ClosetScreen: UIViewController {
         let textAttributes: [NSAttributedString.Key: Any] = [.font: customFont]
         let attributedString = NSAttributedString(string: "Search", attributes: textAttributes)
 
+        searchController.delegate = self
+        searchController.searchResultsUpdater = self
         searchController.searchBar.searchTextField.attributedPlaceholder = attributedString
+        searchController.searchBar.tintColor = UIColor.accentColor
         searchController.obscuresBackgroundDuringPresentation = false
 
         navigationItem.searchController = searchController
@@ -149,7 +152,7 @@ extension ClosetScreen: CreateFolderScreenDelegate {
 
 extension ClosetScreen: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let folder = dataSource.folders[indexPath.row]
+        let folder = dataSource.searchText.isEmpty ? dataSource.folders[indexPath.row] : dataSource.filteredFolders[indexPath.row]
         let folderScreen = FolderScreen(folder: folder)
         navigationController?.pushViewController(folderScreen, animated: true)
     }
@@ -172,6 +175,23 @@ extension ClosetScreen: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         return UIHelper.favoriteFolderAction(dataSource: dataSource, tableView: tableView, indexPath: indexPath)
+    }
+}
+
+// MARK: - Search controller
+
+extension ClosetScreen: UISearchControllerDelegate {
+    func didDismissSearchController(_ searchController: UISearchController) {
+        dataSource.searchText = ""
+        tableView.reloadDataWithAnimation()
+    }
+}
+
+extension ClosetScreen: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let searchText = searchController.searchBar.text else { return }
+        dataSource.searchText = searchText
+        tableView.reloadDataWithAnimation()
     }
 }
 

@@ -16,23 +16,36 @@ class ClothesDataSource: NSObject, UITableViewDataSource {
     var clothes = [Clothing]()
     weak var delegate: ClothesDataSourceDelegate?
 
+    var searchText = ""
+
+    var filteredClothes: [Clothing] {
+        clothes.filter {
+            searchText.isEmpty ? true :
+                $0.name.lowercased().contains(searchText.lowercased()) ||
+                $0.brand.lowercased().contains(searchText.lowercased()) ||
+                $0.size?.lowercased().contains(searchText.lowercased()) != nil ||
+                $0.material?.lowercased().contains(searchText.lowercased()) != nil
+        }
+    }
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return clothes.count
+        delegate?.didUpdateDataSource(searchText.isEmpty ? clothes : filteredClothes)
+        return searchText.isEmpty ? clothes.count : filteredClothes.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ClothingCell.reuseId, for: indexPath) as! ClothingCell
-        let clothing = clothes[indexPath.row]
+        let clothing = searchText.isEmpty ? clothes[indexPath.row] : filteredClothes[indexPath.row]
 
         cell.set(clothing: clothing)
-        delegate?.didUpdateDataSource(clothes)
+        delegate?.didUpdateDataSource(searchText.isEmpty ? clothes : filteredClothes)
 
         return cell
     }
 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let clothing = clothes[indexPath.row]
+            let clothing = searchText.isEmpty ? clothes[indexPath.row] : filteredClothes[indexPath.row]
 
             FirebaseManager.shared.deleteClothing(clothing) { [weak self] error in
                 guard let self = self else { return }

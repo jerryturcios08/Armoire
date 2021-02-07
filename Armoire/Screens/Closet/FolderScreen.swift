@@ -58,7 +58,10 @@ class FolderScreen: UIViewController {
         let textAttributes: [NSAttributedString.Key: Any] = [.font: customFont]
         let attributedString = NSAttributedString(string: "Search", attributes: textAttributes)
 
+        searchController.delegate = self
+        searchController.searchResultsUpdater = self
         searchController.searchBar.searchTextField.attributedPlaceholder = attributedString
+        searchController.searchBar.tintColor = UIColor.accentColor
         searchController.obscuresBackgroundDuringPresentation = false
 
         navigationItem.searchController = searchController
@@ -165,7 +168,7 @@ extension FolderScreen: AddClothingScreenDelegate {
 
 extension FolderScreen: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let clothing = dataSource.clothes[indexPath.row]
+        let clothing = dataSource.searchText.isEmpty ? dataSource.clothes[indexPath.row] : dataSource.filteredClothes[indexPath.row]
         let clothingScreen = ClothingScreen(clothing: clothing)
         navigationController?.pushViewController(clothingScreen, animated: true)
     }
@@ -188,6 +191,23 @@ extension FolderScreen: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         return UIHelper.favoriteClothingAction(dataSource: dataSource, tableView: tableView, indexPath: indexPath)
+    }
+}
+
+// MARK: - Search controller
+
+extension FolderScreen: UISearchControllerDelegate {
+    func didDismissSearchController(_ searchController: UISearchController) {
+        dataSource.searchText = ""
+        tableView.reloadDataWithAnimation()
+    }
+}
+
+extension FolderScreen: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let searchText = searchController.searchBar.text else { return }
+        dataSource.searchText = searchText
+        tableView.reloadDataWithAnimation()
     }
 }
 

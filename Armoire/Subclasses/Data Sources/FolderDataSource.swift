@@ -16,23 +16,30 @@ class FolderDataSource: NSObject, UITableViewDataSource {
     var folders = [Folder]()
     weak var delegate: FolderDataSourceDelegate?
 
+    var searchText = ""
+
+    var filteredFolders: [Folder] {
+        folders.filter { searchText.isEmpty ? true : $0.title.lowercased().contains(searchText.lowercased()) }
+    }
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return folders.count
+        delegate?.didUpdateDataSource(searchText.isEmpty ? folders : filteredFolders)
+        return searchText.isEmpty ? folders.count : filteredFolders.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: FolderCell.reuseId, for: indexPath) as! FolderCell
-        let folder = folders[indexPath.row]
+        let folder = searchText.isEmpty ? folders[indexPath.row] : filteredFolders[indexPath.row]
 
         cell.set(folder: folder)
-        delegate?.didUpdateDataSource(folders)
+        delegate?.didUpdateDataSource(searchText.isEmpty ? folders : filteredFolders)
 
         return cell
     }
 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let folder = folders[indexPath.row]
+            let folder = searchText.isEmpty ? folders[indexPath.row] : filteredFolders[indexPath.row]
 
             FirebaseManager.shared.deleteFolder(folder) { [weak self] error in
                 guard let self = self else { return }

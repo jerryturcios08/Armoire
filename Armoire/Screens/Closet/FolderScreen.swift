@@ -122,6 +122,7 @@ class FolderScreen: UIViewController {
 
     func addTableViewData(using clothing: Clothing) {
         dataSource.clothes.insert(clothing, at: 0)
+        dataSource.sortClothes()
         tableView.reloadData()
     }
 
@@ -138,6 +139,7 @@ class FolderScreen: UIViewController {
 
 extension FolderScreen: ClothesDataSourceDelegate {
     func didUpdateDataSource(_ clothing: [Clothing]) {
+        dataSource.sortClothes()
         let count = clothing.count
         itemCountLabel.text = count == 1 ? "1 item" : "\(count) items"
     }

@@ -108,6 +108,7 @@ class ClosetScreen: UIViewController {
 
     func addTableViewData(using folder: Folder) {
         dataSource.folders.append(folder)
+        dataSource.sortFolders()
         tableView.reloadData()
     }
 

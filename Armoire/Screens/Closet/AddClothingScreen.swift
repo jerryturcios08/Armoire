@@ -151,11 +151,11 @@ class AddClothingScreen: UIViewController {
             return
         }
 
-        if primaryFieldsViewController.clothingName.isEmpty {
+        if primaryFieldsViewController.clothingName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
             // Shows an error if a name was not entered
             alert.message = "A title is required when adding a clothing item. Please enter a title and try again."
             present(alert, animated: true)
-        } else if primaryFieldsViewController.clothingBrand.isEmpty {
+        } else if primaryFieldsViewController.clothingBrand.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
             // Shows an error if a brand was not entered
             alert.message = "A brand is required when adding a clothing item. Please enter a brand and try again."
             present(alert, animated: true)
@@ -172,9 +172,9 @@ class AddClothingScreen: UIViewController {
                 color: color.toHexString(),
                 isFavorite: markedAsFavorite,
                 description: description.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? nil : description,
-                size: size.isEmpty ? nil : size,
-                material: material.isEmpty ? nil : material,
-                url: url.isEmpty ? nil : url
+                size: size.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? nil : size,
+                material: material.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? nil : material,
+                url: url.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? nil : url
             )
 
             delegate?.didAddNewClothing(newClothing, image: image)

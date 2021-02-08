@@ -164,6 +164,15 @@ class FirebaseManager {
         }
     }
 
+    func fetchItemsCount(for folderId: String, completed: @escaping (Result<Int, AMError>) -> Void) {
+        fetchClothes(for: folderId) { result in
+            switch result {
+            case .success(let clothes): completed(.success(clothes.count))
+            case .failure(let error): completed(.failure(error))
+            }
+        }
+    }
+
     func updateFolder(_ folder: Folder, completion: @escaping (Result<Folder, AMError>) -> Void) {
         guard let id = folder.id else { return }
         let folderRef = db.collection("folders").document(id)

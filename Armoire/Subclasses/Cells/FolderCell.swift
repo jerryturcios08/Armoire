@@ -15,7 +15,7 @@ class FolderCell: UITableViewCell {
     let favoriteImageView = UIImageView(image: UIImage(systemName: SFSymbol.starFill)?.withRenderingMode(.alwaysOriginal))
     let folderTitleLabel = AMPrimaryLabel(text: "Dresses", fontSize: 20)
     let folderDescriptionLabel = AMBodyLabel(text: "My favorite dress out of everything in my collection. The fabric feels nice.", fontSize: 11)
-    let folderQuantityLabel = AMBodyLabel(text: "4 items")
+    let folderQuantityLabel = AMBodyLabel(text: "0 items")
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -27,8 +27,21 @@ class FolderCell: UITableViewCell {
     }
 
     func set(folder: Folder) {
+        guard let folderId = folder.id else { return }
+
         folderTitleLabel.text = folder.title
         folderDescriptionLabel.text = folder.description ?? "No description."
+
+        FirebaseManager.shared.fetchItemsCount(for: folderId) { [weak self] result in
+            guard let self = self else { return }
+
+            switch result {
+            case .success(let count):
+                self.folderQuantityLabel.text = count == 1 ? "1 item" : "\(count) items"
+            case .failure(_):
+                break
+            }
+        }
 
         if let starImage = UIImage(systemName: SFSymbol.starFill) {
             let starColor = folder.isFavorite ? UIColor.systemYellow : UIColor.systemGray

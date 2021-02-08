@@ -177,6 +177,7 @@ class FirebaseManager {
         } else {
             folderRef.updateData([
                 "title": folder.title,
+                "description": FieldValue.delete(),
                 "isFavorite": folder.isFavorite
             ])
         }

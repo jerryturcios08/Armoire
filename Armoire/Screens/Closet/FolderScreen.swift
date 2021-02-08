@@ -37,6 +37,10 @@ class FolderScreen: UIViewController {
         configureScreen()
         configureSearchController()
         configureTableView()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         fetchClothes()
     }
 
@@ -45,9 +49,11 @@ class FolderScreen: UIViewController {
         view.backgroundColor = .systemBackground
         navigationItem.largeTitleDisplayMode = .never
 
-        let addButtonImage = UIImage(systemName: SFSymbol.plus)
-        let addButton = UIBarButtonItem(image: addButtonImage, style: .plain, target: self, action: #selector(addButtonTapped))
-        navigationItem.rightBarButtonItem = addButton
+        let editImage = UIImage(systemName: "square.and.pencil")
+        let editFolderButton = UIBarButtonItem(image: editImage, style: .plain, target: self, action: #selector(editButtonTapped))
+        let addImage = UIImage(systemName: SFSymbol.plus)
+        let addClothingButton = UIBarButtonItem(image: addImage, style: .plain, target: self, action: #selector(addButtonTapped))
+        navigationItem.rightBarButtonItems = [addClothingButton, editFolderButton]
 
         dataSource.delegate = self
     }
@@ -126,6 +132,14 @@ class FolderScreen: UIViewController {
         tableView.reloadData()
     }
 
+    @objc func editButtonTapped(_ sender: UIBarButtonItem) {
+        let folderFormScreen = FolderFormScreen(selectedFolder: folder)
+        let destinationScreen = AMNavigationController(rootViewController: folderFormScreen)
+        folderFormScreen.delegate = self
+        destinationScreen.modalPresentationStyle = .fullScreen
+        present(destinationScreen, animated: true)
+    }
+
     @objc func addButtonTapped(_ sender: UIBarButtonItem) {
         let addClothingScreen = AddClothingScreen()
         let destinationScreen = AMNavigationController(rootViewController: addClothingScreen)
@@ -146,6 +160,23 @@ extension FolderScreen: ClothesDataSourceDelegate {
 
     func errorIsPresented(_ error: AMError) {
         presentErrorAlert(message: error.rawValue)
+    }
+}
+
+// MARK: - Folder form delegeate
+
+extension FolderScreen: FolderFormScreenDelegate {
+    func didUpdateExistingFolder(_ folder: Folder) {
+        title = folder.title
+
+        FirebaseManager.shared.updateFolder(folder) { [weak self] result in
+            guard let self = self else { return }
+
+            switch result {
+            case .success(_): self.tableView.reloadData()
+            case .failure(let error): self.presentErrorAlert(message: error.rawValue)
+            }
+        }
     }
 }
 

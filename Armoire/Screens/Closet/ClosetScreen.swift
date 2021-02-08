@@ -25,6 +25,10 @@ class ClosetScreen: UIViewController {
         configureScreen()
         configureSearchController()
         configureTableView()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         fetchFolders()
     }
 
@@ -113,9 +117,9 @@ class ClosetScreen: UIViewController {
     }
 
     @objc func plusButtonTapped(_ sender: UIBarButtonItem) {
-        let createFolderScreen = CreateFolderScreen()
-        let destinationScreen = AMNavigationController(rootViewController: createFolderScreen)
-        createFolderScreen.delegate = self
+        let folderFormScreen = FolderFormScreen()
+        let destinationScreen = AMNavigationController(rootViewController: folderFormScreen)
+        folderFormScreen.delegate = self
         destinationScreen.modalPresentationStyle = .fullScreen
         present(destinationScreen, animated: true)
     }
@@ -135,9 +139,9 @@ extension ClosetScreen: FolderDataSourceDelegate {
     }
 }
 
-// MARK: - Create folder delegate
+// MARK: - Folder Form delegate
 
-extension ClosetScreen: CreateFolderScreenDelegate {
+extension ClosetScreen: FolderFormScreenDelegate {
     func didCreateNewFolder(_ folder: Folder) {
         FirebaseManager.shared.createFolder(with: folder, for: "QePfaCJjbHIOmAZgfgTF") { [weak self] result in
             guard let self = self else { return }
@@ -207,6 +211,7 @@ struct ClosetScreenPreviews: PreviewProvider {
         UIViewControllerPreview {
             AMNavigationController(rootViewController: ClosetScreen())
         }
+        .ignoresSafeArea(.all, edges: .bottom)
     }
 }
 #endif

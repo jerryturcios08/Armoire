@@ -1,18 +1,26 @@
 //
-//  CreateFolderScreen.swift
+//  FolderFormScreen.swift
 //  Armoire
 //
-//  Created by Geraldine Turcios on 1/20/21.
+//  Created by Geraldine Turcios on 2/6/21.
 //
 
 import SwiftUI
 import UIKit
 
-protocol CreateFolderScreenDelegate: class {
+protocol FolderFormScreenDelegate: class {
     func didCreateNewFolder(_ folder: Folder)
+    func didUpdateExistingFolder(_ folder: Folder)
 }
 
-class CreateFolderScreen: UIViewController {
+extension FolderFormScreenDelegate {
+    func didCreateNewFolder(_ folder: Folder) {}
+    func didUpdateExistingFolder(_ folder: Folder) {}
+}
+
+class FolderFormScreen: UIViewController {
+    // MARK: - Properties
+
     let scrollView = UIScrollView()
     let contentStackView = UIStackView()
 
@@ -25,7 +33,29 @@ class CreateFolderScreen: UIViewController {
     var folderDescription = ""
     var markedAsFavorite = false
 
-    weak var delegate: CreateFolderScreenDelegate?
+    private var selectedFolder: Folder?
+
+    weak var delegate: FolderFormScreenDelegate?
+
+    // MARK: - Initializers
+
+    init(selectedFolder: Folder? = nil) {
+        // If selected folder is passed in, this screen will only be for updating that folder
+        self.selectedFolder = selectedFolder
+        super.init(nibName: nil, bundle: nil)
+        setPreviousValues(for: selectedFolder)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+
+    // MARK: - Configurations
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,15 +68,8 @@ class CreateFolderScreen: UIViewController {
         configureFavoriteViews()
     }
 
-    // MARK: - Configurations
-
-    deinit {
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
-
     func configureScreen() {
-        title = "Create Folder"
+        title = selectedFolder == nil ? "Create Folder" : "Edit Folder"
         view.backgroundColor = .systemBackground
 
         let cancelButton = AMBarButtonItem(title: "Cancel", font: Fonts.quicksandMedium, onAction: cancelButtonTapped)
@@ -93,8 +116,7 @@ class CreateFolderScreen: UIViewController {
         folderTitleTextField.delegate = self
         folderTitleTextField.returnKeyType = .next
         folderTitleTextField.tag = 0
-        folderTitleTextField.snp.makeConstraints { $0.height.equalTo(50)
-        }
+        folderTitleTextField.snp.makeConstraints { $0.height.equalTo(50) }
     }
 
     func configureFolderDescriptionTextView() {
@@ -108,6 +130,22 @@ class CreateFolderScreen: UIViewController {
         contentStackView.addArrangedSubview(favoriteStackView)
         favoriteStackView.spacing = 8
         favoriteSwitch.setOnAction(handleFavoriteSwitchToggle)
+    }
+
+    func setPreviousValues(for folder: Folder?) {
+        guard let folder = folder else { return }
+
+        folderTitle = folder.title
+        folderDescription = folder.description ?? ""
+        markedAsFavorite = folder.isFavorite
+
+        folderTitleTextField.text = folder.title
+        favoriteSwitch.isOn = folder.isFavorite
+
+        if let description = folder.description {
+            folderDescriptionTextView.hidePlaceholder()
+            folderDescriptionTextView.text = description
+        }
     }
 
     // MARK: - Defined methods
@@ -132,10 +170,17 @@ class CreateFolderScreen: UIViewController {
             alert.addAction(UIAlertAction(title: "Okay", style: .default))
             present(alert, animated: true)
         } else {
-            let description = folderDescription.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? nil : folderDescription
-            let folder = Folder(title: folderTitle, description: description, isFavorite: markedAsFavorite)
-            delegate?.didCreateNewFolder(folder)
-            dismiss(animated: true)
+            if let folder = selectedFolder {
+                let description = folderDescription.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? nil : folderDescription
+                let updatedFolder = Folder(id: folder.id, title: folderTitle, description: description, isFavorite: markedAsFavorite)
+                delegate?.didUpdateExistingFolder(updatedFolder)
+                dismiss(animated: true)
+            } else {
+                let description = folderDescription.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? nil : folderDescription
+                let folder = Folder(title: folderTitle, description: description, isFavorite: markedAsFavorite)
+                delegate?.didCreateNewFolder(folder)
+                dismiss(animated: true)
+            }
         }
     }
 
@@ -163,7 +208,7 @@ class CreateFolderScreen: UIViewController {
 
 // MARK: - Text field delegate
 
-extension CreateFolderScreen: UITextFieldDelegate {
+extension FolderFormScreen: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         switch textField.tag {
         case 0: return folderDescriptionTextView.becomeFirstResponder()
@@ -174,7 +219,7 @@ extension CreateFolderScreen: UITextFieldDelegate {
 
 // MARK: - Text view delegate
 
-extension CreateFolderScreen: UITextViewDelegate {
+extension FolderFormScreen: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         guard let text = textView.text else { return }
         folderDescription = text
@@ -192,12 +237,18 @@ extension CreateFolderScreen: UITextViewDelegate {
 // MARK: - Previews
 
 #if DEBUG
-struct CreateFolderScreenPreviews: PreviewProvider {
+struct FolderFormScreenPreviews: PreviewProvider {
     static var previews: some View {
-        UIViewControllerPreview {
-            AMNavigationController(rootViewController: CreateFolderScreen())
+        Group {
+            UIViewControllerPreview {
+                AMNavigationController(rootViewController: FolderFormScreen())
+            }
+            .ignoresSafeArea(.all, edges: .all)
+            UIViewControllerPreview {
+                AMNavigationController(rootViewController: FolderFormScreen(selectedFolder: Folder.example))
+            }
+            .ignoresSafeArea(.all, edges: .all)
         }
-        .ignoresSafeArea(.all, edges: .all)
     }
 }
 #endif

@@ -90,7 +90,7 @@ class AddClothingScreen: UIViewController {
         contentStackView.axis = .vertical
         contentStackView.spacing = 20
         contentStackView.isLayoutMarginsRelativeArrangement = true
-        contentStackView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 12, leading: 16, bottom: 16, trailing: 20)
+        contentStackView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 20, leading: 16, bottom: 16, trailing: 20)
 
         contentStackView.snp.makeConstraints { make in
             make.edges.equalTo(scrollView).inset(UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))

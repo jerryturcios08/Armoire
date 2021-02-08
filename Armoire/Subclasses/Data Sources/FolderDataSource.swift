@@ -46,21 +46,7 @@ class FolderDataSource: NSObject, UITableViewDataSource {
             return firstItem.isFavorite && !secondItem.isFavorite
         }
     }
-
-    func updateFolder(with oldFolder: Folder) {
-        var folderIndex = -1
-
-        for (index, folder) in folders.enumerated() {
-            if oldFolder.id == folder.id {
-                folderIndex = index
-            }
-        }
-
-        if folderIndex != -1 {
-            folders[folderIndex] = oldFolder
-        }
-    }
-
+    
     // MARK: - Table view methods
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

@@ -71,7 +71,6 @@ class FolderScreen: UIViewController {
         searchController.obscuresBackgroundDuringPresentation = false
 
         navigationItem.searchController = searchController
-        navigationItem.hidesSearchBarWhenScrolling = false
     }
 
     func configureTableView() {

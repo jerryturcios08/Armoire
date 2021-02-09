@@ -11,10 +11,7 @@ import UIKit
 class ImageViewerScreen: UIViewController {
     let imageView = UIImageView()
 
-    private var imageName: String
-
-    init(imageName: String, image: UIImage?) {
-        self.imageName = imageName
+    init(image: UIImage?) {
         imageView.image = image
         super.init(nibName: nil, bundle: nil)
     }
@@ -57,10 +54,10 @@ struct ImageViewerScreenPreviews: PreviewProvider {
     static var previews: some View {
         Group {
             UIViewControllerPreview {
-                ImageViewerScreen(imageName: "Pink Dress", image: UIImage(named: "PinkDress"))
+                ImageViewerScreen(image: UIImage(named: "PinkDress"))
             }
             UIViewControllerPreview {
-                ImageViewerScreen(imageName: "Pink Dress", image: UIImage(named: "PinkDress"))
+                ImageViewerScreen(image: UIImage(named: "PinkDress"))
             }
             .previewDisplayName("iPhone XR Landscape")
             .previewLayout(.fixed(width: 896, height: 414))

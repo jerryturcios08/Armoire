@@ -263,7 +263,7 @@ class ClothingScreen: UIViewController {
     }
 
     @objc private func clothingImageTapped(_ sender: UITapGestureRecognizer) {
-        let imageViewerScreen = ImageViewerScreen(imageName: clothing.name, image: clothingImageView.image)
+        let imageViewerScreen = ImageViewerScreen(image: clothingImageView.image)
         imageViewerScreen.modalPresentationStyle = .overFullScreen
         imageViewerScreen.modalTransitionStyle = .crossDissolve
         present(imageViewerScreen, animated: true)

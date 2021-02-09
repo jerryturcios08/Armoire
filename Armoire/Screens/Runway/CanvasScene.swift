@@ -105,11 +105,11 @@ class CanvasScene: SKScene {
     }
 
     func changeToDarkMode() {
-        backgroundColor = .darkGray
+        backgroundColor = .canvasDarkModeBackground
     }
 
     func changeToLightMode() {
-        backgroundColor = .systemGray5
+        backgroundColor = .canvasLightModeBackground
     }
 
     // MARK: - Node methods

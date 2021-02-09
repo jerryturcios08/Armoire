@@ -49,9 +49,9 @@ class FolderScreen: UIViewController {
         view.backgroundColor = .systemBackground
         navigationItem.largeTitleDisplayMode = .never
 
-        let editImage = UIImage(systemName: "square.and.pencil")
+        let editImage = UIImage(systemName: "pencil.circle")
         let editFolderButton = UIBarButtonItem(image: editImage, style: .plain, target: self, action: #selector(editButtonTapped))
-        let addImage = UIImage(systemName: SFSymbol.plus)
+        let addImage = UIImage(systemName: "plus.circle")
         let addClothingButton = UIBarButtonItem(image: addImage, style: .plain, target: self, action: #selector(addButtonTapped))
         navigationItem.rightBarButtonItems = [addClothingButton, editFolderButton]
 

@@ -15,17 +15,14 @@ class AMNavigationController: UINavigationController {
 
     private func configureNavigationBar() {
         let navigationBarAppearance = UINavigationBarAppearance()
-        navigationBarAppearance.configureWithOpaqueBackground()
+        navigationBarAppearance.configureWithDefaultBackground()
 
         let largeTitleFont = UIFont(name: Fonts.quicksandBold, size: 34)!
         let smallTitleFont = UIFont(name: Fonts.quicksandBold, size: 17)!
 
         navigationBarAppearance.largeTitleTextAttributes = [NSAttributedString.Key.font: largeTitleFont]
         navigationBarAppearance.titleTextAttributes = [NSAttributedString.Key.font: smallTitleFont]
-        navigationBarAppearance.backgroundColor = .systemBackground
-        navigationBarAppearance.shadowColor = .clear
 
         navigationBar.standardAppearance = navigationBarAppearance
-        navigationBar.scrollEdgeAppearance = navigationBarAppearance
     }
 }

@@ -70,7 +70,6 @@ class RunwayScreen: UIViewController {
 
     func configureControlsToolbar() {
         navigationController?.setToolbarHidden(false, animated: false)
-        navigationController?.toolbar.isTranslucent = false
 
         let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
 
@@ -103,10 +102,10 @@ class RunwayScreen: UIViewController {
         scene.size = CGSize(width: 1000, height: 1000)
         scene.scaleMode = .aspectFill
 
-        if traitCollection.userInterfaceStyle == .light {
-            scene.backgroundColor = .systemGray5
-        } else if traitCollection.userInterfaceStyle == .dark {
-            scene.backgroundColor = .darkGray
+        if traitCollection.userInterfaceStyle == .dark {
+            scene.backgroundColor = .canvasDarkModeBackground
+        } else if traitCollection.userInterfaceStyle == .light {
+            scene.backgroundColor = .canvasLightModeBackground
         }
 
         guard let skView = view as? SKView else { return }

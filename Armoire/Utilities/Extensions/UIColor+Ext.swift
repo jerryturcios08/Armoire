@@ -10,6 +10,9 @@ import UIKit
 extension UIColor {
     static let accentColor = UIColor(named: "AccentColor")
 
+    static let canvasDarkModeBackground = UIColor(red: 14 / 255, green: 14 / 255, blue: 14 / 255, alpha: 1)
+    static let canvasLightModeBackground = UIColor.systemGray5
+
     convenience init?(hex: String) {
         let r, g, b, a: CGFloat
 

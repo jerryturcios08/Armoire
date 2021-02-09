@@ -10,18 +10,7 @@ import UIKit
 class AMTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureTabBar()
-    }
-
-    private func configureTabBar() {
-        tabBar.barTintColor = .systemBackground
-        tabBar.isTranslucent = false
-
-        viewControllers = [
-            createClosetNavigation(),
-            createRunwayNavigation(),
-            createProfileNavigation()
-        ]
+        viewControllers = [ createClosetNavigation(), createRunwayNavigation(), createProfileNavigation() ]
     }
 
     private func createClosetNavigation() -> AMNavigationController {

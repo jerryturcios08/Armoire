@@ -22,9 +22,10 @@ enum UIHelper {
                 dataSource.filteredClothes[indexPath.row].isFavorite.toggle()
             }
 
+            let updatedClothing = dataSource.getItem(for: indexPath)
+            
             dataSource.sortClothes()
             tableView.reloadDataWithAnimation()
-            let updatedClothing = dataSource.getItem(for: indexPath)
 
             FirebaseManager.shared.toggleFavoriteClothing(updatedClothing) { result in
                 switch result {
@@ -56,9 +57,10 @@ enum UIHelper {
                 dataSource.filteredFolders[indexPath.row].isFavorite.toggle()
             }
 
+            let updatedFolder = dataSource.getItem(for: indexPath)
+
             dataSource.sortFolders()
             tableView.reloadDataWithAnimation()
-            let updatedFolder = dataSource.getItem(for: indexPath)
 
             FirebaseManager.shared.updateFolder(updatedFolder) { result in
                 switch result {

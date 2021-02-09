@@ -144,7 +144,7 @@ class ClothingCell: UITableViewCell {
 
     private func addSeparatorLine() {
         addSubview(separatorLine)
-        separatorLine.backgroundColor = .systemGray6
+        separatorLine.backgroundColor = UIColor.customSeparator
 
         separatorLine.snp.makeConstraints { make in
             make.left.right.bottom.equalTo(self)

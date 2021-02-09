@@ -9,6 +9,7 @@ import UIKit
 
 extension UIColor {
     static let accentColor = UIColor(named: "AccentColor")
+    static let customSeparator = UIColor(named: "SeparatorColor")
 
     static let canvasDarkModeBackground = UIColor(red: 14 / 255, green: 14 / 255, blue: 14 / 255, alpha: 1)
     static let canvasLightModeBackground = UIColor.systemGray5

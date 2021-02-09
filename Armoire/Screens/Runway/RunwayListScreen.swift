@@ -37,7 +37,7 @@ class RunwayListScreen: UIViewController {
         view.backgroundColor = .systemBackground
         navigationController?.navigationBar.prefersLargeTitles = true
 
-        let addButtonImage = UIImage(systemName: SFSymbol.plus)
+        let addButtonImage = UIImage(systemName: "plus.circle")
         let addButton = UIBarButtonItem(image: addButtonImage, style: .plain, target: self, action: #selector(addButtonTapped))
         navigationItem.rightBarButtonItem = addButton
     }

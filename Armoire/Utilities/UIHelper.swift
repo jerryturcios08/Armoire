@@ -23,7 +23,7 @@ enum UIHelper {
             }
 
             let updatedClothing = dataSource.getItem(for: indexPath)
-            
+
             dataSource.sortClothes()
             tableView.reloadDataWithAnimation()
 
@@ -58,7 +58,7 @@ enum UIHelper {
             }
 
             let updatedFolder = dataSource.getItem(for: indexPath)
-
+            
             dataSource.sortFolders()
             tableView.reloadDataWithAnimation()
 

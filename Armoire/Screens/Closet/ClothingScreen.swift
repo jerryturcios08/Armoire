@@ -59,15 +59,9 @@ class ClothingScreen: UIViewController {
         title = clothing.name
         view.backgroundColor = .systemBackground
 
-        let editImage = UIImage(systemName: "square.and.pencil")
+        let editImage = UIImage(systemName: "pencil.circle")
         let editClothingButton = UIBarButtonItem(image: editImage, style: .plain, target: self, action: #selector(editButtonTapped))
-
-        let starImageView = UIImageView(image: UIImage(systemName: SFSymbol.starFill))
-        starImageView.tintColor = clothing.isFavorite ? .systemYellow : .systemGray
-        starImageView.frame = .init(x: 0, y: 0, width: 30, height: 28)
-        let markAsFavoriteItem = UIBarButtonItem(customView: starImageView)
-
-        navigationItem.rightBarButtonItems = [markAsFavoriteItem, editClothingButton]
+        navigationItem.rightBarButtonItem = editClothingButton
     }
 
     func configureStackViews() {

@@ -49,11 +49,10 @@ class FolderScreen: UIViewController {
         view.backgroundColor = .systemBackground
         navigationItem.largeTitleDisplayMode = .never
 
-        let editImage = UIImage(systemName: "pencil.circle")
-        let editFolderButton = UIBarButtonItem(image: editImage, style: .plain, target: self, action: #selector(editButtonTapped))
-        let addImage = UIImage(systemName: "plus.circle")
-        let addClothingButton = UIBarButtonItem(image: addImage, style: .plain, target: self, action: #selector(addButtonTapped))
-        navigationItem.rightBarButtonItems = [addClothingButton, editFolderButton]
+        let editFolderAction = UIAction(title: "Edit folder", image: UIImage(systemName: "pencil"), handler: editButtonTapped)
+        let addClothingAction = UIAction(title: "Add clothing", image: UIImage(systemName: "plus"), handler: addButtonTapped)
+        let folderMenu = UIMenu(title: "", children: [editFolderAction, addClothingAction])
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: nil, image: UIImage(systemName: "ellipsis.circle"), primaryAction: nil, menu: folderMenu)
 
         dataSource.delegate = self
     }
@@ -132,7 +131,7 @@ class FolderScreen: UIViewController {
         tableView.reloadData()
     }
 
-    @objc func editButtonTapped(_ sender: UIBarButtonItem) {
+    @objc func editButtonTapped(_ action: UIAction) {
         let folderFormScreen = FolderFormScreen(selectedFolder: folder)
         let destinationScreen = AMNavigationController(rootViewController: folderFormScreen)
         folderFormScreen.delegate = self
@@ -140,7 +139,7 @@ class FolderScreen: UIViewController {
         present(destinationScreen, animated: true)
     }
 
-    @objc func addButtonTapped(_ sender: UIBarButtonItem) {
+    @objc func addButtonTapped(_ action: UIAction) {
         let clothingFormScreen = ClothingFormScreen()
         let destinationScreen = AMNavigationController(rootViewController: clothingFormScreen)
         clothingFormScreen.delegate = self

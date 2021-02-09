@@ -51,6 +51,7 @@ class RunwayListScreen: UIViewController {
         searchController.searchBar.searchTextField.attributedPlaceholder = attributedString
         searchController.obscuresBackgroundDuringPresentation = false
 
+        navigationItem.hidesSearchBarWhenScrolling = false
         navigationItem.searchController = searchController
     }
 

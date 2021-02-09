@@ -56,6 +56,7 @@ class ClosetScreen: UIViewController {
         searchController.searchBar.tintColor = UIColor.accentColor
         searchController.obscuresBackgroundDuringPresentation = false
 
+        navigationItem.hidesSearchBarWhenScrolling = false
         navigationItem.searchController = searchController
     }
 

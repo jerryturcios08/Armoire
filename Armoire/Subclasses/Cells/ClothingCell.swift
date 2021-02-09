@@ -55,7 +55,6 @@ class ClothingCell: UITableViewCell {
     }
 
     private func configureCell() {
-        selectionStyle = .none
         addSeparatorLine()
         configureClothingImageView()
         configureFavoriteImageView()

@@ -50,7 +50,6 @@ class FolderCell: UITableViewCell {
     }
 
     private func configureCell() {
-        selectionStyle = .none
         configureFolderImageView()
         configureFavoriteImageView()
         configureFolderTitleLabel()

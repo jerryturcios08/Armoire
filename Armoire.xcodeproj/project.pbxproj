@@ -52,6 +52,8 @@
 		C6AA153725BCC58D0095ADA0 /* ClothesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6AA153625BCC58D0095ADA0 /* ClothesDataSource.swift */; };
 		C6AC1BA325CA0A780076777B /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6AC1BA225CA0A780076777B /* NetworkManager.swift */; };
 		C6AC1BA725CA0B190076777B /* AMImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6AC1BA625CA0B190076777B /* AMImageView.swift */; };
+		C6B0A4A925D345EC0090A70F /* RunwayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B0A4A825D345EC0090A70F /* RunwayCell.swift */; };
+		C6B0A4AD25D34D780090A70F /* Runway.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B0A4AC25D34D780090A70F /* Runway.swift */; };
 		C6C13A9425CCD70E007CE2E1 /* ImageViewerScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C13A9325CCD70E007CE2E1 /* ImageViewerScreen.swift */; };
 		C6C6D4F125BE15F300E4C0B8 /* UITableView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C6D4F025BE15F300E4C0B8 /* UITableView+Ext.swift */; };
 		C6D8C60D25CF950E00B49301 /* FolderFormScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D8C60C25CF950E00B49301 /* FolderFormScreen.swift */; };
@@ -111,6 +113,8 @@
 		C6AA153625BCC58D0095ADA0 /* ClothesDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClothesDataSource.swift; sourceTree = "<group>"; };
 		C6AC1BA225CA0A780076777B /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		C6AC1BA625CA0B190076777B /* AMImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AMImageView.swift; sourceTree = "<group>"; };
+		C6B0A4A825D345EC0090A70F /* RunwayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunwayCell.swift; sourceTree = "<group>"; };
+		C6B0A4AC25D34D780090A70F /* Runway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Runway.swift; sourceTree = "<group>"; };
 		C6C13A9325CCD70E007CE2E1 /* ImageViewerScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewerScreen.swift; sourceTree = "<group>"; };
 		C6C6D4F025BE15F300E4C0B8 /* UITableView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Ext.swift"; sourceTree = "<group>"; };
 		C6D8C60C25CF950E00B49301 /* FolderFormScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderFormScreen.swift; sourceTree = "<group>"; };
@@ -222,6 +226,7 @@
 			children = (
 				C648380B25C5DC0800C8082B /* Clothing.swift */,
 				C60E9F8025BA358C00D97991 /* Folder.swift */,
+				C6B0A4AC25D34D780090A70F /* Runway.swift */,
 				C68BCD5925C732E20002B376 /* User.swift */,
 			);
 			path = Models;
@@ -253,6 +258,7 @@
 			children = (
 				C63B0B7425B8DCE20065F813 /* ClothingCell.swift */,
 				C63B0B7C25B8DCEA0065F813 /* FolderCell.swift */,
+				C6B0A4A825D345EC0090A70F /* RunwayCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -554,8 +560,10 @@
 				C6DFC04325BF5269002BC018 /* CanvasControlsView.swift in Sources */,
 				C6EE84BB25B8BE8000986BF4 /* AMPrimaryLabel.swift in Sources */,
 				C63B0B8225B8F08E0065F813 /* ClothingScreen.swift in Sources */,
+				C6B0A4AD25D34D780090A70F /* Runway.swift in Sources */,
 				C6AA153225BCBDF00095ADA0 /* AMSwitch.swift in Sources */,
 				C67E11C425CCABE500D0E77C /* AMLinkButton.swift in Sources */,
+				C6B0A4A925D345EC0090A70F /* RunwayCell.swift in Sources */,
 				C6EAA14825BE1FB900C727B3 /* RunwayScreen.swift in Sources */,
 				C658E7D925B78FE8000F8F50 /* previews.swift in Sources */,
 				C60E9F8A25BA37FA00D97991 /* UIColor+Ext.swift in Sources */,

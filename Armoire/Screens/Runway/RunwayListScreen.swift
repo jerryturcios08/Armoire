@@ -13,7 +13,7 @@ class RunwayListScreen: UIViewController {
     let footerContainerView = UIView()
     let runwaysCountLabel = AMBodyLabel(text: "0 runways", fontSize: 18)
 
-    var runways = [String]() {
+    var runways = [Runway]() {
         didSet {
             let count = runways.count
             runwaysCountLabel.text = count == 1 ? "1 runway" : "\(count) runways"
@@ -40,6 +40,11 @@ class RunwayListScreen: UIViewController {
         let addButtonImage = UIImage(systemName: "plus.circle")
         let addButton = UIBarButtonItem(image: addButtonImage, style: .plain, target: self, action: #selector(addButtonTapped))
         navigationItem.rightBarButtonItem = addButton
+
+        runways = [
+            Runway(title: "Wedding Outfit 2021", isFavorite: true, status: .notSharing),
+            Runway(title: "Casual Outfit", isFavorite: false, status: .sharing)
+        ]
     }
 
     func configureSearchController() {
@@ -60,7 +65,9 @@ class RunwayListScreen: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.backgroundColor = .systemBackground
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "RunwayCell")
+        tableView.register(RunwayCell.self, forCellReuseIdentifier: RunwayCell.reuseId)
+        tableView.rowHeight = 70
+        tableView.separatorStyle = .none
 
         tableView.snp.makeConstraints { make in
             make.top.bottom.equalTo(view)
@@ -106,11 +113,12 @@ class RunwayListScreen: UIViewController {
             if runwayName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
                 errorAlert.message = "The text field was empty. Please try again."
                 self.present(errorAlert, animated: true)
-            } else if self.runways.contains(runwayName) {
+            } else if self.runways.contains(where: { $0.title == runwayName }) {
                 errorAlert.message = "The runways list already contains this name. Please enter another name."
                 self.present(errorAlert, animated: true)
             } else {
-                self.runways.insert(runwayName, at: 0)
+                let newRunway = Runway(title: runwayName, isFavorite: false, status: .notSharing)
+                self.runways.insert(newRunway, at: 0)
                 self.tableView.reloadDataWithAnimation()
             }
         })
@@ -127,10 +135,8 @@ extension RunwayListScreen: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "RunwayCell", for: indexPath)
-        let runway = runways[indexPath.row]
-        cell.textLabel?.text = runway
-        cell.textLabel?.font = UIFont(name: Fonts.quicksandMedium, size: 17)
+        let cell = tableView.dequeueReusableCell(withIdentifier: RunwayCell.reuseId, for: indexPath) as! RunwayCell
+        cell.set(runway: runways[indexPath.row])
         return cell
     }
 
@@ -139,6 +145,14 @@ extension RunwayListScreen: UITableViewDataSource, UITableViewDelegate {
             runways.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }
+    }
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 0
+    }
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return nil
     }
 
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -151,7 +165,7 @@ extension RunwayListScreen: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let runway = runways[indexPath.row]
-        let runwayScreen = AMNavigationController(rootViewController: RunwayScreen(runway: runway))
+        let runwayScreen = AMNavigationController(rootViewController: RunwayScreen(runway: runway.title))
         runwayScreen.modalPresentationStyle = .fullScreen
         runwayScreen.modalTransitionStyle = .crossDissolve
         present(runwayScreen, animated: true)

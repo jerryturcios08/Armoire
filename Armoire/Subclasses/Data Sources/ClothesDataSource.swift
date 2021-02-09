@@ -35,9 +35,7 @@ class ClothesDataSource: NSObject, UITableViewDataSource {
         filteredClothes = clothes.filter {
             searchText.isEmpty ? true :
                 $0.name.lowercased().contains(searchText.lowercased()) ||
-                $0.brand.lowercased().contains(searchText.lowercased()) ||
-                $0.size?.lowercased().contains(searchText.lowercased()) != nil ||
-                $0.material?.lowercased().contains(searchText.lowercased()) != nil
+                $0.brand.lowercased().contains(searchText.lowercased())
         }
     }
 

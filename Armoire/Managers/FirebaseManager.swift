@@ -170,9 +170,18 @@ class FirebaseManager {
         uploadTask.resume()
     }
 
-    func deleteClothing(_ clothing: Clothing, errorHandler: @escaping (AMError) ->Void) {
+    func deleteClothing(_ clothing: Clothing, errorHandler: @escaping (AMError) -> Void) {
         guard let id = clothing.id else { return }
+        deleteClothingImage(for: clothing, errorHandler: errorHandler)
 
+        db.collection("clothes").document(id).delete { error in
+            if error != nil {
+                return errorHandler(.failedToDeleteClothing)
+            }
+        }
+    }
+
+    func deleteClothingImage(for clothing: Clothing, errorHandler: @escaping (AMError) -> Void) {
         let storageRef = storage.reference()
         let clothingImageRef = storageRef.child("images/\(clothing.name.blobCase.lowercased()).jpg")
 
@@ -180,12 +189,6 @@ class FirebaseManager {
         clothingImageRef.delete { error in
             if error != nil {
                 return errorHandler(.failedToDeleteImage)
-            }
-        }
-
-        db.collection("clothes").document(id).delete { error in
-            if error != nil {
-                return errorHandler(.failedToDeleteClothing)
             }
         }
     }

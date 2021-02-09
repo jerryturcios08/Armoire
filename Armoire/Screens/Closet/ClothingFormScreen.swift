@@ -247,6 +247,11 @@ class ClothingFormScreen: UIViewController {
             let url = additionalFieldsView.clothingUrl
 
             if let clothing = selectedClothing {
+                FirebaseManager.shared.deleteClothingImage(for: clothing) { [weak self] error in
+                    guard let self = self else { return }
+                    return self.presentErrorAlert(message: error.rawValue)
+                }
+
                 let updatedClothing = Clothing(
                     id: clothing.id,
                     name: name,

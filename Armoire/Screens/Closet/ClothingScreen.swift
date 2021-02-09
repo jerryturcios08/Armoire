@@ -20,9 +20,10 @@ class ClothingScreen: UIViewController {
     let clothingColorWell = UIColorWell()
     let clothingBrandLabel = AMBodyLabel(text: "Miss Collection", fontSize: 24)
     let clothingDescriptionLabel = AMBodyLabel(text: "No description.")
-    let clothingQuantityLabel = AMBodyLabel(text: "1 quantity", fontSize: 22)
-    let sizeLabel = AMBodyLabel(text: "Size", fontSize: 22)
-    let materialLabel = AMBodyLabel(text: "Material", fontSize: 22)
+    let clothingQuantityValueLabel = AMBodyLabel(text: "1")
+    let clothingSizeValueLabel = AMBodyLabel(text: "Small")
+    let clothingMaterialValueLabel = AMBodyLabel(text: "Cotton")
+    let clothingUrlButton = AMLinkButton()
     let dateCreatedLabel = AMBodyLabel(text: "Created on 1/1/2020", fontSize: 16)
     let dateUpdatedLabel = AMBodyLabel(text: "Updated on 1/1/2020", fontSize: 16)
 
@@ -125,23 +126,26 @@ class ClothingScreen: UIViewController {
 
     func configureInfoSection() {
         createSectionHeaderView(for: "Info")
-        createInfoRowStackView(title: "Quantity", value: String(clothing.quantity))
-
-        if let size = clothing.size {
-            createInfoRowStackView(title: "Size", value: size)
-        }
-
-        if let material = clothing.material {
-            createInfoRowStackView(title: "Material", value: material)
-        }
+        createInfoRowStackView(title: "Quantity", value: String(clothing.quantity), info: .quantity)
+        createInfoRowStackView(title: "Size", value: clothing.size != nil ? clothing.size! : "N/a", info: .size)
+        createInfoRowStackView(title: "Material", value: clothing.material != nil ? clothing.material! : "N/a", info: .material)
     }
 
     func configureUrlSection() {
+        createSectionHeaderView(for: "URL")
+
         if let url = clothing.url {
-            createSectionHeaderView(for: "URL")
-            let urlButton = AMLinkButton(title: url, onAction: urlButtonTapped)
-            contentStackView.addArrangedSubview(hStackWithPadding(urlButton))
+            clothingUrlButton.setTitle(url, for: .normal)
+            clothingUrlButton.setTitleColor(.systemTeal, for: .normal)
+            clothingUrlButton.isEnabled = true
+        } else {
+            clothingUrlButton.setTitle("No URL available", for: .normal)
+            clothingUrlButton.setTitleColor(.systemPink, for: .normal)
+            clothingUrlButton.isEnabled = false
         }
+
+        clothingUrlButton.setOnAction(urlButtonTapped(_:))
+        contentStackView.addArrangedSubview(hStackWithPadding(clothingUrlButton))
     }
 
     func configureDateSection() {
@@ -181,14 +185,32 @@ class ClothingScreen: UIViewController {
         return separatorLine
     }
 
-    private func createInfoRowStackView(title: String, value: String) {
+    private enum Info {
+        case quantity, size, material
+    }
+
+    private func createInfoRowStackView(title: String, value: String, info: Info) {
         let titleLabel = AMBodyLabel(text: title, fontSize: 16)
-        let valueLabel = AMBodyLabel(text: value)
-        valueLabel.setFont(with: UIFont(name: Fonts.quicksandRegular, size: 16))
+        var valueLabel = AMBodyLabel()
+
+        switch info {
+        case .quantity:
+            valueLabel = createValueLabel(value: value, label: clothingQuantityValueLabel)
+        case .size:
+            valueLabel = createValueLabel(value: value, label: clothingSizeValueLabel)
+        case .material:
+            valueLabel = createValueLabel(value: value, label: clothingMaterialValueLabel)
+        }
 
         let infoRowStackView = UIStackView(arrangedSubviews: [titleLabel, UIView(), valueLabel])
         contentStackView.addArrangedSubview(hStackWithPadding(infoRowStackView))
         infoRowStackView.spacing = 8
+    }
+
+    private func createValueLabel(value: String, label: AMBodyLabel) -> AMBodyLabel {
+        label.text = value
+        label.setFont(with: UIFont(name: Fonts.quicksandRegular, size: 16))
+        return label
     }
 
     private func hStackWithPadding(_ views: UIView...) -> UIStackView {
@@ -205,8 +227,39 @@ class ClothingScreen: UIViewController {
         return paddingSpacer
     }
 
+    private func updateScreen(clothing: Clothing) {
+        guard let imageUrlString = clothing.imageUrl?.absoluteString else { return }
+        title = clothing.name
+
+        clothingImageView.setImage(fromURL: imageUrlString)
+        clothingNameLabel.text = clothing.name
+        clothingBrandLabel.text = clothing.brand
+        clothingColorWell.selectedColor = UIColor(hex: clothing.color)
+        clothingDescriptionLabel.text = clothing.description ?? "No description."
+        clothingQuantityValueLabel.text = "\(clothing.quantity)"
+        clothingSizeValueLabel.text = clothing.size ?? "N/a"
+        clothingMaterialValueLabel.text = clothing.material ?? "N/a"
+
+        if let url = clothing.url {
+            clothingUrlButton.setTitle(url, for: .normal)
+            clothingUrlButton.setTitleColor(.systemTeal, for: .normal)
+            clothingUrlButton.isEnabled = true
+        } else {
+            clothingUrlButton.setTitle("No URL available", for: .normal)
+            clothingUrlButton.setTitleColor(.systemPink, for: .normal)
+            clothingUrlButton.isEnabled = false
+        }
+    }
+
+    // MARK: - Action methods
+
     @objc private func editButtonTapped(_ sender: UIBarButtonItem) {
-        // Add logic for showing an edit screen for the selected clothing
+        guard let image = clothingImageView.image else { return }
+        let clothingFormScreen = ClothingFormScreen(selectedClothing: clothing, selectedClothingImage: image)
+        let destinationScreen = AMNavigationController(rootViewController: clothingFormScreen)
+        clothingFormScreen.delegate = self
+        destinationScreen.modalPresentationStyle = .fullScreen
+        present(destinationScreen, animated: true)
     }
 
     @objc private func clothingImageTapped(_ sender: UITapGestureRecognizer) {
@@ -223,6 +276,21 @@ class ClothingScreen: UIViewController {
     }
 }
 
+// MARK: - Clothing form delegate
+
+extension ClothingScreen: ClothingFormScreenDelegate {
+    func didUpdateExistingClothing(_ clothing: Clothing, image: UIImage) {
+        FirebaseManager.shared.updateClothing(clothing, image: image) { [weak self] result in
+            guard let self = self else { return }
+
+            switch result {
+            case .success(let clothing): self.updateScreen(clothing: clothing)
+            case .failure(let error): self.presentErrorAlert(message: error.rawValue)
+            }
+        }
+    }
+}
+
 // MARK: - Previews
 
 #if DEBUG
@@ -231,7 +299,7 @@ struct ClothingScreenPreviews: PreviewProvider {
         UIViewControllerPreview {
             AMNavigationController(rootViewController: ClothingScreen(clothing: Clothing.example))
         }
-        .ignoresSafeArea(.all, edges: .all)
+        .ignoresSafeArea(.all, edges: .bottom)
     }
 }
 #endif

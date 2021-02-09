@@ -8,6 +8,8 @@
 import SwiftUI
 import UIKit
 
+// MARK: Delegate
+
 protocol FolderFormScreenDelegate: class {
     func didCreateNewFolder(_ folder: Folder)
     func didUpdateExistingFolder(_ folder: Folder)

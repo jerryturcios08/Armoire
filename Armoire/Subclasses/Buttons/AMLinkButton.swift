@@ -39,6 +39,7 @@ class AMLinkButton: UIButton {
         titleLabel?.font = UIFontMetrics.default.scaledFont(for: customFont)
         titleLabel?.lineBreakMode = .byTruncatingTail
         titleLabel?.adjustsFontForContentSizeCategory = true
+        contentHorizontalAlignment = .left
         setTitleColor(UIColor.systemTeal, for: .normal)
     }
 

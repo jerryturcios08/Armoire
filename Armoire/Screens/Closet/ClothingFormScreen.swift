@@ -1,18 +1,26 @@
 //
-//  AddClothingScreen.swift
+//  ClothingFormScreen.swift
 //  Armoire
 //
-//  Created by Geraldine Turcios on 1/21/21.
+//  Created by Geraldine Turcios on 2/8/21.
 //
 
 import SwiftUI
 import UIKit
 
-protocol AddClothingScreenDelegate: class {
+// MARK: - Delegate
+
+protocol ClothingFormScreenDelegate: class {
     func didAddNewClothing(_ clothing: Clothing, image: UIImage)
+    func didUpdateExistingClothing(_ clothing: Clothing, image: UIImage)
 }
 
-class AddClothingScreen: UIViewController {
+extension ClothingFormScreenDelegate {
+    func didAddNewClothing(_ clothing: Clothing, image: UIImage) {}
+    func didUpdateExistingClothing(_ clothing: Clothing, image: UIImage) {}
+}
+
+class ClothingFormScreen: UIViewController {
     // MARK: - Properties
 
     let scrollView = UIScrollView()
@@ -37,14 +45,33 @@ class AddClothingScreen: UIViewController {
     var clothingColor: UIColor? = nil
     var markedAsFavorite = false
 
-    weak var delegate: AddClothingScreenDelegate?
+    weak var delegate: ClothingFormScreenDelegate?
 
-    // MARK: - Configurations
+    private var selectedClothing: Clothing?
+    private var selectedClothingImage: UIImage?
+
+    // MARK: - Initializers
+
+    init() {
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    init(selectedClothing: Clothing, selectedClothingImage: UIImage) {
+        self.selectedClothing = selectedClothing
+        self.selectedClothingImage = selectedClothingImage
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     deinit {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
+
+    // MARK: - Configurations
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,10 +82,11 @@ class AddClothingScreen: UIViewController {
         configurePrimaryFieldsViewController()
         configureSecondaryFields()
         contentStackView.addArrangedSubview(additionalFieldsView)
+        if selectedClothing != nil { setPreviousValues(for: selectedClothing, image: selectedClothingImage) }
     }
 
     func configureScreen() {
-        title = "Add Clothing"
+        title = selectedClothing == nil ? "Add Clothing" : "Edit Clothing"
         view.backgroundColor = .systemBackground
 
         let cancelButton = AMBarButtonItem(title: "Cancel", font: Fonts.quicksandMedium, onAction: cancelButtonTapped)
@@ -128,6 +156,56 @@ class AddClothingScreen: UIViewController {
         favoriteSwitch.setOnAction(handleFavoriteSwitchToggle)
     }
 
+    func setPreviousValues(for clothing: Clothing?, image: UIImage?) {
+        guard let clothing = clothing else { return }
+        guard let image = image else { return }
+        setPropertyValues(for: clothing, image: image)
+        setViewValues(for: clothing)
+    }
+
+    func setPropertyValues(for clothing: Clothing, image: UIImage) {
+        primaryFieldsViewController.clothingImageView.image = image
+        primaryFieldsViewController.clothingImageView.isHidden = false
+        primaryFieldsViewController.clothingName = clothing.name
+        primaryFieldsViewController.clothingBrand = clothing.brand
+
+        clothingQuantity = clothing.quantity
+        clothingColor = UIColor(hex: clothing.color)
+        markedAsFavorite = clothing.isFavorite
+
+        additionalFieldsView.clothingDescription = clothing.description ?? ""
+        additionalFieldsView.clothingSize = clothing.size ?? ""
+        additionalFieldsView.clothingMaterial = clothing.material ?? ""
+        additionalFieldsView.clothingUrl = clothing.url ?? ""
+    }
+
+    func setViewValues(for clothing: Clothing) {
+        primaryFieldsViewController.clothingImageView.image = selectedClothingImage
+        primaryFieldsViewController.clothingNameTextField.text = clothing.name
+        primaryFieldsViewController.clothingBrandTextField.text = clothing.brand
+
+        clothingQuantityStepper.value = Double(clothing.quantity)
+        clothingColorWell.selectedColor = UIColor(hex: clothing.color)
+        favoriteSwitch.isOn = clothing.isFavorite
+
+        if let description = clothing.description {
+            additionalFieldsView.clothingDescriptionTextView.hidePlaceholder()
+            additionalFieldsView.clothingDescriptionTextView.text = description
+        }
+
+        if let size = clothing.size {
+            additionalFieldsView.clothingSizeTextField.text = size
+        }
+
+        if let material = clothing.material {
+            additionalFieldsView.clothingMaterialTextField.text = material
+        }
+
+        if let url = clothing.url {
+            additionalFieldsView.clothingUrlTextField.text = url
+        }
+    }
+
     // MARK: - Defined methods
 
     func cancelButtonTapped(_ sender: UIBarButtonItem) {
@@ -160,24 +238,48 @@ class AddClothingScreen: UIViewController {
             alert.message = "A brand is required when adding a clothing item. Please enter a brand and try again."
             present(alert, animated: true)
         } else {
+            let name = primaryFieldsViewController.clothingName
+            let brand = primaryFieldsViewController.clothingBrand
+
             let description = additionalFieldsView.clothingDescription
             let size = additionalFieldsView.clothingSize
             let material = additionalFieldsView.clothingMaterial
             let url = additionalFieldsView.clothingUrl
 
-            let newClothing = Clothing(
-                name: primaryFieldsViewController.clothingName,
-                brand: primaryFieldsViewController.clothingBrand,
-                quantity: clothingQuantity,
-                color: color.toHexString(),
-                isFavorite: markedAsFavorite,
-                description: description.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? nil : description,
-                size: size.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? nil : size,
-                material: material.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? nil : material,
-                url: url.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? nil : url
-            )
+            if let clothing = selectedClothing {
+                let updatedClothing = Clothing(
+                    id: clothing.id,
+                    name: name,
+                    brand: brand,
+                    quantity: clothingQuantity,
+                    color: color.toHexString(),
+                    isFavorite: markedAsFavorite,
+                    description: description.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? nil : description,
+                    size: size.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? nil : size,
+                    material: material.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? nil : material,
+                    url: url.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? nil : url,
+                    dateCreated: clothing.dateCreated,
+                    dateUpdated: Date(),
+                    folder: clothing.folder
+                )
 
-            delegate?.didAddNewClothing(newClothing, image: image)
+                delegate?.didUpdateExistingClothing(updatedClothing, image: image)
+            } else {
+                let newClothing = Clothing(
+                    name: name,
+                    brand: brand,
+                    quantity: clothingQuantity,
+                    color: color.toHexString(),
+                    isFavorite: markedAsFavorite,
+                    description: description.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? nil : description,
+                    size: size.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? nil : size,
+                    material: material.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? nil : material,
+                    url: url.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? nil : url
+                )
+
+                delegate?.didAddNewClothing(newClothing, image: image)
+            }
+
             startLoadingOverlay()
 
             DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
@@ -226,12 +328,23 @@ class AddClothingScreen: UIViewController {
 // MARK: - Previews
 
 #if DEBUG
-struct AddClothingScreenPreviews: PreviewProvider {
+struct ClothingFormScreenPreviews: PreviewProvider {
     static var previews: some View {
-        UIViewControllerPreview {
-            AMNavigationController(rootViewController: AddClothingScreen())
+        Group {
+            UIViewControllerPreview {
+                AMNavigationController(rootViewController: ClothingFormScreen())
+            }
+            .ignoresSafeArea(.all, edges: .all)
+            UIViewControllerPreview {
+                AMNavigationController(
+                    rootViewController: ClothingFormScreen(
+                        selectedClothing: Clothing.example,
+                        selectedClothingImage: UIImage(named: "PinkDress")!
+                    )
+                )
+            }
+            .ignoresSafeArea(.all, edges: .all)
         }
-        .ignoresSafeArea(.all, edges: .all)
     }
 }
 #endif

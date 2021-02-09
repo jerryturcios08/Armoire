@@ -141,9 +141,9 @@ class FolderScreen: UIViewController {
     }
 
     @objc func addButtonTapped(_ sender: UIBarButtonItem) {
-        let addClothingScreen = AddClothingScreen()
-        let destinationScreen = AMNavigationController(rootViewController: addClothingScreen)
-        addClothingScreen.delegate = self
+        let clothingFormScreen = ClothingFormScreen()
+        let destinationScreen = AMNavigationController(rootViewController: clothingFormScreen)
+        clothingFormScreen.delegate = self
         destinationScreen.modalPresentationStyle = .fullScreen
         present(destinationScreen, animated: true)
     }
@@ -163,7 +163,24 @@ extension FolderScreen: ClothesDataSourceDelegate {
     }
 }
 
-// MARK: - Folder form delegeate
+// MARK: - Clothing form delegate
+
+extension FolderScreen: ClothingFormScreenDelegate {
+    func didAddNewClothing(_ clothing: Clothing, image: UIImage) {
+        guard let id = folder.id else { return }
+
+        FirebaseManager.shared.addClothing(with: clothing, image: image, folderId: id) { [weak self] result in
+            guard let self = self else { return }
+
+            switch result {
+            case .success(let clothing): self.addTableViewData(using: clothing)
+            case .failure(let error): self.presentErrorAlert(message: error.rawValue)
+            }
+        }
+    }
+}
+
+// MARK: - Folder form delegate
 
 extension FolderScreen: FolderFormScreenDelegate {
     func didUpdateExistingFolder(_ folder: Folder) {
@@ -174,23 +191,6 @@ extension FolderScreen: FolderFormScreenDelegate {
 
             switch result {
             case .success(_): self.tableView.reloadData()
-            case .failure(let error): self.presentErrorAlert(message: error.rawValue)
-            }
-        }
-    }
-}
-
-// MARK: - Add clothing delegate
-
-extension FolderScreen: AddClothingScreenDelegate {
-    func didAddNewClothing(_ clothing: Clothing, image: UIImage) {
-        guard let id = folder.id else { return }
-
-        FirebaseManager.shared.addClothing(with: clothing, image: image, folderId: id) { [weak self] result in
-            guard let self = self else { return }
-
-            switch result {
-            case .success(let clothing): self.addTableViewData(using: clothing)
             case .failure(let error): self.presentErrorAlert(message: error.rawValue)
             }
         }

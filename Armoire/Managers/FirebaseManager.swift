@@ -95,10 +95,79 @@ class FirebaseManager {
         }
     }
 
-    func toggleFavoriteClothing(_ clothing: Clothing, completion: @escaping (Result<Clothing, AMError>) -> Void) {
+    func toggleFavoriteClothing(_ clothing: Clothing, completed: @escaping (Result<Clothing, AMError>) -> Void) {
         guard let id = clothing.id else { return }
         let clothingRef = db.collection("clothes").document(id)
         clothingRef.updateData(["isFavorite": clothing.isFavorite])
+    }
+
+    func updateClothing(_ clothing: Clothing, image: UIImage, completed: @escaping (Result<Clothing, AMError>) -> Void) {
+        guard let id = clothing.id else { return }
+        let clothingRef = db.collection("clothes").document(id)
+        let storageRef = storage.reference()
+
+        let clothingImageRef = storageRef.child("images/\(clothing.name.blobCase.lowercased()).jpg")
+
+        guard let dateUpdated = clothing.dateUpdated else { return }
+
+        guard let data = image.jpegData(compressionQuality: 0.8) else {
+            return completed(.failure(.invalidImage))
+        }
+
+        let uploadTask = clothingImageRef.putData(data, metadata: nil) { metadata, error in
+            clothingImageRef.downloadURL { url, error in
+                if error != nil {
+                    return completed(.failure(.unableToComplete))
+                }
+
+                guard let downloadUrl = url else {
+                    return completed(.failure(.invalidUrl))
+                }
+
+                clothingRef.updateData([
+                    "imageUrl": downloadUrl.absoluteString,
+                    "name": clothing.name,
+                    "brand": clothing.brand,
+                    "quantity": clothing.quantity,
+                    "color": clothing.color,
+                    "isFavorite": clothing.isFavorite,
+                    "dateCreated": clothing.dateCreated,
+                    "dateUpdated": dateUpdated
+                ])
+
+                if let description = clothing.description {
+                    clothingRef.updateData(["description": description])
+                } else {
+                    clothingRef.updateData(["description": FieldValue.delete()])
+                }
+
+                if let size = clothing.size {
+                    clothingRef.updateData(["size": size])
+                } else {
+                    clothingRef.updateData(["size": FieldValue.delete()])
+                }
+
+                if let material = clothing.material {
+                    clothingRef.updateData(["material": material])
+                } else {
+                    clothingRef.updateData(["material": FieldValue.delete()])
+                }
+
+                if let url = clothing.url {
+                    clothingRef.updateData(["url": url])
+                } else {
+                    clothingRef.updateData(["url": FieldValue.delete()])
+                }
+
+                var updatedClothing = clothing
+                updatedClothing.imageUrl = downloadUrl
+                updatedClothing.dateUpdated = dateUpdated
+
+                completed(.success(updatedClothing))
+            }
+        }
+
+        uploadTask.resume()
     }
 
     func deleteClothing(_ clothing: Clothing, errorHandler: @escaping (AMError) ->Void) {

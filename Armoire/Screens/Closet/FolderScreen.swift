@@ -131,7 +131,7 @@ class FolderScreen: UIViewController {
         tableView.reloadData()
     }
 
-    @objc func editButtonTapped(_ action: UIAction) {
+    func editButtonTapped(_ action: UIAction) {
         let folderFormScreen = FolderFormScreen(selectedFolder: folder)
         let destinationScreen = AMNavigationController(rootViewController: folderFormScreen)
         folderFormScreen.delegate = self
@@ -139,7 +139,7 @@ class FolderScreen: UIViewController {
         present(destinationScreen, animated: true)
     }
 
-    @objc func addButtonTapped(_ action: UIAction) {
+    func addButtonTapped(_ action: UIAction) {
         let clothingFormScreen = ClothingFormScreen()
         let destinationScreen = AMNavigationController(rootViewController: clothingFormScreen)
         clothingFormScreen.delegate = self

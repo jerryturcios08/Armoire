@@ -135,7 +135,7 @@ class FolderScreen: UIViewController {
         let folderFormScreen = FolderFormScreen(selectedFolder: folder)
         let destinationScreen = AMNavigationController(rootViewController: folderFormScreen)
         folderFormScreen.delegate = self
-        destinationScreen.modalPresentationStyle = .fullScreen
+        folderFormScreen.isModalInPresentation = true
         present(destinationScreen, animated: true)
     }
 
@@ -143,7 +143,7 @@ class FolderScreen: UIViewController {
         let clothingFormScreen = ClothingFormScreen()
         let destinationScreen = AMNavigationController(rootViewController: clothingFormScreen)
         clothingFormScreen.delegate = self
-        destinationScreen.modalPresentationStyle = .fullScreen
+        clothingFormScreen.isModalInPresentation = true
         present(destinationScreen, animated: true)
     }
 }

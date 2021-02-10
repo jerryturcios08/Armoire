@@ -120,7 +120,7 @@ class ClosetScreen: UIViewController {
         let folderFormScreen = FolderFormScreen()
         let destinationScreen = AMNavigationController(rootViewController: folderFormScreen)
         folderFormScreen.delegate = self
-        destinationScreen.modalPresentationStyle = .fullScreen
+        folderFormScreen.isModalInPresentation = true
         present(destinationScreen, animated: true)
     }
 }

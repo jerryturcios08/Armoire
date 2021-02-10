@@ -85,9 +85,18 @@ class ClothingFormScreen: UIViewController {
         if selectedClothing != nil { setPreviousValues(for: selectedClothing, image: selectedClothingImage) }
     }
 
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+
+        if traitCollection.userInterfaceStyle == .light {
+            view.backgroundColor = .white
+        } else if traitCollection.userInterfaceStyle == .dark {
+            view.backgroundColor = .black
+        }
+    }
+
     func configureScreen() {
         title = selectedClothing == nil ? "Add Clothing" : "Edit Clothing"
-        view.backgroundColor = .systemBackground
 
         let cancelButton = AMBarButtonItem(title: "Cancel", font: Fonts.quicksandMedium, onAction: cancelButtonTapped)
         navigationItem.leftBarButtonItem = cancelButton

@@ -252,7 +252,7 @@ class ClothingScreen: UIViewController {
         let clothingFormScreen = ClothingFormScreen(selectedClothing: clothing, selectedClothingImage: image)
         let destinationScreen = AMNavigationController(rootViewController: clothingFormScreen)
         clothingFormScreen.delegate = self
-        destinationScreen.modalPresentationStyle = .fullScreen
+        clothingFormScreen.isModalInPresentation = true
         present(destinationScreen, animated: true)
     }
 

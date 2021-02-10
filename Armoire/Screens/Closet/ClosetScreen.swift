@@ -48,7 +48,7 @@ class ClosetScreen: UIViewController {
         let searchController = UISearchController()
         let customFont = UIFont(name: Fonts.quicksandMedium, size: 17)!
         let textAttributes: [NSAttributedString.Key: Any] = [.font: customFont]
-        let attributedString = NSAttributedString(string: "Search", attributes: textAttributes)
+        let attributedString = NSAttributedString(string: "Search Folders", attributes: textAttributes)
 
         searchController.delegate = self
         searchController.searchResultsUpdater = self
@@ -211,7 +211,7 @@ struct ClosetScreenPreviews: PreviewProvider {
         UIViewControllerPreview {
             AMNavigationController(rootViewController: ClosetScreen())
         }
-        .ignoresSafeArea(.all, edges: .bottom)
+        .ignoresSafeArea(.all, edges: .all)
     }
 }
 #endif

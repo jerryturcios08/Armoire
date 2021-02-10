@@ -61,7 +61,7 @@ class FolderScreen: UIViewController {
         let searchController = UISearchController()
         let customFont = UIFont(name: Fonts.quicksandMedium, size: 17)!
         let textAttributes: [NSAttributedString.Key: Any] = [.font: customFont]
-        let attributedString = NSAttributedString(string: "Search", attributes: textAttributes)
+        let attributedString = NSAttributedString(string: "Search Clothes", attributes: textAttributes)
 
         searchController.delegate = self
         searchController.searchResultsUpdater = self
@@ -253,6 +253,7 @@ struct FolderScreenPreviews: PreviewProvider {
         UIViewControllerPreview {
             AMNavigationController(rootViewController: FolderScreen(folder: Folder.example))
         }
+        .ignoresSafeArea(.all, edges: .all)
     }
 }
 #endif

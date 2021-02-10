@@ -293,7 +293,7 @@ struct ClothingScreenPreviews: PreviewProvider {
         UIViewControllerPreview {
             AMNavigationController(rootViewController: ClothingScreen(clothing: Clothing.example))
         }
-        .ignoresSafeArea(.all, edges: .bottom)
+        .ignoresSafeArea(.all, edges: .all)
     }
 }
 #endif

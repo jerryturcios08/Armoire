@@ -113,8 +113,8 @@ class CanvasScene: SKScene {
 
     // MARK: - Node methods
 
-    func createNewNode(for imageName: String) {
-        let newNode = SKSpriteNode(imageNamed: imageName)
+    func createNewNode(for image: UIImage) {
+        let newNode = SKSpriteNode(texture: SKTexture(image: image))
         newNode.name = CanvasObject.item.rawValue
         newNode.position = CGPoint(x: frame.midX, y: frame.midY)
         newNode.zPosition = highestNodeZPosition + 1

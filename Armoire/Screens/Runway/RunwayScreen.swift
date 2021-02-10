@@ -164,7 +164,7 @@ class RunwayScreen: UIViewController {
         let itemSearchScreen = ItemSearchScreen()
         let destinationScreen = AMNavigationController(rootViewController: itemSearchScreen)
         itemSearchScreen.delegate = self
-        itemSearchScreen.isModalInPresentation = true
+        destinationScreen.modalPresentationStyle = .fullScreen
         present(destinationScreen, animated: true)
     }
 
@@ -210,8 +210,15 @@ extension RunwayScreen: CanvasSceneDelegate {
 
 extension RunwayScreen: ItemSearchScreenDelegate {
     func didSelectClothingItem(_ clothing: Clothing) {
-        // Create new node using image URL from selected clothing
-        scene.createNewNode(for: "BlackSkirt")
+        guard let imageUrl = clothing.imageUrl else { return }
+
+        do {
+            let data = try Data(contentsOf: imageUrl)
+            guard let image = UIImage(data: data) else { return }
+            scene.createNewNode(for: image)
+        } catch {
+            presentErrorAlert(message: error.localizedDescription)
+        }
     }
 }
 

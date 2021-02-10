@@ -11,14 +11,9 @@ import UIKit
 class RunwayListScreen: UIViewController {
     let tableView = UITableView(frame: .zero, style: .grouped)
     let footerContainerView = UIView()
-    let runwaysCountLabel = AMBodyLabel(text: "0 runways", fontSize: 18)
+    let runwaysCountLabel = AMBodyLabel(text: "2 runways", fontSize: 18)
 
-    var runways = [Runway]() {
-        didSet {
-            let count = runways.count
-            runwaysCountLabel.text = count == 1 ? "1 runway" : "\(count) runways"
-        }
-    }
+    var dataSource = RunwayDataSource()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,10 +36,12 @@ class RunwayListScreen: UIViewController {
         let addButton = UIBarButtonItem(image: addButtonImage, style: .plain, target: self, action: #selector(addButtonTapped))
         navigationItem.rightBarButtonItem = addButton
 
-        runways = [
-            Runway(title: "Wedding Outfit 2021", isFavorite: true, status: .notSharing),
+        dataSource.delegate = self
+        dataSource.runways = [
+            Runway(title: "Wedding Outfit 2021", isFavorite: false, status: .notSharing),
             Runway(title: "Casual Outfit", isFavorite: false, status: .sharing)
         ]
+        dataSource.sortRunways()
     }
 
     func configureSearchController() {
@@ -62,7 +59,7 @@ class RunwayListScreen: UIViewController {
 
     func configureTableView() {
         view.addSubview(tableView)
-        tableView.dataSource = self
+        tableView.dataSource = dataSource
         tableView.delegate = self
         tableView.backgroundColor = .systemBackground
         tableView.register(RunwayCell.self, forCellReuseIdentifier: RunwayCell.reuseId)
@@ -113,12 +110,13 @@ class RunwayListScreen: UIViewController {
             if runwayName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
                 errorAlert.message = "The text field was empty. Please try again."
                 self.present(errorAlert, animated: true)
-            } else if self.runways.contains(where: { $0.title == runwayName }) {
+            } else if self.dataSource.runways.contains(where: { $0.title == runwayName }) {
                 errorAlert.message = "The runways list already contains this name. Please enter another name."
                 self.present(errorAlert, animated: true)
             } else {
                 let newRunway = Runway(title: runwayName, isFavorite: false, status: .notSharing)
-                self.runways.insert(newRunway, at: 0)
+                self.dataSource.runways.append(newRunway)
+                self.dataSource.sortRunways()
                 self.tableView.reloadDataWithAnimation()
             }
         })
@@ -129,22 +127,29 @@ class RunwayListScreen: UIViewController {
     }
 }
 
-extension RunwayListScreen: UITableViewDataSource, UITableViewDelegate {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return runways.count
+// MARK: - Data source delegate
+
+extension RunwayListScreen: RunwayDataSourceDelegate {
+    func didUpdateDataSource(_ runways: [Runway]) {
+        dataSource.sortRunways()
+        let count = runways.count
+        runwaysCountLabel.text = count == 1 ? "1 runway" : "\(count) runways"
     }
 
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: RunwayCell.reuseId, for: indexPath) as! RunwayCell
-        cell.set(runway: runways[indexPath.row])
-        return cell
+    func errorIsPresented(_ error: AMError) {
+        presentErrorAlert(message: error.rawValue)
     }
+}
 
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            runways.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .automatic)
-        }
+// MARK: - Table view delegate
+
+extension RunwayListScreen: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let runway = dataSource.getItem(for: indexPath)
+        let runwayScreen = AMNavigationController(rootViewController: RunwayScreen(runway: runway.title))
+        runwayScreen.modalPresentationStyle = .fullScreen
+        runwayScreen.modalTransitionStyle = .crossDissolve
+        present(runwayScreen, animated: true)
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -162,15 +167,9 @@ extension RunwayListScreen: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return createFooterView()
     }
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let runway = runways[indexPath.row]
-        let runwayScreen = AMNavigationController(rootViewController: RunwayScreen(runway: runway.title))
-        runwayScreen.modalPresentationStyle = .fullScreen
-        runwayScreen.modalTransitionStyle = .crossDissolve
-        present(runwayScreen, animated: true)
-    }
 }
+
+// MARK: - Previews
 
 #if DEBUG
 struct RunwayListScreenPreviews: PreviewProvider {

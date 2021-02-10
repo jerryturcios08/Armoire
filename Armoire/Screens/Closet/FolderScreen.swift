@@ -200,7 +200,7 @@ extension FolderScreen: FolderFormScreenDelegate {
 
 extension FolderScreen: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let clothing = dataSource.searchText.isEmpty ? dataSource.clothes[indexPath.row] : dataSource.filteredClothes[indexPath.row]
+        let clothing = dataSource.getItem(for: indexPath)
         let clothingScreen = ClothingScreen(clothing: clothing)
         navigationController?.pushViewController(clothingScreen, animated: true)
     }

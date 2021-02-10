@@ -158,7 +158,7 @@ extension ClosetScreen: FolderFormScreenDelegate {
 
 extension ClosetScreen: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let folder = dataSource.searchText.isEmpty ? dataSource.folders[indexPath.row] : dataSource.filteredFolders[indexPath.row]
+        let folder = dataSource.getItem(for: indexPath)
         let folderScreen = FolderScreen(folder: folder)
         navigationController?.pushViewController(folderScreen, animated: true)
     }

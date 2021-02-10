@@ -86,7 +86,9 @@ class FirebaseManager {
     }
 
     func iterateOnFetchedFolders(folders: [Folder], completed: @escaping (Result<[String: [Clothing]], AMError>) -> Void) {
-        for folder in folders {
+        let sortedFolders = folders.sorted { $0.title > $1.title }
+
+        for folder in sortedFolders {
             guard let folderId = folder.id else { continue }
 
             self.fetchClothes(for: folderId) { result in

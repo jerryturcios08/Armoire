@@ -14,8 +14,7 @@ protocol ItemSearchScreenDelegate: class {
 
 class ItemSearchScreen: UIViewController {
     let tableView = UITableView(frame: .zero, style: .grouped)
-    let footerContainerView = UIView()
-    let itemCountLabel = AMBodyLabel(text: "Loading items...", fontSize: 18)
+    let notFoundLabel = AMPrimaryLabel(text: "No clothes were found. Please add clothing items using the closet tab.", fontSize: 20)
 
     var folders = [String]()
     var clothes = [[Clothing]]()
@@ -27,6 +26,7 @@ class ItemSearchScreen: UIViewController {
         configureScreen()
         configureSearchController()
         configureTableView()
+        configureNotFoundLabel()
         fetchAllClothes()
     }
 
@@ -81,6 +81,20 @@ class ItemSearchScreen: UIViewController {
         }
     }
 
+    func configureNotFoundLabel() {
+        view.addSubview(notFoundLabel)
+        notFoundLabel.textColor = .systemGray
+        notFoundLabel.numberOfLines = 0
+        notFoundLabel.textAlignment = .center
+        notFoundLabel.isHidden = true
+
+        notFoundLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(view)
+            make.left.equalTo(view.safeAreaLayoutGuide).offset(20)
+            make.right.equalTo(view.safeAreaLayoutGuide).offset(-20)
+        }
+    }
+
     func fetchAllClothes() {
         FirebaseManager.shared.fetchAllClothes(for: "QePfaCJjbHIOmAZgfgTF") { [weak self] result in
             guard let self = self else { return }
@@ -92,25 +106,19 @@ class ItemSearchScreen: UIViewController {
         }
     }
 
-    func createFooterView() -> UIView {
-        itemCountLabel.textColor = .systemGray
-        footerContainerView.addSubview(itemCountLabel)
-
-        itemCountLabel.snp.makeConstraints { make in
-            make.centerX.centerY.equalTo(footerContainerView)
-        }
-
-        return footerContainerView
-    }
-
     func setTableViewData(with foldersDectionary: [String: [Clothing]]) {
         if foldersDectionary.isEmpty {
-            itemCountLabel.text = "0 items"
-        }
+            UIView.transition(with: self.notFoundLabel, duration: 0.25, options: .transitionCrossDissolve, animations: { [weak self] in
+                guard let self = self else { return }
+                self.notFoundLabel.isHidden = false
+            })
+        } else {
+            notFoundLabel.isHidden = true
 
-        for (key, value) in foldersDectionary {
-            folders.append(key)
-            clothes.append(value)
+            for (key, value) in foldersDectionary {
+                folders.append(key)
+                clothes.append(value)
+            }
         }
 
         tableView.hideActivityIndicator()

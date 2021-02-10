@@ -26,7 +26,7 @@ class CanvasScene: SKScene {
 
     // Item properties
     var selectedNode: SKNode?
-    var highestNodeZPosition = CGFloat(0)
+    var highestNodeZPosition = CGFloat(-1)
     var previousNodePoint = CGPoint.zero
     var selectedItemBorderNode = SKShapeNode()
     var nodeIsSelected = false
@@ -41,7 +41,6 @@ class CanvasScene: SKScene {
     override func sceneDidLoad() {
         super.sceneDidLoad()
         configureCamera()
-        createInitialNode()
     }
 
     override func didMove(to view: SKView) {
@@ -113,14 +112,6 @@ class CanvasScene: SKScene {
     }
 
     // MARK: - Node methods
-
-    func createInitialNode() {
-        // TODO: May soon be deleted since this is for early testing
-        let dressNode = SKSpriteNode(imageNamed: "PinkDress")
-        dressNode.name = CanvasObject.item.rawValue
-        dressNode.position = CGPoint(x: frame.midX, y: frame.midY)
-        addChild(dressNode)
-    }
 
     func createNewNode(for imageName: String) {
         let newNode = SKSpriteNode(imageNamed: imageName)

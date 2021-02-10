@@ -161,7 +161,11 @@ class RunwayScreen: UIViewController {
 
     @objc func addItemButtonTapped(_ sender: UIBarButtonItem) {
         // TODO: Add screen for adding an item from the closet with a valid photo
-        scene.createNewNode(for: "BlackSkirt")
+        let itemSearchScreen = ItemSearchScreen()
+        let destinationScreen = AMNavigationController(rootViewController: itemSearchScreen)
+        itemSearchScreen.delegate = self
+        itemSearchScreen.isModalInPresentation = true
+        present(destinationScreen, animated: true)
     }
 
     @objc func deleteButtonTapped(_ sender: UIBarButtonItem) {
@@ -202,16 +206,24 @@ extension RunwayScreen: CanvasSceneDelegate {
     }
 }
 
+// MARK; - Item search delegate
+
+extension RunwayScreen: ItemSearchScreenDelegate {
+    func didSelectClothingItem(_ clothing: Clothing) {
+        // Create new node using image URL from selected clothing
+        scene.createNewNode(for: "BlackSkirt")
+    }
+}
+
 // MARK: - Previews
 
 #if DEBUG
 struct RunwayScreenPreviews: PreviewProvider {
     static var previews: some View {
-        Group {
-            UIViewControllerPreview {
-                AMNavigationController(rootViewController: RunwayScreen(runway: "My Runway"))
-            }
+        UIViewControllerPreview {
+            AMNavigationController(rootViewController: RunwayScreen(runway: "My Runway"))
         }
+        .ignoresSafeArea(.all, edges: .all)
     }
 }
 #endif

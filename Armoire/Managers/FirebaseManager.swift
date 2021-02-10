@@ -74,6 +74,30 @@ class FirebaseManager {
         uploadTask.resume()
     }
 
+    func fetchAllClothes(for userId: String, completed: @escaping (Result<[String: [Clothing]], AMError>) -> Void) {
+        fetchFolders(for: userId) { [weak self] result in
+            guard let self = self else { return }
+
+            switch result {
+            case .success(let fetchedFolders): self.iterateOnFetchedFolders(folders: fetchedFolders, completed: completed)
+            case .failure(let error): completed(.failure(error))
+            }
+        }
+    }
+
+    func iterateOnFetchedFolders(folders: [Folder], completed: @escaping (Result<[String: [Clothing]], AMError>) -> Void) {
+        for folder in folders {
+            guard let folderId = folder.id else { continue }
+
+            self.fetchClothes(for: folderId) { result in
+                switch result {
+                case .success(let clothes): completed(.success([folder.title: clothes]))
+                case .failure(let error): completed(.failure(error))
+                }
+            }
+        }
+    }
+
     func fetchClothes(for folderId: String, completed: @escaping (Result<[Clothing], AMError>) -> Void) {
         let folderRef = db.collection("folders").document(folderId)
         let clothingQuery = db.collection("clothes").whereField("folder", isEqualTo: folderRef)

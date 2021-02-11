@@ -41,7 +41,7 @@ extension UIViewController {
         let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
         loadingIndicator.hidesWhenStopped = true
         loadingIndicator.style = .large
-        loadingIndicator.startAnimating();
+        loadingIndicator.startAnimating()
 
         ProgressDialog.alert.view.addSubview(loadingIndicator)
         present(ProgressDialog.alert, animated: true, completion: nil)

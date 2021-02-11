@@ -98,7 +98,6 @@ class RunwayScreen: UIViewController {
         scene.canvasDelegate = self
         scene.size = view.bounds.size
         scene.anchorPoint = CGPoint(x: 0, y: 0)
-        // TODO: Need to determine how scene size will be handled
         scene.size = CGSize(width: 1000, height: 1000)
         scene.scaleMode = .aspectFill
 
@@ -160,7 +159,6 @@ class RunwayScreen: UIViewController {
     }
 
     @objc func addItemButtonTapped(_ sender: UIBarButtonItem) {
-        // TODO: Add screen for adding an item from the closet with a valid photo
         let itemSearchScreen = ItemSearchScreen()
         let destinationScreen = AMNavigationController(rootViewController: itemSearchScreen)
         itemSearchScreen.delegate = self
@@ -206,7 +204,7 @@ extension RunwayScreen: CanvasSceneDelegate {
     }
 }
 
-// MARK; - Item search delegate
+// MARK: - Item search delegate
 
 extension RunwayScreen: ItemSearchScreenDelegate {
     func didSelectClothingItem(_ clothing: Clothing) {

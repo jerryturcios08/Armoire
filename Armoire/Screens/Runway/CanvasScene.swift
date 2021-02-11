@@ -170,7 +170,6 @@ class CanvasScene: SKScene {
     // MARK: - Gesture methods
 
     @objc func pinchGestureAction(_ sender: UIPinchGestureRecognizer) {
-        // TODO: Add pinch gesture to selected item to change scale
         guard let camera = camera else { return }
 
         if sender.state == .began {

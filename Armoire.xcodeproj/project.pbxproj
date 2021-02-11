@@ -22,6 +22,7 @@
 		C60E9F8A25BA37FA00D97991 /* UIColor+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60E9F8925BA37FA00D97991 /* UIColor+Ext.swift */; };
 		C62E0C4025B8BC110078065A /* AMBodyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62E0C3F25B8BC110078065A /* AMBodyLabel.swift */; };
 		C62E9D2825D48914007FE502 /* ItemSearchScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62E9D2725D48914007FE502 /* ItemSearchScreen.swift */; };
+		C62E9D2C25D4B00B007FE502 /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62E9D2B25D4B00B007FE502 /* String+Ext.swift */; };
 		C63B0B6425B8C2180065F813 /* AMTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63B0B6325B8C2180065F813 /* AMTextField.swift */; };
 		C63B0B6F25B8DACD0065F813 /* FolderScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63B0B6E25B8DACD0065F813 /* FolderScreen.swift */; };
 		C63B0B7525B8DCE20065F813 /* ClothingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63B0B7425B8DCE20065F813 /* ClothingCell.swift */; };
@@ -85,6 +86,7 @@
 		C60E9F8925BA37FA00D97991 /* UIColor+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Ext.swift"; sourceTree = "<group>"; };
 		C62E0C3F25B8BC110078065A /* AMBodyLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AMBodyLabel.swift; sourceTree = "<group>"; };
 		C62E9D2725D48914007FE502 /* ItemSearchScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemSearchScreen.swift; sourceTree = "<group>"; };
+		C62E9D2B25D4B00B007FE502 /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
 		C63B0B6325B8C2180065F813 /* AMTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AMTextField.swift; sourceTree = "<group>"; };
 		C63B0B6E25B8DACD0065F813 /* FolderScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderScreen.swift; sourceTree = "<group>"; };
 		C63B0B7425B8DCE20065F813 /* ClothingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClothingCell.swift; sourceTree = "<group>"; };
@@ -240,6 +242,7 @@
 			isa = PBXGroup;
 			children = (
 				C648381325C5E30400C8082B /* Date+Ext.swift */,
+				C62E9D2B25D4B00B007FE502 /* String+Ext.swift */,
 				C60E9F8925BA37FA00D97991 /* UIColor+Ext.swift */,
 				C66D718825BE0BEE008BC818 /* UIStackView+Ext.swift */,
 				C6C6D4F025BE15F300E4C0B8 /* UITableView+Ext.swift */,
@@ -547,6 +550,7 @@
 				C6716F2325C106DC00D0CFF2 /* PrimaryFieldsViewController.swift in Sources */,
 				C601988325B7843B004B4203 /* constants.swift in Sources */,
 				C6A9C1D425B7CE8600C22F29 /* AMButton.swift in Sources */,
+				C62E9D2C25D4B00B007FE502 /* String+Ext.swift in Sources */,
 				C6B0A4B125D357430090A70F /* RunwayDataSource.swift in Sources */,
 				C6AA152D25BCBD0E0095ADA0 /* AMTextView.swift in Sources */,
 				C60E9F8125BA358C00D97991 /* Folder.swift in Sources */,

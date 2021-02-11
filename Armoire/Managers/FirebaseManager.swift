@@ -8,12 +8,6 @@
 import FirebaseFirestore
 import FirebaseStorage
 
-extension String {
-    var blobCase: String {
-        self.replacingOccurrences(of: " ", with: "-")
-    }
-}
-
 class FirebaseManager {
     static let shared = FirebaseManager()
 

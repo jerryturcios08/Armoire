@@ -113,8 +113,16 @@ class FirebaseManager {
                 fatalError("Something went wrong.")
             }
 
-            let clothes = documents.compactMap { document in
+            var clothes = documents.compactMap { document in
                 return try? document.data(as: Clothing.self)
+            }
+
+            clothes = clothes.sorted { firstItem, secondItem in
+                if firstItem.isFavorite == secondItem.isFavorite {
+                    return firstItem.name < secondItem.name
+                }
+
+                return firstItem.isFavorite && !secondItem.isFavorite
             }
 
             completed(.success(clothes))

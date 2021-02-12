@@ -382,4 +382,41 @@ class FirebaseManager {
             completed(.success(runways))
         }
     }
+
+    func updateRunwayCanvas(_ runway: Runway, itemNodes: [ItemNode], errorHandler: @escaping (AMError) -> Void) {
+        guard let id = runway.id else { return }
+        let runwayRef = db.collection("runways").document(id)
+        let storageRef = storage.reference()
+
+        let runwayCanvasRef = storageRef.child("runways/\(id.blobCase).json")
+
+        do {
+            let jsonData = try JSONEncoder().encode(itemNodes)
+
+            let uploadTask = runwayCanvasRef.putData(jsonData, metadata: nil) { metadata, error in
+                if error != nil {
+                    return errorHandler(.unableToComplete)
+                }
+
+                runwayCanvasRef.downloadURL { url, error in
+                    if error != nil {
+                        return errorHandler(.unableToComplete)
+                    }
+
+                    guard let downloadUrl = url else {
+                        return errorHandler(.invalidUrl)
+                    }
+
+                    runwayRef.updateData([
+                        "dataUrl": downloadUrl.absoluteString,
+                        "dateUpdated": Date()
+                    ])
+                }
+            }
+
+            uploadTask.resume()
+        } catch {
+            errorHandler(.invalidData)
+        }
+    }
 }

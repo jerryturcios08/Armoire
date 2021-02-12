@@ -182,7 +182,7 @@ extension RunwayListScreen: RunwayDataSourceDelegate {
 extension RunwayListScreen: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let runway = dataSource.getItem(for: indexPath)
-        let runwayScreen = AMNavigationController(rootViewController: RunwayScreen(runway: runway.title))
+        let runwayScreen = AMNavigationController(rootViewController: RunwayScreen(runway: runway))
         runwayScreen.modalPresentationStyle = .fullScreen
         runwayScreen.modalTransitionStyle = .crossDissolve
         present(runwayScreen, animated: true)

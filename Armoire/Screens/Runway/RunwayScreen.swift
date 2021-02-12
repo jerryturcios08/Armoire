@@ -20,12 +20,12 @@ class RunwayScreen: UIViewController {
     let moveDownButton = AMBarButtonItem(image: UIImage(systemName: "arrow.down"))
     let deleteButton = AMBarButtonItem(image: UIImage(systemName: "trash"))
 
-    private var runway: String
+    private var runway: Runway
     var selectedNode: SKNode?
 
     // MARK: - Initializers
 
-    init(runway: String) {
+    init(runway: Runway) {
         self.runway = runway
         super.init(nibName: nil, bundle: nil)
     }
@@ -56,7 +56,7 @@ class RunwayScreen: UIViewController {
     // MARK: - Configurations
 
     func configureScreen() {
-        title = runway
+        title = runway.title
         view.backgroundColor = .systemBackground
         navigationItem.largeTitleDisplayMode = .never
 
@@ -202,6 +202,13 @@ extension RunwayScreen: CanvasSceneDelegate {
         moveDownButton.isEnabled = true
         deleteButton.isEnabled = true
     }
+
+    func didUpdate(_ itemNodes: [ItemNode]) {
+        FirebaseManager.shared.updateRunwayCanvas(runway, itemNodes: itemNodes) { [weak self] error in
+            guard let self = self else { return }
+            self.presentErrorAlert(message: error.rawValue)
+        }
+    }
 }
 
 // MARK: - Item search delegate
@@ -226,7 +233,7 @@ extension RunwayScreen: ItemSearchScreenDelegate {
 struct RunwayScreenPreviews: PreviewProvider {
     static var previews: some View {
         UIViewControllerPreview {
-            AMNavigationController(rootViewController: RunwayScreen(runway: "My Runway"))
+            AMNavigationController(rootViewController: RunwayScreen(runway: Runway(title: "Wedding Outfit 2021")))
         }
         .ignoresSafeArea(.all, edges: .all)
     }

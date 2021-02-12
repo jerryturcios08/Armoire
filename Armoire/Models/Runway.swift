@@ -8,7 +8,7 @@
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
-struct ItemNode {
+struct ItemNode: Codable {
     var imageUrl: String
     var xPosition: Double
     var yPosition: Double
@@ -17,6 +17,7 @@ struct ItemNode {
 
 struct Runway: Codable {
     @DocumentID var id: String? = nil
+    var dataUrl: URL?
     var title: String
     var isFavorite = false
     var isSharing = false

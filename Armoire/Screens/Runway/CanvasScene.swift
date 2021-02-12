@@ -10,6 +10,7 @@ import SpriteKit
 protocol CanvasSceneDelegate: class {
     func didTapBackground()
     func didTapItem(_ node: SKNode)
+    func didUpdate(_ itemNodes: [ItemNode])
 }
 
 fileprivate enum CanvasObject: String {
@@ -131,7 +132,7 @@ class CanvasScene: SKScene {
             zPosition: Double(newNode.zPosition)
         )
         itemNodes.append(item)
-        saveRunway()
+        canvasDelegate?.didUpdate(itemNodes)
     }
 
     func createBorderNode(for node: SKNode) -> SKShapeNode {
@@ -177,10 +178,6 @@ class CanvasScene: SKScene {
         }
 
         nodeIsSelected = false
-    }
-
-    func saveRunway() {
-
     }
 
     // MARK: - Gesture methods

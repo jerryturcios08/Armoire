@@ -37,11 +37,6 @@ class RunwayListScreen: UIViewController {
         navigationItem.rightBarButtonItem = addButton
 
         dataSource.delegate = self
-        dataSource.runways = [
-            Runway(title: "Wedding Outfit 2021", isFavorite: false, status: .notSharing),
-            Runway(title: "Casual Outfit", isFavorite: false, status: .sharing)
-        ]
-        dataSource.sortRunways()
     }
 
     func configureSearchController() {
@@ -114,7 +109,7 @@ class RunwayListScreen: UIViewController {
                 errorAlert.message = "The runways list already contains this name. Please enter another name."
                 self.present(errorAlert, animated: true)
             } else {
-                let newRunway = Runway(title: runwayName, isFavorite: false, status: .notSharing)
+                let newRunway = Runway(title: runwayName)
                 self.dataSource.runways.append(newRunway)
                 self.dataSource.sortRunways()
                 self.tableView.reloadDataWithAnimation()

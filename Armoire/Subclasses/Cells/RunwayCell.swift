@@ -29,7 +29,7 @@ class RunwayCell: UITableViewCell {
 
     func set(runway: Runway) {
         runwayTitleLabel.text = runway.title
-        updateStatusLabel(with: runway.status)
+        updateStatusLabel(isSharing: runway.isSharing)
 
         if let starImage = UIImage(systemName: SFSymbol.starFill) {
             let starColor = runway.isFavorite ? UIColor.systemYellow : UIColor.systemGray
@@ -101,16 +101,16 @@ class RunwayCell: UITableViewCell {
         }
     }
 
-    func updateStatusLabel(with status: Status) {
+    func updateStatusLabel(isSharing: Bool) {
         let customFont = UIFont(name: Fonts.quicksandMedium, size: 9)!
 
         let statusAttributedText = NSMutableAttributedString(string: "Status: ", attributes: [
             NSAttributedString.Key.font: UIFontMetrics.default.scaledFont(for: customFont),
         ])
 
-        let valueAttributedText = NSAttributedString(string: status.rawValue, attributes: [
+        let valueAttributedText = NSAttributedString(string: isSharing ? "Sharing" : "Not Sharing", attributes: [
             NSAttributedString.Key.font: UIFontMetrics.default.scaledFont(for: customFont),
-            NSAttributedString.Key.foregroundColor: status == .sharing ? UIColor.systemGreen : UIColor.systemRed
+            NSAttributedString.Key.foregroundColor: isSharing ? UIColor.systemGreen : UIColor.systemRed
         ])
 
         statusAttributedText.append(valueAttributedText)

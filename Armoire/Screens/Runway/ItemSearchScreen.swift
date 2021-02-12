@@ -18,12 +18,18 @@ private struct SearchObject {
 }
 
 class ItemSearchScreen: UIViewController {
+    // MARK: - Properties
+
     let tableView = UITableView(frame: .zero, style: .grouped)
     let notFoundLabel = AMPrimaryLabel(text: "No clothes were found. Please add clothing items using the closet tab.", fontSize: 20)
 
     private var searchObjects = [SearchObject]()
+    private var filteredSearchObjects = [SearchObject]()
+    var searchText = ""
 
     weak var delegate: ItemSearchScreenDelegate?
+
+    // MARK: - Configurations
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -110,6 +116,8 @@ class ItemSearchScreen: UIViewController {
         }
     }
 
+    // MARK: - Defined methods
+
     func setTableViewData(with foldersDectionary: [String: [Clothing]]) {
         if foldersDectionary.isEmpty {
             UIView.transition(with: self.notFoundLabel, duration: 0.25, options: .transitionCrossDissolve, animations: { [weak self] in
@@ -128,6 +136,19 @@ class ItemSearchScreen: UIViewController {
         tableView.reloadDataWithAnimation()
     }
 
+    func filterSearchObjectsWithSearchText() {
+        filteredSearchObjects = searchObjects.filter {
+            searchText.isEmpty ? true :
+                $0.name.lowercased().contains(searchText.lowercased()) ||
+                $0.clothes.contains {
+                    $0.name.lowercased().contains(searchText.lowercased()) ||
+                    $0.brand.lowercased().contains(searchText.lowercased())
+                }
+        }
+
+        tableView.reloadDataWithAnimation()
+    }
+
     @objc func cancelButtonTapped(_ sender: UIBarButtonItem) {
         dismiss(animated: true)
     }
@@ -141,26 +162,35 @@ class ItemSearchScreen: UIViewController {
 
 extension ItemSearchScreen: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return searchObjects.count
+        return searchText.isEmpty ? searchObjects.count : filteredSearchObjects.count
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return searchObjects[section].clothes.count
+        return searchText.isEmpty ? searchObjects[section].clothes.count : filteredSearchObjects[section].clothes.count
     }
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return searchObjects[section].name
+        return searchText.isEmpty ? searchObjects[section].name : filteredSearchObjects[section].name
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ClothingCell.reuseId, for: indexPath) as! ClothingCell
-        let clothing = searchObjects[indexPath.section].clothes[indexPath.row]
+
+        let clothing = searchText.isEmpty ?
+            searchObjects[indexPath.section].clothes[indexPath.row] :
+            filteredSearchObjects[indexPath.section].clothes[indexPath.row]
+
         cell.set(clothing: clothing)
         return cell
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let clothing = searchObjects[indexPath.section].clothes[indexPath.row]
+        navigationItem.searchController?.dismiss(animated: false)
+
+        let clothing = searchText.isEmpty ?
+            searchObjects[indexPath.section].clothes[indexPath.row] :
+            filteredSearchObjects[indexPath.section].clothes[indexPath.row]
+
         delegate?.didSelectClothingItem(clothing)
         dismiss(animated: true)
     }
@@ -169,7 +199,15 @@ extension ItemSearchScreen: UITableViewDataSource, UITableViewDelegate {
 // MARK: - Search controller
 
 extension ItemSearchScreen: UISearchControllerDelegate, UISearchResultsUpdating {
+    func didDismissSearchController(_ searchController: UISearchController) {
+        searchText = ""
+        filterSearchObjectsWithSearchText()
+    }
+
     func updateSearchResults(for searchController: UISearchController) {
+        guard let text = searchController.searchBar.text else { return }
+        searchText = text
+        filterSearchObjectsWithSearchText()
     }
 }
 

@@ -22,6 +22,8 @@ class CanvasScene: SKScene {
 
     let cameraNode = SKCameraNode()
 
+    var itemNodes = [ItemNode]()
+
     weak var canvasDelegate: CanvasSceneDelegate?
 
     // Item properties
@@ -113,13 +115,23 @@ class CanvasScene: SKScene {
 
     // MARK: - Node methods
 
-    func createNewNode(for image: UIImage) {
+    func createNewNode(for image: UIImage, urlString: String) {
         let newNode = SKSpriteNode(texture: SKTexture(image: image))
         newNode.name = CanvasObject.item.rawValue
         newNode.position = CGPoint(x: frame.midX, y: frame.midY)
         newNode.zPosition = highestNodeZPosition + 1
         highestNodeZPosition += 1
         addChild(newNode)
+
+        // Creates a new item node to be synced with firebase
+        let item = ItemNode(
+            imageUrl: urlString,
+            xPosition: Double(newNode.position.x),
+            yPosition: Double(newNode.position.y),
+            zPosition: Double(newNode.zPosition)
+        )
+        itemNodes.append(item)
+        saveRunway()
     }
 
     func createBorderNode(for node: SKNode) -> SKShapeNode {
@@ -136,7 +148,7 @@ class CanvasScene: SKScene {
         return borderNode
     }
 
-    // MARK: - Action methods
+    // MARK: - Defined methods
 
     func increaseNodeZPosition(for node: SKNode) {
         if node.zPosition == highestNodeZPosition {
@@ -165,6 +177,10 @@ class CanvasScene: SKScene {
         }
 
         nodeIsSelected = false
+    }
+
+    func saveRunway() {
+
     }
 
     // MARK: - Gesture methods

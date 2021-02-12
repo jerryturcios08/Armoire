@@ -9,17 +9,22 @@ import SwiftUI
 import UIKit
 
 class RunwayListScreen: UIViewController {
+    // MARK: - Properties
+
     let tableView = UITableView(frame: .zero, style: .grouped)
     let footerContainerView = UIView()
-    let runwaysCountLabel = AMBodyLabel(text: "2 runways", fontSize: 18)
+    let runwaysCountLabel = AMBodyLabel(text: "Loading runways...", fontSize: 18)
 
     var dataSource = RunwayDataSource()
+
+    // MARK: - Configurations
 
     override func viewDidLoad() {
         super.viewDidLoad()
         configureScreen()
         configureSearchController()
         configureTableView()
+        fetchRunways()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -60,12 +65,26 @@ class RunwayListScreen: UIViewController {
         tableView.register(RunwayCell.self, forCellReuseIdentifier: RunwayCell.reuseId)
         tableView.rowHeight = 70
         tableView.separatorStyle = .none
+        tableView.showActivityIndicator()
 
         tableView.snp.makeConstraints { make in
             make.top.bottom.equalTo(view)
             make.left.right.equalTo(view.safeAreaLayoutGuide)
         }
     }
+
+    func fetchRunways() {
+        FirebaseManager.shared.fetchRunways(for: "QePfaCJjbHIOmAZgfgTF") { [weak self] result in
+            guard let self = self else { return }
+
+            switch result {
+            case .success(let runways): self.setTableViewData(with: runways)
+            case .failure(let error): self.presentErrorAlert(message: error.rawValue)
+            }
+        }
+    }
+
+    // MARK: - Defined methods
 
     func createFooterView() -> UIView {
         runwaysCountLabel.textColor = .systemGray
@@ -81,6 +100,22 @@ class RunwayListScreen: UIViewController {
     func deselectSelectedTableViewRow() {
         guard let index = tableView.indexPathForSelectedRow else { return }
         tableView.deselectRow(at: index, animated: true)
+    }
+
+    func setTableViewData(with runways: [Runway]) {
+        if runways.isEmpty {
+            runwaysCountLabel.text = "0 runways"
+        }
+
+        dataSource.runways = runways
+        tableView.hideActivityIndicator()
+        tableView.reloadDataWithAnimation()
+    }
+
+    func addTableViewData(using runway: Runway) {
+        dataSource.runways.append(runway)
+        dataSource.sortRunways()
+        tableView.reloadDataWithAnimation()
     }
 
     @objc func addButtonTapped(_ sender: UIBarButtonItem) {
@@ -109,10 +144,16 @@ class RunwayListScreen: UIViewController {
                 errorAlert.message = "The runways list already contains this name. Please enter another name."
                 self.present(errorAlert, animated: true)
             } else {
-                let newRunway = Runway(title: runwayName)
-                self.dataSource.runways.append(newRunway)
-                self.dataSource.sortRunways()
-                self.tableView.reloadDataWithAnimation()
+                let runway = Runway(title: runwayName)
+
+                FirebaseManager.shared.createRunway(with: runway, for: "QePfaCJjbHIOmAZgfgTF") { [weak self] result in
+                    guard let self = self else { return }
+
+                    switch result {
+                    case .success(let runway): self.addTableViewData(using: runway)
+                    case .failure(let error): self.presentErrorAlert(message: error.rawValue)
+                    }
+                }
             }
         })
 

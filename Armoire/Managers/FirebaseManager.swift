@@ -273,7 +273,7 @@ class FirebaseManager {
         }
     }
 
-    func updateFolder(_ folder: Folder, completion: @escaping (Result<Folder, AMError>) -> Void) {
+    func updateFolder(_ folder: Folder, completed: @escaping (Result<Folder, AMError>) -> Void) {
         guard let id = folder.id else { return }
         let folderRef = db.collection("folders").document(id)
 
@@ -336,6 +336,50 @@ class FirebaseManager {
                     return errorHandler(.invalidData)
                 }
             }
+        }
+    }
+
+    // MARK: - Runway collection
+
+    func createRunway(with runway: Runway, for userId: String, completed: @escaping (Result<Runway, AMError>) -> Void) {
+        let userRef = db.collection("users").document(userId)
+        let runwaysRef = db.collection("runways")
+
+        var newRunway = Runway(
+            title: runway.title,
+            isFavorite: runway.isFavorite,
+            isSharing: runway.isSharing,
+            dateCreated: runway.dateCreated,
+            user: userRef
+        )
+
+        do {
+            let document = try runwaysRef.addDocument(from: newRunway)
+            newRunway.id = document.documentID
+            completed(.success(newRunway))
+        } catch {
+            completed(.failure(.invalidData))
+        }
+    }
+
+    func fetchRunways(for userId: String, completed: @escaping (Result<[Runway], AMError>) -> Void) {
+        let userRef = db.collection("users").document(userId)
+        let runwayQuery = db.collection("runways").whereField("user", isEqualTo: userRef)
+
+        runwayQuery.getDocuments { querySnapshot, error in
+            if error != nil {
+                return completed(.failure(.unableToComplete))
+            }
+
+            guard let documents = querySnapshot?.documents else {
+                return completed(.failure(.nonexistentDocument))
+            }
+
+            let runways = documents.compactMap { document in
+                return try? document.data(as: Runway.self)
+            }
+
+            completed(.success(runways))
         }
     }
 }

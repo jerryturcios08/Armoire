@@ -213,7 +213,7 @@ extension RunwayScreen: ItemSearchScreenDelegate {
         do {
             let data = try Data(contentsOf: imageUrl)
             guard let image = UIImage(data: data) else { return }
-            scene.createNewNode(for: image)
+            scene.createNewNode(for: image, urlString: imageUrl.absoluteString)
         } catch {
             presentErrorAlert(message: error.localizedDescription)
         }

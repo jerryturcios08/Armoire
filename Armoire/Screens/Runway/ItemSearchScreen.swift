@@ -12,12 +12,16 @@ protocol ItemSearchScreenDelegate: class {
     func didSelectClothingItem(_ clothing: Clothing)
 }
 
+private struct SearchObject {
+    var name: String
+    var clothes: [Clothing]
+}
+
 class ItemSearchScreen: UIViewController {
     let tableView = UITableView(frame: .zero, style: .grouped)
     let notFoundLabel = AMPrimaryLabel(text: "No clothes were found. Please add clothing items using the closet tab.", fontSize: 20)
 
-    var folders = [String]()
-    var clothes = [[Clothing]]()
+    private var searchObjects = [SearchObject]()
 
     weak var delegate: ItemSearchScreenDelegate?
 
@@ -116,8 +120,7 @@ class ItemSearchScreen: UIViewController {
             notFoundLabel.isHidden = true
 
             for (key, value) in foldersDectionary {
-                folders.append(key)
-                clothes.append(value)
+                searchObjects.append(SearchObject(name: key, clothes: value))
             }
         }
 
@@ -138,26 +141,27 @@ class ItemSearchScreen: UIViewController {
 
 extension ItemSearchScreen: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return folders.count
+        return searchObjects.count
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return clothes[section].count
+        return searchObjects[section].clothes.count
     }
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return folders[section]
+        return searchObjects[section].name
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ClothingCell.reuseId, for: indexPath) as! ClothingCell
-        let clothing = clothes[indexPath.section][indexPath.row]
+        let clothing = searchObjects[indexPath.section].clothes[indexPath.row]
         cell.set(clothing: clothing)
         return cell
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        delegate?.didSelectClothingItem(clothes[indexPath.section][indexPath.row])
+        let clothing = searchObjects[indexPath.section].clothes[indexPath.row]
+        delegate?.didSelectClothingItem(clothing)
         dismiss(animated: true)
     }
 }

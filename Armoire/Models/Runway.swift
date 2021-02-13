@@ -9,6 +9,7 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 
 struct ItemNode: Codable {
+    var id: String
     var imageUrl: String
     var xPosition: Double
     var yPosition: Double

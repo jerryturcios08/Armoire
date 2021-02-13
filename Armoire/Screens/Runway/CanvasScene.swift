@@ -116,9 +116,30 @@ class CanvasScene: SKScene {
 
     // MARK: - Node methods
 
+    func loadNodes(_ nodes: [ItemNode]) {
+        for node in nodes {
+            guard let url = URL(string: node.imageUrl) else { return }
+            let data = try! Data(contentsOf: url)
+            guard let image = UIImage(data: data) else { return }
+
+            let newNode = SKSpriteNode(texture: SKTexture(image: image))
+            newNode.name = node.id
+            newNode.position = CGPoint(x: node.xPosition, y: node.yPosition)
+            newNode.zPosition = CGFloat(node.zPosition)
+            addChild(newNode)
+
+            if CGFloat(node.zPosition) > highestNodeZPosition {
+                highestNodeZPosition = CGFloat(node.zPosition)
+            }
+
+            itemNodes.append(node)
+        }
+    }
+
     func createNewNode(for image: UIImage, urlString: String) {
+        let generatedId = UUID().uuidString + "-\(CanvasObject.item.rawValue)"
         let newNode = SKSpriteNode(texture: SKTexture(image: image))
-        newNode.name = CanvasObject.item.rawValue
+        newNode.name = generatedId
         newNode.position = CGPoint(x: frame.midX, y: frame.midY)
         newNode.zPosition = highestNodeZPosition + 1
         highestNodeZPosition += 1
@@ -126,6 +147,7 @@ class CanvasScene: SKScene {
 
         // Creates a new item node to be synced with firebase
         let item = ItemNode(
+            id: generatedId,
             imageUrl: urlString,
             xPosition: Double(newNode.position.x),
             yPosition: Double(newNode.position.y),
@@ -158,10 +180,24 @@ class CanvasScene: SKScene {
         } else {
             node.zPosition += 1
         }
+
+        for (index, itemNode) in itemNodes.enumerated() {
+            if itemNode.id == node.name {
+                itemNodes[index].zPosition = Double(node.zPosition)
+                canvasDelegate?.didUpdate(itemNodes)
+            }
+        }
     }
 
     func decreaseNodeZPosition(for node: SKNode) {
         node.zPosition -= 1
+
+        for (index, itemNode) in itemNodes.enumerated() {
+            if itemNode.id == node.name {
+                itemNodes[index].zPosition = Double(node.zPosition)
+                canvasDelegate?.didUpdate(itemNodes)
+            }
+        }
     }
 
     func deleteNode(node: SKNode) {
@@ -177,7 +213,13 @@ class CanvasScene: SKScene {
             self.removeChildren(in: [self.selectedItemBorderNode])
         }
 
-        nodeIsSelected = false
+        for (index, itemNode) in itemNodes.enumerated() {
+            if itemNode.id == node.name {
+                nodeIsSelected = false
+                itemNodes.remove(at: index)
+                canvasDelegate?.didUpdate(itemNodes)
+            }
+        }
     }
 
     // MARK: - Gesture methods
@@ -214,6 +256,16 @@ class CanvasScene: SKScene {
                     // Sets the position of the node and border based on the computations
                     node.position = newPosition
                     selectedItemBorderNode.position = CGPoint(x: node.frame.minX, y: node.frame.minY)
+
+                    // Updates the item nodes array with the updated position for the selected node
+                    for (index, itemNode) in itemNodes.enumerated() {
+                        guard let name = node.name else { continue }
+
+                        if itemNode.id.contains(name) {
+                            itemNodes[index].xPosition = Double(newPosition.x)
+                            itemNodes[index].yPosition = Double(newPosition.y)
+                        }
+                    }
                 }
 
                 previousNodePoint = touchLocation

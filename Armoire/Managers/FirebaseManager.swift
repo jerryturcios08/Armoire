@@ -394,10 +394,6 @@ class FirebaseManager {
             let jsonData = try JSONEncoder().encode(itemNodes)
 
             let uploadTask = runwayCanvasRef.putData(jsonData, metadata: nil) { metadata, error in
-                if error != nil {
-                    return errorHandler(.unableToComplete)
-                }
-
                 runwayCanvasRef.downloadURL { url, error in
                     if error != nil {
                         return errorHandler(.unableToComplete)

@@ -61,7 +61,8 @@ class RunwayScreen: UIViewController {
         navigationItem.largeTitleDisplayMode = .never
 
         let closeButton = UIBarButtonItem(image: UIImage(systemName: "xmark"), style: .plain, target: self, action: #selector(closeButtonTapped))
-        navigationItem.leftBarButtonItem = closeButton
+        let saveButton = UIBarButtonItem(image: UIImage(systemName: "square.and.arrow.down"), style: .plain, target: self, action: #selector(saveButtonTapped))
+        navigationItem.leftBarButtonItems = [closeButton, saveButton]
 
         let exportButton = UIBarButtonItem(image: UIImage(systemName: "link"), style: .plain, target: self, action: #selector(exportButtonTapped))
         let addButton = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(addItemButtonTapped))
@@ -118,6 +119,16 @@ class RunwayScreen: UIViewController {
         skView.showsFPS = false
         skView.showsNodeCount = false
         #endif
+
+        if let dataUrl = runway.dataUrl {
+            do {
+                let jsonData = try Data(contentsOf: dataUrl)
+                let nodes = try JSONDecoder().decode([ItemNode].self, from: jsonData)
+                scene.loadNodes(nodes)
+            } catch {
+                presentErrorAlert(message: error.localizedDescription)
+            }
+        }
     }
 
     // MARK: - Action methods
@@ -128,11 +139,27 @@ class RunwayScreen: UIViewController {
 
         alertController.addAction(UIAlertAction(title: "Exit", style: .default) { [weak self] _ in
             guard let self = self else { return }
+
+            FirebaseManager.shared.updateRunwayCanvas(self.runway, itemNodes: self.scene.itemNodes) { error in
+                self.presentErrorAlert(message: error.rawValue)
+            }
+
             self.dismiss(animated: true)
         })
 
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
 
+        present(alertController, animated: true)
+    }
+
+    @objc func saveButtonTapped(_ sender: UIBarButtonItem) {
+        FirebaseManager.shared.updateRunwayCanvas(self.runway, itemNodes: self.scene.itemNodes) { error in
+            return self.presentErrorAlert(message: error.rawValue)
+        }
+
+        let alertController = UIAlertController(title: "Saved", message: "Your runway was saved.", preferredStyle: .alert)
+        alertController.view.tintColor = UIColor.accentColor
+        alertController.addAction(UIAlertAction(title: "Okay", style: .default))
         present(alertController, animated: true)
     }
 

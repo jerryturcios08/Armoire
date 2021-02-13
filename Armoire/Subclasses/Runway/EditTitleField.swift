@@ -28,9 +28,9 @@ class EditTitleField: UIView {
         super.traitCollectionDidChange(previousTraitCollection)
 
         if traitCollection.userInterfaceStyle == .light {
-            layer.borderColor = UIColor.systemGray5.cgColor
+            layer.borderColor = UIColor.clear.cgColor
         } else if traitCollection.userInterfaceStyle == .dark {
-            layer.borderColor = UIColor.darkGray.cgColor
+            layer.borderColor = UIColor.secondarySystemFill.cgColor
         }
     }
 
@@ -41,7 +41,7 @@ class EditTitleField: UIView {
         layer.borderWidth = 1
         layer.cornerRadius = 15
 
-        layer.shadowColor = UIColor.black.cgColor
+        layer.borderColor = UIColor.clear.cgColor
         layer.shadowOffset = .init(width: 0, height: 4)
         layer.shadowRadius = 4
         layer.shadowOpacity = 0.15
@@ -50,6 +50,9 @@ class EditTitleField: UIView {
 
     private func configureTextField() {
         addSubview(textField)
+        textField.autocapitalizationType = .words
+        textField.autocorrectionType = .yes
+        textField.returnKeyType = .done
 
         textField.snp.makeConstraints { make in
             make.edges.equalTo(self).inset(UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8))

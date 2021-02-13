@@ -20,6 +20,9 @@ class RunwayScreen: UIViewController {
     let moveDownButton = AMBarButtonItem(image: UIImage(systemName: "arrow.down"))
     let deleteButton = AMBarButtonItem(image: UIImage(systemName: "trash"))
 
+    let editTitleField = EditTitleField(previousTitle: "")
+    let editTitleTapGestureRecognizer = UITapGestureRecognizer()
+
     private var runway: Runway
     var selectedNode: SKNode?
 
@@ -39,8 +42,11 @@ class RunwayScreen: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureScreen()
+        configureGestures()
+        configureNavigationTitleView()
         configureControlsToolbar()
         configureCanvasView()
+        configureEditTitleField()
     }
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -56,7 +62,6 @@ class RunwayScreen: UIViewController {
     // MARK: - Configurations
 
     func configureScreen() {
-        title = runway.title
         view.backgroundColor = .systemBackground
         navigationItem.largeTitleDisplayMode = .never
 
@@ -67,6 +72,24 @@ class RunwayScreen: UIViewController {
         let exportButton = UIBarButtonItem(image: UIImage(systemName: "link"), style: .plain, target: self, action: #selector(exportButtonTapped))
         let addButton = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(addItemButtonTapped))
         navigationItem.rightBarButtonItems = [addButton, exportButton]
+    }
+
+    func configureGestures() {
+        editTitleTapGestureRecognizer.addTarget(self, action: #selector(runwayTitleTapped))
+        view.addGestureRecognizer(editTitleTapGestureRecognizer)
+    }
+
+    func configureNavigationTitleView() {
+        let titleLabel = AMBodyLabel(text: runway.title)
+        titleLabel.text = runway.title
+        titleLabel.numberOfLines = 1
+        titleLabel.lineBreakMode = .byTruncatingTail
+
+        let titleView = titleLabel
+        titleView.setFont(with: UIFont(name: Fonts.quicksandSemiBold, size: 17))
+        titleView.isUserInteractionEnabled = true
+        titleView.addGestureRecognizer(editTitleTapGestureRecognizer)
+        navigationItem.titleView = titleView
     }
 
     func configureControlsToolbar() {
@@ -131,7 +154,33 @@ class RunwayScreen: UIViewController {
         }
     }
 
-    // MARK: - Action methods
+    func configureEditTitleField() {
+        view.addSubview(editTitleField)
+        editTitleField.isHidden = true
+        editTitleField.textField.delegate = self
+        editTitleField.textField.text = runway.title
+
+        editTitleField.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(10)
+            make.width.equalTo(340)
+            make.height.equalTo(60)
+            make.centerX.equalTo(view)
+        }
+    }
+
+    // MARK: - Defined methods
+
+    func updateTitleView(text: String) {
+        let updatedTitleLabel = AMBodyLabel(text: text)
+        updatedTitleLabel.numberOfLines = 1
+        updatedTitleLabel.lineBreakMode = .byTruncatingTail
+
+        let titleView = updatedTitleLabel
+        titleView.setFont(with: UIFont(name: Fonts.quicksandSemiBold, size: 17))
+        titleView.isUserInteractionEnabled = true
+        titleView.addGestureRecognizer(editTitleTapGestureRecognizer)
+        navigationItem.titleView = updatedTitleLabel
+    }
 
     @objc func closeButtonTapped(_ sender: UIBarButtonItem) {
         let alertController = UIAlertController(title: "Exit", message: "Are you sure you want to close this runway? All progress will be saved.", preferredStyle: .alert)
@@ -211,6 +260,14 @@ class RunwayScreen: UIViewController {
 
         present(alertController, animated: true)
     }
+
+    @objc func runwayTitleTapped(_ gesture: UITapGestureRecognizer) {
+        UIView.transition(with: editTitleField, duration: 0.25, options: .transitionCrossDissolve, animations: { [weak self] in
+            guard let self = self else { return }
+            self.editTitleField.isHidden = false
+            self.editTitleField.textField.becomeFirstResponder()
+        })
+    }
 }
 
 // MARK: - Canvas scene delegate
@@ -251,6 +308,32 @@ extension RunwayScreen: ItemSearchScreenDelegate {
         } catch {
             presentErrorAlert(message: error.localizedDescription)
         }
+    }
+}
+
+// MARK: - Text field delegate
+
+extension RunwayScreen: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        guard let text = textField.text else { return true }
+
+        if !text.isEmpty && (text != runway.title) {
+            runway.title = text
+
+            FirebaseManager.shared.updateRunway(runway) { [weak self] result in
+                guard let self = self else { return }
+
+                switch result {
+                case .success(_): break
+                case .failure(let error): self.presentErrorAlert(message: error.rawValue)
+                }
+            }
+        }
+
+        editTitleField.isHidden = true
+        updateTitleView(text: self.runway.title)
+
+        return textField.resignFirstResponder()
     }
 }
 

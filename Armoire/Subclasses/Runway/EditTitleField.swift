@@ -43,7 +43,7 @@ class EditTitleField: UIView {
 
     private func configureTextField() {
         addSubview(textField)
-        textField.autocapitalizationType = .words
+        textField.autocapitalizationType = .sentences
         textField.autocorrectionType = .yes
         textField.returnKeyType = .done
 

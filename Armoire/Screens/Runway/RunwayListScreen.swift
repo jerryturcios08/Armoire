@@ -51,6 +51,9 @@ class RunwayListScreen: UIViewController {
         let textAttributes: [NSAttributedString.Key: Any] = [.font: customFont]
         let attributedString = NSAttributedString(string: "Search", attributes: textAttributes)
 
+        searchController.delegate = self
+        searchController.searchResultsUpdater = self
+        searchController.searchBar.tintColor = UIColor.accentColor
         searchController.searchBar.searchTextField.attributedPlaceholder = attributedString
         searchController.obscuresBackgroundDuringPresentation = false
 
@@ -203,6 +206,23 @@ extension RunwayListScreen: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return createFooterView()
+    }
+}
+
+// MARK: - Search controller
+
+extension RunwayListScreen: UISearchControllerDelegate, UISearchResultsUpdating {
+    func didDismissSearchController(_ searchController: UISearchController) {
+        dataSource.searchText = ""
+        dataSource.filterRunwaysWithSearchText()
+        tableView.reloadDataWithAnimation()
+    }
+
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let text = searchController.searchBar.text else { return }
+        dataSource.searchText = text
+        dataSource.filterRunwaysWithSearchText()
+        tableView.reloadDataWithAnimation()
     }
 }
 

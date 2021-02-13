@@ -26,22 +26,15 @@ class EditTitleField: UIView {
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-
-        if traitCollection.userInterfaceStyle == .light {
-            layer.borderColor = UIColor.clear.cgColor
-        } else if traitCollection.userInterfaceStyle == .dark {
-            layer.borderColor = UIColor.secondarySystemFill.cgColor
-        }
+        updateColorScheme()
     }
 
     private func configureView() {
-        backgroundColor = .systemBackground
+        updateColorScheme()
 
-        layer.borderColor = UIColor.systemGray5.cgColor // May not be needed
         layer.borderWidth = 1
         layer.cornerRadius = 15
 
-        layer.borderColor = UIColor.clear.cgColor
         layer.shadowOffset = .init(width: 0, height: 4)
         layer.shadowRadius = 4
         layer.shadowOpacity = 0.15
@@ -56,6 +49,16 @@ class EditTitleField: UIView {
 
         textField.snp.makeConstraints { make in
             make.edges.equalTo(self).inset(UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8))
+        }
+    }
+
+    private func updateColorScheme() {
+        if traitCollection.userInterfaceStyle == .light {
+            backgroundColor = .systemBackground
+            layer.borderColor = UIColor.systemBackground.cgColor
+        } else if traitCollection.userInterfaceStyle == .dark {
+            backgroundColor = .secondarySystemFill
+            layer.borderColor = UIColor.secondarySystemFill.cgColor
         }
     }
 }

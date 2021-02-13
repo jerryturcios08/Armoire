@@ -123,7 +123,7 @@ class FirebaseManager {
         }
     }
 
-    func toggleFavoriteClothing(_ clothing: Clothing, completed: @escaping (Result<Clothing, AMError>) -> Void) {
+    func favoriteClothing(_ clothing: Clothing, completed: @escaping (Result<Clothing, AMError>) -> Void) {
         guard let id = clothing.id else { return }
         let clothingRef = db.collection("clothes").document(id)
         clothingRef.updateData(["isFavorite": clothing.isFavorite])
@@ -381,6 +381,12 @@ class FirebaseManager {
 
             completed(.success(runways))
         }
+    }
+
+    func updateRunway(_ runway: Runway, completed: @escaping (Result<Runway, AMError>) -> Void) {
+        guard let id = runway.id else { return }
+        let runwayRef = db.collection("runways").document(id)
+        runwayRef.updateData(["title": runway.title, "isFavorite": runway.isFavorite])
     }
 
     func updateRunwayCanvas(_ runway: Runway, itemNodes: [ItemNode], errorHandler: @escaping (AMError) -> Void) {

@@ -27,7 +27,7 @@ enum UIHelper {
             dataSource.sortClothes()
             tableView.reloadDataWithAnimation()
 
-            FirebaseManager.shared.toggleFavoriteClothing(updatedClothing) { result in
+            FirebaseManager.shared.favoriteClothing(updatedClothing) { result in
                 switch result {
                 case .success(_): break
                 case .failure(let error): fatalError(error.rawValue)
@@ -63,6 +63,41 @@ enum UIHelper {
             tableView.reloadDataWithAnimation()
 
             FirebaseManager.shared.updateFolder(updatedFolder) { result in
+                switch result {
+                case .success(_): break
+                case .failure(let error): fatalError(error.rawValue)
+                }
+            }
+
+            completionHandler(true)
+        }
+
+        action.backgroundColor = actionColor
+        action.image = actionImage
+
+        return UISwipeActionsConfiguration(actions: [action])
+    }
+
+    static func favoriteRunwayAction(dataSource: RunwayDataSource, tableView: UITableView, indexPath: IndexPath) -> UISwipeActionsConfiguration {
+        let runway = dataSource.getItem(for: indexPath)
+
+        let actionColor = runway.isFavorite ? UIColor.systemGray : UIColor.systemYellow
+        let actionTitle = runway.isFavorite ? "Unfavorite" : "Favorite"
+        let actionImage = runway.isFavorite ? UIImage(systemName: "star") : UIImage(systemName: "star.fill")
+
+        let action = UIContextualAction(style: .normal, title: actionTitle) { action, view, completionHandler in
+            if dataSource.searchText.isEmpty {
+                dataSource.runways[indexPath.row].isFavorite.toggle()
+            } else {
+                dataSource.filteredRunways[indexPath.row].isFavorite.toggle()
+            }
+
+            let updatedRunway = dataSource.getItem(for: indexPath)
+
+            dataSource.sortRunways()
+            tableView.reloadDataWithAnimation()
+
+            FirebaseManager.shared.updateRunway(updatedRunway) { result in
                 switch result {
                 case .success(_): break
                 case .failure(let error): fatalError(error.rawValue)

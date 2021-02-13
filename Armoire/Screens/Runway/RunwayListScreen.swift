@@ -207,6 +207,10 @@ extension RunwayListScreen: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return createFooterView()
     }
+
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        return UIHelper.favoriteRunwayAction(dataSource: dataSource, tableView: tableView, indexPath: indexPath)
+    }
 }
 
 // MARK: - Search controller

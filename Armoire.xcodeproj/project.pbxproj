@@ -18,6 +18,7 @@
 		C601987C25B78421004B4203 /* Quicksand-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C601987725B78421004B4203 /* Quicksand-SemiBold.ttf */; };
 		C601987D25B78421004B4203 /* Quicksand-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C601987825B78421004B4203 /* Quicksand-Regular.ttf */; };
 		C601988325B7843B004B4203 /* constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C601988225B7843B004B4203 /* constants.swift */; };
+		C601AD0725D85397005E8711 /* EditTitleField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C601AD0625D85397005E8711 /* EditTitleField.swift */; };
 		C60E9F8125BA358C00D97991 /* Folder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60E9F8025BA358C00D97991 /* Folder.swift */; };
 		C60E9F8A25BA37FA00D97991 /* UIColor+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60E9F8925BA37FA00D97991 /* UIColor+Ext.swift */; };
 		C62E0C4025B8BC110078065A /* AMBodyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62E0C3F25B8BC110078065A /* AMBodyLabel.swift */; };
@@ -82,6 +83,7 @@
 		C601987725B78421004B4203 /* Quicksand-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-SemiBold.ttf"; sourceTree = "<group>"; };
 		C601987825B78421004B4203 /* Quicksand-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-Regular.ttf"; sourceTree = "<group>"; };
 		C601988225B7843B004B4203 /* constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = constants.swift; sourceTree = "<group>"; };
+		C601AD0625D85397005E8711 /* EditTitleField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTitleField.swift; sourceTree = "<group>"; };
 		C60E9F8025BA358C00D97991 /* Folder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Folder.swift; sourceTree = "<group>"; };
 		C60E9F8925BA37FA00D97991 /* UIColor+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Ext.swift"; sourceTree = "<group>"; };
 		C62E0C3F25B8BC110078065A /* AMBodyLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AMBodyLabel.swift; sourceTree = "<group>"; };
@@ -227,6 +229,14 @@
 			path = Application;
 			sourceTree = "<group>";
 		};
+		C601AD0525D85377005E8711 /* Runway */ = {
+			isa = PBXGroup;
+			children = (
+				C601AD0625D85397005E8711 /* EditTitleField.swift */,
+			);
+			path = Runway;
+			sourceTree = "<group>";
+		};
 		C60E9F7F25BA357300D97991 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -299,6 +309,7 @@
 				C63B0B8A25B9317D0065F813 /* Data Sources */,
 				C63B0B5C25B8C1FD0065F813 /* Labels */,
 				C658E7E525B79023000F8F50 /* Navigation */,
+				C601AD0525D85377005E8711 /* Runway */,
 				C6AC1BA625CA0B190076777B /* AMImageView.swift */,
 				C6AA153125BCBDF00095ADA0 /* AMSwitch.swift */,
 				C63B0B6325B8C2180065F813 /* AMTextField.swift */,
@@ -557,6 +568,7 @@
 				C658E7E125B7901F000F8F50 /* AMTabBarController.swift in Sources */,
 				C63B0B8C25B931980065F813 /* FolderDataSource.swift in Sources */,
 				C6C13A9425CCD70E007CE2E1 /* ImageViewerScreen.swift in Sources */,
+				C601AD0725D85397005E8711 /* EditTitleField.swift in Sources */,
 				C63B0B6F25B8DACD0065F813 /* FolderScreen.swift in Sources */,
 				C6D8C60D25CF950E00B49301 /* FolderFormScreen.swift in Sources */,
 				C6DFC04825BF77E6002BC018 /* AMCanvasButton.swift in Sources */,

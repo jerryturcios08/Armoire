@@ -30,6 +30,7 @@ class RunwayListScreen: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         deselectSelectedTableViewRow()
+        fetchRunways()
     }
 
     func configureScreen() {

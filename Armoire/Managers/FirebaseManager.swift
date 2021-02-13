@@ -415,4 +415,30 @@ class FirebaseManager {
             errorHandler(.invalidData)
         }
     }
+
+    func deleteRunway(_ runway: Runway, errorHandler: @escaping (AMError) -> Void) {
+        guard let runwayId = runway.id else { return }
+
+        if runway.dataUrl != nil {
+            deleteRunwayData(for: runwayId, errorHandler: errorHandler)
+        }
+
+        db.collection("runways").document(runwayId).delete { error in
+            if error != nil {
+                return errorHandler(.failedToDeleteRunway)
+            }
+        }
+    }
+
+    func deleteRunwayData(for runwayId: String, errorHandler: @escaping (AMError) -> Void) {
+        let storageRef = storage.reference()
+        let runwayCanvasRef = storageRef.child("runways/\(runwayId.blobCase).json")
+
+        // Deletes the image from firebase storage associated to the clothing item
+        runwayCanvasRef.delete { error in
+            if error != nil {
+                return errorHandler(.failedToDeleteCanvas)
+            }
+        }
+    }
 }

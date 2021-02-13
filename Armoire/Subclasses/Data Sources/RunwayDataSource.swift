@@ -67,6 +67,12 @@ class RunwayDataSource: NSObject, UITableViewDataSource {
         if editingStyle == .delete {
             let selectedRunway = getItem(for: indexPath)
 
+            FirebaseManager.shared.deleteRunway(selectedRunway) { [weak self] error in
+                guard let self = self else { return }
+                self.delegate?.errorIsPresented(error)
+                return
+            }
+
             if searchText.isEmpty {
                 runways.remove(at: indexPath.row)
             } else {

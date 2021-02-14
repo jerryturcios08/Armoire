@@ -16,6 +16,8 @@ struct Chat: Codable {
 class CriticChatCell: UITableViewCell {
     static let reuseId = "CriticChatCell"
 
+    let separatorLine = UIView()
+
     let criticImageView = AMImageView(frame: .zero)
     let criticNameLabel = AMBodyLabel(text: "@notelena", fontSize: 18)
     let lastMessageLabel = AMBodyLabel(text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Commodo nulla facilisi nullam vehicula ipsum a arcu. Sit amet justo donec enim diam. Senectus et netus et malesuada fames ac. Ultrices sagittis orci a scelerisque purus semper.", fontSize: 16)
@@ -36,6 +38,7 @@ class CriticChatCell: UITableViewCell {
     }
 
     private func configureCell() {
+        addSeparatorLine()
         configureCriticImageView()
         configureCriticNameLabel()
         configureLastMessageLabel()
@@ -47,8 +50,8 @@ class CriticChatCell: UITableViewCell {
 
         criticImageView.layer.cornerRadius = 40
         criticImageView.clipsToBounds = true
-        criticImageView.layer.borderColor = UIColor.systemGray3.cgColor
-        criticImageView.layer.borderWidth = 3
+        criticImageView.layer.borderColor = UIColor.lightGray.cgColor
+        criticImageView.layer.borderWidth = 1
 
         criticImageView.snp.makeConstraints { make in
             make.left.equalTo(self).offset(20)
@@ -77,6 +80,16 @@ class CriticChatCell: UITableViewCell {
             make.top.equalTo(criticNameLabel.snp.bottom).offset(4)
             make.left.right.equalTo(criticNameLabel)
             make.bottom.equalTo(criticImageView)
+        }
+    }
+
+    private func addSeparatorLine() {
+        addSubview(separatorLine)
+        separatorLine.backgroundColor = UIColor.customSeparator
+
+        separatorLine.snp.makeConstraints { make in
+            make.left.right.bottom.equalTo(self)
+            make.height.equalTo(4)
         }
     }
 }

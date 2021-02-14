@@ -64,6 +64,7 @@ class CriticListScreen: UIViewController {
         tableView.delegate = self
         tableView.register(CriticChatCell.self, forCellReuseIdentifier: CriticChatCell.reuseId)
         tableView.rowHeight = 100
+        tableView.separatorStyle = .none
 
         tableView.snp.makeConstraints { make in
             make.top.bottom.equalTo(view)

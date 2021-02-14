@@ -49,7 +49,7 @@
 		C6716F2325C106DC00D0CFF2 /* PrimaryFieldsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6716F2225C106DC00D0CFF2 /* PrimaryFieldsViewController.swift */; };
 		C671BE5F25C0D3C7002D1B62 /* AdditionalFieldsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C671BE5E25C0D3C6002D1B62 /* AdditionalFieldsView.swift */; };
 		C673CFFE25B7ABE800D3E765 /* ProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C673CFFD25B7ABE800D3E765 /* ProfileScreen.swift */; };
-		C673D00625B7AC3C00D3E765 /* RunwayListScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C673D00525B7AC3C00D3E765 /* RunwayListScreen.swift */; };
+		C673D00625B7AC3C00D3E765 /* RunwayScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C673D00525B7AC3C00D3E765 /* RunwayScreen.swift */; };
 		C67E11C425CCABE500D0E77C /* AMLinkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67E11C325CCABE400D0E77C /* AMLinkButton.swift */; };
 		C68BCD5A25C732E20002B376 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68BCD5925C732E20002B376 /* User.swift */; };
 		C68BCD7325C76C3C0002B376 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68BCD7225C76C3C0002B376 /* UIViewController+Ext.swift */; };
@@ -67,7 +67,7 @@
 		C6D8C60D25CF950E00B49301 /* FolderFormScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D8C60C25CF950E00B49301 /* FolderFormScreen.swift */; };
 		C6DFC04325BF5269002BC018 /* CanvasControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6DFC04225BF5269002BC018 /* CanvasControlsView.swift */; };
 		C6DFC04825BF77E6002BC018 /* AMCanvasButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6DFC04725BF77E6002BC018 /* AMCanvasButton.swift */; };
-		C6EAA14825BE1FB900C727B3 /* RunwayScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6EAA14725BE1FB900C727B3 /* RunwayScreen.swift */; };
+		C6EAA14825BE1FB900C727B3 /* CanvasScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6EAA14725BE1FB900C727B3 /* CanvasScreen.swift */; };
 		C6EAA14D25BE214300C727B3 /* CanvasScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6EAA14C25BE214300C727B3 /* CanvasScene.swift */; };
 		C6EE84BB25B8BE8000986BF4 /* AMPrimaryLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6EE84BA25B8BE8000986BF4 /* AMPrimaryLabel.swift */; };
 /* End PBXBuildFile section */
@@ -118,7 +118,7 @@
 		C6716F2225C106DC00D0CFF2 /* PrimaryFieldsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryFieldsViewController.swift; sourceTree = "<group>"; };
 		C671BE5E25C0D3C6002D1B62 /* AdditionalFieldsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalFieldsView.swift; sourceTree = "<group>"; };
 		C673CFFD25B7ABE800D3E765 /* ProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreen.swift; sourceTree = "<group>"; };
-		C673D00525B7AC3C00D3E765 /* RunwayListScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunwayListScreen.swift; sourceTree = "<group>"; };
+		C673D00525B7AC3C00D3E765 /* RunwayScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunwayScreen.swift; sourceTree = "<group>"; };
 		C67E11C325CCABE400D0E77C /* AMLinkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AMLinkButton.swift; sourceTree = "<group>"; };
 		C68BCD5925C732E20002B376 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		C68BCD7225C76C3C0002B376 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
@@ -136,7 +136,7 @@
 		C6D8C60C25CF950E00B49301 /* FolderFormScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderFormScreen.swift; sourceTree = "<group>"; };
 		C6DFC04225BF5269002BC018 /* CanvasControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasControlsView.swift; sourceTree = "<group>"; };
 		C6DFC04725BF77E6002BC018 /* AMCanvasButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AMCanvasButton.swift; sourceTree = "<group>"; };
-		C6EAA14725BE1FB900C727B3 /* RunwayScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunwayScreen.swift; sourceTree = "<group>"; };
+		C6EAA14725BE1FB900C727B3 /* CanvasScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasScreen.swift; sourceTree = "<group>"; };
 		C6EAA14C25BE214300C727B3 /* CanvasScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasScene.swift; sourceTree = "<group>"; };
 		C6EE84BA25B8BE8000986BF4 /* AMPrimaryLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AMPrimaryLabel.swift; sourceTree = "<group>"; };
 		F3B933E3C3206FEB502DAD33 /* Pods-Armoire.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Armoire.release.xcconfig"; path = "Target Support Files/Pods-Armoire/Pods-Armoire.release.xcconfig"; sourceTree = "<group>"; };
@@ -383,11 +383,11 @@
 			isa = PBXGroup;
 			children = (
 				C6EAA14C25BE214300C727B3 /* CanvasScene.swift */,
+				C6EAA14725BE1FB900C727B3 /* CanvasScreen.swift */,
 				C60003D925D8C26A008472BB /* CriticChatScreen.swift */,
 				C60003E625D8D30A008472BB /* CriticListScreen.swift */,
 				C62E9D2725D48914007FE502 /* ItemSearchScreen.swift */,
-				C673D00525B7AC3C00D3E765 /* RunwayListScreen.swift */,
-				C6EAA14725BE1FB900C727B3 /* RunwayScreen.swift */,
+				C673D00525B7AC3C00D3E765 /* RunwayScreen.swift */,
 			);
 			path = Runway;
 			sourceTree = "<group>";
@@ -558,7 +558,7 @@
 				C648381D25C607C600C8082B /* FirebaseManager.swift in Sources */,
 				C601983E25B78383004B4203 /* ClosetScreen.swift in Sources */,
 				C670A0F825BD31CA000A1405 /* AMBarButtonItem.swift in Sources */,
-				C673D00625B7AC3C00D3E765 /* RunwayListScreen.swift in Sources */,
+				C673D00625B7AC3C00D3E765 /* RunwayScreen.swift in Sources */,
 				C601983A25B78383004B4203 /* AppDelegate.swift in Sources */,
 				C63B0B6425B8C2180065F813 /* AMTextField.swift in Sources */,
 				C64CDAEF25D2112B005F3ACD /* ClothingFormScreen.swift in Sources */,
@@ -603,7 +603,7 @@
 				C6AA153225BCBDF00095ADA0 /* AMSwitch.swift in Sources */,
 				C67E11C425CCABE500D0E77C /* AMLinkButton.swift in Sources */,
 				C6B0A4A925D345EC0090A70F /* RunwayCell.swift in Sources */,
-				C6EAA14825BE1FB900C727B3 /* RunwayScreen.swift in Sources */,
+				C6EAA14825BE1FB900C727B3 /* CanvasScreen.swift in Sources */,
 				C658E7D925B78FE8000F8F50 /* previews.swift in Sources */,
 				C62E9D2825D48914007FE502 /* ItemSearchScreen.swift in Sources */,
 				C60E9F8A25BA37FA00D97991 /* UIColor+Ext.swift in Sources */,

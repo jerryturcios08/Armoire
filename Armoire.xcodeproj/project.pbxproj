@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		72CAAF4FCB0CE68A63A1C963 /* Pods_Armoire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 850AD35AB4ABB34A197A0BFC /* Pods_Armoire.framework */; };
+		C60003DA25D8C26A008472BB /* CriticChatScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60003D925D8C26A008472BB /* CriticChatScreen.swift */; };
+		C60003DE25D8C379008472BB /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60003DD25D8C379008472BB /* Message.swift */; };
+		C60003E225D8C3C0008472BB /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60003E125D8C3C0008472BB /* MessageCell.swift */; };
 		C601983A25B78383004B4203 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C601983925B78383004B4203 /* AppDelegate.swift */; };
 		C601983C25B78383004B4203 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C601983B25B78383004B4203 /* SceneDelegate.swift */; };
 		C601983E25B78383004B4203 /* ClosetScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C601983D25B78383004B4203 /* ClosetScreen.swift */; };
@@ -71,6 +74,9 @@
 /* Begin PBXFileReference section */
 		345BABCA796DCB781B1DF126 /* Pods-Armoire.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Armoire.debug.xcconfig"; path = "Target Support Files/Pods-Armoire/Pods-Armoire.debug.xcconfig"; sourceTree = "<group>"; };
 		850AD35AB4ABB34A197A0BFC /* Pods_Armoire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Armoire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C60003D925D8C26A008472BB /* CriticChatScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CriticChatScreen.swift; sourceTree = "<group>"; };
+		C60003DD25D8C379008472BB /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		C60003E125D8C3C0008472BB /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		C601983625B78383004B4203 /* Armoire.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Armoire.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C601983925B78383004B4203 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C601983B25B78383004B4203 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -242,6 +248,7 @@
 			children = (
 				C648380B25C5DC0800C8082B /* Clothing.swift */,
 				C60E9F8025BA358C00D97991 /* Folder.swift */,
+				C60003DD25D8C379008472BB /* Message.swift */,
 				C6B0A4AC25D34D780090A70F /* Runway.swift */,
 				C68BCD5925C732E20002B376 /* User.swift */,
 			);
@@ -275,6 +282,7 @@
 			children = (
 				C63B0B7425B8DCE20065F813 /* ClothingCell.swift */,
 				C63B0B7C25B8DCEA0065F813 /* FolderCell.swift */,
+				C60003E125D8C3C0008472BB /* MessageCell.swift */,
 				C6B0A4A825D345EC0090A70F /* RunwayCell.swift */,
 			);
 			path = Cells;
@@ -373,6 +381,7 @@
 			isa = PBXGroup;
 			children = (
 				C6EAA14C25BE214300C727B3 /* CanvasScene.swift */,
+				C60003D925D8C26A008472BB /* CriticChatScreen.swift */,
 				C62E9D2725D48914007FE502 /* ItemSearchScreen.swift */,
 				C673D00525B7AC3C00D3E765 /* RunwayListScreen.swift */,
 				C6EAA14725BE1FB900C727B3 /* RunwayScreen.swift */,
@@ -552,7 +561,9 @@
 				C64CDAEF25D2112B005F3ACD /* ClothingFormScreen.swift in Sources */,
 				C6AA153725BCC58D0095ADA0 /* ClothesDataSource.swift in Sources */,
 				C658E7CE25B78D31000F8F50 /* AMNavigationController.swift in Sources */,
+				C60003DA25D8C26A008472BB /* CriticChatScreen.swift in Sources */,
 				C648381425C5E30400C8082B /* Date+Ext.swift in Sources */,
+				C60003E225D8C3C0008472BB /* MessageCell.swift in Sources */,
 				C6AC1BA725CA0B190076777B /* AMImageView.swift in Sources */,
 				C68BCD7325C76C3C0002B376 /* UIViewController+Ext.swift in Sources */,
 				C671BE5F25C0D3C7002D1B62 /* AdditionalFieldsView.swift in Sources */,
@@ -563,6 +574,7 @@
 				C6A9C1D425B7CE8600C22F29 /* AMButton.swift in Sources */,
 				C62E9D2C25D4B00B007FE502 /* String+Ext.swift in Sources */,
 				C6B0A4B125D357430090A70F /* RunwayDataSource.swift in Sources */,
+				C60003DE25D8C379008472BB /* Message.swift in Sources */,
 				C6AA152D25BCBD0E0095ADA0 /* AMTextView.swift in Sources */,
 				C60E9F8125BA358C00D97991 /* Folder.swift in Sources */,
 				C658E7E125B7901F000F8F50 /* AMTabBarController.swift in Sources */,

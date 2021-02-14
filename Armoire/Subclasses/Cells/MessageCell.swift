@@ -60,7 +60,7 @@ class MessageCell: UITableViewCell {
         messageLabel.snp.makeConstraints { make in
             make.top.equalTo(self).offset(16)
             make.bottom.equalTo(self).offset(-32)
-            make.width.lessThanOrEqualTo(250)
+            make.width.lessThanOrEqualTo(self.frame.width / 1.2)
         }
     }
 

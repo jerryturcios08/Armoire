@@ -33,15 +33,22 @@ class CriticChatScreen: UIViewController {
         super.traitCollectionDidChange(previousTraitCollection)
 
         if traitCollection.userInterfaceStyle == .light {
+            view.backgroundColor = .systemGray6
             tableView.backgroundColor = .systemGray6
         } else if traitCollection.userInterfaceStyle == .dark {
+            view.backgroundColor = .black
             tableView.backgroundColor = .black
         }
     }
 
     func configureScreen() {
         title = criticName
-        view.backgroundColor = .systemBackground
+
+        if traitCollection.userInterfaceStyle == .light {
+            view.backgroundColor = .systemGray6
+        } else if traitCollection.userInterfaceStyle == .dark {
+            view.backgroundColor = .black
+        }
 
         messages = [
             .init(body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Commodo nulla facilisi nullam vehicula ipsum a arcu. Sit amet justo donec enim diam. Senectus et netus et malesuada fames ac. Ultrices sagittis orci a scelerisque purus semper.", isIncoming: true),

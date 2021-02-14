@@ -49,7 +49,7 @@ class RunwayScreen: UIViewController {
         let searchController = UISearchController()
         let customFont = UIFont(name: Fonts.quicksandMedium, size: 17)!
         let textAttributes: [NSAttributedString.Key: Any] = [.font: customFont]
-        let attributedString = NSAttributedString(string: "Search", attributes: textAttributes)
+        let attributedString = NSAttributedString(string: "Search Runways", attributes: textAttributes)
 
         searchController.delegate = self
         searchController.searchResultsUpdater = self

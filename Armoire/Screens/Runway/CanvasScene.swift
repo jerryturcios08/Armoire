@@ -97,13 +97,14 @@ class CanvasScene: SKScene {
     }
 
     func configureGestures(view: SKView) {
-        let panGesture = UIPanGestureRecognizer()
-        panGesture.addTarget(self, action: #selector(panGestureAction))
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(panGestureAction))
         view.addGestureRecognizer(panGesture)
 
-        let pinchGesture = UIPinchGestureRecognizer()
-        pinchGesture.addTarget(self, action: #selector(pinchGestureAction))
+        let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(pinchGestureAction))
         view.addGestureRecognizer(pinchGesture)
+
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(longPressGestureAction))
+        view.addGestureRecognizer(longPressGesture)
     }
 
     func changeToDarkMode() {
@@ -332,5 +333,11 @@ class CanvasScene: SKScene {
 
             camera.position = newPosition
         }
+    }
+
+    @objc func longPressGestureAction(_ sender: UILongPressGestureRecognizer) {
+        guard let camera = camera else { return }
+        camera.run(SKAction.moveTo(x: frame.minX, duration: 0.5))
+        camera.run(SKAction.moveTo(y: frame.minY, duration: 0.5))
     }
 }

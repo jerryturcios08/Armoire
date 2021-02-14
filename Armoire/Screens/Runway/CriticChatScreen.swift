@@ -61,8 +61,13 @@ class CriticChatScreen: UIViewController {
         tableView.delegate = self
         tableView.register(MessageCell.self, forCellReuseIdentifier: MessageCell.reuseId)
         tableView.allowsSelection = false
-        tableView.backgroundColor = .systemGray6
         tableView.separatorStyle = .none
+
+        if traitCollection.userInterfaceStyle == .light {
+            tableView.backgroundColor = .systemGray6
+        } else if traitCollection.userInterfaceStyle == .dark {
+            tableView.backgroundColor = .black
+        }
 
         tableView.snp.makeConstraints { make in
             make.top.bottom.equalTo(view)

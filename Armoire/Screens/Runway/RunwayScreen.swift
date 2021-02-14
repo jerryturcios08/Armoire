@@ -212,7 +212,9 @@ class RunwayScreen: UIViewController {
     }
 
     @objc func exportButtonTapped(_ sender: UIBarButtonItem) {
-        // TODO: Allow for sharing with another user to get feedback on a runway
+        let destinationScreen = AMNavigationController(rootViewController: CriticListScreen())
+        destinationScreen.modalPresentationStyle = .fullScreen
+        present(destinationScreen, animated: true)
     }
 
     @objc func addItemButtonTapped(_ sender: UIBarButtonItem) {

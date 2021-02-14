@@ -11,6 +11,7 @@
 		C60003DA25D8C26A008472BB /* CriticChatScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60003D925D8C26A008472BB /* CriticChatScreen.swift */; };
 		C60003DE25D8C379008472BB /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60003DD25D8C379008472BB /* Message.swift */; };
 		C60003E225D8C3C0008472BB /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60003E125D8C3C0008472BB /* MessageCell.swift */; };
+		C60003E725D8D30A008472BB /* CriticListScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60003E625D8D30A008472BB /* CriticListScreen.swift */; };
 		C601983A25B78383004B4203 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C601983925B78383004B4203 /* AppDelegate.swift */; };
 		C601983C25B78383004B4203 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C601983B25B78383004B4203 /* SceneDelegate.swift */; };
 		C601983E25B78383004B4203 /* ClosetScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C601983D25B78383004B4203 /* ClosetScreen.swift */; };
@@ -77,6 +78,7 @@
 		C60003D925D8C26A008472BB /* CriticChatScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CriticChatScreen.swift; sourceTree = "<group>"; };
 		C60003DD25D8C379008472BB /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		C60003E125D8C3C0008472BB /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
+		C60003E625D8D30A008472BB /* CriticListScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CriticListScreen.swift; sourceTree = "<group>"; };
 		C601983625B78383004B4203 /* Armoire.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Armoire.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C601983925B78383004B4203 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C601983B25B78383004B4203 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -382,6 +384,7 @@
 			children = (
 				C6EAA14C25BE214300C727B3 /* CanvasScene.swift */,
 				C60003D925D8C26A008472BB /* CriticChatScreen.swift */,
+				C60003E625D8D30A008472BB /* CriticListScreen.swift */,
 				C62E9D2725D48914007FE502 /* ItemSearchScreen.swift */,
 				C673D00525B7AC3C00D3E765 /* RunwayListScreen.swift */,
 				C6EAA14725BE1FB900C727B3 /* RunwayScreen.swift */,
@@ -573,6 +576,7 @@
 				C601988325B7843B004B4203 /* constants.swift in Sources */,
 				C6A9C1D425B7CE8600C22F29 /* AMButton.swift in Sources */,
 				C62E9D2C25D4B00B007FE502 /* String+Ext.swift in Sources */,
+				C60003E725D8D30A008472BB /* CriticListScreen.swift in Sources */,
 				C6B0A4B125D357430090A70F /* RunwayDataSource.swift in Sources */,
 				C60003DE25D8C379008472BB /* Message.swift in Sources */,
 				C6AA152D25BCBD0E0095ADA0 /* AMTextView.swift in Sources */,

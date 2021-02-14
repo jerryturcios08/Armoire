@@ -152,10 +152,6 @@ class ItemSearchScreen: UIViewController {
     @objc func cancelButtonTapped(_ sender: UIBarButtonItem) {
         dismiss(animated: true)
     }
-
-    @objc func doneButtonTapped(_ sender: UIBarButtonItem) {
-        dismiss(animated: true)
-    }
 }
 
 // MARK: - Table view methods

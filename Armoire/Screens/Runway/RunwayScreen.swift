@@ -216,6 +216,14 @@ class RunwayScreen: UIViewController {
         // TODO: Allow for sharing with another user to get feedback on a runway
     }
 
+    @objc func addItemButtonTapped(_ sender: UIBarButtonItem) {
+        let itemSearchScreen = ItemSearchScreen()
+        let destinationScreen = AMNavigationController(rootViewController: itemSearchScreen)
+        itemSearchScreen.delegate = self
+        destinationScreen.modalPresentationStyle = .fullScreen
+        present(destinationScreen, animated: true)
+    }
+
     @objc func undoButtonTapped(_ sender: UIBarButtonItem) {
         // TODO: Implement undo functionality
     }
@@ -232,14 +240,6 @@ class RunwayScreen: UIViewController {
     @objc func arrowDownButtonTapped(_ sender: UIBarButtonItem) {
         guard let node = selectedNode else { return }
         scene.decreaseNodeZPosition(for: node)
-    }
-
-    @objc func addItemButtonTapped(_ sender: UIBarButtonItem) {
-        let itemSearchScreen = ItemSearchScreen()
-        let destinationScreen = AMNavigationController(rootViewController: itemSearchScreen)
-        itemSearchScreen.delegate = self
-        destinationScreen.modalPresentationStyle = .fullScreen
-        present(destinationScreen, animated: true)
     }
 
     @objc func deleteButtonTapped(_ sender: UIBarButtonItem) {

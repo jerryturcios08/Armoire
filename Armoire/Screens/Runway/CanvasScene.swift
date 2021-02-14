@@ -31,6 +31,7 @@ class CanvasScene: SKScene {
     var selectedNode: SKNode?
     var highestNodeZPosition = CGFloat(-1)
     var previousNodePoint = CGPoint.zero
+    var previousNodeScale = CGFloat()
     var selectedItemBorderNode = SKShapeNode()
     var nodeIsSelected = false
 
@@ -126,6 +127,12 @@ class CanvasScene: SKScene {
             newNode.name = node.id
             newNode.position = CGPoint(x: node.xPosition, y: node.yPosition)
             newNode.zPosition = CGFloat(node.zPosition)
+
+            if let scale = node.scale {
+                let scale = newNode.xScale * CGFloat(scale)
+                newNode.setScale(scale)
+            }
+
             addChild(newNode)
 
             if CGFloat(node.zPosition) > highestNodeZPosition {
@@ -222,20 +229,55 @@ class CanvasScene: SKScene {
         }
     }
 
+    func deleteAllNodes() {
+        itemNodes.removeAll()
+
+        for node in children {
+            guard let name = node.name else { continue }
+
+            if name.contains("-Item") {
+                node.removeFromParent()
+            }
+        }
+    }
+
     // MARK: - Gesture methods
 
     @objc func pinchGestureAction(_ sender: UIPinchGestureRecognizer) {
-        guard let camera = camera else { return }
+        if nodeIsSelected {
+            guard let node = selectedNode else { return }
 
-        if sender.state == .began {
-            previousCameraScale = camera.xScale
-        }
+            if sender.state == .began {
+                previousNodeScale = node.xScale
+            }
 
-        let scale = previousCameraScale * 1 / sender.scale
+            let scale = previousNodeScale * sender.scale
 
-        if scale > 1, scale < 20 {
-            currentCameraScale = scale
-            camera.setScale(scale)
+            if scale > 0.5, scale < 8 {
+                node.setScale(scale)
+
+                // Updates the item nodes array with the updated scale for the selected node
+                for (index, itemNode) in itemNodes.enumerated() {
+                    guard let name = node.name else { continue }
+
+                    if itemNode.id.contains(name) {
+                        itemNodes[index].scale = Double(sender.scale)
+                    }
+                }
+            }
+        } else {
+            guard let camera = camera else { return }
+
+            if sender.state == .began {
+                previousCameraScale = camera.xScale
+            }
+
+            let scale = previousCameraScale * 1 / sender.scale
+
+            if scale > 1, scale < 20 {
+                currentCameraScale = scale
+                camera.setScale(scale)
+            }
         }
     }
 

@@ -14,6 +14,7 @@ struct ItemNode: Codable {
     var xPosition: Double
     var yPosition: Double
     var zPosition: Double
+    var scale: Double? = nil
 }
 
 struct Runway: Codable {

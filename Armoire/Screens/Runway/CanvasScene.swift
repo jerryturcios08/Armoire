@@ -31,7 +31,6 @@ class CanvasScene: SKScene {
     var selectedNode: SKNode?
     var highestNodeZPosition = CGFloat(-1)
     var previousNodePoint = CGPoint.zero
-    var previousNodeScale = CGFloat()
     var selectedItemBorderNode = SKShapeNode()
     var nodeIsSelected = false
 
@@ -147,7 +146,7 @@ class CanvasScene: SKScene {
         let generatedId = UUID().uuidString + "-\(CanvasObject.item.rawValue)"
         let newNode = SKSpriteNode(texture: SKTexture(image: image))
         newNode.name = generatedId
-        newNode.position = CGPoint(x: frame.midX, y: frame.midY)
+        newNode.position = CGPoint(x: frame.minX, y: frame.minY)
         newNode.zPosition = highestNodeZPosition + 1
         highestNodeZPosition += 1
         addChild(newNode)
@@ -246,6 +245,7 @@ class CanvasScene: SKScene {
     @objc func pinchGestureAction(_ sender: UIPinchGestureRecognizer) {
         if nodeIsSelected {
             guard let node = selectedNode else { return }
+            var previousNodeScale = CGFloat()
 
             if sender.state == .began {
                 previousNodeScale = node.xScale

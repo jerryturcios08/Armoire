@@ -122,7 +122,6 @@ class RunwayScreen: UIViewController {
         scene.canvasDelegate = self
         scene.size = view.bounds.size
         scene.anchorPoint = CGPoint(x: 0, y: 0)
-        scene.size = CGSize(width: 1000, height: 1000)
         scene.scaleMode = .aspectFill
 
         if traitCollection.userInterfaceStyle == .dark {

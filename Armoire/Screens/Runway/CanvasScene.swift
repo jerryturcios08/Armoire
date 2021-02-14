@@ -31,6 +31,7 @@ class CanvasScene: SKScene {
     var selectedNode: SKNode?
     var highestNodeZPosition = CGFloat(-1)
     var previousNodePoint = CGPoint.zero
+    var previousNodeScale = CGFloat()
     var selectedItemBorderNode = SKShapeNode()
     var nodeIsSelected = false
 
@@ -246,7 +247,6 @@ class CanvasScene: SKScene {
     @objc func pinchGestureAction(_ sender: UIPinchGestureRecognizer) {
         if nodeIsSelected {
             guard let node = selectedNode else { return }
-            var previousNodeScale = CGFloat()
 
             if sender.state == .began {
                 previousNodeScale = node.xScale

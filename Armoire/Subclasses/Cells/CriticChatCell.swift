@@ -14,9 +14,11 @@ struct Chat: Codable {
 }
 
 class CriticChatCell: UITableViewCell {
+    static let reuseId = "CriticChatCell"
+
     let criticImageView = AMImageView(frame: .zero)
-    let criticNameLabel = AMBodyLabel(text: "@notelena", fontSize: 12)
-    let lastMessageLabel = AMBodyLabel(text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Commodo nulla facilisi nullam vehicula ipsum a arcu. Sit amet justo donec enim diam. Senectus et netus et malesuada fames ac. Ultrices sagittis orci a scelerisque purus semper.", fontSize: 10)
+    let criticNameLabel = AMBodyLabel(text: "@notelena", fontSize: 18)
+    let lastMessageLabel = AMBodyLabel(text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Commodo nulla facilisi nullam vehicula ipsum a arcu. Sit amet justo donec enim diam. Senectus et netus et malesuada fames ac. Ultrices sagittis orci a scelerisque purus semper.", fontSize: 16)
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -43,7 +45,7 @@ class CriticChatCell: UITableViewCell {
         addSubview(criticImageView)
         criticImageView.image = UIImage(named: "CriticAvatar")
 
-        criticImageView.layer.cornerRadius = 30
+        criticImageView.layer.cornerRadius = 40
         criticImageView.clipsToBounds = true
         criticImageView.layer.borderColor = UIColor.systemGray3.cgColor
         criticImageView.layer.borderWidth = 3
@@ -51,7 +53,7 @@ class CriticChatCell: UITableViewCell {
         criticImageView.snp.makeConstraints { make in
             make.left.equalTo(self).offset(20)
             make.centerY.equalTo(self)
-            make.width.height.equalTo(60)
+            make.width.height.equalTo(80)
         }
     }
 
@@ -88,7 +90,7 @@ struct CriticChatCellPreviews: PreviewProvider {
                 .preferredColorScheme(.dark)
         }
         .previewLayout(.sizeThatFits)
-        .frame(minWidth: 0, maxWidth: .infinity, maxHeight: 80)
+        .frame(minWidth: 0, maxWidth: .infinity, maxHeight: 100)
     }
 }
 #endif

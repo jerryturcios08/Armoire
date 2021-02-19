@@ -262,6 +262,7 @@ class CanvasScene: SKScene {
 
                     if itemNode.id.contains(name) {
                         itemNodes[index].scale = Double(scale)
+                        canvasDelegate?.didUpdate(itemNodes)
                     }
                 }
             }
@@ -306,6 +307,7 @@ class CanvasScene: SKScene {
                         if itemNode.id.contains(name) {
                             itemNodes[index].xPosition = Double(newPosition.x)
                             itemNodes[index].yPosition = Double(newPosition.y)
+                            canvasDelegate?.didUpdate(itemNodes)
                         }
                     }
                 }

@@ -130,8 +130,7 @@ class CanvasScene: SKScene {
             newNode.zPosition = CGFloat(node.zPosition)
 
             if let scale = node.scale {
-                let scale = newNode.xScale * CGFloat(scale)
-                newNode.setScale(scale)
+                newNode.setScale(CGFloat(scale))
             }
 
             addChild(newNode)
@@ -262,7 +261,7 @@ class CanvasScene: SKScene {
                     guard let name = node.name else { continue }
 
                     if itemNode.id.contains(name) {
-                        itemNodes[index].scale = Double(sender.scale)
+                        itemNodes[index].scale = Double(scale)
                     }
                 }
             }

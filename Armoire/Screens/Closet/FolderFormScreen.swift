@@ -102,11 +102,7 @@ class FolderFormScreen: UIViewController {
 
     func configureStackView() {
         view.addSubview(scrollView)
-
-        scrollView.snp.makeConstraints { make in
-            make.top.bottom.equalTo(view)
-            make.left.right.equalTo(view.safeAreaLayoutGuide)
-        }
+        scrollView.snp.makeConstraints { $0.size.equalTo(view) }
 
         scrollView.addSubview(contentStackView)
         contentStackView.axis = .vertical

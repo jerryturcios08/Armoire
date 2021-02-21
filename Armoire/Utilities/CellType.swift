@@ -21,7 +21,7 @@ enum Destination {
 }
 
 enum CellType {
-    case avatarCell(String)
+    case avatarCell
     case navigationCell(String, String?, UIViewController)
-    case dangerButtonCell(String, NSTextAlignment)
+    case dangerButtonCell(String)
 }

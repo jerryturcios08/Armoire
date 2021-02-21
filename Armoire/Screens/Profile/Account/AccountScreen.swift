@@ -1,18 +1,29 @@
 //
-//  ProfileScreen.swift
+//  AccountScreen.swift
 //  Armoire
 //
-//  Created by Geraldine Turcios on 1/19/21.
+//  Created by Geraldine Turcios on 2/20/21.
 //
 
 import SwiftUI
 import UIKit
 
-class ProfileScreen: UIViewController {
+class AccountScreen: UIViewController {
     let tableView = UITableView(frame: .zero, style: .grouped)
 
-    let sections = ["General", "Support", "Danger"]
+    let sections = ["Avatar", "General", "Danger"]
     var cells = [[CellType]]()
+
+    private var user: User
+
+    init(user: User) {
+        self.user = user
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,20 +37,25 @@ class ProfileScreen: UIViewController {
     }
 
     func configureScreen() {
-        title = "Profile"
+        title = "Account"
         view.backgroundColor = .systemBackground
     }
 
     func configureTableView() {
         cells = [
-            [.navigationCell("Account", nil, AccountScreen(user: User.example)), .navigationCell("Notifications", nil, NotificationsScreen())],
-            [.navigationCell("About", nil, AboutScreen()), .navigationCell("Tip Jar", nil, TipJarScreen())],
-            [.dangerButtonCell("Log Out")]
+            [.avatarCell],
+            [
+                .navigationCell("Username", user.username, UsernameScreen()),
+                .navigationCell("Email", user.email, EmailScreen()),
+                .navigationCell("Password", nil, PasswordScreen())
+            ],
+            [.dangerButtonCell("Delete Account")]
         ]
 
         view.addSubview(tableView)
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.register(AvatarCell.self, forCellReuseIdentifier: AvatarCell.reuseId)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "DangerButtonCell")
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "NavigationCell")
         tableView.snp.makeConstraints { $0.size.equalTo(view) }
@@ -50,14 +66,23 @@ class ProfileScreen: UIViewController {
         tableView.deselectRow(at: index, animated: true)
     }
 
-    func logOutButtonTapped() {
-        presentErrorAlert(message: "Logged out!")
+    func deleteAccountButtonTapped() {
+        let alertController = UIAlertController(title: "Warning", message: "Are you sure you want to delete your account? All account data will be erased and this action is irreversible.", preferredStyle: .alert)
+        alertController.view.tintColor = UIColor.accentColor
+
+        alertController.addAction(UIAlertAction(title: "Delete", style: .destructive) { _ in
+            self.presentErrorAlert(message: "ACCOUNT DELETED!")
+        })
+
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+
+        present(alertController, animated: true)
     }
 }
 
 // MARK: - Table view methods
 
-extension ProfileScreen: UITableViewDataSource, UITableViewDelegate {
+extension AccountScreen: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
         return sections.count
     }
@@ -71,6 +96,10 @@ extension ProfileScreen: UITableViewDataSource, UITableViewDelegate {
         let customFont = UIFontMetrics.default.scaledFont(for: UIFont(name: Fonts.quicksandMedium, size: 17)!)
 
         switch cellType {
+        case .avatarCell:
+            let cell = tableView.dequeueReusableCell(withIdentifier: AvatarCell.reuseId, for: indexPath) as! AvatarCell
+            cell.set(image: UIImage(named: "CriticAvatar")!)
+            return cell
         case .dangerButtonCell(let title):
             let cell = tableView.dequeueReusableCell(withIdentifier: "DangerButtonCell", for: indexPath)
 
@@ -81,7 +110,7 @@ extension ProfileScreen: UITableViewDataSource, UITableViewDelegate {
 
             return cell
         case .navigationCell(let title, let detail, _):
-            let cell = tableView.dequeueReusableCell(withIdentifier: "NavigationCell", for: indexPath)
+            let cell = UITableViewCell(style: .value1, reuseIdentifier: "NavigationCell")
 
             cell.accessoryType = .disclosureIndicator
             cell.textLabel?.text = title
@@ -90,8 +119,6 @@ extension ProfileScreen: UITableViewDataSource, UITableViewDelegate {
             cell.detailTextLabel?.font = customFont
 
             return cell
-        default:
-            return UITableViewCell()
         }
     }
 
@@ -99,26 +126,24 @@ extension ProfileScreen: UITableViewDataSource, UITableViewDelegate {
         let cellType = cells[indexPath.section][indexPath.row]
 
         switch cellType {
-        case .dangerButtonCell(_): logOutButtonTapped()
-        case .navigationCell(_, _, let destination):
-            navigationController?.pushViewController(destination, animated: true)
-        default:
-            break
+        case .avatarCell: navigationController?.pushViewController(AvatarScreen(), animated: true)
+        case .dangerButtonCell(_): deleteAccountButtonTapped()
+        case .navigationCell(_, _, let destination): navigationController?.pushViewController(destination, animated: true)
         }
     }
 
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return section == 0 ? ProfileHeaderView(user: User.example) : nil
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return indexPath.section == 0 ? 84 : 44
     }
 }
 
 // MARK: - Previews
 
 #if DEBUG
-struct ProfileScreenPreviews: PreviewProvider {
+struct AccountScreenPreviews: PreviewProvider {
     static var previews: some View {
         UIViewControllerPreview {
-            AMNavigationController(rootViewController: ProfileScreen())
+            AMNavigationController(rootViewController: AccountScreen(user: User.example))
         }
         .ignoresSafeArea(.all, edges: .all)
     }

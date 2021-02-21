@@ -1,5 +1,5 @@
 //
-//  AccountScreen.swift
+//  EmailScreen.swift
 //  Armoire
 //
 //  Created by Geraldine Turcios on 2/20/21.
@@ -7,14 +7,14 @@
 
 import UIKit
 
-class AccountScreen: UIViewController {
+class EmailScreen: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureScreen()
     }
-    
+
     func configureScreen() {
-        title = "Account"
+        title = "Change Email"
         view.backgroundColor = .systemBackground
     }
 }

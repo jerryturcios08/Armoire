@@ -48,6 +48,10 @@
 		C658E7E125B7901F000F8F50 /* AMTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C658E7E025B7901F000F8F50 /* AMTabBarController.swift */; };
 		C66D718925BE0BEE008BC818 /* UIStackView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66D718825BE0BEE008BC818 /* UIStackView+Ext.swift */; };
 		C66F9DE925E1DF1A00B04144 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66F9DE825E1DF1A00B04144 /* ProfileHeaderView.swift */; };
+		C66F9E1125E1EDFC00B04144 /* UsernameScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66F9E1025E1EDFC00B04144 /* UsernameScreen.swift */; };
+		C66F9E1425E1EE0800B04144 /* EmailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66F9E1325E1EE0800B04144 /* EmailScreen.swift */; };
+		C66F9E1725E1EE1300B04144 /* PasswordScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66F9E1625E1EE1300B04144 /* PasswordScreen.swift */; };
+		C66F9E1A25E1EE1A00B04144 /* AvatarScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66F9E1925E1EE1A00B04144 /* AvatarScreen.swift */; };
 		C670A0F825BD31CA000A1405 /* AMBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C670A0F725BD31CA000A1405 /* AMBarButtonItem.swift */; };
 		C6716F2325C106DC00D0CFF2 /* PrimaryFieldsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6716F2225C106DC00D0CFF2 /* PrimaryFieldsViewController.swift */; };
 		C671BE5F25C0D3C7002D1B62 /* AdditionalFieldsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C671BE5E25C0D3C6002D1B62 /* AdditionalFieldsView.swift */; };
@@ -55,7 +59,6 @@
 		C673D00625B7AC3C00D3E765 /* RunwayScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C673D00525B7AC3C00D3E765 /* RunwayScreen.swift */; };
 		C67E11C425CCABE500D0E77C /* AMLinkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67E11C325CCABE400D0E77C /* AMLinkButton.swift */; };
 		C6839A9625E1A8880065153D /* AvatarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6839A9525E1A8880065153D /* AvatarCell.swift */; };
-		C6839A9D25E1ADFB0065153D /* DangerButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6839A9C25E1ADFB0065153D /* DangerButtonCell.swift */; };
 		C6839AA125E1B1DE0065153D /* AccountScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6839AA025E1B1DE0065153D /* AccountScreen.swift */; };
 		C6839AA425E1B1FC0065153D /* NotificationsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6839AA325E1B1FC0065153D /* NotificationsScreen.swift */; };
 		C6839AA725E1B2030065153D /* AboutScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6839AA625E1B2030065153D /* AboutScreen.swift */; };
@@ -126,6 +129,10 @@
 		C658E7E025B7901F000F8F50 /* AMTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AMTabBarController.swift; sourceTree = "<group>"; };
 		C66D718825BE0BEE008BC818 /* UIStackView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Ext.swift"; sourceTree = "<group>"; };
 		C66F9DE825E1DF1A00B04144 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
+		C66F9E1025E1EDFC00B04144 /* UsernameScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsernameScreen.swift; sourceTree = "<group>"; };
+		C66F9E1325E1EE0800B04144 /* EmailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailScreen.swift; sourceTree = "<group>"; };
+		C66F9E1625E1EE1300B04144 /* PasswordScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordScreen.swift; sourceTree = "<group>"; };
+		C66F9E1925E1EE1A00B04144 /* AvatarScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarScreen.swift; sourceTree = "<group>"; };
 		C670A0F725BD31CA000A1405 /* AMBarButtonItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AMBarButtonItem.swift; sourceTree = "<group>"; };
 		C6716F2225C106DC00D0CFF2 /* PrimaryFieldsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryFieldsViewController.swift; sourceTree = "<group>"; };
 		C671BE5E25C0D3C6002D1B62 /* AdditionalFieldsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalFieldsView.swift; sourceTree = "<group>"; };
@@ -133,7 +140,6 @@
 		C673D00525B7AC3C00D3E765 /* RunwayScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunwayScreen.swift; sourceTree = "<group>"; };
 		C67E11C325CCABE400D0E77C /* AMLinkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AMLinkButton.swift; sourceTree = "<group>"; };
 		C6839A9525E1A8880065153D /* AvatarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarCell.swift; sourceTree = "<group>"; };
-		C6839A9C25E1ADFB0065153D /* DangerButtonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DangerButtonCell.swift; sourceTree = "<group>"; };
 		C6839AA025E1B1DE0065153D /* AccountScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountScreen.swift; sourceTree = "<group>"; };
 		C6839AA325E1B1FC0065153D /* NotificationsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsScreen.swift; sourceTree = "<group>"; };
 		C6839AA625E1B2030065153D /* AboutScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutScreen.swift; sourceTree = "<group>"; };
@@ -379,6 +385,18 @@
 			path = Profile;
 			sourceTree = "<group>";
 		};
+		C66F9E1C25E1EE3000B04144 /* Account */ = {
+			isa = PBXGroup;
+			children = (
+				C6839AA025E1B1DE0065153D /* AccountScreen.swift */,
+				C66F9E1925E1EE1A00B04144 /* AvatarScreen.swift */,
+				C66F9E1325E1EE0800B04144 /* EmailScreen.swift */,
+				C66F9E1625E1EE1300B04144 /* PasswordScreen.swift */,
+				C66F9E1025E1EDFC00B04144 /* UsernameScreen.swift */,
+			);
+			path = Account;
+			sourceTree = "<group>";
+		};
 		C6716F2125C106AE00D0CFF2 /* Closet */ = {
 			isa = PBXGroup;
 			children = (
@@ -404,8 +422,8 @@
 		C673CFFB25B7ABCF00D3E765 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				C66F9E1C25E1EE3000B04144 /* Account */,
 				C6839AA625E1B2030065153D /* AboutScreen.swift */,
-				C6839AA025E1B1DE0065153D /* AccountScreen.swift */,
 				C6839AA325E1B1FC0065153D /* NotificationsScreen.swift */,
 				C673CFFD25B7ABE800D3E765 /* ProfileScreen.swift */,
 				C6839AA925E1B20A0065153D /* TipJarScreen.swift */,
@@ -440,7 +458,6 @@
 			isa = PBXGroup;
 			children = (
 				C6839A9525E1A8880065153D /* AvatarCell.swift */,
-				C6839A9C25E1ADFB0065153D /* DangerButtonCell.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -609,11 +626,11 @@
 				C64CDAEF25D2112B005F3ACD /* ClothingFormScreen.swift in Sources */,
 				C6AA153725BCC58D0095ADA0 /* ClothesDataSource.swift in Sources */,
 				C658E7CE25B78D31000F8F50 /* AMNavigationController.swift in Sources */,
-				C6839A9D25E1ADFB0065153D /* DangerButtonCell.swift in Sources */,
 				C60003DA25D8C26A008472BB /* CriticChatScreen.swift in Sources */,
 				C648381425C5E30400C8082B /* Date+Ext.swift in Sources */,
 				C60003E225D8C3C0008472BB /* MessageCell.swift in Sources */,
 				C6AC1BA725CA0B190076777B /* AMImageView.swift in Sources */,
+				C66F9E1A25E1EE1A00B04144 /* AvatarScreen.swift in Sources */,
 				C68BCD7325C76C3C0002B376 /* UIViewController+Ext.swift in Sources */,
 				C671BE5F25C0D3C7002D1B62 /* AdditionalFieldsView.swift in Sources */,
 				C601983C25B78383004B4203 /* SceneDelegate.swift in Sources */,
@@ -621,6 +638,7 @@
 				C6716F2325C106DC00D0CFF2 /* PrimaryFieldsViewController.swift in Sources */,
 				C601988325B7843B004B4203 /* constants.swift in Sources */,
 				C6A9C1D425B7CE8600C22F29 /* AMButton.swift in Sources */,
+				C66F9E1725E1EE1300B04144 /* PasswordScreen.swift in Sources */,
 				C6839AAA25E1B20A0065153D /* TipJarScreen.swift in Sources */,
 				C62E9D2C25D4B00B007FE502 /* String+Ext.swift in Sources */,
 				C60003E725D8D30A008472BB /* CriticListScreen.swift in Sources */,
@@ -648,7 +666,9 @@
 				C648380C25C5DC0800C8082B /* Clothing.swift in Sources */,
 				C6DFC04325BF5269002BC018 /* CanvasControlsView.swift in Sources */,
 				C6EE84BB25B8BE8000986BF4 /* AMPrimaryLabel.swift in Sources */,
+				C66F9E1425E1EE0800B04144 /* EmailScreen.swift in Sources */,
 				C63B0B8225B8F08E0065F813 /* ClothingScreen.swift in Sources */,
+				C66F9E1125E1EDFC00B04144 /* UsernameScreen.swift in Sources */,
 				C6B0A4AD25D34D780090A70F /* Runway.swift in Sources */,
 				C615893E25E1A5DA00FBB5EE /* CellType.swift in Sources */,
 				C6AA153225BCBDF00095ADA0 /* AMSwitch.swift in Sources */,

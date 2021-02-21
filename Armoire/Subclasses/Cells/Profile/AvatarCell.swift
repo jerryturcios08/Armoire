@@ -43,7 +43,7 @@ class AvatarCell: UITableViewCell {
 
         avatarImageView.snp.makeConstraints { make in
             make.centerY.equalTo(self)
-            make.left.equalTo(self).offset(20)
+            make.left.equalTo(self.safeAreaLayoutGuide).offset(20)
             make.width.height.equalTo(60)
         }
     }
@@ -54,7 +54,7 @@ class AvatarCell: UITableViewCell {
 
         detailLabel.snp.makeConstraints { make in
             make.centerY.equalTo(self)
-            make.right.equalTo(self).offset(-20)
+            make.right.equalTo(self.safeAreaLayoutGuide).offset(-20)
         }
     }
 }

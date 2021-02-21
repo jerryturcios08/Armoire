@@ -69,7 +69,7 @@ class ClothingCell: UITableViewCell {
         addSubview(clothingImageView)
 
         clothingImageView.snp.makeConstraints { make in
-            make.left.equalTo(self).offset(20)
+            make.left.equalTo(self.safeAreaLayoutGuide).offset(20)
             make.top.equalTo(self).offset(9)
             make.bottom.equalTo(separatorLine).offset(-12)
             make.width.equalTo(100)
@@ -81,7 +81,7 @@ class ClothingCell: UITableViewCell {
 
         favoriteImageView.snp.makeConstraints { make in
             make.top.equalTo(clothingImageView)
-            make.right.equalTo(self).offset(-16)
+            make.right.equalTo(self.safeAreaLayoutGuide).offset(-16)
             make.width.equalTo(22)
         }
     }

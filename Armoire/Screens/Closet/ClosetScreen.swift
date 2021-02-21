@@ -69,11 +69,7 @@ class ClosetScreen: UIViewController {
         tableView.rowHeight = 90
         tableView.separatorStyle = .none
         tableView.showActivityIndicator()
-
-        tableView.snp.makeConstraints { make in
-            make.top.bottom.equalTo(view)
-            make.left.right.equalTo(view.safeAreaLayoutGuide)
-        }
+        tableView.snp.makeConstraints { $0.size.equalTo(view) }
     }
 
     func fetchFolders() {

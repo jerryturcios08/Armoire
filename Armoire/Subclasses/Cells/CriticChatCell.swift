@@ -54,7 +54,7 @@ class CriticChatCell: UITableViewCell {
         criticImageView.layer.borderWidth = 1
 
         criticImageView.snp.makeConstraints { make in
-            make.left.equalTo(self).offset(20)
+            make.left.equalTo(self.safeAreaLayoutGuide).offset(20)
             make.centerY.equalTo(self)
             make.width.height.equalTo(80)
         }
@@ -66,7 +66,7 @@ class CriticChatCell: UITableViewCell {
         criticNameLabel.snp.makeConstraints { make in
             make.top.equalTo(criticImageView)
             make.left.equalTo(criticImageView.snp.right).offset(12)
-            make.right.equalTo(self).offset(-20)
+            make.right.equalTo(self.safeAreaLayoutGuide).offset(-20)
         }
     }
 

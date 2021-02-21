@@ -57,7 +57,7 @@ class RunwayCell: UITableViewCell {
         addSubview(favoriteImageView)
 
         favoriteImageView.snp.makeConstraints { make in
-            make.right.equalTo(self).offset(-16)
+            make.right.equalTo(self.safeAreaLayoutGuide).offset(-16)
             make.top.equalTo(self).offset(8)
         }
     }
@@ -66,7 +66,7 @@ class RunwayCell: UITableViewCell {
         addSubview(runwayTitleLabel)
 
         runwayTitleLabel.snp.makeConstraints { make in
-            make.left.equalTo(self).offset(20)
+            make.left.equalTo(self.safeAreaLayoutGuide).offset(20)
             make.centerY.equalTo(favoriteImageView)
         }
     }

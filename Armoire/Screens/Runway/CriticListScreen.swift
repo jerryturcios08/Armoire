@@ -65,11 +65,7 @@ class CriticListScreen: UIViewController {
         tableView.register(CriticChatCell.self, forCellReuseIdentifier: CriticChatCell.reuseId)
         tableView.rowHeight = 100
         tableView.separatorStyle = .none
-
-        tableView.snp.makeConstraints { make in
-            make.top.bottom.equalTo(view)
-            make.left.right.equalTo(view.safeAreaLayoutGuide)
-        }
+        tableView.snp.makeConstraints { $0.size.equalTo(view) }
     }
 
     func deselectSelectedTableViewRow() {

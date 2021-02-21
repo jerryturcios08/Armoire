@@ -63,7 +63,7 @@ class FolderCell: UITableViewCell {
 
         folderImageView.snp.makeConstraints { make in
             make.top.equalTo(self).offset(8)
-            make.left.equalTo(self).offset(16)
+            make.left.equalTo(self.safeAreaLayoutGuide).offset(16)
             make.width.equalTo(40)
             make.height.equalTo(32)
         }
@@ -74,7 +74,7 @@ class FolderCell: UITableViewCell {
 
         favoriteImageView.snp.makeConstraints { make in
             make.top.equalTo(folderImageView)
-            make.right.equalTo(self).offset(-16)
+            make.right.equalTo(self.safeAreaLayoutGuide).offset(-16)
             make.width.equalTo(22)
         }
     }

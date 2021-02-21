@@ -221,7 +221,6 @@ class CanvasScreen: UIViewController {
         let itemSearchScreen = ItemSearchScreen()
         let destinationScreen = AMNavigationController(rootViewController: itemSearchScreen)
         itemSearchScreen.delegate = self
-        destinationScreen.modalPresentationStyle = .fullScreen
         present(destinationScreen, animated: true)
     }
 

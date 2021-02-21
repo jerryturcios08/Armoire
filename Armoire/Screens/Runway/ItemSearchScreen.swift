@@ -40,20 +40,9 @@ class ItemSearchScreen: UIViewController {
         fetchAllClothes()
     }
 
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-
-        if traitCollection.userInterfaceStyle == .light {
-            view.backgroundColor = .white
-            tableView.backgroundColor = .white
-        } else if traitCollection.userInterfaceStyle == .dark {
-            view.backgroundColor = .black
-            tableView.backgroundColor = .black
-        }
-    }
-
     func configureScreen() {
         title = "Clothing Item Search"
+        view.backgroundColor = .systemBackground
 
         let xmarkImage = UIImage(systemName: "xmark.circle")
         let cancelButton = UIBarButtonItem(image: xmarkImage, style: .plain, target: self, action: #selector(cancelButtonTapped))

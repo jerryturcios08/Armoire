@@ -70,18 +70,9 @@ class FolderFormScreen: UIViewController {
         configureFavoriteViews()
     }
 
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-
-        if traitCollection.userInterfaceStyle == .light {
-            view.backgroundColor = .white
-        } else if traitCollection.userInterfaceStyle == .dark {
-            view.backgroundColor = .black
-        }
-    }
-
     func configureScreen() {
         title = selectedFolder == nil ? "Create Folder" : "Edit Folder"
+        view.backgroundColor = .systemBackground
 
         let cancelButton = AMBarButtonItem(title: "Cancel", font: Fonts.quicksandMedium, onAction: cancelButtonTapped)
         navigationItem.leftBarButtonItem = cancelButton

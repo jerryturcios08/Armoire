@@ -39,7 +39,7 @@ class AMTextField: UITextField {
         leftView = leftPaddingView
         leftViewMode = .always
 
-        backgroundColor = .systemGray6
+        backgroundColor = .systemGray5
         autocapitalizationType = .none
         autocorrectionType = .no
         returnKeyType = .done

@@ -25,7 +25,7 @@ class AMTextView: UITextView {
         text = placeholder
         textColor = .systemGray2
         font = UIFont(name: Fonts.quicksandMedium, size: 18)
-        backgroundColor = .systemGray6
+        backgroundColor = .systemGray5
         tintColor = UIColor.accentColor
         layer.cornerRadius = 10
         textContainerInset = UIEdgeInsets(top: 12, left: 8, bottom: 12, right: 8)

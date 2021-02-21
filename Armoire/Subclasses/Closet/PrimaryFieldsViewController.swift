@@ -79,6 +79,14 @@ class PrimaryFieldsViewController: UIViewController {
         let alert = UIAlertController(title: "Photo", message: "Please select a method to add an image.", preferredStyle: .actionSheet)
         alert.view.tintColor = UIColor.accentColor
 
+        if let popoverController = alert.popoverPresentationController {
+            // Sets the source of the alert for the popover
+            popoverController.sourceView = view
+
+            popoverController.sourceRect = CGRect(x: view.bounds.midX, y: view.bounds.midY, width: 0, height: 0)
+            popoverController.permittedArrowDirections = []
+        }
+
         alert.addAction(UIAlertAction(title: "Camera", style: .default) { [weak self] _ in
             guard let self = self else { return }
             picker.sourceType = .camera

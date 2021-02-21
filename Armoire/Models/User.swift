@@ -13,4 +13,13 @@ struct User: Codable {
     var lastName: String
     var email: String
     var username: String
+
+    static var example: User {
+        User(
+            firstName: "Geraldine",
+            lastName: "Turcios",
+            email: "rosierjolie1999@gmail.com",
+            username: "rosierjolie"
+        )
+    }
 }

@@ -25,6 +25,7 @@
 		C601AD0725D85397005E8711 /* EditTitleField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C601AD0625D85397005E8711 /* EditTitleField.swift */; };
 		C60E9F8125BA358C00D97991 /* Folder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60E9F8025BA358C00D97991 /* Folder.swift */; };
 		C60E9F8A25BA37FA00D97991 /* UIColor+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60E9F8925BA37FA00D97991 /* UIColor+Ext.swift */; };
+		C615893E25E1A5DA00FBB5EE /* CellType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C615893D25E1A5DA00FBB5EE /* CellType.swift */; };
 		C6216D4225D9C45900DBE66F /* CriticChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6216D4125D9C45900DBE66F /* CriticChatCell.swift */; };
 		C62E0C4025B8BC110078065A /* AMBodyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62E0C3F25B8BC110078065A /* AMBodyLabel.swift */; };
 		C62E9D2825D48914007FE502 /* ItemSearchScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62E9D2725D48914007FE502 /* ItemSearchScreen.swift */; };
@@ -46,12 +47,19 @@
 		C658E7D925B78FE8000F8F50 /* previews.swift in Sources */ = {isa = PBXBuildFile; fileRef = C658E7D825B78FE8000F8F50 /* previews.swift */; };
 		C658E7E125B7901F000F8F50 /* AMTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C658E7E025B7901F000F8F50 /* AMTabBarController.swift */; };
 		C66D718925BE0BEE008BC818 /* UIStackView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66D718825BE0BEE008BC818 /* UIStackView+Ext.swift */; };
+		C66F9DE925E1DF1A00B04144 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66F9DE825E1DF1A00B04144 /* ProfileHeaderView.swift */; };
 		C670A0F825BD31CA000A1405 /* AMBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C670A0F725BD31CA000A1405 /* AMBarButtonItem.swift */; };
 		C6716F2325C106DC00D0CFF2 /* PrimaryFieldsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6716F2225C106DC00D0CFF2 /* PrimaryFieldsViewController.swift */; };
 		C671BE5F25C0D3C7002D1B62 /* AdditionalFieldsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C671BE5E25C0D3C6002D1B62 /* AdditionalFieldsView.swift */; };
 		C673CFFE25B7ABE800D3E765 /* ProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C673CFFD25B7ABE800D3E765 /* ProfileScreen.swift */; };
 		C673D00625B7AC3C00D3E765 /* RunwayScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C673D00525B7AC3C00D3E765 /* RunwayScreen.swift */; };
 		C67E11C425CCABE500D0E77C /* AMLinkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67E11C325CCABE400D0E77C /* AMLinkButton.swift */; };
+		C6839A9625E1A8880065153D /* AvatarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6839A9525E1A8880065153D /* AvatarCell.swift */; };
+		C6839A9D25E1ADFB0065153D /* DangerButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6839A9C25E1ADFB0065153D /* DangerButtonCell.swift */; };
+		C6839AA125E1B1DE0065153D /* AccountScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6839AA025E1B1DE0065153D /* AccountScreen.swift */; };
+		C6839AA425E1B1FC0065153D /* NotificationsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6839AA325E1B1FC0065153D /* NotificationsScreen.swift */; };
+		C6839AA725E1B2030065153D /* AboutScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6839AA625E1B2030065153D /* AboutScreen.swift */; };
+		C6839AAA25E1B20A0065153D /* TipJarScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6839AA925E1B20A0065153D /* TipJarScreen.swift */; };
 		C68BCD5A25C732E20002B376 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68BCD5925C732E20002B376 /* User.swift */; };
 		C68BCD7325C76C3C0002B376 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68BCD7225C76C3C0002B376 /* UIViewController+Ext.swift */; };
 		C6A9C1D425B7CE8600C22F29 /* AMButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A9C1D325B7CE8600C22F29 /* AMButton.swift */; };
@@ -95,6 +103,7 @@
 		C601AD0625D85397005E8711 /* EditTitleField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTitleField.swift; sourceTree = "<group>"; };
 		C60E9F8025BA358C00D97991 /* Folder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Folder.swift; sourceTree = "<group>"; };
 		C60E9F8925BA37FA00D97991 /* UIColor+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Ext.swift"; sourceTree = "<group>"; };
+		C615893D25E1A5DA00FBB5EE /* CellType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellType.swift; sourceTree = "<group>"; };
 		C6216D4125D9C45900DBE66F /* CriticChatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CriticChatCell.swift; sourceTree = "<group>"; };
 		C62E0C3F25B8BC110078065A /* AMBodyLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AMBodyLabel.swift; sourceTree = "<group>"; };
 		C62E9D2725D48914007FE502 /* ItemSearchScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemSearchScreen.swift; sourceTree = "<group>"; };
@@ -116,12 +125,19 @@
 		C658E7D825B78FE8000F8F50 /* previews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = previews.swift; sourceTree = "<group>"; };
 		C658E7E025B7901F000F8F50 /* AMTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AMTabBarController.swift; sourceTree = "<group>"; };
 		C66D718825BE0BEE008BC818 /* UIStackView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Ext.swift"; sourceTree = "<group>"; };
+		C66F9DE825E1DF1A00B04144 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		C670A0F725BD31CA000A1405 /* AMBarButtonItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AMBarButtonItem.swift; sourceTree = "<group>"; };
 		C6716F2225C106DC00D0CFF2 /* PrimaryFieldsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryFieldsViewController.swift; sourceTree = "<group>"; };
 		C671BE5E25C0D3C6002D1B62 /* AdditionalFieldsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalFieldsView.swift; sourceTree = "<group>"; };
 		C673CFFD25B7ABE800D3E765 /* ProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreen.swift; sourceTree = "<group>"; };
 		C673D00525B7AC3C00D3E765 /* RunwayScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunwayScreen.swift; sourceTree = "<group>"; };
 		C67E11C325CCABE400D0E77C /* AMLinkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AMLinkButton.swift; sourceTree = "<group>"; };
+		C6839A9525E1A8880065153D /* AvatarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarCell.swift; sourceTree = "<group>"; };
+		C6839A9C25E1ADFB0065153D /* DangerButtonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DangerButtonCell.swift; sourceTree = "<group>"; };
+		C6839AA025E1B1DE0065153D /* AccountScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountScreen.swift; sourceTree = "<group>"; };
+		C6839AA325E1B1FC0065153D /* NotificationsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsScreen.swift; sourceTree = "<group>"; };
+		C6839AA625E1B2030065153D /* AboutScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutScreen.swift; sourceTree = "<group>"; };
+		C6839AA925E1B20A0065153D /* TipJarScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipJarScreen.swift; sourceTree = "<group>"; };
 		C68BCD5925C732E20002B376 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		C68BCD7225C76C3C0002B376 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
 		C6A9C1D325B7CE8600C22F29 /* AMButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AMButton.swift; sourceTree = "<group>"; };
@@ -212,6 +228,7 @@
 			children = (
 				C60E9F8825BA37F100D97991 /* Extensions */,
 				C648386E25C619F000C8082B /* AMError.swift */,
+				C615893D25E1A5DA00FBB5EE /* CellType.swift */,
 				C601988225B7843B004B4203 /* constants.swift */,
 				C658E7D825B78FE8000F8F50 /* previews.swift */,
 				C658E7C825B7896E000F8F50 /* UIHelper.swift */,
@@ -284,6 +301,7 @@
 		C63B0B7325B8DCD70065F813 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				C6839A9425E1A86D0065153D /* Profile */,
 				C63B0B7425B8DCE20065F813 /* ClothingCell.swift */,
 				C6216D4125D9C45900DBE66F /* CriticChatCell.swift */,
 				C63B0B7C25B8DCEA0065F813 /* FolderCell.swift */,
@@ -322,6 +340,7 @@
 				C63B0B8A25B9317D0065F813 /* Data Sources */,
 				C63B0B5C25B8C1FD0065F813 /* Labels */,
 				C658E7E525B79023000F8F50 /* Navigation */,
+				C66F9DE725E1DF0400B04144 /* Profile */,
 				C601AD0525D85377005E8711 /* Runway */,
 				C6AC1BA625CA0B190076777B /* AMImageView.swift */,
 				C6AA153125BCBDF00095ADA0 /* AMSwitch.swift */,
@@ -352,6 +371,14 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		C66F9DE725E1DF0400B04144 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				C66F9DE825E1DF1A00B04144 /* ProfileHeaderView.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
 		C6716F2125C106AE00D0CFF2 /* Closet */ = {
 			isa = PBXGroup;
 			children = (
@@ -377,7 +404,11 @@
 		C673CFFB25B7ABCF00D3E765 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				C6839AA625E1B2030065153D /* AboutScreen.swift */,
+				C6839AA025E1B1DE0065153D /* AccountScreen.swift */,
+				C6839AA325E1B1FC0065153D /* NotificationsScreen.swift */,
 				C673CFFD25B7ABE800D3E765 /* ProfileScreen.swift */,
+				C6839AA925E1B20A0065153D /* TipJarScreen.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -403,6 +434,15 @@
 				C67E11C325CCABE400D0E77C /* AMLinkButton.swift */,
 			);
 			path = Buttons;
+			sourceTree = "<group>";
+		};
+		C6839A9425E1A86D0065153D /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				C6839A9525E1A8880065153D /* AvatarCell.swift */,
+				C6839A9C25E1ADFB0065153D /* DangerButtonCell.swift */,
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 		C6DFC04C25BF78C4002BC018 /* Canvas */ = {
@@ -563,11 +603,13 @@
 				C670A0F825BD31CA000A1405 /* AMBarButtonItem.swift in Sources */,
 				C673D00625B7AC3C00D3E765 /* RunwayScreen.swift in Sources */,
 				C601983A25B78383004B4203 /* AppDelegate.swift in Sources */,
+				C6839AA725E1B2030065153D /* AboutScreen.swift in Sources */,
 				C6216D4225D9C45900DBE66F /* CriticChatCell.swift in Sources */,
 				C63B0B6425B8C2180065F813 /* AMTextField.swift in Sources */,
 				C64CDAEF25D2112B005F3ACD /* ClothingFormScreen.swift in Sources */,
 				C6AA153725BCC58D0095ADA0 /* ClothesDataSource.swift in Sources */,
 				C658E7CE25B78D31000F8F50 /* AMNavigationController.swift in Sources */,
+				C6839A9D25E1ADFB0065153D /* DangerButtonCell.swift in Sources */,
 				C60003DA25D8C26A008472BB /* CriticChatScreen.swift in Sources */,
 				C648381425C5E30400C8082B /* Date+Ext.swift in Sources */,
 				C60003E225D8C3C0008472BB /* MessageCell.swift in Sources */,
@@ -579,6 +621,7 @@
 				C6716F2325C106DC00D0CFF2 /* PrimaryFieldsViewController.swift in Sources */,
 				C601988325B7843B004B4203 /* constants.swift in Sources */,
 				C6A9C1D425B7CE8600C22F29 /* AMButton.swift in Sources */,
+				C6839AAA25E1B20A0065153D /* TipJarScreen.swift in Sources */,
 				C62E9D2C25D4B00B007FE502 /* String+Ext.swift in Sources */,
 				C60003E725D8D30A008472BB /* CriticListScreen.swift in Sources */,
 				C6B0A4B125D357430090A70F /* RunwayDataSource.swift in Sources */,
@@ -586,12 +629,15 @@
 				C6AA152D25BCBD0E0095ADA0 /* AMTextView.swift in Sources */,
 				C60E9F8125BA358C00D97991 /* Folder.swift in Sources */,
 				C658E7E125B7901F000F8F50 /* AMTabBarController.swift in Sources */,
+				C66F9DE925E1DF1A00B04144 /* ProfileHeaderView.swift in Sources */,
+				C6839AA425E1B1FC0065153D /* NotificationsScreen.swift in Sources */,
 				C63B0B8C25B931980065F813 /* FolderDataSource.swift in Sources */,
 				C6C13A9425CCD70E007CE2E1 /* ImageViewerScreen.swift in Sources */,
 				C601AD0725D85397005E8711 /* EditTitleField.swift in Sources */,
 				C63B0B6F25B8DACD0065F813 /* FolderScreen.swift in Sources */,
 				C6D8C60D25CF950E00B49301 /* FolderFormScreen.swift in Sources */,
 				C6DFC04825BF77E6002BC018 /* AMCanvasButton.swift in Sources */,
+				C6839A9625E1A8880065153D /* AvatarCell.swift in Sources */,
 				C6AC1BA325CA0A780076777B /* NetworkManager.swift in Sources */,
 				C648386F25C619F000C8082B /* AMError.swift in Sources */,
 				C658E7C925B7896E000F8F50 /* UIHelper.swift in Sources */,
@@ -604,12 +650,14 @@
 				C6EE84BB25B8BE8000986BF4 /* AMPrimaryLabel.swift in Sources */,
 				C63B0B8225B8F08E0065F813 /* ClothingScreen.swift in Sources */,
 				C6B0A4AD25D34D780090A70F /* Runway.swift in Sources */,
+				C615893E25E1A5DA00FBB5EE /* CellType.swift in Sources */,
 				C6AA153225BCBDF00095ADA0 /* AMSwitch.swift in Sources */,
 				C67E11C425CCABE500D0E77C /* AMLinkButton.swift in Sources */,
 				C6B0A4A925D345EC0090A70F /* RunwayCell.swift in Sources */,
 				C6EAA14825BE1FB900C727B3 /* CanvasScreen.swift in Sources */,
 				C658E7D925B78FE8000F8F50 /* previews.swift in Sources */,
 				C62E9D2825D48914007FE502 /* ItemSearchScreen.swift in Sources */,
+				C6839AA125E1B1DE0065153D /* AccountScreen.swift in Sources */,
 				C60E9F8A25BA37FA00D97991 /* UIColor+Ext.swift in Sources */,
 				C6C6D4F125BE15F300E4C0B8 /* UITableView+Ext.swift in Sources */,
 				C673CFFE25B7ABE800D3E765 /* ProfileScreen.swift in Sources */,

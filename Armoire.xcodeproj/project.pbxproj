@@ -295,6 +295,23 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		C612AD3325EC837E00D54062 /* Inputs */ = {
+			isa = PBXGroup;
+			children = (
+				C63B0B6325B8C2180065F813 /* AMTextField.swift */,
+				C6AA152C25BCBD0E0095ADA0 /* AMTextView.swift */,
+			);
+			path = Inputs;
+			sourceTree = "<group>";
+		};
+		C612AD3525EC83BC00D54062 /* Image Views */ = {
+			isa = PBXGroup;
+			children = (
+				C6AC1BA625CA0B190076777B /* AMImageView.swift */,
+			);
+			path = "Image Views";
+			sourceTree = "<group>";
+		};
 		C63B0B5C25B8C1FD0065F813 /* Labels */ = {
 			isa = PBXGroup;
 			children = (
@@ -339,19 +356,17 @@
 		C658E7BC25B7890B000F8F50 /* Subclasses */ = {
 			isa = PBXGroup;
 			children = (
-				C67E11E225CCB5C100D0E77C /* Buttons */,
 				C6DFC04C25BF78C4002BC018 /* Canvas */,
 				C63B0B7325B8DCD70065F813 /* Cells */,
 				C6716F2125C106AE00D0CFF2 /* Closet */,
+				C67E11E225CCB5C100D0E77C /* Controls */,
 				C63B0B8A25B9317D0065F813 /* Data Sources */,
+				C612AD3525EC83BC00D54062 /* Image Views */,
+				C612AD3325EC837E00D54062 /* Inputs */,
 				C63B0B5C25B8C1FD0065F813 /* Labels */,
 				C658E7E525B79023000F8F50 /* Navigation */,
 				C66F9DE725E1DF0400B04144 /* Profile */,
 				C601AD0525D85377005E8711 /* Runway */,
-				C6AC1BA625CA0B190076777B /* AMImageView.swift */,
-				C6AA153125BCBDF00095ADA0 /* AMSwitch.swift */,
-				C63B0B6325B8C2180065F813 /* AMTextField.swift */,
-				C6AA152C25BCBD0E0095ADA0 /* AMTextView.swift */,
 			);
 			path = Subclasses;
 			sourceTree = "<group>";
@@ -444,14 +459,15 @@
 			path = Runway;
 			sourceTree = "<group>";
 		};
-		C67E11E225CCB5C100D0E77C /* Buttons */ = {
+		C67E11E225CCB5C100D0E77C /* Controls */ = {
 			isa = PBXGroup;
 			children = (
 				C670A0F725BD31CA000A1405 /* AMBarButtonItem.swift */,
 				C6A9C1D325B7CE8600C22F29 /* AMButton.swift */,
 				C67E11C325CCABE400D0E77C /* AMLinkButton.swift */,
+				C6AA153125BCBDF00095ADA0 /* AMSwitch.swift */,
 			);
-			path = Buttons;
+			path = Controls;
 			sourceTree = "<group>";
 		};
 		C6839A9425E1A86D0065153D /* Profile */ = {

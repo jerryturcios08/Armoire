@@ -11,7 +11,6 @@ import UIKit
 class ProfileScreen: UIViewController {
     let tableView = UITableView(frame: .zero, style: .grouped)
 
-    let sections = ["General", "Support", "Danger"]
     var cells = [[CellType]]()
 
     override func viewDidLoad() {
@@ -59,7 +58,7 @@ class ProfileScreen: UIViewController {
 
 extension ProfileScreen: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return sections.count
+        return cells.count
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

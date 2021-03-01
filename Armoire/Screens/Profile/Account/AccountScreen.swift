@@ -11,7 +11,6 @@ import UIKit
 class AccountScreen: UIViewController {
     let tableView = UITableView(frame: .zero, style: .grouped)
 
-    let sections = ["Avatar", "General", "Danger"]
     var cells = [[CellType]]()
 
     private var user: User
@@ -84,7 +83,7 @@ class AccountScreen: UIViewController {
 
 extension AccountScreen: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return sections.count
+        return cells.count
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

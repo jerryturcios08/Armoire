@@ -14,7 +14,9 @@ class LoginScreen: UIViewController {
     let emailTextField = AMTextField(placeholder: "Email")
     let passwordTextField = AMTextField(placeholder: "Password")
     let signInButton = AMButton(title: "Sign In")
-    let forgotPasswordButton = UIButton()
+    let forgotPasswordButton = AMTextButton(title: "Forgot password?", textColor: .systemGray)
+    let signUpLabel = AMBodyLabel(text: "Don't have an account?", fontSize: 18)
+    let signUpButton = AMTextButton(title: "Sign Up", textColor: UIColor.accentColor)
     let signUpStackView = UIStackView()
 
     var email = ""
@@ -102,16 +104,7 @@ class LoginScreen: UIViewController {
 
     private func configureForgotPasswordButton() {
         view.addSubview(forgotPasswordButton)
-
-        guard let customFont = UIFont(name: Fonts.quicksandMedium, size: 18) else {
-            fatalError("Quicksand Medium custom font not found. Please make sure it is added to the bundle.")
-        }
-
-        forgotPasswordButton.addTarget(self, action: #selector(forgotPasswordButtonTapped), for: .touchUpInside)
-        forgotPasswordButton.setTitle("Forgot Password?", for: .normal)
-        forgotPasswordButton.setTitleColor(.systemGray, for: .normal)
-        forgotPasswordButton.titleLabel?.adjustsFontForContentSizeCategory = true
-        forgotPasswordButton.titleLabel?.font = UIFontMetrics.default.scaledFont(for: customFont)
+        forgotPasswordButton.setOnAction(forgotPasswordButtonTapped)
 
         forgotPasswordButton.snp.makeConstraints { make in
             make.centerX.equalTo(view)
@@ -120,19 +113,6 @@ class LoginScreen: UIViewController {
     }
 
     private func configureSignUpStackView() {
-        guard let customFont = UIFont(name: Fonts.quicksandMedium, size: 18) else {
-            fatalError("Quicksand Medium custom font not found. Please make sure it is added to the bundle.")
-        }
-
-        let signUpLabel = AMBodyLabel(text: "Don't have an account?", fontSize: 18)
-
-        let signUpButton = UIButton()
-        signUpButton.addTarget(self, action: #selector(signUpButtonTapped), for: .touchUpInside)
-        signUpButton.setTitle("Sign Up", for: .normal)
-        signUpButton.setTitleColor(UIColor.accentColor, for: .normal)
-        signUpButton.titleLabel?.adjustsFontForContentSizeCategory = true
-        signUpButton.titleLabel?.font = UIFontMetrics.default.scaledFont(for: customFont)
-
         view.addSubview(signUpStackView)
         signUpStackView.addArrangedSubviews(UIView(), signUpLabel, signUpButton, UIView())
         signUpStackView.distribution = .fill
@@ -170,5 +150,4 @@ struct LoginScreenPreviews: PreviewProvider {
             .ignoresSafeArea(.all, edges: .all)
     }
 }
-
 #endif

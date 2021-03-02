@@ -28,6 +28,7 @@
 		C615893E25E1A5DA00FBB5EE /* CellType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C615893D25E1A5DA00FBB5EE /* CellType.swift */; };
 		C6216D4225D9C45900DBE66F /* CriticChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6216D4125D9C45900DBE66F /* CriticChatCell.swift */; };
 		C626955A25EE99DA00256208 /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C626955925EE99DA00256208 /* LoginScreen.swift */; };
+		C626955D25EEDCBB00256208 /* AMTextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C626955C25EEDCBB00256208 /* AMTextButton.swift */; };
 		C62E0C4025B8BC110078065A /* AMBodyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62E0C3F25B8BC110078065A /* AMBodyLabel.swift */; };
 		C62E9D2825D48914007FE502 /* ItemSearchScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62E9D2725D48914007FE502 /* ItemSearchScreen.swift */; };
 		C62E9D2C25D4B00B007FE502 /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62E9D2B25D4B00B007FE502 /* String+Ext.swift */; };
@@ -110,6 +111,7 @@
 		C615893D25E1A5DA00FBB5EE /* CellType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellType.swift; sourceTree = "<group>"; };
 		C6216D4125D9C45900DBE66F /* CriticChatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CriticChatCell.swift; sourceTree = "<group>"; };
 		C626955925EE99DA00256208 /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
+		C626955C25EEDCBB00256208 /* AMTextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AMTextButton.swift; sourceTree = "<group>"; };
 		C62E0C3F25B8BC110078065A /* AMBodyLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AMBodyLabel.swift; sourceTree = "<group>"; };
 		C62E9D2725D48914007FE502 /* ItemSearchScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemSearchScreen.swift; sourceTree = "<group>"; };
 		C62E9D2B25D4B00B007FE502 /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
@@ -469,6 +471,7 @@
 				C6A9C1D325B7CE8600C22F29 /* AMButton.swift */,
 				C67E11C325CCABE400D0E77C /* AMLinkButton.swift */,
 				C6AA153125BCBDF00095ADA0 /* AMSwitch.swift */,
+				C626955C25EEDCBB00256208 /* AMTextButton.swift */,
 			);
 			path = Controls;
 			sourceTree = "<group>";
@@ -654,6 +657,7 @@
 				C671BE5F25C0D3C7002D1B62 /* AdditionalFieldsView.swift in Sources */,
 				C601983C25B78383004B4203 /* SceneDelegate.swift in Sources */,
 				C66D718925BE0BEE008BC818 /* UIStackView+Ext.swift in Sources */,
+				C626955D25EEDCBB00256208 /* AMTextButton.swift in Sources */,
 				C6716F2325C106DC00D0CFF2 /* PrimaryFieldsViewController.swift in Sources */,
 				C601988325B7843B004B4203 /* constants.swift in Sources */,
 				C6A9C1D425B7CE8600C22F29 /* AMButton.swift in Sources */,

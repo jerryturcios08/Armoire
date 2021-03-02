@@ -9,6 +9,8 @@ import SwiftUI
 import UIKit
 
 class LoginScreen: UIViewController {
+    // MARK: - Properties
+
     let loginLogoImageView = UIImageView(image: UIImage(named: "LoginLogo"))
     let loginLabel = AMBodyLabel(text: "Login", fontSize: 34)
     let emailTextField = AMTextField(placeholder: "Email")
@@ -22,8 +24,11 @@ class LoginScreen: UIViewController {
     var email = ""
     var password = ""
 
+    // MARK: - Configurations
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureGestures()
         configureLoginLogoImageView()
         configureLoginLabel()
         configureEmailTextField()
@@ -47,6 +52,11 @@ class LoginScreen: UIViewController {
         if largeSizeCategories.contains(traitCollection.preferredContentSizeCategory) {
             signUpStackView.axis = .vertical
         }
+    }
+
+    private func configureGestures() {
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tapGestureRecognizer)
     }
 
     private func configureLoginLogoImageView() {
@@ -73,6 +83,10 @@ class LoginScreen: UIViewController {
     private func configureEmailTextField() {
         view.addSubview(emailTextField)
         emailTextField.setOnEdit(handleEmailTextFieldEdit)
+        emailTextField.delegate = self
+        emailTextField.keyboardType = .emailAddress
+        emailTextField.returnKeyType = .next
+        emailTextField.tag = 0
 
         emailTextField.snp.makeConstraints { make in
             make.top.equalTo(loginLabel.snp.bottom).offset(20)
@@ -84,6 +98,10 @@ class LoginScreen: UIViewController {
     private func configurePasswordTextField() {
         view.addSubview(passwordTextField)
         passwordTextField.setOnEdit(handlePasswordTextFieldEdit)
+        passwordTextField.delegate = self
+        passwordTextField.isSecureTextEntry = true
+        passwordTextField.returnKeyType = .done
+        passwordTextField.tag = 1
 
         passwordTextField.snp.makeConstraints { make in
             make.top.equalTo(emailTextField.snp.bottom).offset(20)
@@ -120,9 +138,11 @@ class LoginScreen: UIViewController {
 
         signUpStackView.snp.makeConstraints { make in
             make.centerX.equalTo(view)
-            make.bottom.equalTo(view).offset(-16)
+            make.bottom.equalTo(view).offset(-24)
         }
     }
+
+    // MARK: - Action methods
 
     func handleEmailTextFieldEdit(_ sender: UITextField) {
         guard let text = sender.text else { return }
@@ -141,7 +161,25 @@ class LoginScreen: UIViewController {
     @objc func signUpButtonTapped(_ sender: UIButton) {
         // Push to a new view controller for creating an account
     }
+
+    @objc func dismissKeyboard(_ sender: UITapGestureRecognizer) {
+        view.endEditing(true)
+    }
 }
+
+// MARK: - Text field delegate
+
+extension LoginScreen: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        switch textField.tag {
+        case 0: return passwordTextField.becomeFirstResponder()
+        case 1: return passwordTextField.resignFirstResponder()
+        default: return true
+        }
+    }
+}
+
+// MARK: - Previews
 
 #if DEBUG
 struct LoginScreenPreviews: PreviewProvider {

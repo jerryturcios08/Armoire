@@ -28,6 +28,7 @@ class LoginScreen: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .systemBackground
         configureGestures()
         configureLoginLogoImageView()
         configureLoginLabel()
@@ -132,6 +133,7 @@ class LoginScreen: UIViewController {
 
     private func configureSignUpStackView() {
         view.addSubview(signUpStackView)
+        signUpButton.setOnAction(signUpButtonTapped)
         signUpStackView.addArrangedSubviews(UIView(), signUpLabel, signUpButton, UIView())
         signUpStackView.distribution = .fill
         signUpStackView.spacing = 8
@@ -159,7 +161,9 @@ class LoginScreen: UIViewController {
     }
 
     @objc func signUpButtonTapped(_ sender: UIButton) {
-        // Push to a new view controller for creating an account
+        let destinationScreen = SignUpScreen()
+        destinationScreen.modalPresentationStyle = .fullScreen
+        present(destinationScreen, animated: true)
     }
 
     @objc func dismissKeyboard(_ sender: UITapGestureRecognizer) {

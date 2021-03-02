@@ -29,6 +29,7 @@
 		C6216D4225D9C45900DBE66F /* CriticChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6216D4125D9C45900DBE66F /* CriticChatCell.swift */; };
 		C626955A25EE99DA00256208 /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C626955925EE99DA00256208 /* LoginScreen.swift */; };
 		C626955D25EEDCBB00256208 /* AMTextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C626955C25EEDCBB00256208 /* AMTextButton.swift */; };
+		C626956125EEE1B500256208 /* SignUpScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C626956025EEE1B500256208 /* SignUpScreen.swift */; };
 		C62E0C4025B8BC110078065A /* AMBodyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62E0C3F25B8BC110078065A /* AMBodyLabel.swift */; };
 		C62E9D2825D48914007FE502 /* ItemSearchScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62E9D2725D48914007FE502 /* ItemSearchScreen.swift */; };
 		C62E9D2C25D4B00B007FE502 /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62E9D2B25D4B00B007FE502 /* String+Ext.swift */; };
@@ -112,6 +113,7 @@
 		C6216D4125D9C45900DBE66F /* CriticChatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CriticChatCell.swift; sourceTree = "<group>"; };
 		C626955925EE99DA00256208 /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
 		C626955C25EEDCBB00256208 /* AMTextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AMTextButton.swift; sourceTree = "<group>"; };
+		C626956025EEE1B500256208 /* SignUpScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpScreen.swift; sourceTree = "<group>"; };
 		C62E0C3F25B8BC110078065A /* AMBodyLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AMBodyLabel.swift; sourceTree = "<group>"; };
 		C62E9D2725D48914007FE502 /* ItemSearchScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemSearchScreen.swift; sourceTree = "<group>"; };
 		C62E9D2B25D4B00B007FE502 /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
@@ -253,6 +255,7 @@
 				C673CFFB25B7ABCF00D3E765 /* Profile */,
 				C673CFFC25B7ABD700D3E765 /* Runway */,
 				C626955925EE99DA00256208 /* LoginScreen.swift */,
+				C626956025EEE1B500256208 /* SignUpScreen.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -702,6 +705,7 @@
 				C658E7D925B78FE8000F8F50 /* previews.swift in Sources */,
 				C62E9D2825D48914007FE502 /* ItemSearchScreen.swift in Sources */,
 				C6839AA125E1B1DE0065153D /* AccountScreen.swift in Sources */,
+				C626956125EEE1B500256208 /* SignUpScreen.swift in Sources */,
 				C60E9F8A25BA37FA00D97991 /* UIColor+Ext.swift in Sources */,
 				C6C6D4F125BE15F300E4C0B8 /* UITableView+Ext.swift in Sources */,
 				C673CFFE25B7ABE800D3E765 /* ProfileScreen.swift in Sources */,

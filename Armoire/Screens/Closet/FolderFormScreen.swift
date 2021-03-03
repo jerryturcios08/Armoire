@@ -99,7 +99,7 @@ class FolderFormScreen: UIViewController {
         contentStackView.axis = .vertical
         contentStackView.spacing = 20
         contentStackView.isLayoutMarginsRelativeArrangement = true
-        contentStackView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 20, leading: 16, bottom: 16, trailing: 20)
+        contentStackView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20)
 
         contentStackView.snp.makeConstraints { make in
             make.edges.equalTo(scrollView).inset(UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
@@ -186,7 +186,7 @@ class FolderFormScreen: UIViewController {
         view.endEditing(true)
     }
 
-    @objc func keyboardWillShow(notification:NSNotification) {
+    @objc func keyboardWillShow(notification: NSNotification) {
         guard let userInfo = notification.userInfo else { return }
         guard let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
 
@@ -198,7 +198,7 @@ class FolderFormScreen: UIViewController {
         scrollView.contentInset = contentInset
     }
 
-    @objc func keyboardWillHide(notification:NSNotification) {
+    @objc func keyboardWillHide(notification: NSNotification) {
         let contentInset = UIEdgeInsets.zero
         scrollView.contentInset = contentInset
     }

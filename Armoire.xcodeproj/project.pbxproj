@@ -251,11 +251,10 @@
 		C601988725B78483004B4203 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				C6CBCDF325F0489300E73C37 /* Auth */,
 				C673CFF825B7ABA100D3E765 /* Closet */,
 				C673CFFB25B7ABCF00D3E765 /* Profile */,
 				C673CFFC25B7ABD700D3E765 /* Runway */,
-				C626955925EE99DA00256208 /* LoginScreen.swift */,
-				C626956025EEE1B500256208 /* SignUpScreen.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -485,6 +484,15 @@
 				C6839A9525E1A8880065153D /* AvatarCell.swift */,
 			);
 			path = Profile;
+			sourceTree = "<group>";
+		};
+		C6CBCDF325F0489300E73C37 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				C626955925EE99DA00256208 /* LoginScreen.swift */,
+				C626956025EEE1B500256208 /* SignUpScreen.swift */,
+			);
+			path = Auth;
 			sourceTree = "<group>";
 		};
 		C6DFC04C25BF78C4002BC018 /* Canvas */ = {

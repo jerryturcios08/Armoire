@@ -156,11 +156,10 @@ class LoginScreen: UIViewController {
         password = text
     }
 
-    @objc func forgotPasswordButtonTapped(_ sender: UIButton) {
-        // Push to a new view controller for resetting the password
+    func forgotPasswordButtonTapped(_ sender: UIButton) {
     }
 
-    @objc func signUpButtonTapped(_ sender: UIButton) {
+    func signUpButtonTapped(_ sender: UIButton) {
         let destinationScreen = SignUpScreen()
         destinationScreen.modalPresentationStyle = .fullScreen
         present(destinationScreen, animated: true)

@@ -79,6 +79,7 @@
 		C6B0A4B125D357430090A70F /* RunwayDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B0A4B025D357430090A70F /* RunwayDataSource.swift */; };
 		C6C13A9425CCD70E007CE2E1 /* ImageViewerScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C13A9325CCD70E007CE2E1 /* ImageViewerScreen.swift */; };
 		C6C6D4F125BE15F300E4C0B8 /* UITableView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C6D4F025BE15F300E4C0B8 /* UITableView+Ext.swift */; };
+		C6CBCE0625F04BE900E73C37 /* ForgotPasswordScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6CBCE0525F04BE900E73C37 /* ForgotPasswordScreen.swift */; };
 		C6D8C60D25CF950E00B49301 /* FolderFormScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D8C60C25CF950E00B49301 /* FolderFormScreen.swift */; };
 		C6DFC04325BF5269002BC018 /* CanvasControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6DFC04225BF5269002BC018 /* CanvasControlsView.swift */; };
 		C6DFC04825BF77E6002BC018 /* AMCanvasButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6DFC04725BF77E6002BC018 /* AMCanvasButton.swift */; };
@@ -163,6 +164,7 @@
 		C6B0A4B025D357430090A70F /* RunwayDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunwayDataSource.swift; sourceTree = "<group>"; };
 		C6C13A9325CCD70E007CE2E1 /* ImageViewerScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewerScreen.swift; sourceTree = "<group>"; };
 		C6C6D4F025BE15F300E4C0B8 /* UITableView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Ext.swift"; sourceTree = "<group>"; };
+		C6CBCE0525F04BE900E73C37 /* ForgotPasswordScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordScreen.swift; sourceTree = "<group>"; };
 		C6D8C60C25CF950E00B49301 /* FolderFormScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderFormScreen.swift; sourceTree = "<group>"; };
 		C6DFC04225BF5269002BC018 /* CanvasControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasControlsView.swift; sourceTree = "<group>"; };
 		C6DFC04725BF77E6002BC018 /* AMCanvasButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AMCanvasButton.swift; sourceTree = "<group>"; };
@@ -489,6 +491,7 @@
 		C6CBCDF325F0489300E73C37 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
+				C6CBCE0525F04BE900E73C37 /* ForgotPasswordScreen.swift */,
 				C626955925EE99DA00256208 /* LoginScreen.swift */,
 				C626956025EEE1B500256208 /* SignUpScreen.swift */,
 			);
@@ -700,6 +703,7 @@
 				C648380C25C5DC0800C8082B /* Clothing.swift in Sources */,
 				C6DFC04325BF5269002BC018 /* CanvasControlsView.swift in Sources */,
 				C6EE84BB25B8BE8000986BF4 /* AMPrimaryLabel.swift in Sources */,
+				C6CBCE0625F04BE900E73C37 /* ForgotPasswordScreen.swift in Sources */,
 				C66F9E1425E1EE0800B04144 /* EmailScreen.swift in Sources */,
 				C63B0B8225B8F08E0065F813 /* ClothingScreen.swift in Sources */,
 				C66F9E1125E1EDFC00B04144 /* UsernameScreen.swift in Sources */,

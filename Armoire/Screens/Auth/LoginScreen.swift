@@ -157,6 +157,9 @@ class LoginScreen: UIViewController {
     }
 
     func forgotPasswordButtonTapped(_ sender: UIButton) {
+        let destinationScreen = ForgotPasswordScreen()
+        destinationScreen.modalPresentationStyle = .fullScreen
+        present(destinationScreen, animated: true)
     }
 
     func signUpButtonTapped(_ sender: UIButton) {

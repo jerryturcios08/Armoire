@@ -5,6 +5,7 @@
 //  Created by Geraldine Turcios on 3/3/21.
 //
 
+import FirebaseAuth
 import SwiftUI
 import UIKit
 
@@ -99,7 +100,23 @@ class ForgotPasswordScreen: UIViewController {
     }
 
     func handleResetButtonTapped(_ sender: UIButton) {
-        // TODO: Implement reset functionality using Firebase
+        Auth.auth().sendPasswordReset(withEmail: email) { [weak self] error in
+            guard let self = self else { return }
+
+            if let error = error {
+                self.presentErrorAlert(message: error.localizedDescription)
+            } else {
+                let alert = UIAlertController(title: "Success", message: "An email was sent to your inbox with instructions on how to reset your password.", preferredStyle: .alert)
+                alert.view.tintColor = UIColor.accentColor
+
+                alert.addAction(UIAlertAction(title: "Okay", style: .default) { [weak self] _ in
+                    guard let self = self else { return }
+                    self.dismiss(animated: true)
+                })
+
+                self.present(alert, animated: true)
+            }
+        }
     }
 }
 

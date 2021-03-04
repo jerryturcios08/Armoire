@@ -1,9 +1,17 @@
 PODS:
+  - Firebase/Auth (7.5.0):
+    - Firebase/CoreOnly
+    - FirebaseAuth (~> 7.5.0)
   - Firebase/CoreOnly (7.5.0):
     - FirebaseCore (= 7.5.0)
   - Firebase/Storage (7.5.0):
     - Firebase/CoreOnly
     - FirebaseStorage (~> 7.5.0)
+  - FirebaseAuth (7.5.0):
+    - FirebaseCore (~> 7.0)
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.0)
+    - GoogleUtilities/Environment (~> 7.0)
+    - GTMSessionFetcher/Core (~> 1.4)
   - FirebaseCore (7.5.0):
     - FirebaseCoreDiagnostics (~> 7.4)
     - GoogleUtilities/Environment (~> 7.0)
@@ -21,10 +29,21 @@ PODS:
     - GTMSessionFetcher/Core (~> 1.4)
   - GoogleDataTransport (8.2.0):
     - nanopb (~> 2.30907.0)
+  - GoogleUtilities/AppDelegateSwizzler (7.2.0):
+    - GoogleUtilities/Environment
+    - GoogleUtilities/Logger
+    - GoogleUtilities/Network
   - GoogleUtilities/Environment (7.2.0):
     - PromisesObjC (~> 1.2)
   - GoogleUtilities/Logger (7.2.0):
     - GoogleUtilities/Environment
+  - GoogleUtilities/Network (7.2.0):
+    - GoogleUtilities/Logger
+    - "GoogleUtilities/NSData+zlib"
+    - GoogleUtilities/Reachability
+  - "GoogleUtilities/NSData+zlib (7.2.0)"
+  - GoogleUtilities/Reachability (7.2.0):
+    - GoogleUtilities/Logger
   - GTMSessionFetcher/Core (1.5.0)
   - nanopb (2.30907.0):
     - nanopb/decode (= 2.30907.0)
@@ -35,6 +54,7 @@ PODS:
   - SnapKit (5.0.1)
 
 DEPENDENCIES:
+  - Firebase/Auth
   - Firebase/Storage
   - FirebaseFirestore (from `https://github.com/invertase/firestore-ios-sdk-frameworks.git`, tag `6.27.1`)
   - FirebaseFirestoreSwift
@@ -43,6 +63,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Firebase
+    - FirebaseAuth
     - FirebaseCore
     - FirebaseCoreDiagnostics
     - FirebaseFirestoreSwift
@@ -66,6 +87,7 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Firebase: fd5e4d2b756292c6e7ee6faac1eb320225d6e97e
+  FirebaseAuth: 13585612f93d671962682007ea8ded1d60ef0762
   FirebaseCore: 06a2b68af8901f2244eb989419eb89edc3789b4d
   FirebaseCoreDiagnostics: 35685db68b11fe7d19d2d8b557fd7e3a56ac81cc
   FirebaseFirestore: ce0576e778a47c89f60e6e10e209538b1eb9600f
@@ -78,6 +100,6 @@ SPEC CHECKSUMS:
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
 
-PODFILE CHECKSUM: 223ef834d4887420cd6a5034d7cca1891dbaf173
+PODFILE CHECKSUM: e135ca74c37089222c2a446cec9a07d820045ea5
 
 COCOAPODS: 1.10.1

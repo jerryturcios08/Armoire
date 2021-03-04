@@ -14,6 +14,7 @@ target 'Armoire' do
   end
 
   # Pods for Armoire
+  pod 'Firebase/Auth'
   pod 'FirebaseFirestore', :git => 'https://github.com/invertase/firestore-ios-sdk-frameworks.git', :tag => '6.27.1'
   pod 'Firebase/Storage'
   pod 'FirebaseFirestoreSwift'

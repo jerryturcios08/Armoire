@@ -19,8 +19,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
-        checkAuthenticatedUser()
+        window?.rootViewController = AMTabBarController()
         window?.makeKeyAndVisible()
+
+        checkAuthenticatedUser()
     }
 
     func sceneDidBecomeActive(_ scene: UIScene) {
@@ -33,9 +35,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         Auth.auth().addStateDidChangeListener { [weak self] auth, user in
             guard let self = self else { return }
 
-            if let _ = user {
-                self.window?.rootViewController = AMTabBarController()
-            } else {
+            if user == nil {
                 self.window?.rootViewController = LoginScreen()
             }
         }

@@ -121,10 +121,20 @@ class CanvasScene: SKScene {
     func loadNodes(_ nodes: [ItemNode]) {
         for node in nodes {
             guard let url = URL(string: node.imageUrl) else { return }
-            let data = try! Data(contentsOf: url)
-            guard let image = UIImage(data: data) else { return }
 
-            let newNode = SKSpriteNode(texture: SKTexture(image: image))
+            let newNode: SKSpriteNode
+            let nodeImage: UIImage
+
+            do {
+                let data = try Data(contentsOf: url)
+                guard let image = UIImage(data: data) else { return }
+                nodeImage = image
+            } catch {
+                // Ignores the current node if the image cannot be found
+                continue
+            }
+
+            newNode = SKSpriteNode(texture: SKTexture(image: nodeImage))
             newNode.name = node.id
             newNode.position = CGPoint(x: node.xPosition, y: node.yPosition)
             newNode.zPosition = CGFloat(node.zPosition)

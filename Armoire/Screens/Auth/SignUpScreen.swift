@@ -16,6 +16,8 @@ class SignUpScreen: UIViewController {
 
     let backButton = UIButton()
     let signUpLabel = AMBodyLabel(text: "Sign Up", fontSize: 34)
+    let addAvatarImageButton = AMButton(title: "Add Avatar")
+    let avatarImageView = UIImageView()
     let firstNameTextField = AMTextField(placeholder: "First Name")
     let lastNameTextField = AMTextField(placeholder: "Last Name")
     let usernameTextField = AMTextField(placeholder: "@username")
@@ -46,6 +48,7 @@ class SignUpScreen: UIViewController {
         configureStackView()
         configureBackButton()
         configureSignUpLabel()
+        configureAvatarImageView()
         configureTextFields()
         configureRegisterButton()
     }
@@ -71,7 +74,7 @@ class SignUpScreen: UIViewController {
         contentStackView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20)
 
         contentStackView.snp.makeConstraints { make in
-            make.edges.equalTo(scrollView).inset(UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0))
+            make.edges.equalTo(scrollView).inset(UIEdgeInsets(top: 20, left: 0, bottom: 20, right: 0))
             make.width.equalTo(scrollView)
         }
     }
@@ -89,6 +92,17 @@ class SignUpScreen: UIViewController {
     func configureSignUpLabel() {
         contentStackView.addArrangedSubview(signUpLabel)
         signUpLabel.font = UIFont(name: Fonts.quicksandBold, size: 34)
+    }
+
+    func configureAvatarImageView() {
+        contentStackView.addArrangedSubview(avatarImageView)
+        avatarImageView.contentMode = .scaleAspectFit
+        avatarImageView.isHidden = true
+        avatarImageView.snp.makeConstraints { $0.height.lessThanOrEqualTo(280) }
+
+        contentStackView.addArrangedSubview(addAvatarImageButton)
+        addAvatarImageButton.setOnAction(addAvatarImageButtonTapped)
+        addAvatarImageButton.snp.makeConstraints { $0.height.equalTo(50) }
     }
 
     func configureTextFields() {
@@ -132,6 +146,39 @@ class SignUpScreen: UIViewController {
 
     @objc func xmarkButtonTapped(_ sender: UIButton) {
         dismiss(animated: true)
+    }
+
+    func addAvatarImageButtonTapped(_ sender: UIButton) {
+        let picker = UIImagePickerController()
+        picker.navigationBar.tintColor = UIColor.accentColor
+        picker.delegate = self
+
+        let alert = UIAlertController(title: "Photo", message: "Please select a method to add an image.", preferredStyle: .actionSheet)
+        alert.view.tintColor = UIColor.accentColor
+
+        if let popoverController = alert.popoverPresentationController {
+            // Sets the source of the alert for the popover
+            popoverController.sourceView = view
+
+            popoverController.sourceRect = CGRect(x: view.bounds.midX, y: view.bounds.midY, width: 0, height: 0)
+            popoverController.permittedArrowDirections = []
+        }
+
+        alert.addAction(UIAlertAction(title: "Camera", style: .default) { [weak self] _ in
+            guard let self = self else { return }
+            picker.sourceType = .camera
+            self.present(picker, animated: true)
+        })
+
+        alert.addAction(UIAlertAction(title: "Photo Library", style: .default) { [weak self] _ in
+            guard let self = self else { return }
+            picker.sourceType = .photoLibrary
+            self.present(picker, animated: true)
+        })
+
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+
+        present(alert, animated: true)
     }
 
     func handleFirstNameTextFieldEdit(_ sender: UITextField) {
@@ -189,6 +236,19 @@ class SignUpScreen: UIViewController {
         scrollView.contentInset = contentInset
     }
 }
+
+// MARK: - Image picker delegate
+
+extension SignUpScreen: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        guard let image = info[.originalImage] as? UIImage else { return }
+        avatarImageView.image = image
+        avatarImageView.isHidden = false
+        dismiss(animated: true)
+    }
+}
+
+// MARK: - Text field delegate
 
 extension SignUpScreen: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

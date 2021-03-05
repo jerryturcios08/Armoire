@@ -5,6 +5,7 @@
 //  Created by Geraldine Turcios on 3/2/21.
 //
 
+import FirebaseAuth
 import SwiftUI
 import UIKit
 
@@ -212,7 +213,27 @@ class SignUpScreen: UIViewController {
     }
 
     func registerButtonTapped(_ sender: UIButton) {
-        // TODO: Handle registration logic and dismiss screen
+        if firstName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            return presentErrorAlert(message: "The first name field is empty. Please enter a first name.")
+        } else if lastName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            return presentErrorAlert(message: "The last name field is empty. Please enter a last name.")
+        } else if username.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            return presentErrorAlert(message: "The username field is empty. Please enter a username.")
+        } else if password != confirmPassword {
+            return presentErrorAlert(message: "The passwords entered do not match. Please try again.")
+        }
+
+        startLoadingOverlay()
+
+        Auth.auth().createUser(withEmail: email, password: password) { [weak self] result, error in
+            guard let self = self else { return }
+
+            if let error = error {
+                self.presentErrorAlert(message: error.localizedDescription)
+            } else {
+                self.stopLoadingOverlay()
+            }
+        }
     }
 
     @objc func dismissKeyboard(_ sender: UITapGestureRecognizer) {

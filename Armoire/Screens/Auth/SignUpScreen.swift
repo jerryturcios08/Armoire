@@ -71,7 +71,7 @@ class SignUpScreen: UIViewController {
         contentStackView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20)
 
         contentStackView.snp.makeConstraints { make in
-            make.edges.equalTo(scrollView).inset(UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
+            make.edges.equalTo(scrollView).inset(UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0))
             make.width.equalTo(scrollView)
         }
     }

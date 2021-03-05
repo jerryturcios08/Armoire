@@ -5,6 +5,7 @@
 //  Created by Geraldine Turcios on 3/2/21.
 //
 
+import FirebaseAuth
 import SwiftUI
 import UIKit
 
@@ -113,6 +114,7 @@ class LoginScreen: UIViewController {
 
     private func configureSignInButton() {
         view.addSubview(signInButton)
+        signInButton.setOnAction(signInButtonTapped)
 
         signInButton.snp.makeConstraints { make in
             make.top.equalTo(passwordTextField.snp.bottom).offset(20)
@@ -154,6 +156,22 @@ class LoginScreen: UIViewController {
     func handlePasswordTextFieldEdit(_ sender: UITextField) {
         guard let text = sender.text else { return }
         password = text
+    }
+
+    func signInButtonTapped(_ sender: UIButton) {
+        startLoadingOverlay()
+
+        Auth.auth().signIn(withEmail: email, password: password) { [weak self] result, error in
+            guard let self = self else { return }
+
+            self.stopLoadingOverlay()
+
+            if let error = error {
+                self.presentErrorAlert(message: error.localizedDescription)
+            } else {
+                UIApplication.shared.windows[0].rootViewController = AMTabBarController()
+            }
+        }
     }
 
     func forgotPasswordButtonTapped(_ sender: UIButton) {

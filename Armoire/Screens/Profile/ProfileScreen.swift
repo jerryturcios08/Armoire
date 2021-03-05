@@ -5,6 +5,7 @@
 //  Created by Geraldine Turcios on 1/19/21.
 //
 
+import FirebaseAuth
 import SwiftUI
 import UIKit
 
@@ -50,7 +51,23 @@ class ProfileScreen: UIViewController {
     }
 
     func logOutButtonTapped() {
-        presentErrorAlert(message: "Logged out!")
+        startLoadingOverlay()
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
+            guard let self = self else { return }
+
+            do {
+                self.stopLoadingOverlay()
+                try Auth.auth().signOut()
+                let window = UIApplication.shared.windows[0]
+
+                UIView.transition(with: window, duration: 0.25, options: .transitionCrossDissolve, animations: {
+                    window.rootViewController = LoginScreen()
+                })
+            } catch {
+                self.presentErrorAlert(message: error.localizedDescription)
+            }
+        }
     }
 }
 

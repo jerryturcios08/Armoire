@@ -51,7 +51,7 @@ class ProfileScreen: UIViewController {
     }
 
     func logOutButtonTapped() {
-        startLoadingOverlay()
+        startLoadingOverlay(message: "Logging out")
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
             guard let self = self else { return }

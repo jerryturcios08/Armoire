@@ -35,8 +35,8 @@ extension UIViewController {
         present(safariViewController, animated: true)
     }
 
-    func startLoadingOverlay() {
-        ProgressDialog.alert = UIAlertController(title: nil, message: "Please wait...", preferredStyle: .alert)
+    func startLoadingOverlay(message: String) {
+        ProgressDialog.alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
 
         let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
         loadingIndicator.hidesWhenStopped = true
@@ -47,7 +47,7 @@ extension UIViewController {
         present(ProgressDialog.alert, animated: true, completion: nil)
     }
 
-    func stopLoadingOverlay() {
-        ProgressDialog.alert.dismiss(animated: true, completion: nil)
+    func stopLoadingOverlay(completion: (() -> Void)? = nil) {
+        ProgressDialog.alert.dismiss(animated: true, completion: completion)
     }
 }

@@ -281,7 +281,7 @@ class ClothingFormScreen: UIViewController {
                 delegate?.didAddNewClothing(newClothing, image: image)
             }
 
-            startLoadingOverlay()
+            startLoadingOverlay(message: "Please wait")
 
             DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
                 guard let self = self else { return }

@@ -159,17 +159,17 @@ class LoginScreen: UIViewController {
     }
 
     func signInButtonTapped(_ sender: UIButton) {
-        startLoadingOverlay()
+        startLoadingOverlay(message: "Please wait")
 
         Auth.auth().signIn(withEmail: email, password: password) { [weak self] result, error in
             guard let self = self else { return }
 
-            self.stopLoadingOverlay()
-
-            if let error = error {
-                self.presentErrorAlert(message: error.localizedDescription)
-            } else {
-                UIApplication.shared.windows[0].rootViewController = AMTabBarController()
+            self.stopLoadingOverlay {
+                if let error = error {
+                    self.presentErrorAlert(message: error.localizedDescription)
+                } else {
+                    UIApplication.shared.windows[0].rootViewController = AMTabBarController()
+                }
             }
         }
     }

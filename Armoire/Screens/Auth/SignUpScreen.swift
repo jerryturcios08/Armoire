@@ -223,7 +223,7 @@ class SignUpScreen: UIViewController {
             return presentErrorAlert(message: "The passwords entered do not match. Please try again.")
         }
 
-        startLoadingOverlay()
+        startLoadingOverlay(message: "Creating account")
 
         Auth.auth().createUser(withEmail: email, password: password) { [weak self] result, error in
             guard let self = self else { return }

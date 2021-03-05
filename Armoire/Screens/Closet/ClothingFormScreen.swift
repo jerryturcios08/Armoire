@@ -209,30 +209,20 @@ class ClothingFormScreen: UIViewController {
     }
 
     func doneButtonTapped(_ sender: UIBarButtonItem) {
-        let alert = UIAlertController(title: "Error", message: nil, preferredStyle: .alert)
-        alert.view.tintColor = UIColor.accentColor
-        alert.addAction(UIAlertAction(title: "Okay", style: .default))
-
         guard let image = primaryFieldsViewController.clothingImageView.image else {
-            alert.message = "An image is required when adding a clothing item. Please add an image and try again."
-            present(alert, animated: true)
-            return
+            return presentErrorAlert(message: "An image is required when adding a clothing item. Please add an image and try again.")
         }
 
         guard let color = clothingColor else {
-            alert.message = "A color was not selected for this clothing item. Please choose one from the color well and try again."
-            present(alert, animated: true)
-            return
+            return presentErrorAlert(message: "A color was not selected for this clothing item. Please choose one from the color well and try again.")
         }
 
         if primaryFieldsViewController.clothingName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
             // Shows an error if a name was not entered
-            alert.message = "A title is required when adding a clothing item. Please enter a title and try again."
-            present(alert, animated: true)
+            presentErrorAlert(message: "A title is required when adding a clothing item. Please enter a title and try again.")
         } else if primaryFieldsViewController.clothingBrand.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
             // Shows an error if a brand was not entered
-            alert.message = "A brand is required when adding a clothing item. Please enter a brand and try again."
-            present(alert, animated: true)
+            presentErrorAlert(message: "A brand is required when adding a clothing item. Please enter a brand and try again.")
         } else {
             let name = primaryFieldsViewController.clothingName
             let brand = primaryFieldsViewController.clothingBrand

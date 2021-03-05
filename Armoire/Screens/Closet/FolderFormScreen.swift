@@ -163,10 +163,7 @@ class FolderFormScreen: UIViewController {
 
     func doneButtonTapped(_ sender: UIBarButtonItem) {
         if folderTitle.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-            let alert = UIAlertController(title: "Error", message: "The title text field must not be empty.", preferredStyle: .alert)
-            alert.view.tintColor = UIColor.accentColor
-            alert.addAction(UIAlertAction(title: "Okay", style: .default))
-            present(alert, animated: true)
+            presentErrorAlert(message: "The title text field must not be empty.")
         } else {
             if let folder = selectedFolder {
                 let description = folderDescription.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? nil : folderDescription

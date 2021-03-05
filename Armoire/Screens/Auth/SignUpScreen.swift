@@ -213,6 +213,11 @@ class SignUpScreen: UIViewController {
     }
 
     func registerButtonTapped(_ sender: UIButton) {
+        // TODO: Implement functionality where avatar is properly uploaded to firebase for user
+        guard let _ = avatarImageView.image else {
+            return presentErrorAlert(message: "An image is required when adding a clothing item. Please add an image and try again.")
+        }
+
         if firstName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
             return presentErrorAlert(message: "The first name field is empty. Please enter a first name.")
         } else if lastName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {

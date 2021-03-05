@@ -133,16 +133,10 @@ class RunwayScreen: UIViewController {
             guard let self = self else { return }
             guard let runwayName = alertController.textFields?[0].text else { return }
 
-            let errorAlert = UIAlertController(title: "Error", message: nil, preferredStyle: .alert)
-            errorAlert.view.tintColor = UIColor.accentColor
-            errorAlert.addAction(UIAlertAction(title: "Okay", style: .default))
-
             if runwayName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                errorAlert.message = "The text field was empty. Please try again."
-                self.present(errorAlert, animated: true)
+                self.presentErrorAlert(message: "The text field was empty. Please try again.")
             } else if self.dataSource.runways.contains(where: { $0.title == runwayName }) {
-                errorAlert.message = "The runways list already contains this name. Please enter another name."
-                self.present(errorAlert, animated: true)
+                self.presentErrorAlert(message: "The runways list already contains this name. Please enter another name.")
             } else {
                 let runway = Runway(title: runwayName)
 
@@ -234,6 +228,7 @@ struct RunwayScreenPreviews: PreviewProvider {
         UIViewControllerPreview {
             AMNavigationController(rootViewController: RunwayScreen())
         }
+        .ignoresSafeArea(.all, edges: .all)
     }
 }
 #endif
